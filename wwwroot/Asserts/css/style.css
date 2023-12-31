@@ -1,11 +1,4 @@
-/*------------------------------------------------------------------
-Main Style Stylesheet
-	Project:		Realtor | Real Estate HTML5 Template
-	Version:	    1.0
-	Author:			M_Adnan
-	Last change:	20/04/15
-	Primary use:	Realtor | Real Estate HTML5 Template, Real Estate, Property
--------------------------------------------------------------------*/
+
 
 /*------------------------------------------------------------------
 body 
@@ -327,10 +320,17 @@ header:before {
 	height: 100%;
 	z-index: -1;
 }
-header .logo {
-	float: left;
-	margin: 14px 0;
-}
+	header .logo {
+		float: left;
+		/*margin: 14px 0;*/
+		margin: 0px 0;
+	}
+	 .logo {
+		float: left;
+		/*margin: 14px 0;*/
+		margin: 0px 0;
+	}
+
 header nav {
 	display: inline-block;
 	width: auto;
@@ -396,6 +396,26 @@ header .ownmenu ul.dropdown li:nth-last-child(1) a {
 }
 .ownmenu > li:hover > a, .ownmenu > li.active > a {
 }
+
+/*-----------------Custom Css----------------*/
+.ownmenu ul.dropdown li i.fa.fa-user {
+	font-size: 25px;
+	/*margin: 15px;*/
+	background-color: rgb(0, 150, 0);
+	color: white;
+	padding: 12px 18px;
+	border-radius: 100%;
+}
+
+.ownmenu ul.dropdown li i.fa.fa-users {
+	font-size: 25px;
+	/*margin: 15px;*/
+	background-color: rgb(0, 150, 0);
+	padding: 16px;
+	border-radius: 100%;
+	color: white;
+}
+
 .sub-nav-co {
 	float: right;
 	position: relative;

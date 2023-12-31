@@ -12,10 +12,12 @@ namespace USBDProperty.Controllers
     public class NoticesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public NoticesController(ApplicationDbContext context)
+        public NoticesController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            environment = _environment;
         }
 
         // GET: Notices
@@ -57,13 +59,43 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("NoticeID,Title,Description,Images,StartDate,EndDate,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] Notice notice)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(notice);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    string UniqueFileName = UploadImage(notice);
+                    //notice.Path = UniqueFileName(notice);
+                    _context.Add(notice);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ModelState.AddModelError(string.Empty, "Model property is not valid please check");
+            } 
+            catch(Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
             }
+            
             return View(notice);
+        }
+
+        private string UploadImage(Notice notice)
+        {
+            string uniqueFileName = string.Empty;
+            if (notice.Images != null)
+            {
+                string uploadFolder = Path.Combine(_environment.WebRootPath, "Content/Photo/");
+
+                string fileName = Guid.NewGuid().ToString() + "_" + notice.Images.FileName;
+                string filePath = Path.Combine(uploadFolder, fileName);
+                string filetosave = "~/Content/Images/" + fileName;
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    notice.Images.CopyTo(fileStream);
+                }
+                return filetosave;
+            }
+            return "";
         }
 
         // GET: Notices/Edit/5
