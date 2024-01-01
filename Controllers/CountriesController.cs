@@ -21,27 +21,42 @@ namespace USBDProperty.Controllers
         // GET: Countries
         public async Task<IActionResult> Index()
         {
-              return _context.Countries != null ? 
-                          View(await _context.Countries.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Countries'  is null.");
+            try
+            {
+                return _context.Countries != null ?
+                         View(await _context.Countries.OrderByDescending(c => c.CountryID).ToListAsync()) :
+                         Problem("Entity set 'ApplicationDbContext.Countries'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+             
         }
 
         // GET: Countries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Countries == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Countries == null)
+                {
+                    return NotFound();
+                }
 
-            var country = await _context.Countries
-                .FirstOrDefaultAsync(m => m.CountryID == id);
-            if (country == null)
+                var country = await _context.Countries
+                    .FirstOrDefaultAsync(m => m.CountryID == id);
+                if (country == null)
+                {
+                    return NotFound();
+                }
+
+                return View(country);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);        
             }
-
-            return View(country);
         }
 
         // GET: Countries/Create
@@ -57,29 +72,43 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CountryID,CountryName")] Country country)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(country);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(country);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(country);
             }
-            return View(country);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Countries/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Countries == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Countries == null)
+                {
+                    return NotFound();
+                }
 
-            var country = await _context.Countries.FindAsync(id);
-            if (country == null)
-            {
-                return NotFound();
+                var country = await _context.Countries.FindAsync(id);
+                if (country == null)
+                {
+                    return NotFound();
+                }
+                return View(country);
             }
-            return View(country);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: Countries/Edit/5
@@ -120,19 +149,26 @@ namespace USBDProperty.Controllers
         // GET: Countries/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Countries == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Countries == null)
+                {
+                    return NotFound();
+                }
 
-            var country = await _context.Countries
-                .FirstOrDefaultAsync(m => m.CountryID == id);
-            if (country == null)
+                var country = await _context.Countries
+                    .FirstOrDefaultAsync(m => m.CountryID == id);
+                if (country == null)
+                {
+                    return NotFound();
+                }
+
+                return View(country);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(country);
         }
 
         // POST: Countries/Delete/5
@@ -140,18 +176,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Countries == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Countries'  is null.");
+                if (_context.Countries == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.Countries'  is null.");
+                }
+                var country = await _context.Countries.FindAsync(id);
+                if (country != null)
+                {
+                    _context.Countries.Remove(country);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var country = await _context.Countries.FindAsync(id);
-            if (country != null)
+            catch(Exception ex)
             {
-                _context.Countries.Remove(country);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool CountryExists(int id)

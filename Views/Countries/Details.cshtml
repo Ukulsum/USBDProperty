@@ -5,21 +5,51 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+<main id="main">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Country Details</h5>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CountryID)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CountryID)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CountryName)
+                </dt>
+                 <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CountryName)
+                </dd>
+            
+            </dl>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.CountryID">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</main>
 
-<div>
+
+@*
+    <h1>Details</h1>
+
+    <div>
     <h4>Country</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CountryName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CountryName)
-        </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.CountryName)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.CountryName)
+    </dd>
     </dl>
-</div>
-<div>
+    </div>
+    <div>
     <a asp-action="Edit" asp-route-id="@Model?.CountryID">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+    </div>*@

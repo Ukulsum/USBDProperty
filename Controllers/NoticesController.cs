@@ -61,15 +61,60 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                string wwwRootPath = _environment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(notice.Images.FileName);
+                string extension = Path.GetExtension(notice.Images.FileName);
+                notice.Path = fileName + notice.Title + extension;
+                string path = Path.Combine(wwwRootPath + "/Content/Images", fileName);
+                using (var fileStrem = new FileStream(path, FileMode.Create))
                 {
-                    string UniqueFileName = UploadImage(notice);
-                    //notice.Path = UniqueFileName(notice);
+                    await notice.Images.CopyToAsync(fileStrem);
+                }
+                //if (ModelState.IsValid)
+                //{
+                //string fPath = "";
+                //if (notice.Images != null)
+                //{
+
+                //    string pathSave = "";
+                //    var folderName = Path.Combine("/Content/Images");
+                //    if (_environment != null)
+                //    {
+                //        pathSave = Path.Combine(_environment.WebRootPath, folderName);
+                //    }
+                //    else
+                //    {
+                //        pathSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                //    }
+
+                //    var fileName = notice.Title + Path.GetExtension(notice.Images.FileName);
+                //    var filePath = Path.Combine(pathSave, fileName);
+                //    fPath = "~/Content/Images/" + notice.Title + Path.GetExtension(notice.Images.FileName);
+                //    using (var stream = new FileStream(filePath, FileMode.Create))
+                //    {
+                //        await notice.Images.CopyToAsync(stream);
+                //    }
+                //notice.Path = fPath;
+                //return fPath;
+                //}
+                var Notice = new Notice
+                {
+                    Title = notice.Title,
+                    Description = notice.Description,
+                    StartDate = notice.StartDate,
+                    EndDate = notice.EndDate,
+                    CreatedBy = "Umme",
+                    CreatedDate = DateTime.Now,
+                    Path = path  
+                    };
+                    //string UniqueFileName = UploadImage(notice);
+                    
+                    //notice.Path = UniqueFileName;
                     _context.Add(notice);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
-                }
-                ModelState.AddModelError(string.Empty, "Model property is not valid please check");
+                //}
+                //ModelState.AddModelError(string.Empty, "Model property is not valid please check");
             } 
             catch(Exception ex)
             {
@@ -79,24 +124,39 @@ namespace USBDProperty.Controllers
             return View(notice);
         }
 
-        private string UploadImage(Notice notice)
-        {
-            string uniqueFileName = string.Empty;
-            if (notice.Images != null)
-            {
-                string uploadFolder = Path.Combine(_environment.WebRootPath, "Content/Photo/");
+        //private string UploadImage(Notice model)
+        //{
+        //    string fPath = "";
+        //    string uniqueFileName = string.Empty;
+        //    if(model.Images != null)
+        //    {
+        //        var folderName = Path.Combine("~/Content/Images");
+        //        var pathSave = Path.Combine(_environment.WebRootPath, folderName);
+        //        var fileName = model.Title + Path.GetExtension(model.Images.FileName);
+        //        var filePath = Path.Combine(pathSave, fileName);
+        //        fPath = "~/Content/Images/" + model.Title + Path.GetExtension(model.Images.FileName);
+        //        using (var stream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            model.Images.CopyTo(stream);
+        //        }
+        //        return fPath;
+        //    }
+            //if (notice.Images != null)
+            //{
+                
+            //    string uploadFolder = Path.Combine(_environment.WebRootPath, "Content/Images/");
 
-                string fileName = Guid.NewGuid().ToString() + "_" + notice.Images.FileName;
-                string filePath = Path.Combine(uploadFolder, fileName);
-                string filetosave = "~/Content/Images/" + fileName;
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    notice.Images.CopyTo(fileStream);
-                }
-                return filetosave;
-            }
-            return "";
-        }
+            //    string fileName = Guid.NewGuid().ToString() + "_" + notice.Images.FileName;
+            //    string filePath = Path.Combine(uploadFolder, fileName);
+            //    string filetosave = "~/Content/Images/" + fileName;
+            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
+            //    {
+            //        notice.Images.CopyTo(fileStream);
+            //    }
+            //    return filetosave;
+            //}
+        //    return "";
+        //}
 
         // GET: Notices/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using USBDProperty.DTO;
 
 namespace USBDProperty.Models
@@ -13,7 +15,12 @@ namespace USBDProperty.Models
         public string Title { get; set; }
         [MaxLength]
         public string Description { get; set; }
-        public string Images { get; set; }
+        [ValidateNever]
+        public string Path { get; set; }
+        [NotMapped]
+        [ValidateNever]
+        [DisplayName("Photos")]
+        public IFormFile Images { get; set; }
         [DisplayName("Start Date")]
         public DateTime StartDate { get; set; }
         [DisplayName("End Date")]
