@@ -21,34 +21,55 @@ namespace USBDProperty.Controllers
         // GET: Areas
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Areas.Include(a => a.City);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var applicationDbContext = _context.Areas.Include(a => a.City);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Areas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Areas == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Areas == null)
+                {
+                    return NotFound();
+                }
 
-            var area = await _context.Areas
-                .Include(a => a.City)
-                .FirstOrDefaultAsync(m => m.AreaId == id);
-            if (area == null)
+                var area = await _context.Areas
+                    .Include(a => a.City)
+                    .FirstOrDefaultAsync(m => m.AreaId == id);
+                if (area == null)
+                {
+                    return NotFound();
+                }
+
+                return View(area);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(area);
         }
 
         // GET: Areas/Create
         public IActionResult Create()
         {
-            ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName");
-            return View();
+            try
+            {
+                ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName");
+                return View();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: Areas/Create
@@ -58,31 +79,45 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AreaId,AreaName,CityId")] Area area)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(area);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(area);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
+                return View(area);
             }
-            ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
-            return View(area);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Areas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Areas == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Areas == null)
+                {
+                    return NotFound();
+                }
 
-            var area = await _context.Areas.FindAsync(id);
-            if (area == null)
-            {
-                return NotFound();
+                var area = await _context.Areas.FindAsync(id);
+                if (area == null)
+                {
+                    return NotFound();
+                }
+                ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
+                return View(area);
             }
-            ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
-            return View(area);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: Areas/Edit/5
@@ -124,20 +159,27 @@ namespace USBDProperty.Controllers
         // GET: Areas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Areas == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Areas == null)
+                {
+                    return NotFound();
+                }
 
-            var area = await _context.Areas
-                .Include(a => a.City)
-                .FirstOrDefaultAsync(m => m.AreaId == id);
-            if (area == null)
+                var area = await _context.Areas
+                    .Include(a => a.City)
+                    .FirstOrDefaultAsync(m => m.AreaId == id);
+                if (area == null)
+                {
+                    return NotFound();
+                }
+
+                return View(area);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(area);
         }
 
         // POST: Areas/Delete/5
@@ -145,18 +187,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Areas == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Areas'  is null.");
+                if (_context.Areas == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.Areas'  is null.");
+                }
+                var area = await _context.Areas.FindAsync(id);
+                if (area != null)
+                {
+                    _context.Areas.Remove(area);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var area = await _context.Areas.FindAsync(id);
-            if (area != null)
+            catch(Exception ex)
             {
-                _context.Areas.Remove(area);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool AreaExists(int id)

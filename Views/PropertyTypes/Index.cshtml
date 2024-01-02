@@ -16,6 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PropertyTypeName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentPropertyTypeId)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -24,6 +27,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PropertyTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentPropertyTypeId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PropertyTypeId">Edit</a> |

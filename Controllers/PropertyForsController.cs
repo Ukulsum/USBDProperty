@@ -21,27 +21,41 @@ namespace USBDProperty.Controllers
         // GET: PropertyFors
         public async Task<IActionResult> Index()
         {
-              return _context.PropertyFors != null ? 
-                          View(await _context.PropertyFors.ToListAsync()) :
+            try
+            {
+                return _context.PropertyFors != null ?
+                          View(await _context.PropertyFors.OrderByDescending(p => p.PropertyForId).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.PropertyFors'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PropertyFors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.PropertyFors == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyFors == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyFor = await _context.PropertyFors
-                .FirstOrDefaultAsync(m => m.PropertyForId == id);
-            if (propertyFor == null)
+                var propertyFor = await _context.PropertyFors
+                    .FirstOrDefaultAsync(m => m.PropertyForId == id);
+                if (propertyFor == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyFor);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyFor);
         }
 
         // GET: PropertyFors/Create
@@ -57,29 +71,43 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PropertyForId,PropeFor")] PropertyFor propertyFor)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(propertyFor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(propertyFor);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(propertyFor);
             }
-            return View(propertyFor);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PropertyFors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PropertyFors == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyFors == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyFor = await _context.PropertyFors.FindAsync(id);
-            if (propertyFor == null)
-            {
-                return NotFound();
+                var propertyFor = await _context.PropertyFors.FindAsync(id);
+                if (propertyFor == null)
+                {
+                    return NotFound();
+                }
+                return View(propertyFor);
             }
-            return View(propertyFor);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: PropertyFors/Edit/5
@@ -120,19 +148,26 @@ namespace USBDProperty.Controllers
         // GET: PropertyFors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.PropertyFors == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyFors == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyFor = await _context.PropertyFors
-                .FirstOrDefaultAsync(m => m.PropertyForId == id);
-            if (propertyFor == null)
+                var propertyFor = await _context.PropertyFors
+                    .FirstOrDefaultAsync(m => m.PropertyForId == id);
+                if (propertyFor == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyFor);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyFor);
         }
 
         // POST: PropertyFors/Delete/5
@@ -140,18 +175,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PropertyFors == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.PropertyFors'  is null.");
+                if (_context.PropertyFors == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.PropertyFors'  is null.");
+                }
+                var propertyFor = await _context.PropertyFors.FindAsync(id);
+                if (propertyFor != null)
+                {
+                    _context.PropertyFors.Remove(propertyFor);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var propertyFor = await _context.PropertyFors.FindAsync(id);
-            if (propertyFor != null)
+            catch(Exception ex)
             {
-                _context.PropertyFors.Remove(propertyFor);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool PropertyForExists(int id)

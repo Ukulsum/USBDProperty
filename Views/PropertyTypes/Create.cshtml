@@ -19,6 +19,11 @@
                 <span asp-validation-for="PropertyTypeName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ParentPropertyTypeId" class="control-label"></label>
+                <input asp-for="ParentPropertyTypeId" class="form-control" />
+                <span asp-validation-for="ParentPropertyTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

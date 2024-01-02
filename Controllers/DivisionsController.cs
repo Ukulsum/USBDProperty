@@ -21,34 +21,55 @@ namespace USBDProperty.Controllers
         // GET: Divisions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Divisions.Include(d => d.Country);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var applicationDbContext = _context.Divisions.OrderByDescending(d => d.DivisionID).Include(d => d.Country);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Divisions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Divisions == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Divisions == null)
+                {
+                    return NotFound();
+                }
 
-            var division = await _context.Divisions
-                .Include(d => d.Country)
-                .FirstOrDefaultAsync(m => m.DivisionID == id);
-            if (division == null)
+                var division = await _context.Divisions
+                    .Include(d => d.Country)
+                    .FirstOrDefaultAsync(m => m.DivisionID == id);
+                if (division == null)
+                {
+                    return NotFound();
+                }
+
+                return View(division);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(division);
         }
 
         // GET: Divisions/Create
         public IActionResult Create()
         {
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName");
-            return View();
+            try
+            {
+                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName");
+                return View();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: Divisions/Create
@@ -81,18 +102,27 @@ namespace USBDProperty.Controllers
         // GET: Divisions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Divisions == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Divisions == null)
+                {
+                    return NotFound();
+                }
 
-            var division = await _context.Divisions.FindAsync(id);
-            if (division == null)
-            {
-                return NotFound();
+                var division = await _context.Divisions.FindAsync(id);
+                if (division == null)
+                {
+                    return NotFound();
+                }
+                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", division.CountryId);
+                return View(division);
             }
-            ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", division.CountryId);
-            return View(division);
+             
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
 
         // POST: Divisions/Edit/5
@@ -134,20 +164,27 @@ namespace USBDProperty.Controllers
         // GET: Divisions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Divisions == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Divisions == null)
+                {
+                    return NotFound();
+                }
 
-            var division = await _context.Divisions
-                .Include(d => d.Country)
-                .FirstOrDefaultAsync(m => m.DivisionID == id);
-            if (division == null)
+                var division = await _context.Divisions
+                    .Include(d => d.Country)
+                    .FirstOrDefaultAsync(m => m.DivisionID == id);
+                if (division == null)
+                {
+                    return NotFound();
+                }
+
+                return View(division);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(division);
         }
 
         // POST: Divisions/Delete/5
@@ -155,16 +192,23 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Divisions == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Divisions'  is null.");
+                if (_context.Divisions == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.Divisions'  is null.");
+                }
+                var division = await _context.Divisions.FindAsync(id);
+                if (division != null)
+                {
+                    _context.Divisions.Remove(division);
+                }
+
             }
-            var division = await _context.Divisions.FindAsync(id);
-            if (division != null)
+            catch(Exception ex)
             {
-                _context.Divisions.Remove(division);
+                return BadRequest(ex.Message);
             }
-            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

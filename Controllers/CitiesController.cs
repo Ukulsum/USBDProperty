@@ -21,34 +21,55 @@ namespace USBDProperty.Controllers
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Citys.Include(c => c.Division);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var applicationDbContext = _context.Citys.OrderByDescending(c => c.CityId).Include(c => c.Division);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Cities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Citys == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Citys == null)
+                {
+                    return NotFound();
+                }
 
-            var city = await _context.Citys
-                .Include(c => c.Division)
-                .FirstOrDefaultAsync(m => m.CityId == id);
-            if (city == null)
+                var city = await _context.Citys
+                    .Include(c => c.Division)
+                    .FirstOrDefaultAsync(m => m.CityId == id);
+                if (city == null)
+                {
+                    return NotFound();
+                }
+                return View(city);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(city);
         }
+           
 
         // GET: Cities/Create
         public IActionResult Create()
         {
-            ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName");
-            return View();
+            try
+            {
+                ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName");
+                return View();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: Cities/Create
@@ -58,31 +79,45 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CityId,CityName,DivisionId")] City city)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(city);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(city);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", city.DivisionId);
+                return View(city);
             }
-            ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", city.DivisionId);
-            return View(city);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Cities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Citys == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Citys == null)
+                {
+                    return NotFound();
+                }
 
-            var city = await _context.Citys.FindAsync(id);
-            if (city == null)
-            {
-                return NotFound();
+                var city = await _context.Citys.FindAsync(id);
+                if (city == null)
+                {
+                    return NotFound();
+                }
+                ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", city.DivisionId);
+                return View(city);
             }
-            ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", city.DivisionId);
-            return View(city);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: Cities/Edit/5
@@ -124,20 +159,27 @@ namespace USBDProperty.Controllers
         // GET: Cities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Citys == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Citys == null)
+                {
+                    return NotFound();
+                }
 
-            var city = await _context.Citys
-                .Include(c => c.Division)
-                .FirstOrDefaultAsync(m => m.CityId == id);
-            if (city == null)
+                var city = await _context.Citys
+                    .Include(c => c.Division)
+                    .FirstOrDefaultAsync(m => m.CityId == id);
+                if (city == null)
+                {
+                    return NotFound();
+                }
+
+                return View(city);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(city);
         }
 
         // POST: Cities/Delete/5
@@ -145,18 +187,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Citys == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Citys'  is null.");
+                if (_context.Citys == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.Citys'  is null.");
+                }
+                var city = await _context.Citys.FindAsync(id);
+                if (city != null)
+                {
+                    _context.Citys.Remove(city);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var city = await _context.Citys.FindAsync(id);
-            if (city != null)
+            catch(Exception ex)
             {
-                _context.Citys.Remove(city);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool CityExists(int id)

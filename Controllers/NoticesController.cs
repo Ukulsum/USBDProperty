@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize]
     public class NoticesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -61,11 +63,19 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                string wwwRootPath = _environment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(notice.Images.FileName);
+                string wwwRootPath = "";
+                if (_environment!=null)
+                {
+                     wwwRootPath = _environment.WebRootPath;
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                }
+               // string fileName = Path.GetFileNameWithoutExtension(notice.Images.FileName);
                 string extension = Path.GetExtension(notice.Images.FileName);
-                notice.Path = fileName + notice.Title + extension;
-                string path = Path.Combine(wwwRootPath + "/Content/Images", fileName);
+                string fileName =  notice.Title + extension;
+                string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
                 using (var fileStrem = new FileStream(path, FileMode.Create))
                 {
                     await notice.Images.CopyToAsync(fileStrem);
@@ -97,7 +107,7 @@ namespace USBDProperty.Controllers
                 //notice.Path = fPath;
                 //return fPath;
                 //}
-                var Notice = new Notice
+                var noticeToInsert = new Notice
                 {
                     Title = notice.Title,
                     Description = notice.Description,
@@ -105,14 +115,16 @@ namespace USBDProperty.Controllers
                     EndDate = notice.EndDate,
                     CreatedBy = "Umme",
                     CreatedDate = DateTime.Now,
-                    Path = path  
+                    Path = "/Content/Images/"+fileName
                     };
                     //string UniqueFileName = UploadImage(notice);
                     
                     //notice.Path = UniqueFileName;
-                    _context.Add(notice);
-                    await _context.SaveChangesAsync();
+                    _context.Add(noticeToInsert);
+                if (await _context.SaveChangesAsync() > 0)
+                {
                     return RedirectToAction(nameof(Index));
+                }
                 //}
                 //ModelState.AddModelError(string.Empty, "Model property is not valid please check");
             } 
@@ -177,36 +189,97 @@ namespace USBDProperty.Controllers
         // POST: Notices/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("NoticeID,Title,Description,Images,StartDate,EndDate,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] Notice notice)
+        //{
+
+        //    if (id != notice.NoticeID)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(notice);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!NoticeExists(notice.NoticeID))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(notice);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("NoticeID,Title,Description,Images,StartDate,EndDate,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] Notice notice)
         {
-            if (id != notice.NoticeID)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(notice);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NoticeExists(notice.NoticeID))
+                    //var data = _context.Notices.Where(n => n.NoticeID == notice.NoticeID).SingleOrDefaultAsync();
+                    if(notice!= null)
                     {
-                        return NotFound();
+                        var uniqueFileName = string.Empty;
+                        if (notice.Images != null)
+                        {
+                            string wwwRootPath = "";
+                            if (_environment != null)
+                            {
+                                wwwRootPath = _environment.WebRootPath;
+                            }
+                            else
+                            {
+                                wwwRootPath = Directory.GetCurrentDirectory();
+                            }
+                            // string fileName = Path.GetFileNameWithoutExtension(notice.Images.FileName);
+                            string extension = Path.GetExtension(notice.Images.FileName);
+                            string fileName = notice.Title + extension;
+                            string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await notice.Images.CopyToAsync(fileStrem);
+                            }
+                            var NoticeToUpdate = new Notice
+                            {
+                                NoticeID = notice.NoticeID,
+                                Title = notice.Title,
+                                Description = notice.Description,
+                                StartDate = notice.StartDate,
+                                EndDate = notice.EndDate,
+                                UpdateBy = "Kulsum",
+                                UpdateDate = DateTime.Now,
+                                Path = "/Content/Images/" + fileName
+                            };
+                            _context.Update(NoticeToUpdate);
+                            if (await _context.SaveChangesAsync() > 0)
+                            {
+                                return RedirectToAction(nameof(Index));
+                            }
+                        };
                     }
-                    else
-                    {
-                        throw;
-                    }
+
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(notice);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return View();         
         }
 
         // GET: Notices/Delete/5

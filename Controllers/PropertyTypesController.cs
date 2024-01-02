@@ -21,9 +21,27 @@ namespace USBDProperty.Controllers
         // GET: PropertyTypes
         public async Task<IActionResult> Index()
         {
-              return _context.PropertyTypes != null ? 
-                          View(await _context.PropertyTypes.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
+            //try
+            //{
+            //    var data = _context.PropertyTypes.ToListAsync();
+            //    var result = await _context.PropertyTypes.Select(s => new PropertyTypeVm
+            //    {
+            //        PropertyTypeId = s.PropertyTypeId,
+            //        PropertyTypeName = s.PropertyTypeName,
+            //        ParentPropertyType = (from c in _context.PropertyTypes
+            //                              join p in _context.PropertyTypes on c.ParentPropertyTypeId equals p.PropertyTypeId
+            //                              where s.PropertyTypeId.Equals(p.PropertyTypeId)
+            //                              select p.PropertyTypeName).FirstOrDefaultAsync(),
+            //                              ParentPropertyTypeId = s.PropertyTypeId
+            //                        });
+            //}
+            //catch(Exception ex)
+            //{
+            //    return Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
+            //}
+            return _context.PropertyTypes != null ?
+                        View(await _context.PropertyTypes.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
         }
 
         // GET: PropertyTypes/Details/5
@@ -55,7 +73,7 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyTypeId,PropertyTypeName")] PropertyType propertyType)
+        public async Task<IActionResult> Create([Bind("PropertyTypeId,PropertyTypeName,ParentPropertyTypeId")] PropertyType propertyType)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +105,7 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertyTypeId,PropertyTypeName")] PropertyType propertyType)
+        public async Task<IActionResult> Edit(int id, [Bind("PropertyTypeId,PropertyTypeName,ParentPropertyTypeId")] PropertyType propertyType)
         {
             if (id != propertyType.PropertyTypeId)
             {

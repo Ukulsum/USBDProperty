@@ -5,7 +5,40 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit</h1>
+<main id="main">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Property For</h5>
+            <hr />
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="PropertyForId" />
+
+                        <div class="form-group">
+                            <label asp-for="PropeFor" class="control-label"></label>
+                            <input asp-for="PropeFor" class="form-control" />
+                            <span asp-validation-for="PropeFor" class="text-danger"></span>
+                        </div>
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group mt-2">
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-2">
+                        <div class="form-group">
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</main>
+
+@*<h1>Edit</h1>
 
 <h4>PropertyFor</h4>
 <hr />
@@ -29,4 +62,4 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+*@

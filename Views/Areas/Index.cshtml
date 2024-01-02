@@ -5,7 +5,63 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<main id="main">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <h5 class="card-title">List of Areas</h5>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+                </div>
+            </div>
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AreaId)
+                        </th>
+                          <th>
+                            @Html.DisplayNameFor(model => model.AreaName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AreaId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AreaName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City.CityName)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.AreaId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.AreaId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.AreaId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+
+
+@*<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -40,3 +96,4 @@
 }
     </tbody>
 </table>
+*@
