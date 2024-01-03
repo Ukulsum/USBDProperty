@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using USBDProperty.DTO;
@@ -12,7 +13,7 @@ namespace USBDProperty.Models
         [StringLength(255)]
         public string Title { get; set; }
         [MaxLength]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [Required]
         [StringLength(150)]
         [DisplayName("Property Name")]
@@ -78,11 +79,17 @@ namespace USBDProperty.Models
         public int PropertyForId { get; set; }
 
 
+        [ValidateNever]
         public PropertyFor propertyFor { get; set; }
+        [ValidateNever]
         public PropertyType PropertyType { get; set; }
+        [ValidateNever]
         public TransactionType TransactionType { get; set; }
+        [ValidateNever]
         public  PropertyOwnerInfo PropertyOwnerInfo { get; set; }
+        [ValidateNever]
         public SocialIcon SocialIcon { get; set; }
+        [ValidateNever]
         public Area Area { get; set; }
     }
 }

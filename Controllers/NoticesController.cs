@@ -138,7 +138,8 @@ namespace USBDProperty.Controllers
 
         //private string UploadImage(Notice model)
         //{
-        //    string fPath = "";
+        //    string fPath = "
+        //    ";
         //    string uniqueFileName = string.Empty;
         //    if(model.Images != null)
         //    {
