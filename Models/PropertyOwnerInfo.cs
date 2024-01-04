@@ -13,7 +13,7 @@ namespace USBDProperty.Models
         [Required]
         public string Banner { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(100)] 
         [DisplayName("Company Name")]
         public string CompanyName { get; set; }
         [Required]

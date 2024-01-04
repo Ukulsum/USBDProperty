@@ -30,19 +30,19 @@ namespace USBDProperty.Models
         public string PropertySize { get; set; }
         [Required]
         [StringLength(50)]
-        [DisplayName("Number Of Bedrooms")]
+        [DisplayName("Bedrooms")]
         public string NumberOfBedrooms { get; set; }
         [Required]
         [StringLength(50)]
-        [DisplayName("Number Of Baths")]
+        [DisplayName("Baths")]
         public string NumberOfBaths { get; set; }
         [Required]
         [StringLength(50)]
-        [DisplayName("Number Of Balconies")]
+        [DisplayName("Balconies")]
         public string NumberOfBalconies { get; set; }
         [Required]
         [StringLength(50)]
-        [DisplayName("Number Of Garages")]
+        [DisplayName("Garages")]
         public string NumberOfGarages { get; set; }
         [StringLength(50)]
         [DisplayName("Total Floor")]
@@ -80,14 +80,19 @@ namespace USBDProperty.Models
 
 
         [ValidateNever]
+        [DisplayName("Property For")]
         public PropertyFor propertyFor { get; set; }
         [ValidateNever]
+        [DisplayName("Property Type")]
         public PropertyType PropertyType { get; set; }
         [ValidateNever]
+        [DisplayName("Transaction Type")]
         public TransactionType TransactionType { get; set; }
         [ValidateNever]
+        [DisplayName("Company Name")]
         public  PropertyOwnerInfo PropertyOwnerInfo { get; set; }
         [ValidateNever]
+        [DisplayName("Social Icon")]
         public SocialIcon SocialIcon { get; set; }
         [ValidateNever]
         public Area Area { get; set; }
