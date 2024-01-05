@@ -50,7 +50,7 @@
             <div class="container">
                 <ul class="left-bar-side">
                     <li>
-                        <p><i class="fa fa-phone"></i> Call Us Now : +01 123 456 78 </p>
+                        <p><i class="fa fa-phone"></i> Call Us Now : +8801712532107 </p>
                         <span>|</span>
                     </li>
                     <li>
@@ -83,6 +83,7 @@
                     <!--======= MENU START =========-->
                     <ul class="ownmenu">
                         <li class="active"><a href="#">Home</a> </li>
+                        @await Component.InvokeAsync("ParentMenu" )
                         <li>
                             <a href="#">Sale </a>
                             <ul class="dropdown">
@@ -166,6 +167,9 @@
                                 </li>
                             </ul>
                         </li>
+                    
+                        
+                        
                         <li><a href="#">Developers</a></li>
                         <li><a href="#">Contact us</a></li>
                         <li><a href="#">My Accounts</a>

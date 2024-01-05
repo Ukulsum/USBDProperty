@@ -65,6 +65,8 @@ namespace USBDProperty.Controllers
         // GET: PropertyTypes/Create
         public IActionResult Create()
         {
+            var ptype = _context.PropertyTypes.OrderBy(a => a.PropertyTypeName).ToList();
+            ViewBag.PropertyTypes = new SelectList(ptype, "PropertyTypeId", "PropertyTypeName");
             return View();
         }
 

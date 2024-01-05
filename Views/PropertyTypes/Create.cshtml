@@ -14,15 +14,18 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="ParentPropertyTypeId" class="control-label"></label>
+                <select asp-for="ParentPropertyTypeId" class="form-control" asp-items="@ViewBag.PropertyTypes">
+                    <option value="0">Select Parent</option>
+                </select>
+                <span asp-validation-for="ParentPropertyTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="PropertyTypeName" class="control-label"></label>
                 <input asp-for="PropertyTypeName" class="form-control" />
                 <span asp-validation-for="PropertyTypeName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ParentPropertyTypeId" class="control-label"></label>
-                <input asp-for="ParentPropertyTypeId" class="form-control" />
-                <span asp-validation-for="ParentPropertyTypeId" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
