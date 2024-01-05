@@ -21,27 +21,41 @@ namespace USBDProperty.Controllers
         // GET: TermsConditions
         public async Task<IActionResult> Index()
         {
-              return _context.TermsConditions != null ? 
-                          View(await _context.TermsConditions.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.TermsConditions'  is null.");
+            try
+            {
+                return _context.TermsConditions != null ?
+                         View(await _context.TermsConditions.ToListAsync()) :
+                         Problem("Entity set 'ApplicationDbContext.TermsConditions'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: TermsConditions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TermsConditions == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.TermsConditions == null)
+                {
+                    return NotFound();
+                }
 
-            var termsCondition = await _context.TermsConditions
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (termsCondition == null)
+                var termsCondition = await _context.TermsConditions
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (termsCondition == null)
+                {
+                    return NotFound();
+                }
+
+                return View(termsCondition);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(termsCondition);
         }
 
         // GET: TermsConditions/Create
@@ -57,29 +71,43 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Title,Description")] TermsCondition termsCondition)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(termsCondition);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(termsCondition);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(termsCondition);
             }
-            return View(termsCondition);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: TermsConditions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.TermsConditions == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.TermsConditions == null)
+                {
+                    return NotFound();
+                }
 
-            var termsCondition = await _context.TermsConditions.FindAsync(id);
-            if (termsCondition == null)
-            {
-                return NotFound();
+                var termsCondition = await _context.TermsConditions.FindAsync(id);
+                if (termsCondition == null)
+                {
+                    return NotFound();
+                }
+                return View(termsCondition);
             }
-            return View(termsCondition);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: TermsConditions/Edit/5
@@ -120,19 +148,26 @@ namespace USBDProperty.Controllers
         // GET: TermsConditions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.TermsConditions == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.TermsConditions == null)
+                {
+                    return NotFound();
+                }
 
-            var termsCondition = await _context.TermsConditions
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (termsCondition == null)
+                var termsCondition = await _context.TermsConditions
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (termsCondition == null)
+                {
+                    return NotFound();
+                }
+
+                return View(termsCondition);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(termsCondition);
         }
 
         // POST: TermsConditions/Delete/5
@@ -140,18 +175,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TermsConditions == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.TermsConditions'  is null.");
+                if (_context.TermsConditions == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.TermsConditions'  is null.");
+                }
+                var termsCondition = await _context.TermsConditions.FindAsync(id);
+                if (termsCondition != null)
+                {
+                    _context.TermsConditions.Remove(termsCondition);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var termsCondition = await _context.TermsConditions.FindAsync(id);
-            if (termsCondition != null)
+            catch(Exception ex)
             {
-                _context.TermsConditions.Remove(termsCondition);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool TermsConditionExists(int id)

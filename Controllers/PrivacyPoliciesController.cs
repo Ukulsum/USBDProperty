@@ -21,27 +21,41 @@ namespace USBDProperty.Controllers
         // GET: PrivacyPolicies
         public async Task<IActionResult> Index()
         {
-              return _context.PrivacyPolicy != null ? 
+            try
+            {
+                return _context.PrivacyPolicy != null ?
                           View(await _context.PrivacyPolicy.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.PrivacyPolicy'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PrivacyPolicies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.PrivacyPolicy == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PrivacyPolicy == null)
+                {
+                    return NotFound();
+                }
 
-            var privacyPolicy = await _context.PrivacyPolicy
-                .FirstOrDefaultAsync(m => m.PpId == id);
-            if (privacyPolicy == null)
+                var privacyPolicy = await _context.PrivacyPolicy
+                    .FirstOrDefaultAsync(m => m.PpId == id);
+                if (privacyPolicy == null)
+                {
+                    return NotFound();
+                }
+
+                return View(privacyPolicy);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(privacyPolicy);
         }
 
         // GET: PrivacyPolicies/Create
@@ -57,29 +71,43 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PpId,Title,Description")] PrivacyPolicy privacyPolicy)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(privacyPolicy);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(privacyPolicy);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(privacyPolicy);
             }
-            return View(privacyPolicy);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PrivacyPolicies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PrivacyPolicy == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PrivacyPolicy == null)
+                {
+                    return NotFound();
+                }
 
-            var privacyPolicy = await _context.PrivacyPolicy.FindAsync(id);
-            if (privacyPolicy == null)
-            {
-                return NotFound();
+                var privacyPolicy = await _context.PrivacyPolicy.FindAsync(id);
+                if (privacyPolicy == null)
+                {
+                    return NotFound();
+                }
+                return View(privacyPolicy);
             }
-            return View(privacyPolicy);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: PrivacyPolicies/Edit/5
@@ -120,19 +148,26 @@ namespace USBDProperty.Controllers
         // GET: PrivacyPolicies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.PrivacyPolicy == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PrivacyPolicy == null)
+                {
+                    return NotFound();
+                }
 
-            var privacyPolicy = await _context.PrivacyPolicy
-                .FirstOrDefaultAsync(m => m.PpId == id);
-            if (privacyPolicy == null)
+                var privacyPolicy = await _context.PrivacyPolicy
+                    .FirstOrDefaultAsync(m => m.PpId == id);
+                if (privacyPolicy == null)
+                {
+                    return NotFound();
+                }
+
+                return View(privacyPolicy);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(privacyPolicy);
         }
 
         // POST: PrivacyPolicies/Delete/5
@@ -140,18 +175,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PrivacyPolicy == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.PrivacyPolicy'  is null.");
+                if (_context.PrivacyPolicy == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.PrivacyPolicy'  is null.");
+                }
+                var privacyPolicy = await _context.PrivacyPolicy.FindAsync(id);
+                if (privacyPolicy != null)
+                {
+                    _context.PrivacyPolicy.Remove(privacyPolicy);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var privacyPolicy = await _context.PrivacyPolicy.FindAsync(id);
-            if (privacyPolicy != null)
+            catch(Exception ex)
             {
-                _context.PrivacyPolicy.Remove(privacyPolicy);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool PrivacyPolicyExists(int id)

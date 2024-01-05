@@ -4,8 +4,36 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<main id="main">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Country Details</h5>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.TransactionTypeId)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.TransactionTypeId)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.TransactionTypeName)
+                </dt>
+                 <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.TransactionTypeName)
+                </dd>
+            
+            </dl>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.TransactionTypeId">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</main>
 
-<h1>Details</h1>
+
+@*<h1>Details</h1>
 
 <div>
     <h4>TransactionType</h4>
@@ -23,3 +51,4 @@
     <a asp-action="Edit" asp-route-id="@Model?.TransactionTypeId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+*@

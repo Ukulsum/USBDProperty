@@ -21,27 +21,41 @@ namespace USBDProperty.Controllers
         // GET: TransactionTypes
         public async Task<IActionResult> Index()
         {
-              return _context.TransactionTypes != null ? 
-                          View(await _context.TransactionTypes.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.TransactionTypes'  is null.");
+            try
+            {
+                return _context.TransactionTypes != null ?
+                         View(await _context.TransactionTypes.ToListAsync()) :
+                         Problem("Entity set 'ApplicationDbContext.TransactionTypes'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: TransactionTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TransactionTypes == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.TransactionTypes == null)
+                {
+                    return NotFound();
+                }
 
-            var transactionType = await _context.TransactionTypes
-                .FirstOrDefaultAsync(m => m.TransactionTypeId == id);
-            if (transactionType == null)
+                var transactionType = await _context.TransactionTypes
+                    .FirstOrDefaultAsync(m => m.TransactionTypeId == id);
+                if (transactionType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(transactionType);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(transactionType);
         }
 
         // GET: TransactionTypes/Create
@@ -57,29 +71,43 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TransactionTypeId,TransactionTypeName")] TransactionType transactionType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(transactionType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(transactionType);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(transactionType);
             }
-            return View(transactionType);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: TransactionTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.TransactionTypes == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.TransactionTypes == null)
+                {
+                    return NotFound();
+                }
 
-            var transactionType = await _context.TransactionTypes.FindAsync(id);
-            if (transactionType == null)
-            {
-                return NotFound();
+                var transactionType = await _context.TransactionTypes.FindAsync(id);
+                if (transactionType == null)
+                {
+                    return NotFound();
+                }
+                return View(transactionType);
             }
-            return View(transactionType);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: TransactionTypes/Edit/5
@@ -120,19 +148,26 @@ namespace USBDProperty.Controllers
         // GET: TransactionTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.TransactionTypes == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.TransactionTypes == null)
+                {
+                    return NotFound();
+                }
 
-            var transactionType = await _context.TransactionTypes
-                .FirstOrDefaultAsync(m => m.TransactionTypeId == id);
-            if (transactionType == null)
+                var transactionType = await _context.TransactionTypes
+                    .FirstOrDefaultAsync(m => m.TransactionTypeId == id);
+                if (transactionType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(transactionType);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(transactionType);
         }
 
         // POST: TransactionTypes/Delete/5
@@ -140,18 +175,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TransactionTypes == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.TransactionTypes'  is null.");
+                if (_context.TransactionTypes == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.TransactionTypes'  is null.");
+                }
+                var transactionType = await _context.TransactionTypes.FindAsync(id);
+                if (transactionType != null)
+                {
+                    _context.TransactionTypes.Remove(transactionType);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var transactionType = await _context.TransactionTypes.FindAsync(id);
-            if (transactionType != null)
+            catch(Exception ex)
             {
-                _context.TransactionTypes.Remove(transactionType);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool TransactionTypeExists(int id)
