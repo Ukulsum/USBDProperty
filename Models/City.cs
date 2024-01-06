@@ -8,6 +8,7 @@ namespace USBDProperty.Models
     public class City
     {
         [Key]
+        [DisplayName("ID")]
         public int CityId { get; set; }
         [Required]
         [StringLength(100)]

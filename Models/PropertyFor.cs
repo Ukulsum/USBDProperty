@@ -6,6 +6,7 @@ namespace USBDProperty.Models
     public class PropertyFor
     {
         [Key]
+        [DisplayName("ID")]
         public int PropertyForId { get; set; }
         [Required]
         [StringLength(100)]

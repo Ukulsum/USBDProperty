@@ -6,6 +6,7 @@ namespace USBDProperty.Models
     public class TransactionType
     {
         [Key]
+        [DisplayName("ID")]
         public int TransactionTypeId { get; set; }
         [Required]
         [StringLength(100)]

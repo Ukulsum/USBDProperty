@@ -6,6 +6,7 @@ namespace USBDProperty.Models
     public class Country
     {
         [Key]
+        [DisplayName("ID")]
         public int CountryID { get; set; }
         [Required]
         [StringLength(100)]

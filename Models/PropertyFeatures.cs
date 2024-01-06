@@ -8,6 +8,7 @@ namespace USBDProperty.Models
     public class PropertyFeatures
     {
         [Key]
+        [DisplayName("ID")]
         public int PropertyFeatureId { get; set; }
         [Required]
         [MaxLength]

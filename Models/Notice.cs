@@ -9,6 +9,7 @@ namespace USBDProperty.Models
     public class Notice : BaseDTO
     {
         [Key]
+        [DisplayName("ID")]
         public int NoticeID { get; set; }
         [Required]
         [StringLength(150)]

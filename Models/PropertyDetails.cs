@@ -9,6 +9,7 @@ namespace USBDProperty.Models
     public class PropertyDetails : BaseDTO
     {
         [Key]
+        [DisplayName("ID")]
         public int PropertyInfoId { get; set; }
         [StringLength(255)]
         public string Title { get; set; }

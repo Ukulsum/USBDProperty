@@ -7,6 +7,7 @@ namespace USBDProperty.Models
     public class PropertyOwnerInfo : BaseDTO
     {
         [Key]
+        [DisplayName("ID")]
         public int OwnerID { get; set; }
         [Required]
         public string Logo { get; set; }

@@ -7,6 +7,7 @@ namespace USBDProperty.Models
     public class ClientContact
     {
         [Key]
+        [DisplayName("ID")]
         public int ClientContactId { get; set; }
         [Required]
         [StringLength(100)]

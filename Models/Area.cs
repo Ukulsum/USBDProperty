@@ -8,6 +8,7 @@ namespace USBDProperty.Models
     public class Area
     {
         [Key]
+        [DisplayName("ID")]
         public int AreaId { get; set; }
         [Required]
         [StringLength(100)]

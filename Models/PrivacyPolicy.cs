@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace USBDProperty.Models
 {
     public class PrivacyPolicy
     {
         [Key]
+        [DisplayName("ID")]
         public int PpId { get; set; }
         [Required]
         [StringLength(150)]

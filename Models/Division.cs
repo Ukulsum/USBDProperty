@@ -8,6 +8,7 @@ namespace USBDProperty.Models
     public class Division
     {
         [Key]
+        [DisplayName("ID")]
         public int DivisionID { get; set; }
         [Required]
         [StringLength(100)]

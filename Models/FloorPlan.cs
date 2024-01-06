@@ -7,6 +7,7 @@ namespace USBDProperty.Models
     public class FloorPlan
     {
         [Key]
+        [DisplayName("ID")]
         public int FloorPlanId { get; set; }
         [Required]
         [StringLength(255)]

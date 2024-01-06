@@ -47,9 +47,9 @@
                                 @Html.DisplayFor(modelItem => item.City.CityName)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.AreaId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.AreaId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.AreaId">Delete</a>
+                                <a asp-action="Edit" asp-route-id="@item.AreaId"><i class="bi bi-pencil-square"></i></a> |
+                                <a asp-action="Details" asp-route-id="@item.AreaId"><i class="bi bi-eye-fill"></i></a> |
+                                <a asp-action="Delete" asp-route-id="@item.AreaId"><i class="bi bi-trash"></i></a>
                             </td>
                         </tr>
                     }

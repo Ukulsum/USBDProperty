@@ -18,6 +18,7 @@ namespace USBDProperty.Models
     public class PropertyTypeVm
     {
         [Key]
+        [DisplayName("ID")]
         public int PropertyTypeId { get; set; }
         [Required]
         [StringLength(255)]
