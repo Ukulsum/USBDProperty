@@ -1,0 +1,40 @@
+﻿@model IEnumerable<USBDProperty.Models.PropertyType>
+@foreach(var item in Model)
+{
+    
+
+
+<li>
+    <a href="#">
+        @item.PropertyTypeName
+        </a>
+    <ul class="dropdown">
+        <li>
+            <a href="#">Residential</a>
+            <ul class="dropdown">
+                <li><a href="#">Apartment/Flat</a></li>
+                <li><a href="#">Independent House</a></li>
+                <li><a href="#">Duplex Home</a></li>
+                <li><a href="#">Studio Apartment</a></li>
+                <li><a href="#">Land Sharing Flat</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Commercial</a>
+            <ul class="dropdown">
+                <li><a href="#">Office Space</a></li>
+                <li><a href="#">Industial Space</a></li>
+                <li><a href="#">Shop Showroom</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Land/Plot</a>
+            <ul class="dropdown">
+                <li><a href="#">Residential Plot</a></li>
+                <li><a href="#">Commercial Plot</a></li>
+                <li><a href="#">Agriculture Plot</a></li>
+            </ul>
+        </li>
+    </ul>
+    </li>
+}
