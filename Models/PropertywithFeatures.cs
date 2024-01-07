@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace USBDProperty.Models
 {
-    public class PropertyFeatures
+    public class PropertyWithFeatures
     {
         [Key]
         [DisplayName("ID")]

@@ -1,14 +1,24 @@
 ﻿@model IEnumerable<USBDProperty.Models.PropertyType>
 @foreach(var item in Model)
 {
-    
-
-
 <li>
-    <a href="#">
-        @item.PropertyTypeName
-        </a>
-    <ul class="dropdown">
+  
+        @if (item.ParentPropertyTypeId > 0)
+        {
+            <a href="#">
+                @item.PropertyTypeName
+            </a>
+            @await Component.InvokeAsync("Submenu", new { pid = item.ParentPropertyTypeId })
+        }
+        else
+        {
+            <a href="/PropertyDetails/Details/@item.ParentPropertyTypeId">
+                @item.PropertyTypeName
+            </a>
+        }
+
+
+   @*  <ul class="dropdown">
         <li>
             <a href="#">Residential</a>
             <ul class="dropdown">
@@ -35,6 +45,6 @@
                 <li><a href="#">Agriculture Plot</a></li>
             </ul>
         </li>
-    </ul>
+    </ul> *@
     </li>
 }
