@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.MultiImagePath)
             </th>
             <th>
@@ -26,7 +29,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MultiImagePath)
+                @*@Html.DisplayFor(modelItem => item.MultiImagePath)*@
+                <img src=@Url.Content(item.MultiImagePath) alt=@item.Title width="250" height="200" class="img-responsive">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PropertyDetails.Location)

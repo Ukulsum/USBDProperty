@@ -8,7 +8,7 @@
 <main id="main">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Property Information</h5>
+            <h5 class="card-title text-center">Property Information</h5>
             <hr />
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -35,12 +35,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    @*<div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="PropertyForId" class="control-label"></label>
-                            <select asp-for="PropertyForId" class="form-control" asp-items="ViewBag.PropertyForId"></select>
+                        <label asp-for="PropertyForId" class="control-label"></label>
+                        <select asp-for="PropertyForId" class="form-control" asp-items="ViewBag.PropertyForId"></select>
                         </div>
-                    </div>
+                        </div>*@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="AreaId" class="control-label"></label>
@@ -164,8 +164,9 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="TransactionTypeId" class="control-label"></label>
-                            <select asp-for="TransactionTypeId" class="form-control" asp-items="ViewBag.TransactionTypeId"></select>
+                            <label asp-for="TransactionType" class="control-label"></label>
+                            <input asp-for="TransactionType" class="form-control" />
+                            <span asp-validation-for="TransactionType" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -190,7 +191,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label asp-for="Image" class="control-label"></label>
+                            <input type="file" asp-for="Image" class="form-control" id="imageInput" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                            <img src="#" style="width:155px;height:155px;" alt="Image Upload" id="imgPreview">
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
                     <textarea type="text" asp-for="Description" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
@@ -223,6 +238,18 @@
             height: 300,
             width: '100%',
          });
+          $("#imageInput").change(function () {
+                const file = this.files[0];
+                console.log(file);
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function (event) {
+                        console.log(event.target.result);
+                        $("#imgPreview").attr('src', event.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
     })
 </script>
 }

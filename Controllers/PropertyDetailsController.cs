@@ -12,10 +12,12 @@ namespace USBDProperty.Controllers
     public class PropertyDetailsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public PropertyDetailsController(ApplicationDbContext context)
+        public PropertyDetailsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            environment = _environment;
         }
 
         // GET: PropertyDetails
@@ -27,9 +29,9 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.Area)
                                                 .Include(p => p.PropertyOwnerInfo)
                                                 .Include(p => p.PropertyType)
-                                                .Include(p => p.SocialIcon)
-                                                .Include(p => p.TransactionType)
-                                                .Include(p => p.propertyFor);
+                                                .Include(p => p.SocialIcon);
+                                                //.Include(p => p.TransactionType)
+                                                //.Include(p => p.propertyFor);
                 return View(await applicationDbContext.ToListAsync());
             }
             catch(Exception ex)
@@ -54,8 +56,8 @@ namespace USBDProperty.Controllers
                     .Include(p => p.PropertyOwnerInfo)
                     .Include(p => p.PropertyType)
                     .Include(p => p.SocialIcon)
-                    .Include(p => p.TransactionType)
-                    .Include(p => p.propertyFor)
+                    //.Include(p => p.TransactionType)
+                    //.Include(p => p.propertyFor)
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
                 if (propertyDetails == null)
                 {
@@ -79,8 +81,8 @@ namespace USBDProperty.Controllers
                 ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner");
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
                 ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon");
-                ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
+                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
                 return View();
             }
             catch(Exception ex)
@@ -97,58 +99,74 @@ namespace USBDProperty.Controllers
         //[Bind("PropertyInfoId,Title,Description,PropertyName,Location,ConstructionStatus,PropertySize,NumberOfBedrooms,NumberOfBaths,NumberOfBalconies,NumberOfGarages,TotalFloor,FloorAvailableNo,Furnishing,Facing,LandArea,Price,Measurement,Comments,HandOverDate,PropertyTypeId,TransactionTypeId,OwnerId,IconId,AreaId,PropertyForId,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PropertyDetails propertyDetails)
+        public async Task<IActionResult> Create( PropertyDetails propertyDetails)
         {
             try
             {
-                if (ModelState.IsValid)
+                string wwwRootPath = "";
+                if (_environment != null)
                 {
-                    //var PropertyInfo = new PropertyDetails
-                    //{
-                    //    Title = propertyDetails.Title,
-                    //    Description = propertyDetails.Description,
-                    //    PropertyName = propertyDetails.PropertyName,
-                    //    Location = propertyDetails.Location,
-                    //    ConstructionStatus = propertyDetails.ConstructionStatus,
-                    //    PropertySize = propertyDetails.PropertySize,
-                    //    NumberOfBedrooms = propertyDetails.NumberOfBedrooms,
-                    //    NumberOfBaths = propertyDetails.NumberOfBaths,
-                    //    NumberOfBalconies = propertyDetails.NumberOfBalconies,
-                    //    NumberOfGarages = propertyDetails.NumberOfGarages,
-                    //    TotalFloor = propertyDetails.TotalFloor,
-                    //    FloorAvailableNo = propertyDetails.FloorAvailableNo,
-                    //    Furnishing = propertyDetails.Furnishing,
-                    //    Facing = propertyDetails.Facing,
-                    //    LandArea = propertyDetails.LandArea,
-                    //    Price = propertyDetails.Price,
-                    //    Measurement = propertyDetails.Measurement,
-                    //    Comments = propertyDetails.Comments,
-                    //    HandOverDate = propertyDetails.HandOverDate,
-                    //    PropertyTypeId = propertyDetails.PropertyTypeId,
-                    //    TransactionTypeId = propertyDetails.TransactionTypeId,
-                    //    OwnerId = propertyDetails.OwnerId,
-                    //    IconId = propertyDetails.IconId,
-                    //    AreaId = propertyDetails.AreaId,
-                    //    PropertyForId = propertyDetails.PropertyForId,
-                    //    CreatedBy = "umme",
-                    //    CreatedDate = DateTime.Now
-                    //};
-                    _context.Add(propertyDetails);
-                    await _context.SaveChangesAsync();
+                    wwwRootPath = _environment.WebRootPath;
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                }
+                string extention = Path.GetExtension(propertyDetails.Image.FileName);
+                string fileName = propertyDetails.Title + extention;
+                string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
+                using (var fileStrem = new FileStream(path, FileMode.Create))
+                {
+                    await propertyDetails.Image.CopyToAsync(fileStrem);
+                }
+
+                var PropertyInfo = new PropertyDetails
+                {
+                    Title = propertyDetails.Title,
+                    Description = propertyDetails.Description,
+                    PropertyName = propertyDetails.PropertyName,
+                    Location = propertyDetails.Location,
+                    ConstructionStatus = propertyDetails.ConstructionStatus,
+                    PropertySize = propertyDetails.PropertySize,
+                    NumberOfBedrooms = propertyDetails.NumberOfBedrooms,
+                    NumberOfBaths = propertyDetails.NumberOfBaths,
+                    NumberOfBalconies = propertyDetails.NumberOfBalconies,
+                    NumberOfGarages = propertyDetails.NumberOfGarages,
+                    TotalFloor = propertyDetails.TotalFloor,
+                    FloorAvailableNo = propertyDetails.FloorAvailableNo,
+                    Furnishing = propertyDetails.Furnishing,
+                    Facing = propertyDetails.Facing,
+                    LandArea = propertyDetails.LandArea,
+                    Price = propertyDetails.Price,
+                    Measurement = propertyDetails.Measurement,
+                    Comments = propertyDetails.Comments,
+                    HandOverDate = propertyDetails.HandOverDate,
+                    PropertyTypeId = propertyDetails.PropertyTypeId,
+                    OwnerId = propertyDetails.OwnerId,
+                    IconId = propertyDetails.IconId,
+                    AreaId = propertyDetails.AreaId,
+                    CreatedBy = "umme",
+                    CreatedDate = DateTime.Now,
+                    Path = "/Content/Images/"+fileName
+                };
+                _context.Add(PropertyInfo);
+                if (await _context.SaveChangesAsync() > 0)
+                {
                     return RedirectToAction(nameof(Index));
                 }
+
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
-                ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
-                return View(propertyDetails);
+                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError(string.Empty, ex.Message);
             }
+            return View(propertyDetails);
         }
 
         // GET: PropertyDetails/Edit/5
@@ -170,8 +188,8 @@ namespace USBDProperty.Controllers
                 ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
-                ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
+                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
             }
             catch(Exception ex)
@@ -218,8 +236,8 @@ namespace USBDProperty.Controllers
                 ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
-                ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
+                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
             }
             catch(Exception ex)
@@ -244,7 +262,7 @@ namespace USBDProperty.Controllers
                     .Include(p => p.PropertyType)
                     .Include(p => p.SocialIcon)
                     .Include(p => p.TransactionType)
-                    .Include(p => p.propertyFor)
+                    //.Include(p => p.propertyFor)
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
                 if (propertyDetails == null)
                 {

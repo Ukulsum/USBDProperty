@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240107102425_da")]
+    partial class da
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -572,14 +574,13 @@ namespace USBDProperty.Data.Migrations
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Price")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("PropertyForId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PropertyName")
                         .IsRequired()
@@ -604,9 +605,8 @@ namespace USBDProperty.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("TransactionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("int");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
@@ -621,6 +621,8 @@ namespace USBDProperty.Data.Migrations
                     b.HasIndex("IconId");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("PropertyForId");
 
                     b.HasIndex("PropertyTypeId");
 
@@ -959,6 +961,12 @@ namespace USBDProperty.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("USBDProperty.Models.PropertyFor", "propertyFor")
+                        .WithMany()
+                        .HasForeignKey("PropertyForId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("USBDProperty.Models.PropertyType", "PropertyType")
                         .WithMany()
                         .HasForeignKey("PropertyTypeId")
@@ -972,6 +980,8 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("PropertyType");
 
                     b.Navigation("SocialIcon");
+
+                    b.Navigation("propertyFor");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
