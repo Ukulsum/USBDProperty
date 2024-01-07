@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "AllUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<style>
+.panel{
+    margin-top:80px;
+    }
+
+    .panel-search{
+        z-index:99999;
+        margin-top:20px;
+    }
+
+    .panel-search a{
+        float:right;
+        text-align:right;
+    }</style>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="box-title center">
+            <b>All Users with their associated Roles</b>
+        </h3>
+        <hr />
+    </div>
+        <div class="col-md-12 row panel-search">
+        <a href="/Users/Create" class="float-right" title="Create a new user">
+            <i class="fa fa-plus"></i>Add User
+        </a>
+        @using (Html.BeginForm())
+        {
+
+            <p class="col-md-4">
+                RoleName :   @Html.DropDownList("roleName", ViewBag.roles as IEnumerable<SelectListItem>, "Select role", new { @id = "cid" })
+            </p>
+            <p class="col-md-4">
+                <input type="text" name="email" title="search by email" placeholder="Search by email" />
+            </p>
+            <input type="submit" value="Search" class="col-md-4" />
+        }
+        </div>
+   
+    <!-- /.box-header -->
+    <div class="panel-body">
+        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+            <thead>
+                <tr>
+                    <td><b>Username</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Roles</b></td>
+                    <td>........</td>
+                </tr>
+            </thead>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                    <td>
+                        @Html.ActionLink("Edit or Add Role", "EditRoles", "UserInfos", new { @email = @user.Email }, null)
+
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+  
+</div>

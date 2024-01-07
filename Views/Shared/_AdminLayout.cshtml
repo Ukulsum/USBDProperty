@@ -30,7 +30,7 @@
     <!-- Template Main CSS File -->
     <link href="~/AdminAsserts/css/style.css" rel="stylesheet">
 
-
+    <link href="~/asserts/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -375,6 +375,42 @@
                     </li>
                 </ul>
             </li><!-- End Settngs Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#Role-nav" data-bs-toggle="collapse"
+                   href="#">
+                    <i class="ri-settings-4-fill"></i><span>Authentication</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="Role-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                    <li>
+                        <a asp-action="Index" asp-controller="Roles">
+                            <i class="bi bi-circle"></i><span> Role</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Users">
+                            <i class="bi bi-circle"></i><span>All User</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="TermsConditions">
+                            <i class="bi bi-circle"></i><span>Assign User to Role</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="PrivacyPolicies">
+                            <i class="bi bi-circle"></i><span>Forgot Password</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="ClientContacts">
+                            <i class="bi bi-circle"></i><span>Create Developers</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Authentication Nav -->
+
+
             @*<li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                 <i class="ri-settings-4-fill"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>

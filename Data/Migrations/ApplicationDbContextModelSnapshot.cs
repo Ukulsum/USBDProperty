@@ -298,21 +298,7 @@ namespace USBDProperty.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PropertyForId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PropertyForId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertyTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("ClientContactId");
-
-                    b.HasIndex("PropertyForId1");
-
-                    b.HasIndex("PropertyTypeId");
 
                     b.ToTable("ClientContacts");
                 });
@@ -637,16 +623,16 @@ namespace USBDProperty.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyFeatureId"), 1L, 1);
 
-                    b.Property<string>("PropertyFeatureName")
+                    b.Property<string>("FeatureDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PropertyInfoId")
-                        .HasColumnType("int");
+                    b.Property<string>("PropertyFeatureName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("PropertyFeatureId");
-
-                    b.HasIndex("PropertyInfoId");
 
                     b.ToTable("PropertyFeatures");
                 });
@@ -749,6 +735,29 @@ namespace USBDProperty.Data.Migrations
                     b.HasKey("PropertyTypeId");
 
                     b.ToTable("PropertyTypes");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyWithFeatures", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int>("FeatureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FeatureId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("PropertyWithFeatures");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.SocialIcon", b =>
@@ -889,25 +898,6 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("Division");
                 });
 
-            modelBuilder.Entity("USBDProperty.Models.ClientContact", b =>
-                {
-                    b.HasOne("USBDProperty.Models.PropertyFor", "PropertyFor")
-                        .WithMany()
-                        .HasForeignKey("PropertyForId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("USBDProperty.Models.PropertyType", "PropertyType")
-                        .WithMany()
-                        .HasForeignKey("PropertyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PropertyFor");
-
-                    b.Navigation("PropertyType");
-                });
-
             modelBuilder.Entity("USBDProperty.Models.Division", b =>
                 {
                     b.HasOne("USBDProperty.Models.Country", "Country")
@@ -992,15 +982,23 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("propertyFor");
                 });
 
-            modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
+            modelBuilder.Entity("USBDProperty.Models.PropertyWithFeatures", b =>
                 {
+                    b.HasOne("USBDProperty.Models.PropertyFeatures", "PropertyFeatures")
+                        .WithMany()
+                        .HasForeignKey("FeatureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
                         .WithMany()
-                        .HasForeignKey("PropertyInfoId")
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PropertyDetails");
+
+                    b.Navigation("PropertyFeatures");
                 });
 #pragma warning restore 612, 618
         }

@@ -22,18 +22,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
+           @*  <th>
                 @Html.DisplayNameFor(model => model.PropertyForId)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.ContactDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Message)
             </th>
-            <th>
+          @*   <th>
                 @Html.DisplayNameFor(model => model.PropertyType)
-            </th>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -49,18 +49,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
+         @*    <td>
                 @Html.DisplayFor(modelItem => item.PropertyForId)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.ContactDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Message)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
-            </td>
+            </td> *@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ClientContactId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ClientContactId">Details</a> |
