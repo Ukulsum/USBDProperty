@@ -11,14 +11,15 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int PropertyFeatureId { get; set; }
         [Required]
-        [MaxLength]
-        [DisplayName("Property Feature")]
+      
+        [DisplayName("Feature")]
+        [StringLength(150)]
         public string PropertyFeatureName { get; set; }
-        [ForeignKey("PropertyDetails")]
-        public int PropertyInfoId { get; set; }
-
-
-        [ValidateNever]
-        public PropertyDetails PropertyDetails { get; set; }
+        [DisplayName("Feature Description ")]
+        public string  FeatureDescription{ get; set; }
+        //[ForeignKey("PropertyDetails")]
+        //public int PropertyInfoId { get; set; }
+        //[ValidateNever]
+        //public PropertyDetails PropertyDetails { get; set; }
     }
 }

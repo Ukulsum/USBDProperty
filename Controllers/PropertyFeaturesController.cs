@@ -21,55 +21,33 @@ namespace USBDProperty.Controllers
         // GET: PropertyFeatures
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                var applicationDbContext = _context.PropertyFeatures.Include(p => p.PropertyDetails);
-                return View(await applicationDbContext.ToListAsync());
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+              return _context.PropertyFeatures != null ? 
+                          View(await _context.PropertyFeatures.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.PropertyFeatures'  is null.");
         }
 
         // GET: PropertyFeatures/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            try
+            if (id == null || _context.PropertyFeatures == null)
             {
-                if (id == null || _context.PropertyFeatures == null)
-                {
-                    return NotFound();
-                }
-
-                var propertyFeatures = await _context.PropertyFeatures
-                    .Include(p => p.PropertyDetails)
-                    .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
-                if (propertyFeatures == null)
-                {
-                    return NotFound();
-                }
-
-                return View(propertyFeatures);
+                return NotFound();
             }
-            catch(Exception ex)
+
+            var propertyFeatures = await _context.PropertyFeatures
+                .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
+            if (propertyFeatures == null)
             {
-                return BadRequest(ex.Message);
+                return NotFound();
             }
+
+            return View(propertyFeatures);
         }
 
         // GET: PropertyFeatures/Create
         public IActionResult Create()
         {
-            try
-            {
-                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
-                return View();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return View();
         }
 
         // POST: PropertyFeatures/Create
@@ -77,47 +55,31 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyFeatureId,PropertyFeatureName,PropertyInfoId")] PropertyFeatures propertyFeatures)
+        public async Task<IActionResult> Create([Bind("PropertyFeatureId,PropertyFeatureName,FeatureDescription")] PropertyFeatures propertyFeatures)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _context.Add(propertyFeatures);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyFeatures.PropertyInfoId);
-                return View(propertyFeatures);
+                _context.Add(propertyFeatures);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return View(propertyFeatures);
         }
 
         // GET: PropertyFeatures/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            try
+            if (id == null || _context.PropertyFeatures == null)
             {
-                if (id == null || _context.PropertyFeatures == null)
-                {
-                    return NotFound();
-                }
+                return NotFound();
+            }
 
-                var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
-                if (propertyFeatures == null)
-                {
-                    return NotFound();
-                }
-                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyFeatures.PropertyInfoId);
-                return View(propertyFeatures);
-            }
-            catch(Exception ex)
+            var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
+            if (propertyFeatures == null)
             {
-                return BadRequest(ex.Message);
+                return NotFound();
             }
+            return View(propertyFeatures);
         }
 
         // POST: PropertyFeatures/Edit/5
@@ -125,68 +87,52 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertyFeatureId,PropertyFeatureName,PropertyInfoId")] PropertyFeatures propertyFeatures)
+        public async Task<IActionResult> Edit(int id, [Bind("PropertyFeatureId,PropertyFeatureName,FeatureDescription")] PropertyFeatures propertyFeatures)
         {
-            try
+            if (id != propertyFeatures.PropertyFeatureId)
             {
-                if (id != propertyFeatures.PropertyFeatureId)
-                {
-                    return NotFound();
-                }
+                return NotFound();
+            }
 
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        _context.Update(propertyFeatures);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!PropertyFeaturesExists(propertyFeatures.PropertyFeatureId))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                    return RedirectToAction(nameof(Index));
-                }
-                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyFeatures.PropertyInfoId);
-                return View(propertyFeatures);
-            }
-            catch(Exception ex)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ex.Message);
+                try
+                {
+                    _context.Update(propertyFeatures);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PropertyFeaturesExists(propertyFeatures.PropertyFeatureId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
+            return View(propertyFeatures);
         }
 
         // GET: PropertyFeatures/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            try
+            if (id == null || _context.PropertyFeatures == null)
             {
-                if (id == null || _context.PropertyFeatures == null)
-                {
-                    return NotFound();
-                }
-
-                var propertyFeatures = await _context.PropertyFeatures
-                    .Include(p => p.PropertyDetails)
-                    .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
-                if (propertyFeatures == null)
-                {
-                    return NotFound();
-                }
-
-                return View(propertyFeatures);
+                return NotFound();
             }
-            catch(Exception ex)
+
+            var propertyFeatures = await _context.PropertyFeatures
+                .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
+            if (propertyFeatures == null)
             {
-                return BadRequest(ex.Message);
+                return NotFound();
             }
+
+            return View(propertyFeatures);
         }
 
         // POST: PropertyFeatures/Delete/5
@@ -194,25 +140,18 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            if (_context.PropertyFeatures == null)
             {
-                if (_context.PropertyFeatures == null)
-                {
-                    return Problem("Entity set 'ApplicationDbContext.PropertyFeatures'  is null.");
-                }
-                var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
-                if (propertyFeatures != null)
-                {
-                    _context.PropertyFeatures.Remove(propertyFeatures);
-                }
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'ApplicationDbContext.PropertyFeatures'  is null.");
             }
-            catch(Exception ex)
+            var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
+            if (propertyFeatures != null)
             {
-                return BadRequest(ex.Message);
+                _context.PropertyFeatures.Remove(propertyFeatures);
             }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool PropertyFeaturesExists(int id)

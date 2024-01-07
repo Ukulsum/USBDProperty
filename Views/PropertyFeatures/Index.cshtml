@@ -5,96 +5,38 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<main id="main">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-9">
-                    <h5 class="card-title">List of Property Feature</h5>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
-                </div>
-            </div>
+<h1>Index</h1>
 
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PropertyFeatureId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PropertyFeatureName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PropertyDetails)
-                        </th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PropertyFeatureId)
-                            </td>
-                            <td>
-                                @Html.Raw(item.PropertyFeatureName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PropertyDetails.Location)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.PropertyFeatureId"><i class="bi bi-pencil-square"></i></a> |
-                                <a asp-action="Details" asp-route-id="@item.PropertyFeatureId"><i class="bi bi-eye-fill"></i></a> |
-                                <a asp-action="Delete" asp-route-id="@item.PropertyFeatureId"><i class="bi bi-trash"></i></a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</main>
-
-
-
-
-@*<h1>Index</h1>
-
-    <p>
+<p>
     <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
+</p>
+<table class="table">
     <thead>
-    <tr>
-    <th>
-    @Html.DisplayNameFor(model => model.PropertyFeatureName)
-    </th>
-    <th>
-    @Html.DisplayNameFor(model => model.PropertyDetails)
-    </th>
-    <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyFeatureName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeatureDescription)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-    <tr>
-    <td>
-    @Html.DisplayFor(modelItem => item.PropertyFeatureName)
-    </td>
-    <td>
-    @Html.DisplayFor(modelItem => item.PropertyDetails.Location)
-    </td>
-    <td>
-    <a asp-action="Edit" asp-route-id="@item.PropertyFeatureId">Edit</a> |
-    <a asp-action="Details" asp-route-id="@item.PropertyFeatureId">Details</a> |
-    <a asp-action="Delete" asp-route-id="@item.PropertyFeatureId">Delete</a>
-    </td>
-    </tr>
-    }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyFeatureName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeatureDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PropertyFeatureId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PropertyFeatureId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PropertyFeatureId">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
-    </table>*@
+</table>

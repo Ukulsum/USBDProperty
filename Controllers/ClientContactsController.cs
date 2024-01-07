@@ -21,7 +21,8 @@ namespace USBDProperty.Controllers
         // GET: ClientContacts
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ClientContacts.Include(c => c.PropertyType);
+            //var applicationDbContext = _context.ClientContacts.Include(c => c.PropertyType);
+            var applicationDbContext = _context.ClientContacts;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +35,7 @@ namespace USBDProperty.Controllers
             }
 
             var clientContact = await _context.ClientContacts
-                .Include(c => c.PropertyType)
+                //.Include(c => c.PropertyType)
                 .FirstOrDefaultAsync(m => m.ClientContactId == id);
             if (clientContact == null)
             {
@@ -64,7 +65,9 @@ namespace USBDProperty.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", clientContact.PropertyTypeId);
+            //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", 
+            //    clientContact.PropertyTypeId);
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName"      );
             return View(clientContact);
         }
 
@@ -81,7 +84,8 @@ namespace USBDProperty.Controllers
             {
                 return NotFound();
             }
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", clientContact.PropertyTypeId);
+            //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", clientContact.PropertyTypeId);
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
             return View(clientContact);
         }
 
@@ -117,7 +121,7 @@ namespace USBDProperty.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", clientContact.PropertyTypeId);
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
             return View(clientContact);
         }
 
@@ -130,7 +134,7 @@ namespace USBDProperty.Controllers
             }
 
             var clientContact = await _context.ClientContacts
-                .Include(c => c.PropertyType)
+                //.Include(c => c.PropertyType)
                 .FirstOrDefaultAsync(m => m.ClientContactId == id);
             if (clientContact == null)
             {

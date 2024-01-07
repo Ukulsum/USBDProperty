@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace USBDProperty.Models
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
       
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -27,5 +27,6 @@ namespace USBDProperty.Models
         public DbSet<PrivacyPolicy> PrivacyPolicy { get; set; }
         public DbSet<MultipleImageUpload> MultipleImageUploads { get; set; }
         public DbSet<FloorPlan> FloorPlans { get; set; }
+        public DbSet<PropertyWithFeatures> PropertyWithFeatures { get; set; }
     }
 }
