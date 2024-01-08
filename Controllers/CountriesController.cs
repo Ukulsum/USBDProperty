@@ -17,7 +17,11 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
-
+        public JsonResult GetCountry()
+        {
+            var record = _context.Countries.OrderBy(c => c.CountryName).ToList();
+            return Json(record);
+        }
         // GET: Countries
         public async Task<IActionResult> Index()
         {

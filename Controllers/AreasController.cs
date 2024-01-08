@@ -17,7 +17,12 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
-
+        public JsonResult GetArea(int cid)
+        {
+            var record = _context.Areas.OrderBy(c => c.AreaName)
+                                            .Where(d => d.CityId.Equals(cid)).ToList();
+            return Json(record);
+        }
         // GET: Areas
         public async Task<IActionResult> Index()
         {

@@ -4,11 +4,11 @@ using USBDProperty.DTO;
 
 namespace USBDProperty.Models
 {
-    public class PropertyOwnerInfo : BaseDTO
+    public class DevelopersorAgent : BaseDTO
     {
         [Key]
         [DisplayName("ID")]
-        public int OwnerID { get; set; }
+        public int ID { get; set; }
         [Required]
         public string Logo { get; set; }
         [Required]
@@ -31,5 +31,7 @@ namespace USBDProperty.Models
         [StringLength(150)]
         [DisplayName("Posted By")]
         public string PostedBy { get; set; }
+
+        public ICollection<DevelopersorAgent> DevelopersorAgents { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace USBDProperty.Models
 {
-    public class PropertyFor
+    public class PropertyFor333
     {
         [Key]
         [DisplayName("ID")]

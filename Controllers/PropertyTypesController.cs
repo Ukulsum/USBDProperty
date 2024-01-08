@@ -17,7 +17,22 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
-
+        public JsonResult GetChildType(int? pid)
+        {
+            try
+            {
+                if (pid.Value  != null)
+                {
+                    var result = _context.PropertyTypes.OrderBy(p => p.PropertyTypeName).Where(p => p.ParentPropertyTypeId.Equals(pid));
+                    return Json(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { isSuccess = false,Message=ex.Message });
+            }
+            return Json(new { isSuccess = false, Message = "Failed to retrieve" });
+        }
         // GET: PropertyTypes
         public async Task<IActionResult> Index()
         {

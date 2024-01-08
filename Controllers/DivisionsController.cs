@@ -17,7 +17,12 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
-
+        public JsonResult GetDivision(int cid)
+        {
+            var record = _context.Divisions.OrderBy(c => c.DivisionName)
+                                            .Where(d=>d.CountryId.Equals(cid)).ToList();
+            return Json(record);
+        }
         // GET: Divisions
         public async Task<IActionResult> Index()
         {

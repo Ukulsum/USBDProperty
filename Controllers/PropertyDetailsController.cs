@@ -27,9 +27,9 @@ namespace USBDProperty.Controllers
             {
                 var applicationDbContext = _context.PropertyDetails
                                                 .Include(p => p.Area)
-                                                .Include(p => p.PropertyOwnerInfo)
-                                                .Include(p => p.PropertyType)
-                                                .Include(p => p.SocialIcon);
+                                                //.Include(p => p.PropertyOwnerInfo)
+                                                .Include(p => p.PropertyType);
+                                                //.Include(p => p.SocialIcon);
                                                 //.Include(p => p.TransactionType)
                                                 //.Include(p => p.propertyFor);
                 return View(await applicationDbContext.ToListAsync());
@@ -53,9 +53,9 @@ namespace USBDProperty.Controllers
 
                 var propertyDetails = await _context.PropertyDetails
                     .Include(p => p.Area)
-                    .Include(p => p.PropertyOwnerInfo)
+                   // .Include(p => p.DevelopersAgent)
                     .Include(p => p.PropertyType)
-                    .Include(p => p.SocialIcon)
+                   // .Include(p => p.SocialIcon)
                     //.Include(p => p.TransactionType)
                     //.Include(p => p.propertyFor)
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
@@ -71,15 +71,15 @@ namespace USBDProperty.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+       
         // GET: PropertyDetails/Create
         public IActionResult Create()
         {
             try
             {
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-                ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner");
-                ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
+               // ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner");
+                ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
                 ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon");
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
@@ -99,7 +99,7 @@ namespace USBDProperty.Controllers
         //[Bind("PropertyInfoId,Title,Description,PropertyName,Location,ConstructionStatus,PropertySize,NumberOfBedrooms,NumberOfBaths,NumberOfBalconies,NumberOfGarages,TotalFloor,FloorAvailableNo,Furnishing,Facing,LandArea,Price,Measurement,Comments,HandOverDate,PropertyTypeId,TransactionTypeId,OwnerId,IconId,AreaId,PropertyForId,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyInfoId,Title,Description,PropertyName,Location,ConstructionStatus,PropertySize,NumberOfBedrooms,NumberOfBaths,NumberOfBalconies,NumberOfGarages,TotalFloor,FloorAvailableNo,Furnishing,Facing,LandArea,Price,Measurement,Comments,HandOverDate,PropertyTypeId,TransactionType,OwnerId,IconId,AreaId,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")]PropertyDetails propertyDetails)
+        public async Task<IActionResult> Create( PropertyDetails propertyDetails)
         {
             try
             {
@@ -143,9 +143,9 @@ namespace USBDProperty.Controllers
                     Comments = propertyDetails.Comments,
                     HandOverDate = propertyDetails.HandOverDate,
                     PropertyTypeId = propertyDetails.PropertyTypeId,
-                    TransactionType = propertyDetails.TransactionType,
+                    PropertyCondition = propertyDetails.PropertyCondition,
                     OwnerId = propertyDetails.OwnerId,
-                    IconId = propertyDetails.IconId,
+                    //IconId = propertyDetails.IconId,
                     AreaId = propertyDetails.AreaId,
                     CreatedBy = "umme",
                     CreatedDate = DateTime.Now,
@@ -158,9 +158,9 @@ namespace USBDProperty.Controllers
                 }
 
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-                ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
+               // ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
+                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
             }
@@ -187,9 +187,9 @@ namespace USBDProperty.Controllers
                     return NotFound();
                 }
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-                ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
+                //ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
+                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
@@ -235,9 +235,9 @@ namespace USBDProperty.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-                ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
+                //ViewData["OwnerId"] = new SelectList(_context.PropertyOwnerInfos, "OwnerID", "Banner", propertyDetails.OwnerId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
+                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
@@ -260,10 +260,10 @@ namespace USBDProperty.Controllers
 
                 var propertyDetails = await _context.PropertyDetails
                     .Include(p => p.Area)
-                    .Include(p => p.PropertyOwnerInfo)
+                    //.Include(p => p.PropertyOwnerInfo)
                     .Include(p => p.PropertyType)
-                    .Include(p => p.SocialIcon)
-                    .Include(p => p.TransactionType)
+                    //.Include(p => p.SocialIcon)
+                   // .Include(p => p.TransactionType)
                     //.Include(p => p.propertyFor)
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
                 if (propertyDetails == null)

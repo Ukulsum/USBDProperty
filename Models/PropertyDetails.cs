@@ -6,11 +6,18 @@ using USBDProperty.DTO;
 
 namespace USBDProperty.Models
 {
+  public  enum PropertyCondition
+    {
+        New=1,Used
+    }
     public class PropertyDetails : BaseDTO
     {
         [Key]
         [DisplayName("ID")]
         public int PropertyInfoId { get; set; }
+        //[ValidateNever]
+        //public IFormFile Image { get;set; }
+        //public string Path { get; set; } = "";
         [StringLength(255)]
         public string Title { get; set; }
         [MaxLength]
@@ -70,39 +77,35 @@ namespace USBDProperty.Models
         public string Measurement { get; set; }
         [StringLength(255)]
         public string Comments { get; set; }
-        [DisplayName("Transaction Type")]
-        public string TransactionType { get; set; }
+        [DisplayName("Propety Condition")]
+        public PropertyCondition PropertyCondition { get; set; }
         [DisplayName("Handover Date")]
+        [DataType(DataType.Date)]
         public DateTime? HandOverDate { get; set; }
         [ForeignKey("PropertyType")]
         public int PropertyTypeId { get; set; }
        
         [ForeignKey("PropertyOwnerInfo")]
+        [DisplayName("Developer/Agent")]
         public int OwnerId { get; set; }
-        [ForeignKey("SocialIcon")]
-        public int IconId { get; set; }
+       
         [ForeignKey("Area")]
         public int AreaId { get; set; }
-        //[ForeignKey("propertyFor")]
-        //public int PropertyForId { get; set; }
-
-
-        //[ValidateNever]
-        //[DisplayName("Property For")]
-        //public PropertyFor propertyFor { get; set; }
+         
+       public PropertyFor propertyFor { get; set; }
         [ValidateNever]
         [DisplayName("Property Type")]
         public PropertyType PropertyType { get; set; }
-        //[ValidateNever]
-        //[DisplayName("Transaction Type")]
-        //public TransactionType TransactionType { get; set; }
+        //[ValidateNever]   
+        //public  DevelopersorAgent PropertyOwnerInfo { get; set; }
+
         [ValidateNever]
-        [DisplayName("Company Name")]
-        public  PropertyOwnerInfo PropertyOwnerInfo { get; set; }
-        [ValidateNever]
-        [DisplayName("Social Icon")]
-        public SocialIcon SocialIcon { get; set; }
+        public ProjectsInfo ProjectsInfo { get; set; }
         [ValidateNever]
         public Area Area { get; set; }
+    }
+    public enum PropertyFor
+    {
+        Buy=1,Sell,Rent
     }
 }
