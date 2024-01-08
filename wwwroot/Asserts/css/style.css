@@ -560,10 +560,32 @@ ul.dropdown li:hover {
 	background: #ffffff;
 	padding: 30px;
 	display: inline-block;
-	width: 100%;
+	width: 90%;
 	margin-top: 80px;
 	position: relative;
+	border-radius: 15px;
 }
+.search-type {
+	background: #fff;
+	box-shadow: 0 4px 10px rgba(0,117,255,.0898711);
+	border-radius: 10px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	justify-content: space-evenly;
+	padding: 0 60px;
+	width: auto;
+}
+
+/*.finder .container .find-sec {
+	background: #ffffff;
+	padding: 30px;
+	display: inline-block;
+	width: 90%;
+	margin-top: 80px;
+	position: relative;
+	border-radius: 15px;
+}*/
 .find-sec:before {
 	content: "";
 	position: absolute;

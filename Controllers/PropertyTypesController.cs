@@ -99,6 +99,7 @@ namespace USBDProperty.Controllers
             {
                 return NotFound();
             }
+            
             return View(propertyType);
         }
 

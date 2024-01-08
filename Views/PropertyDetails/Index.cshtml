@@ -33,6 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PropertyType)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
            @* <th>
                 @Html.DisplayNameFor(model => model.Location)
             </th>
@@ -81,9 +84,9 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.HandOverDate)
             </th>*@
-            <th>
+           @* <th>
                 @Html.DisplayNameFor(model => model.propertyFor)
-            </th>
+            </th>*@
             
             @*<th>
                 @Html.DisplayNameFor(model => model.TransactionType)
@@ -117,6 +120,9 @@
             </td>
              <td>
                 @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
+            </td>
+            <td>
+                <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive">
             </td>
            @* <td>
                 @Html.DisplayFor(modelItem => item.Location)
@@ -166,9 +172,9 @@
             @*<td>
                 @Html.DisplayFor(modelItem => item.HandOverDate)
             </td>*@
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.propertyFor.PropeFor)
-            </td>
+            </td>*@
            
             @*<td>
                 @Html.DisplayFor(modelItem => item.TransactionType.TransactionTypeName)
