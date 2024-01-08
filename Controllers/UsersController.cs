@@ -72,7 +72,7 @@ namespace USBDProperty.Controllers
             //    email = currentFilter;
 
             //}
-            ViewBag.CurrentFilter = email;
+            //ViewBag.CurrentFilter = email;
             if (roleName != string.Empty)
             {
                 usersWithRoles = usersWithRoles.Where(u => u.Role.Contains(roleName)).ToList();
@@ -111,8 +111,8 @@ namespace USBDProperty.Controllers
             {
 
                 var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, uservm.Email, CancellationToken.None);
+                user.Email = uservm.Email;
+                await _userStore.SetUserNameAsync(user,uservm.Email, CancellationToken.None);
                // await _emailStore.SetEmailAsync(user, uservm.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, uservm.Password);
 
