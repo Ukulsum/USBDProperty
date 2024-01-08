@@ -28,10 +28,10 @@ namespace USBDProperty.Controllers
             {
                 var applicationDbContext = _context.PropertyDetails
                                                 .Include(p => p.Area)
-                                                .Include(p => p.PropertyOwnerInfo)
-                                                .Include(p => p.PropertyType)
-                                                .Include(p => p.SocialIcon)
-                                                .Include(p => p.propertyFor).ToList();
+                                                // .Include(p => p.PropertyOwnerInfo)
+                                                .Include(p => p.PropertyType);
+                                                //.Include(p => p.SocialIcon)
+                                                //.Include(p => p.propertyFor).ToList();
                                               //.Include(p => p.TransactionType)
                                                 
                 return Json(new { data = applicationDbContext });
@@ -82,7 +82,7 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.PropertyType);
                                                 //.Include(p => p.SocialIcon);
                                                 //.Include(p => p.TransactionType)
-                                                .Include(p => p.propertyFor);
+                                                //.Include(p => p.propertyFor);
                 return View(await applicationDbContext.ToListAsync());
             }
             catch(Exception ex)
@@ -110,7 +110,7 @@ namespace USBDProperty.Controllers
                     .Include(p => p.PropertyType)
                    // .Include(p => p.SocialIcon)
                     //.Include(p => p.TransactionType)
-                    .Include(p => p.propertyFor)
+                    //.Include(p => p.propertyFor)
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
                 if (propertyDetails == null)
                 {
@@ -135,7 +135,7 @@ namespace USBDProperty.Controllers
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
                 ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon");
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
                 return View();
             }
             catch(Exception ex)
@@ -215,7 +215,7 @@ namespace USBDProperty.Controllers
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
             }
             catch(Exception ex)
             {
@@ -244,7 +244,7 @@ namespace USBDProperty.Controllers
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
             }
             catch(Exception ex)
@@ -292,7 +292,7 @@ namespace USBDProperty.Controllers
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
+                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
             }
             catch(Exception ex)
