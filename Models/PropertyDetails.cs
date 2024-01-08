@@ -91,8 +91,13 @@ namespace USBDProperty.Models
        
         [ForeignKey("Area")]
         public int AreaId { get; set; }
-         
-       public PropertyFor propertyFor { get; set; }
+        //[ForeignKey("propertyFor")]
+        //public int PropertyForId { get; set; }
+
+
+        //[ValidateNever]
+        //[DisplayName("Property For")]
+        //public PropertyFor propertyFor { get; set; }
         [ValidateNever]
         [DisplayName("Property Type")]
         public PropertyType PropertyType { get; set; }

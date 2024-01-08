@@ -290,8 +290,10 @@
         </div>
 
         <!--======= PROPERTIES ROW =========-->
-        <ul class="row">
+        @*<ul class="row">*@
+            <div class="load_Property">
 
+            </div>
             <!--======= PROPERTY =========-->
     @*        <li class="col-sm-4">
                 <!--======= TAGS =========-->
@@ -453,7 +455,7 @@
                     </div>
                 </section>
             </li>*@
-        </ul>
+        @*</ul>*@
     </div>
 </section>
 
@@ -737,25 +739,13 @@
     </div>*@
 
 
-
-
-
-@section Scripts{
-    <script>
-        $(document).ready(function (){
-
-        })
-        function getProperty(){
-            $.ajax({
-                url: "https://localhost:7247/PropertyDetails/Index",
-                method: "Get",
-                success: function(res){
-                    var propertylist = "";
-                    $.each(res, function(index, value){
-                        propertylist += '<li class="col-sm-4"><span class="tag font-montserrat sale">' + value.PropertyType + '</span>
-                <section> 
+<li class="col-sm-4">
+                <!--======= TAGS =========-->
+                <span class="tag font-montserrat rent">FOR RENT</span>
+                <section>
+                    <!--======= IMAGE =========-->
                     <div class="img">
-                        <img class="img-responsive" src="~/Asserts/images/img-3.jpg" alt="">
+                        <img class="img-responsive" src="~/Asserts/images/img-1.jpg" alt="">
                         <!--======= IMAGE HOVER =========-->
 
                         <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
@@ -773,8 +763,33 @@
                         <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
                     </div>
                 </section>
-            </li>'
-                    })
+            </li>
+
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function (){
+            getProperty()
+        })
+        function getProperty(){
+            alert("helo")
+            $.ajax({
+                url: "/PropertyDetails/HomeProperty",
+                method: "Get",
+                success: function(res){
+                    console.log(res.data)
+                    var propertylist = "";
+                    $.each(res.data, function(index, value){
+                        console.log(value )
+                        console.log(value.numberOfBedrooms )
+                        propertylist += '<ul class="row"><li class="col-sm-4"><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.title + '</a> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><p> ' + value.description + ' </p><div class="share-p"> <span class="price font-montserrat">' + value.price + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
+                    });
+                    console.log(propertylist);
+                    //console.log(PropertySize);
+                    $(".load_Property").empty();
+                    $(".load_Property").html(propertylist);
                 }
             })
         }
