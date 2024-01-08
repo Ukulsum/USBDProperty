@@ -99,7 +99,7 @@ namespace USBDProperty.Controllers
         //[Bind("PropertyInfoId,Title,Description,PropertyName,Location,ConstructionStatus,PropertySize,NumberOfBedrooms,NumberOfBaths,NumberOfBalconies,NumberOfGarages,TotalFloor,FloorAvailableNo,Furnishing,Facing,LandArea,Price,Measurement,Comments,HandOverDate,PropertyTypeId,TransactionTypeId,OwnerId,IconId,AreaId,PropertyForId,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( PropertyDetails propertyDetails)
+        public async Task<IActionResult> Create([Bind("PropertyInfoId,Title,Description,PropertyName,Location,ConstructionStatus,PropertySize,NumberOfBedrooms,NumberOfBaths,NumberOfBalconies,NumberOfGarages,TotalFloor,FloorAvailableNo,Furnishing,Facing,LandArea,Price,Measurement,Comments,HandOverDate,PropertyTypeId,TransactionType,OwnerId,IconId,AreaId,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")]PropertyDetails propertyDetails)
         {
             try
             {
@@ -112,6 +112,7 @@ namespace USBDProperty.Controllers
                 {
                     wwwRootPath = Directory.GetCurrentDirectory();
                 }
+                //string fileN = Path.GetFileNameWithoutExtension(propertyDetails.Image.FileName);
                 string extention = Path.GetExtension(propertyDetails.Image.FileName);
                 string fileName = propertyDetails.Title + extention;
                 string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
@@ -142,6 +143,7 @@ namespace USBDProperty.Controllers
                     Comments = propertyDetails.Comments,
                     HandOverDate = propertyDetails.HandOverDate,
                     PropertyTypeId = propertyDetails.PropertyTypeId,
+                    TransactionType = propertyDetails.TransactionType,
                     OwnerId = propertyDetails.OwnerId,
                     IconId = propertyDetails.IconId,
                     AreaId = propertyDetails.AreaId,
