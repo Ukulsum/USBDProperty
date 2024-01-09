@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
 #nullable disable
 
-namespace USBDProperty.Data.Migrations
+namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240103075952_dsa")]
-    partial class dsa
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,71 +72,6 @@ namespace USBDProperty.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -226,6 +159,75 @@ namespace USBDProperty.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("USBDProperty.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProfilePic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("USBDProperty.Models.Area", b =>
                 {
                     b.Property<int>("AreaId")
@@ -300,21 +302,7 @@ namespace USBDProperty.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PropertyForId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PropertyForId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertyTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("ClientContactId");
-
-                    b.HasIndex("PropertyForId1");
-
-                    b.HasIndex("PropertyTypeId");
 
                     b.ToTable("ClientContacts");
                 });
@@ -335,6 +323,67 @@ namespace USBDProperty.Data.Migrations
                     b.HasKey("CountryID");
 
                     b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.DevelopersorAgent", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Banner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ContactNo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Logo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("PostedBy")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("UpdateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("DevelopersorAgent");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Division", b =>
@@ -385,28 +434,6 @@ namespace USBDProperty.Data.Migrations
                     b.HasIndex("PropertyInfoID");
 
                     b.ToTable("FloorPlans");
-                });
-
-            modelBuilder.Entity("USBDProperty.Models.MultipleImageUpload", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("MultiImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("propertyInfoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("propertyInfoId");
-
-                    b.ToTable("MultipleImageUploads");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Notice", b =>
@@ -478,6 +505,74 @@ namespace USBDProperty.Data.Migrations
                     b.ToTable("PrivacyPolicy");
                 });
 
+            modelBuilder.Entity("USBDProperty.Models.ProjectImageGallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("ProjectImageGallery");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.ProjectsInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AgentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LocationMap")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgentID");
+
+                    b.ToTable("ProjectsInfo");
+                });
+
             modelBuilder.Entity("USBDProperty.Models.PropertyDetails", b =>
                 {
                     b.Property<int>("PropertyInfoId")
@@ -526,9 +621,6 @@ namespace USBDProperty.Data.Migrations
                     b.Property<DateTime?>("HandOverDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IconId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -567,15 +659,19 @@ namespace USBDProperty.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("PropertyForId")
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyCondition")
                         .HasColumnType("int");
 
                     b.Property<string>("PropertyName")
@@ -601,9 +697,6 @@ namespace USBDProperty.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("TransactionTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -614,15 +707,9 @@ namespace USBDProperty.Data.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.HasIndex("IconId");
-
-                    b.HasIndex("OwnerId");
-
-                    b.HasIndex("PropertyForId");
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("PropertyTypeId");
-
-                    b.HasIndex("TransactionTypeId");
 
                     b.ToTable("PropertyDetails");
                 });
@@ -635,92 +722,44 @@ namespace USBDProperty.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyFeatureId"), 1L, 1);
 
-                    b.Property<string>("PropertyFeatureName")
+                    b.Property<string>("FeatureDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PropertyFeatureName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("PropertyFeatureId");
 
                     b.ToTable("PropertyFeatures");
                 });
 
-            modelBuilder.Entity("USBDProperty.Models.PropertyFor", b =>
+            modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
                 {
-                    b.Property<int>("PropertyForId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyForId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<string>("PropeFor")
+                    b.Property<string>("MultiImagePath")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PropertyForId");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("PropertyFors");
-                });
-
-            modelBuilder.Entity("USBDProperty.Models.PropertyOwnerInfo", b =>
-                {
-                    b.Property<int>("OwnerID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("propertyInfoId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OwnerID"), 1L, 1);
+                    b.HasKey("ID");
 
-                    b.Property<string>("Banner")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasIndex("propertyInfoId");
 
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ContactNo")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Logo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("PostedBy")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("UpdateBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("OwnerID");
-
-                    b.ToTable("PropertyOwnerInfos");
+                    b.ToTable("PropertyImages");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyType", b =>
@@ -742,6 +781,29 @@ namespace USBDProperty.Data.Migrations
                     b.HasKey("PropertyTypeId");
 
                     b.ToTable("PropertyTypes");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyWithFeatures", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int>("FeatureId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FeatureId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("PropertyWithFeatures");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.SocialIcon", b =>
@@ -820,7 +882,7 @@ namespace USBDProperty.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("USBDProperty.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -829,7 +891,7 @@ namespace USBDProperty.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("USBDProperty.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -844,7 +906,7 @@ namespace USBDProperty.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("USBDProperty.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -853,7 +915,7 @@ namespace USBDProperty.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("USBDProperty.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -882,25 +944,6 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("Division");
                 });
 
-            modelBuilder.Entity("USBDProperty.Models.ClientContact", b =>
-                {
-                    b.HasOne("USBDProperty.Models.PropertyFor", "PropertyFor")
-                        .WithMany()
-                        .HasForeignKey("PropertyForId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("USBDProperty.Models.PropertyType", "PropertyType")
-                        .WithMany()
-                        .HasForeignKey("PropertyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PropertyFor");
-
-                    b.Navigation("PropertyType");
-                });
-
             modelBuilder.Entity("USBDProperty.Models.Division", b =>
                 {
                     b.HasOne("USBDProperty.Models.Country", "Country")
@@ -923,15 +966,26 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("PropertyDetails");
                 });
 
-            modelBuilder.Entity("USBDProperty.Models.MultipleImageUpload", b =>
+            modelBuilder.Entity("USBDProperty.Models.ProjectImageGallery", b =>
                 {
-                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
+                    b.HasOne("USBDProperty.Models.ProjectsInfo", "ProjectsInfo")
                         .WithMany()
-                        .HasForeignKey("propertyInfoId")
+                        .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PropertyDetails");
+                    b.Navigation("ProjectsInfo");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.ProjectsInfo", b =>
+                {
+                    b.HasOne("USBDProperty.Models.DevelopersorAgent", "Developers")
+                        .WithMany("projectsInfos")
+                        .HasForeignKey("AgentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Developers");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyDetails", b =>
@@ -942,21 +996,9 @@ namespace USBDProperty.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("USBDProperty.Models.SocialIcon", "SocialIcon")
+                    b.HasOne("USBDProperty.Models.ProjectsInfo", "ProjectsInfo")
                         .WithMany()
-                        .HasForeignKey("IconId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("USBDProperty.Models.PropertyOwnerInfo", "PropertyOwnerInfo")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("USBDProperty.Models.PropertyFor", "propertyFor")
-                        .WithMany()
-                        .HasForeignKey("PropertyForId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -966,23 +1008,46 @@ namespace USBDProperty.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("USBDProperty.Models.TransactionType", "TransactionType")
+                    b.Navigation("Area");
+
+                    b.Navigation("ProjectsInfo");
+
+                    b.Navigation("PropertyType");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
+                {
+                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
                         .WithMany()
-                        .HasForeignKey("TransactionTypeId")
+                        .HasForeignKey("propertyInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Area");
+                    b.Navigation("PropertyDetails");
+                });
 
-                    b.Navigation("PropertyOwnerInfo");
+            modelBuilder.Entity("USBDProperty.Models.PropertyWithFeatures", b =>
+                {
+                    b.HasOne("USBDProperty.Models.PropertyFeatures", "PropertyFeatures")
+                        .WithMany()
+                        .HasForeignKey("FeatureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("PropertyType");
+                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("SocialIcon");
+                    b.Navigation("PropertyDetails");
 
-                    b.Navigation("TransactionType");
+                    b.Navigation("PropertyFeatures");
+                });
 
-                    b.Navigation("propertyFor");
+            modelBuilder.Entity("USBDProperty.Models.DevelopersorAgent", b =>
+                {
+                    b.Navigation("projectsInfos");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,11 +9,11 @@ using USBDProperty.Models;
 
 #nullable disable
 
-namespace USBDProperty.Data.Migrations
+namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240108130917_ppprj")]
-    partial class ppprj
+    [Migration("20240109050414_p")]
+    partial class p
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -738,9 +738,6 @@ namespace USBDProperty.Data.Migrations
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("propertyFor")
-                        .HasColumnType("int");
 
                     b.HasKey("PropertyInfoId");
 

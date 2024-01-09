@@ -774,7 +774,7 @@
             getProperty()
         })
         function getProperty(){
-            alert("helo")
+            //alert("helo")
             $.ajax({
                 url: "/PropertyDetails/HomeProperty",
                 method: "Get",
@@ -784,14 +784,38 @@
                     $.each(res.data, function(index, value){
                         console.log(value )
                         console.log(value.numberOfBedrooms )
-                        propertylist += '<ul class="row"><li class="col-sm-4"><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.title + '</a> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><p> ' + value.description + ' </p><div class="share-p"> <span class="price font-montserrat">' + value.price + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
+                        propertylist += '<ul class="row">';
+                        propertylist += '<li class="col-sm-6 col-md-4"><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.propertyName + '</a><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.price + '</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + " TROPICAL HOMES LTD" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>'
                     });
                     console.log(propertylist);
                     //console.log(PropertySize);
+                    propertylist += '</ul>';
                     $(".load_Property").empty();
                     $(".load_Property").html(propertylist);
                 }
             })
         }
+        //function getProperty(){
+        //    //alert("helo")
+        //    $.ajax({
+        //        url: "/PropertyDetails/HomeProperty",
+        //        method: "Get",
+        //        success: function(res){
+        //            console.log(res.data)
+        //            var propertylist = "";
+        //            $.each(res.data, function(index, value){
+        //                console.log(value )
+        //                console.log(value.numberOfBedrooms )
+        //                propertylist += '<ul class="row">';
+        //                propertylist += '<li class="col-sm-4"><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.title + '</a> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><p> ' + value.description + ' </p><div class="share-p"> <span class="price font-montserrat">' + value.price + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>'
+        //            });
+        //            console.log(propertylist);
+        //            //console.log(PropertySize);
+        //            propertylist += '</ul>';
+        //            $(".load_Property").empty();
+        //            $(".load_Property").html(propertylist);
+        //        }
+        //    })
+        //}
     </script>
 }

@@ -1,468 +1,155 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "HomePropertyDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section class="properties">
     <div class="container">
-        <div class="card">
-            <div class="load_HomePropertyDetailsById">
-          
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="load_HomePropertyDetailsById">
+
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    @*<h5 class="card-title">Property Summary</h5>*@
+                    <div class="load_HomePropertyDetails">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
 </section>
-<section class="properties">
-    <div class="container">
 
-        <!--======= TITTLE =========-->
-        <div class="tittle">
-            <img src="~/Asserts/images/head-top.png" alt="">
-            <h3>new properties list</h3>
-            @*<p>This time there's no stopping us. Straightnin' the curves. Flatnin' the hills Someday the mountain might get ‘em but the law never will. The weather started getting rough - the tiny ship was tossed.</p>*@
-        </div>
-
-        <!--======= PROPERTIES ROW =========-->
-        @*<ul class="row">*@
-            <div class="load_HomePropertyDetails">
-
-            </div>
-            <!--======= PROPERTY =========-->
-    @*        <li class="col-sm-4">
-                <!--======= TAGS =========-->
-                <span class="tag font-montserrat rent">FOR RENT</span>
-                <section>
-                    <!--======= IMAGE =========-->
-                    <div class="img">
-                        <img class="img-responsive" src="~/Asserts/images/img-1.jpg" alt="">
-                        <!--======= IMAGE HOVER =========-->
-
-                        <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
-                    </div>
-                    <!--======= HOME INNER DETAILS =========-->
-                    <ul class="home-in">
-                        <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                        <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                        <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                    </ul>
-                    <!--======= HOME DETAILS =========-->
-                    <div class="detail-sec">
-                        <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                        <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                        <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                    </div>
-                </section>
-            </li>*@
-
-            <!--======= PROPERTY =========-->
-            @*<li class="col-sm-4">
-                <!--======= TAGS =========-->
-                <span class="tag font-montserrat rent">FOR RENT</span>
-                <section>
-                    <!--======= IMAGE =========-->
-                    <div class="img">
-                        <img class="img-responsive" src="~/Asserts/images/img-2.jpg" alt="">
-                        <!--======= IMAGE HOVER =========-->
-
-                        <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
-                    </div>
-                    <!--======= HOME INNER DETAILS =========-->
-                    <ul class="home-in">
-                        <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                        <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                        <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                    </ul>
-                    <!--======= HOME DETAILS =========-->
-                    <div class="detail-sec">
-                        <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                        <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                        <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                    </div>
-                </section>
-            </li>*@
-
-            <!--======= PROPERTY =========-->
-            @*<li class="col-sm-4">
-                <!--======= TAGS =========-->
-                <span class="tag font-montserrat sale">FOR SALE</span>
-                <section>
-                    <!--======= IMAGE =========-->
-                    <div class="img">
-                        <img class="img-responsive" src="~/Asserts/images/img-3.jpg" alt="">
-                        <!--======= IMAGE HOVER =========-->
-
-                        <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
-                    </div>
-                    <!--======= HOME INNER DETAILS =========-->
-                    <ul class="home-in">
-                        <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                        <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                        <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                    </ul>
-                    <!--======= HOME DETAILS =========-->
-                    <div class="detail-sec">
-                        <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                        <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                        <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                    </div>
-                </section>
-            </li>*@
-
-            <!--======= PROPERTY =========-->
-           @* <li class="col-sm-4">
-                <!--======= TAGS =========-->
-                <span class="tag font-montserrat rent">FOR RENT</span>
-                <section>
-                    <!--======= IMAGE =========-->
-                    <div class="img">
-                        <img class="img-responsive" src="~/Asserts/images/img-4.jpg" alt="">
-                        <!--======= IMAGE HOVER =========-->
-
-                        <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
-                    </div>
-                    <!--======= HOME INNER DETAILS =========-->
-                    <ul class="home-in">
-                        <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                        <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                        <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                    </ul>
-                    <!--======= HOME DETAILS =========-->
-                    <div class="detail-sec">
-                        <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                        <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                        <div class="share-p"> <span class="price font-montserrat">$ 2,956,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                    </div>
-                </section>
-            </li>*@
-
-            <!--======= PROPERTY =========-->
-            @*<li class="col-sm-4">
-                <!--======= TAGS =========-->
-                <span class="tag font-montserrat sale">FOR SALE</span>
-                <section>
-                    <!--======= IMAGE =========-->
-                    <div class="img">
-                        <img class="img-responsive" src="~/Asserts/images/img-5.jpg" alt="">
-                        <!--======= IMAGE HOVER =========-->
-
-                        <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
-                    </div>
-                    <!--======= HOME INNER DETAILS =========-->
-                    <ul class="home-in">
-                        <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                        <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                        <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                    </ul>
-                    <!--======= HOME DETAILS =========-->
-                    <div class="detail-sec">
-                        <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                        <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                        <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                    </div>
-                </section>
-            </li>*@
-
-            <!--======= PROPERTY =========-->
-           @* <li class="col-sm-4">
-                <!--======= TAGS =========-->
-                <span class="tag font-montserrat rent">FOR RENT</span>
-                <section>
-                    <!--======= IMAGE =========-->
-                    <div class="img">
-                        <img class="img-responsive" src="~/Asserts/images/img-6.jpg" alt="">
-                        <!--======= IMAGE HOVER =========-->
-
-                        <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
-                    </div>
-                    <!--======= HOME INNER DETAILS =========-->
-                    <ul class="home-in">
-                        <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-                        <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-                        <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-                    </ul>
-                    <!--======= HOME DETAILS =========-->
-                    <div class="detail-sec">
-                        <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-                        <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-                        <div class="share-p"> <span class="price font-montserrat">$ 2,956,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-                    </div>
-                </section>
-            </li>*@
-        @*</ul>*@
-    </div>
 
 
 <h1>HomePropertyDetails</h1>
 
-<main id="main">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Property Information</h5>
-            <hr />
-            @*<div class="row">
-                <div class="col-md-6">
-                    <dl class="row">
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Title)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.Title)
-                        </dd>
-                        <dt class="col-sm-5">
-                           <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.PropertyName)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.PropertyName)
-                        </dd>
-                        <dt class="col-sm-5">
-                           <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.propertyFor)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.propertyFor.PropeFor)
-                        </dd>
-                        <dt class="col-sm-5">
-                           <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.Location)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.Location)
-                        </dd>
-                        <dt class="col-sm-5">
-                           <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.PropertyOwnerInfo)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.PropertyOwnerInfo.CompanyName)
-                        </dd>
-                        <dt class="col-sm-5">
-                           <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.NumberOfBedrooms)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.NumberOfBedrooms)
-                        </dd>
-                        <dt class="col-sm-5">
-                           <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.NumberOfBaths)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.NumberOfBaths)
-                        </dd>
-                        <dt class="col-sm-5">
-                           <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.TotalFloor)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.TotalFloor)
-                        </dd>
 
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Price)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.Price)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Measurement)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.Measurement)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Furnishing)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.Furnishing)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.HandOverDate)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.HandOverDate)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.CreatedBy)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.CreatedBy)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.UpdateBy)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.UpdateBy)
-                        </dd>
-                    </dl>
-                </div>
-
-                <div class="col-md-6">
-                    <dl class="row">
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Description)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.Raw(Model.Description)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyType)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.PropertyType.PropertyTypeName)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.ConstructionStatus)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.ConstructionStatus)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.TransactionType)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.TransactionType)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertySize)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.PropertySize)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.NumberOfBalconies)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.NumberOfBalconies)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.NumberOfGarages)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.NumberOfGarages)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.FloorAvailableNo)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.FloorAvailableNo)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Facing)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.Facing)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.LandArea)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.LandArea)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Comments)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.Comments)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.SocialIcon)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.SocialIcon.Icon)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.CreatedDate)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.CreatedDate)
-                        </dd>
-                        <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.UpdateDate)
-                        </dt>
-                        <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.UpdateDate)
-                        </dd>
-                    </dl>
-                </div>
-            </div>*@
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
-                <a asp-action="Index">Back to List</a>
-            </div>
-        </div>
-    </div>
-</main>
 
 
 
 
 
 @section Scripts{
-    <script>
-        $(document).ready(function (){
-            getHomePropertyDetails()
-            getHomePropertyDetailsById()
+<script>
+    $(document).ready(function (){
+        //getHomePropertyDetails()
+        getHomePropertyDetailsById()
+    })
+    //function getHomePropertyDetails(id){
+    //    alert("helo")
+    //    var curloc = $(location).attr('href');
+    //    var url = curloc.split('/');
+    //    console.log("HomePropertyDetails");
+    //    console.log(url);
+    //    var id = url[url.length-1];
+    //    console.log(id)
+    //    $.ajax({
+    //        url: "/PropertyDetails/HomeProperty/"+ id,
+    //        method: "Get",
+    //        success: function(res){
+    //            console.log(res.data)
+    //            var propertylist = "";
+    //            $.each(res.data, function(index, value){
+    //                console.log(value )
+    //                console.log(value.numberOfBedrooms )
+    //                propertylist += '<ul><li><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.title + '</a> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><p> ' + value.description + ' </p><div class="share-p"> <span class="price font-montserrat">' + value.price + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
+    //            });
+    //            console.log(propertylist);
+    //            //console.log(PropertySize);
+    //            $(".load_HomePropertyDetails").empty();
+    //            $(".load_HomePropertyDetails").html(propertylist);
+    //        }
+    //    })
+    //}
+    function getHomePropertyDetailsById(id){
+        //alert("helo")
+        var curloc = $(location).attr('href');
+        var url = curloc.split('/');
+        console.log("HomePropertyDetails");
+        console.log(url);
+        var id = url[url.length-1];
+        console.log(id)
+        $.ajax({
+            url: "/PropertyDetails/HomeProperty/"+ id,
+            method: "Get",
+            success: function(res){
+                console.log(res.data)
+                var propertylist = "";
+                $.each(res.data, function(index, value){
+                    console.log(value )
+                    console.log(value.numberOfBedrooms )
+                    propertylist = '<h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><ul><li class="col-sm-12 col-md-10"><section><div class="img"><img class="img-responsive" src="/Asserts/images/bdh.jpeg" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" +'</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
+                });
+                 console.log(propertylist);
+                //console.log(PropertySize);
+                $(".load_HomePropertyDetailsById").empty();
+                $(".load_HomePropertyDetailsById").html(propertylist);
+
+
+                var propertyInfo = "";
+                $.each(res.data, function(index, value){
+                    //console.log(pinfo)
+                    //console.log(pinfo.numberOfBaths)
+                     //class="detail-sec"
+                    propertyInfo = '<ul class="row"><li class="col-sm-12 col-md-10"><section><h3 class="m-2"> Property Summary</h3><hr/><div><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>'+ value.propertyName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>'+ " Sale" +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>'+ value.constructionStatus +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>'+ value.propertyCondition +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>'+ value.numberOfBedrooms +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>'+ value.numberOfBaths +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>'+ value.totalFloor +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>'+ value.facing +'</span></li></ul><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>'+ value.propertyType.propertyTypeName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>'+ value.location +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>'+ value.propertySize +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>'+ value.floorAvailableNo +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>'+ value.numberOfBalconies +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>'+ value.numberOfGarages +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>'+ value.furnishing +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>'+ value.landArea+'</span></li></ul></div></section></li></ul> </div>'
+                });
+                
+                $(".load_HomePropertyDetails").empty();
+                $(".load_HomePropertyDetails").html(propertyInfo);
+            }
         })
-        function getHomePropertyDetails(id){
-            alert("helo")
-            var curloc = $(location).attr('href');
-            var url = curloc.split('/');
-            console.log("HomePropertyDetails");
-            console.log(url);
-            var id = url[url.length-1];
-            console.log(id)
-            $.ajax({
-                url: "/PropertyDetails/HomeProperty/"+ id,
-                method: "Get",
-                success: function(res){
-                    console.log(res.data)
-                    var propertylist = "";
-                    $.each(res.data, function(index, value){
-                        console.log(value )
-                        console.log(value.numberOfBedrooms )
-                        propertylist += '<ul class="row"><li class="col-sm-4"><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.title + '</a> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><p> ' + value.description + ' </p><div class="share-p"> <span class="price font-montserrat">' + value.price + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
-                    });
-                    console.log(propertylist);
-                    //console.log(PropertySize);
-                    $(".load_HomePropertyDetails").empty();
-                    $(".load_HomePropertyDetails").html(propertylist);
-                }
-            })
-        }
-        function getHomePropertyDetailsById(id){
-            alert("helo")
-            var curloc = $(location).attr('href');
-            var url = curloc.split('/');
-            console.log("HomePropertyDetails");
-            console.log(url);
-            var id = url[url.length-1];
-            console.log(id)
-            $.ajax({
-                url: "/PropertyDetails/HomeProperty/"+ id,
-                method: "Get",
-                success: function(res){
-                    console.log(res.data)
-                    var propertylist = "";
-                    $.each(res.data, function(index, value){
-                        console.log(value )
-                        console.log(value.numberOfBedrooms )
-                        propertylist += '<h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for " + value.propertyFor.propeFor + " at " + value.location + '</h5><ul class="row"><li class="col-sm-12 col-md-12"><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/bdh.jpeg" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.title + '</a> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><p> ' + value.description + ' </p><div class="share-p"> <span class="price font-montserrat">' + value.price + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
-                    });
-                    console.log(propertylist);
-                    //console.log(PropertySize);
-                    $(".load_HomePropertyDetailsById").empty();
-                    $(".load_HomePropertyDetailsById").html(propertylist);
-                }
-            })
-        }
-    </script>
+    }
+    // function getHomePropertyDetailsById(id){
+    //    //alert("helo")
+    //    var curloc = $(location).attr('href');
+    //    var url = curloc.split('/');
+    //    console.log("HomePropertyDetails");
+    //    console.log(url);
+    //    var id = url[url.length-1];
+    //    console.log(id)
+    //    $.ajax({
+    //        url: "/PropertyDetails/HomeProperty/"+ id,
+    //        method: "Get",
+    //        success: function(res){
+    //            console.log(res.data)
+    //            var propertylist = "";
+    //            $.each(res.data, function(index, value){
+    //                console.log(value )
+    //                console.log(value.numberOfBedrooms )
+    //                propertylist = '<h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><ul><li class="col-sm-12 col-md-10"><section><div class="img"><img class="img-responsive" src="/Asserts/images/bdh.jpeg" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" +'</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
+    //            });
+    //            console.log(propertylist);
+    //            //console.log(PropertySize);
+    //            $(".load_HomePropertyDetailsById").empty();
+    //            $(".load_HomePropertyDetailsById").html(propertylist);
+    //        }
+    //    })
+    //}
+</script>
 }
+
+@*<span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span>*@
 
 @*<main id="main">
     <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Property Information</h5>
-            <hr />
-            
+    <div class="card-body">
+    <h5 class="card-title">Property Information</h5>
+    <hr />
 
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
-                <a asp-action="Index">Back to List</a>
-            </div>
-        </div>
+
+    <div>
+    <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
     </div>
-</main>*@
+    </div>
+    </div>
+    </main>*@
