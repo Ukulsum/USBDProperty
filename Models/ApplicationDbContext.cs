@@ -25,7 +25,7 @@ namespace USBDProperty.Models
         public DbSet<ClientContact> ClientContacts { get; set; }
         public DbSet<DevelopersorAgent> DevelopersorAgent { get; set; }
         public DbSet<PrivacyPolicy> PrivacyPolicy { get; set; }
-        public DbSet<MultipleImageUpload> MultipleImageUploads { get; set; }
+        public DbSet<PropertyImages> PropertyImages { get; set; }
         public DbSet<FloorPlan> FloorPlans { get; set; }
         public DbSet<PropertyWithFeatures> PropertyWithFeatures { get; set; }
         public DbSet<ProjectsInfo> ProjectsInfo { get; set; }

@@ -32,6 +32,6 @@ namespace USBDProperty.Models
         [DisplayName("Posted By")]
         public string PostedBy { get; set; }
 
-        public ICollection<DevelopersorAgent> DevelopersorAgents { get; set; }
+        public ICollection<ProjectsInfo> projectsInfos { get; set; }
     }
 }

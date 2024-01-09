@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace USBDProperty.Models
 {
-    public class MultipleImageUpload
+    public class PropertyImages
     {
         [Key]
         public int ID { get; set; }
