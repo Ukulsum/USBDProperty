@@ -57,7 +57,8 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientContactId,ClientName,ContactNo,Email,PropertyForId,PropertyTypeId,ContactDate,Message")] ClientContact clientContact)
+        public async Task<IActionResult> Create(
+             ClientContact clientContact)
         {
             if (ModelState.IsValid)
             {

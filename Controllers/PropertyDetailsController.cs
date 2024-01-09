@@ -197,10 +197,10 @@ namespace USBDProperty.Controllers
                     HandOverDate = propertyDetails.HandOverDate,
                     PropertyTypeId = propertyDetails.PropertyTypeId,
                     PropertyCondition = propertyDetails.PropertyCondition,
-                    OwnerId = propertyDetails.OwnerId,
+                    ProjectId = propertyDetails.ProjectId,
                     //IconId = propertyDetails.IconId,
                     AreaId = propertyDetails.AreaId,
-                    CreatedBy = "umme",
+                    CreatedBy =User.Identity.Name?? "umme",
                     CreatedDate = DateTime.Now,
                     Path = "/Content/Images/"+fileName
                 };

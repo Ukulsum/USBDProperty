@@ -85,9 +85,9 @@ namespace USBDProperty.Models
         [ForeignKey("PropertyType")]
         public int PropertyTypeId { get; set; }
        
-        [ForeignKey("PropertyOwnerInfo")]
-        [DisplayName("Developer/Agent")]
-        public int OwnerId { get; set; }
+        [ForeignKey("ProjectsInfo")]
+        [DisplayName("Project")]
+        public int ProjectId { get; set; }
        
         [ForeignKey("Area")]
         public int AreaId { get; set; }
@@ -111,6 +111,6 @@ namespace USBDProperty.Models
     }
     public enum PropertyFor
     {
-        Buy=1,Sell,Rent
+        Buy=1,Sale,Rent
     }
 }
