@@ -22,7 +22,7 @@ namespace USBDProperty.Controllers
             return View();
         }
         [HttpPost]
-        public   async Task Create(string rname)
+        public   async Task<IActionResult> Create(string rname)
         {
             string msg = "";
             try
@@ -33,7 +33,7 @@ namespace USBDProperty.Controllers
                 if (roleresult.Succeeded)
                 {
 
-                    //return RedirectToAction("Index");
+                    return RedirectToAction("Index");
                 }
 
                 else if (roleresult.Errors.Count() > 0)
@@ -46,7 +46,7 @@ namespace USBDProperty.Controllers
                 msg = ex.Message;
             }
 
-            //return View();
+            return View();
         }
         private static string DisplayError(string msg, IdentityResult roleresult)
         {

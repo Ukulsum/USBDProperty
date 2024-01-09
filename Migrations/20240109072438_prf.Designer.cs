@@ -9,11 +9,11 @@ using USBDProperty.Models;
 
 #nullable disable
 
-namespace USBDProperty.Data.Migrations
+namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240108130917_ppprj")]
-    partial class ppprj
+    [Migration("20240109072438_prf")]
+    partial class prf
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -204,7 +204,6 @@ namespace USBDProperty.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfilePic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -355,9 +354,6 @@ namespace USBDProperty.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DevelopersorAgentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -387,8 +383,6 @@ namespace USBDProperty.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("DevelopersorAgentID");
 
                     b.ToTable("DevelopersorAgent");
                 });
@@ -441,32 +435,6 @@ namespace USBDProperty.Data.Migrations
                     b.HasIndex("PropertyInfoID");
 
                     b.ToTable("FloorPlans");
-                });
-
-            modelBuilder.Entity("USBDProperty.Models.MultipleImageUpload", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("MultiImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("propertyInfoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("propertyInfoId");
-
-                    b.ToTable("MultipleImageUploads");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Notice", b =>
@@ -692,9 +660,6 @@ namespace USBDProperty.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -704,7 +669,7 @@ namespace USBDProperty.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("ProjectsInfoId")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<int>("PropertyCondition")
@@ -739,14 +704,11 @@ namespace USBDProperty.Data.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("propertyFor")
-                        .HasColumnType("int");
-
                     b.HasKey("PropertyInfoId");
 
                     b.HasIndex("AreaId");
 
-                    b.HasIndex("ProjectsInfoId");
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("PropertyTypeId");
 
@@ -773,6 +735,32 @@ namespace USBDProperty.Data.Migrations
                     b.HasKey("PropertyFeatureId");
 
                     b.ToTable("PropertyFeatures");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("MultiImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("propertyInfoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("propertyInfoId");
+
+                    b.ToTable("PropertyImages");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyType", b =>
@@ -957,13 +945,6 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("Division");
                 });
 
-            modelBuilder.Entity("USBDProperty.Models.DevelopersorAgent", b =>
-                {
-                    b.HasOne("USBDProperty.Models.DevelopersorAgent", null)
-                        .WithMany("DevelopersorAgents")
-                        .HasForeignKey("DevelopersorAgentID");
-                });
-
             modelBuilder.Entity("USBDProperty.Models.Division", b =>
                 {
                     b.HasOne("USBDProperty.Models.Country", "Country")
@@ -986,17 +967,6 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("PropertyDetails");
                 });
 
-            modelBuilder.Entity("USBDProperty.Models.MultipleImageUpload", b =>
-                {
-                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
-                        .WithMany()
-                        .HasForeignKey("propertyInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PropertyDetails");
-                });
-
             modelBuilder.Entity("USBDProperty.Models.ProjectImageGallery", b =>
                 {
                     b.HasOne("USBDProperty.Models.ProjectsInfo", "ProjectsInfo")
@@ -1011,7 +981,7 @@ namespace USBDProperty.Data.Migrations
             modelBuilder.Entity("USBDProperty.Models.ProjectsInfo", b =>
                 {
                     b.HasOne("USBDProperty.Models.DevelopersorAgent", "Developers")
-                        .WithMany()
+                        .WithMany("projectsInfos")
                         .HasForeignKey("AgentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1029,7 +999,7 @@ namespace USBDProperty.Data.Migrations
 
                     b.HasOne("USBDProperty.Models.ProjectsInfo", "ProjectsInfo")
                         .WithMany()
-                        .HasForeignKey("ProjectsInfoId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1044,6 +1014,17 @@ namespace USBDProperty.Data.Migrations
                     b.Navigation("ProjectsInfo");
 
                     b.Navigation("PropertyType");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
+                {
+                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
+                        .WithMany()
+                        .HasForeignKey("propertyInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PropertyDetails");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyWithFeatures", b =>
@@ -1067,7 +1048,7 @@ namespace USBDProperty.Data.Migrations
 
             modelBuilder.Entity("USBDProperty.Models.DevelopersorAgent", b =>
                 {
-                    b.Navigation("DevelopersorAgents");
+                    b.Navigation("projectsInfos");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,18 +2,17 @@
 
 #nullable disable
 
-namespace USBDProperty.Data.Migrations
+namespace USBDProperty.Migrations
 {
-    public partial class p3 : Migration
+    public partial class prf : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "PropertyFeatureName",
-                table: "PropertyFeatures",
-                type: "nvarchar(150)",
-                maxLength: 150,
-                nullable: false,
+                name: "ProfilePic",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
         }
@@ -21,13 +20,14 @@ namespace USBDProperty.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "PropertyFeatureName",
-                table: "PropertyFeatures",
+                name: "ProfilePic",
+                table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: false,
+                defaultValue: "",
                 oldClrType: typeof(string),
-                oldType: "nvarchar(150)",
-                oldMaxLength: 150);
+                oldType: "nvarchar(max)",
+                oldNullable: true);
         }
     }
 }

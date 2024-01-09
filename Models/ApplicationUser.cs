@@ -4,6 +4,6 @@ namespace USBDProperty.Models
 {
     public class ApplicationUser:IdentityUser
     {
-        public string ProfilePic { get; set; }
+        public string? ProfilePic { get; set; }
     }
 }

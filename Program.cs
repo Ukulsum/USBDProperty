@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using USBDProperty.Data;
+//using USBDProperty.Data;
 using USBDProperty.Models;
 
 var builder = WebApplication.CreateBuilder(args);

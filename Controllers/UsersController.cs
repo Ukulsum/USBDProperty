@@ -89,7 +89,7 @@ namespace USBDProperty.Controllers
     public IActionResult Create(string returnUrl = null)
         {
             ViewBag.roles = new SelectList(_context.Roles.OrderBy(c => c.Name), "Name", "Name");
-            return View(new UserVM { ReturnUrl=returnUrl?? "/Admin/Dashboard" });
+            return View(new UserVM { ReturnUrl=returnUrl?? "/Users/Index" });
         }
         private ApplicationUser CreateUser()
         {

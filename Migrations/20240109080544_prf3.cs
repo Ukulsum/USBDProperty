@@ -2,25 +2,25 @@
 
 #nullable disable
 
-namespace USBDProperty.Data.Migrations
+namespace USBDProperty.Migrations
 {
-    public partial class pa : Migration
+    public partial class prf3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Path",
-                table: "Notices",
-                type: "nvarchar(max)",
+            migrationBuilder.AddColumn<int>(
+                name: "PropertyFor",
+                table: "PropertyDetails",
+                type: "int",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Path",
-                table: "Notices");
+                name: "PropertyFor",
+                table: "PropertyDetails");
         }
     }
 }
