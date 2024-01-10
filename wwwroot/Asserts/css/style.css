@@ -250,7 +250,7 @@ hr {
 			TOP BAR
 ========================================================*/
 .top-bar {
-	background: #222222;
+	background: #006838;
 	border-bottom: 1px solid #eaebef;
 	height: 45px;
 	position: relative;
@@ -262,7 +262,7 @@ hr {
 	display: inline-block;
 }
 .top-bar ul li a {
-	color: #888888;
+	color: #ffffff;
 	display: inline-block;
 	padding: 0 10px;
 	line-height: 45px;
@@ -290,7 +290,7 @@ hr {
 }
 .top-bar .left-bar-side p {
 	font-weight: 400;
-	color: #9d9c9c;
+	color: #ffffff;
 	line-height: 40px;
 	margin: 0px;
 	display: inline-block;
@@ -570,14 +570,92 @@ ul.dropdown li:hover {
 	box-shadow: 0 4px 10px rgba(0,117,255,.0898711);
 	border-radius: 10px;
 	position: absolute;
+	top: -50px;
+	left: 20%;
+	justify-content: space-evenly;
+	padding: 25px 112px;
+	width: auto;
+}
+/*.search-type {
+	background: #fff;
+	box-shadow: 0 4px 10px rgba(0,117,255,.0898711);
+	border-radius: 10px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	justify-content: space-evenly;
+	padding: 25px 112px;
+	width: auto;
+}*/
+
+/*.search-type {
+	background: #fff;
+	box-shadow: 0 4px 10px rgba(0,117,255,.0898711);
+	border-radius: 10px;
+	position: absolute;
 	top: 0;
 	left: 50%;
 	justify-content: space-evenly;
 	padding: 0 60px;
 	width: auto;
+}*/
+ span.search-type-tab {
+	min-width: 120px;
+	padding: 20px;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+	/*font-size: 1.1428571429rem;
+	line-height: 26px;*/
+	font-weight: 600;
+	color: #3a4856;
 }
-
-/*.finder .container .find-sec {
+.search-btn-container button.search-btn {
+	border: 0;
+	background-color: #006838;
+	/*color: #ED1C24;*/
+	color: #ffffff;
+	border-radius: 10px;
+	padding: 15px 50px;
+	font-size: 18px;
+	font-weight: 700;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	-webkit-transform: translate(-50%,50%);
+	transform: translate(-50%,50%);
+	outline: none;
+}
+.search-type span.search-type-tab.active {
+	border-bottom: 2px solid #006838;
+	/*color: #2B3990;*/
+	color: #ED1C24;
+	/*color: #1c3c6b;*/
+}
+.search-btn-container button.search-btn:hover {
+	background-color: #ED1C24;
+	/*color: #ffffff;*/
+	/*color: #006838;*/
+}
+	/*#searchbar .search-type {
+	background: #fff;
+	-webkit-box-shadow: 0 4px 10px rgba(0,117,255,.0898711);
+	box-shadow: 0 4px 10px rgba(0,117,255,.0898711);
+	border-radius: 10px;
+	position: absolute;
+	top: 0;
+	left: 50%;*/
+	/*-webkit-box-pack: space-evenly;
+	-ms-flex-pack: space-evenly;*/
+	/*justify-content: space-evenly;
+	padding: 0 60px;
+	width: auto;*/
+	/*-webkit-transform: translate(-50%,calc(-50% - 5px));*/
+	/*transform: translate(-50%,calc(-50% - 5px));
+}*/
+	/*.finder .container .find-sec {
 	background: #ffffff;
 	padding: 30px;
 	display: inline-block;
@@ -586,18 +664,18 @@ ul.dropdown li:hover {
 	position: relative;
 	border-radius: 15px;
 }*/
-.find-sec:before {
-	content: "";
-	position: absolute;
-	right: 0px;
-	background: none;
-	top: 0px;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 0 43px 43px 0;
-	border-color: transparent #57b45a transparent transparent;
-}
+	.find-sec:before {
+		content: "";
+		position: absolute;
+		right: 0px;
+		background: none;
+		top: 0px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 43px 43px 0;
+		border-color: transparent #57b45a transparent transparent;
+	}
 .find-sec label {
 	display: inline-block;
 	width: 100%;
@@ -4804,7 +4882,7 @@ ul.dropdown li:hover {
 ========================================================*/
 footer {
 	padding: 0;
-	background: #222222 url(../images/map-bottom.png) bottom repeat-x;
+	background: #006838 url(../images/map-bottom.png) bottom repeat-x;
 	padding-bottom: 60px;
 }
 footer h5 {
@@ -4910,13 +4988,13 @@ footer .recent-come li span {
 footer .links a:hover {
 	color: #ffdd00;
 }
-footer .subcribe {
-	display: inline-block;
-	width: 100%;
-	background: #4caf50;
-	padding: 20px 30px;
-	margin-bottom: 60px;
-}
+	footer .subcribe {
+		display: inline-block;
+		width: 100%;
+		background: #ED1C24;
+		padding: 20px 30px;
+		margin-bottom: 60px;
+	}
 footer .subcribe h4 {
 	color: #fff;
 	font-weight: 400;
@@ -4956,7 +5034,7 @@ footer .subcribe .form-control {
 }
 footer .subcribe .btn {
 	margin-top: 0px;
-	background: #3f8f42;
+	background: #006838;
 	height: 45px;
 }
 footer button {
@@ -4973,7 +5051,7 @@ footer button {
 	padding: 0 10px;
 }
 .rights {
-	background: #111111;
+	background: #006838;
 	padding: 20px 0;
 	text-transform: uppercase;
 }
@@ -4998,6 +5076,24 @@ footer .social_icons a {
 	width: 35px;
 	line-height: 35px;
 	color: #fff;
+}
+
+
+strong {
+	font-weight: 700;
+	color: #ED1C24;
+}
+
+
+/*======= Gozayaan ========*/
+#searchbar {
+	font-family: Gilroy;
+	position: relative;
+	background: #fff;
+	-webkit-box-shadow: 0 20px 100px 10px rgba(24,33,77,.05);
+	box-shadow: 0 20px 100px 10px rgba(24,33,77,.05);
+	border-radius: 20px;
+	padding: 50px 30px 40px;
 }
 /*=======================================================
 			404 PAGES

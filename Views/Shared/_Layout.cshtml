@@ -79,13 +79,13 @@
             <div class="container">
 
                 <!--======= LOGO =========-->
-                <div class="logo"> <a href="#"><img src="~/Asserts/logo/Us--Bangla-logo-web-03.png" height="80px" width="200px" alt=""></a> </div>
+                <div class="logo"> <a href="#"><img src="~/Asserts/logo/Us--Bangla-logo-web-03.png" height="60px" width="150px" alt=""></a> </div>
                 <!--======= NAV =========-->
                 <nav>
 
                     <!--======= MENU START =========-->
                     <ul class="ownmenu">
-                        <li class="active"><a href="#">Home</a> </li>
+                        <li class="active"><a asp-action="Index" asp-controller="Home">Home</a> </li>
                         @await Component.InvokeAsync("ParentMenu" )
                       @*   <li>
                             <a href="#">Sale </a>
