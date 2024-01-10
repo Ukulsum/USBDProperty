@@ -12,13 +12,8 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:Migrations/20240109064335_pst.Designer.cs
-    [Migration("20240109064335_pst")]
-    partial class pst
-========
-    [Migration("20240109072438_prf")]
-    partial class prf
->>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109072438_prf.Designer.cs
+    [Migration("20240110043538_i")]
+    partial class i
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -678,6 +673,9 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PropertyCondition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyFor")
                         .HasColumnType("int");
 
                     b.Property<string>("PropertyName")

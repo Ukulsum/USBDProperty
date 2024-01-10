@@ -12,13 +12,8 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:Migrations/20240109062149_ps.Designer.cs
-    [Migration("20240109062149_ps")]
-    partial class ps
-========
-    [Migration("20240109064013_pa12")]
-    partial class pa12
->>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.Designer.cs
+    [Migration("20240110043333_p")]
+    partial class p
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,7 +204,6 @@ namespace USBDProperty.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfilePic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -679,6 +673,9 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PropertyCondition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyFor")
                         .HasColumnType("int");
 
                     b.Property<string>("PropertyName")

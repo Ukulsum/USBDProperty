@@ -44,7 +44,28 @@ namespace USBDProperty.Controllers
 
         }
 
+        public JsonResult HomePropertybyID(int Id)
+        {
+            try
+            {
+                var applicationDbContext = _context.PropertyDetails
+                                                .Include(p => p.Area)
+                                                 .Include(p => p.ProjectsInfo)
+                                                .Include(p => p.PropertyType)
+                                                .Where(p=>p.PropertyInfoId.Equals(Id));
+                //.Include(p => p.SocialIcon)
+                //.Include(p => p.propertyFor).ToList();
+                //.Include(p => p.TransactionType)
 
+                return Json(new { data = applicationDbContext });
+            }
+            catch (Exception ex)
+            {
+                //return BadRequest(ex.Message);
+                return Json(new { data = "No record" });
+            }
+
+        }
         //[HttpGet("HomePropertyDetails")]
         public async Task<IActionResult> HomePropertyDetails(int? id)
         {

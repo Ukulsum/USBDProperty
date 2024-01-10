@@ -79,7 +79,7 @@
         var id = url[url.length-1];
         console.log(id)
         $.ajax({
-            url: "/PropertyDetails/HomeProperty/"+ id,
+            url: "/PropertyDetails/HomePropertybyID/"+ id,
             method: "Get",
             success: function(res){
                 console.log(res.data)
