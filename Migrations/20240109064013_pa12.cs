@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace USBDProperty.Migrations
 {
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
     public partial class p : Migration
+========
+    public partial class pa12 : Migration
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -92,7 +96,10 @@ namespace USBDProperty.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     PostedBy = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
                     DevelopersorAgentID = table.Column<int>(type: "int", nullable: true),
+========
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -102,11 +109,14 @@ namespace USBDProperty.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DevelopersorAgent", x => x.ID);
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
                     table.ForeignKey(
                         name: "FK_DevelopersorAgent_DevelopersorAgent_DevelopersorAgentID",
                         column: x => x.DevelopersorAgentID,
                         principalTable: "DevelopersorAgent",
                         principalColumn: "ID");
+========
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -454,7 +464,11 @@ namespace USBDProperty.Migrations
                     PropertyCondition = table.Column<int>(type: "int", nullable: false),
                     HandOverDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PropertyTypeId = table.Column<int>(type: "int", nullable: false),
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
                     OwnerId = table.Column<int>(type: "int", nullable: false),
+========
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
                     AreaId = table.Column<int>(type: "int", nullable: false),
                     ProjectsInfoId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -473,8 +487,13 @@ namespace USBDProperty.Migrations
                         principalColumn: "AreaId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
                         name: "FK_PropertyDetails_ProjectsInfo_ProjectsInfoId",
                         column: x => x.ProjectsInfoId,
+========
+                        name: "FK_PropertyDetails_ProjectsInfo_ProjectId",
+                        column: x => x.ProjectId,
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
                         principalTable: "ProjectsInfo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -508,7 +527,7 @@ namespace USBDProperty.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MultipleImageUploads",
+                name: "PropertyImages",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -519,9 +538,9 @@ namespace USBDProperty.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MultipleImageUploads", x => x.ID);
+                    table.PrimaryKey("PK_PropertyImages", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_MultipleImageUploads_PropertyDetails_propertyInfoId",
+                        name: "FK_PropertyImages_PropertyDetails_propertyInfoId",
                         column: x => x.propertyInfoId,
                         principalTable: "PropertyDetails",
                         principalColumn: "PropertyInfoId",
@@ -604,11 +623,14 @@ namespace USBDProperty.Migrations
                 column: "DivisionId");
 
             migrationBuilder.CreateIndex(
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
                 name: "IX_DevelopersorAgent_DevelopersorAgentID",
                 table: "DevelopersorAgent",
                 column: "DevelopersorAgentID");
 
             migrationBuilder.CreateIndex(
+========
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
                 name: "IX_Divisions_CountryId",
                 table: "Divisions",
                 column: "CountryId");
@@ -619,9 +641,14 @@ namespace USBDProperty.Migrations
                 column: "PropertyInfoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MultipleImageUploads_propertyInfoId",
-                table: "MultipleImageUploads",
-                column: "propertyInfoId");
+                name: "IX_ProjectImageGallery_ProjectID",
+                table: "ProjectImageGallery",
+                column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectsInfo_AgentID",
+                table: "ProjectsInfo",
+                column: "AgentID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectImageGallery_ProjectID",
@@ -639,9 +666,15 @@ namespace USBDProperty.Migrations
                 column: "AreaId");
 
             migrationBuilder.CreateIndex(
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
                 name: "IX_PropertyDetails_ProjectsInfoId",
                 table: "PropertyDetails",
                 column: "ProjectsInfoId");
+========
+                name: "IX_PropertyDetails_ProjectId",
+                table: "PropertyDetails",
+                column: "ProjectId");
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_PropertyDetails_PropertyTypeId",
@@ -649,6 +682,14 @@ namespace USBDProperty.Migrations
                 column: "PropertyTypeId");
 
             migrationBuilder.CreateIndex(
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
+========
+                name: "IX_PropertyImages_propertyInfoId",
+                table: "PropertyImages",
+                column: "propertyInfoId");
+
+            migrationBuilder.CreateIndex(
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
                 name: "IX_PropertyWithFeatures_FeatureId",
                 table: "PropertyWithFeatures",
                 column: "FeatureId");
@@ -683,9 +724,6 @@ namespace USBDProperty.Migrations
                 name: "FloorPlans");
 
             migrationBuilder.DropTable(
-                name: "MultipleImageUploads");
-
-            migrationBuilder.DropTable(
                 name: "Notices");
 
             migrationBuilder.DropTable(
@@ -695,6 +733,12 @@ namespace USBDProperty.Migrations
                 name: "ProjectImageGallery");
 
             migrationBuilder.DropTable(
+<<<<<<<< HEAD:Migrations/20240109050414_p.cs
+========
+                name: "PropertyImages");
+
+            migrationBuilder.DropTable(
+>>>>>>>> b589791f2cd0877b6d22b552763fc9e2b95499b2:Migrations/20240109064013_pa12.cs
                 name: "PropertyWithFeatures");
 
             migrationBuilder.DropTable(

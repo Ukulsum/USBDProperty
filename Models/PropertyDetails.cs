@@ -108,6 +108,7 @@ namespace USBDProperty.Models
         public ProjectsInfo ProjectsInfo { get; set; }
         [ValidateNever]
         public Area Area { get; set; }
+        public PropertyFor PropertyFor { get; set; }
     }
     public enum PropertyFor
     {

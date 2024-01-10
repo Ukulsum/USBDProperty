@@ -16,9 +16,11 @@
                     <h2>Property Types</h2>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="Title" class="control-label">Purposes</label>
-                            <input type="text" asp-for="Title" class="form-control" />
-                            <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
+                            <label   class="control-label">Purposes</label>
+                            <select id="parenTypes" class="form-control" asp-items="Html.GetEnumSelectList<PropertyFor>()">
+                                <option value="0">Select Type</option>
+                            </select>
+                            <span asp-validation-for="PropertyFor" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">

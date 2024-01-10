@@ -202,7 +202,6 @@ namespace USBDProperty.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfilePic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -672,6 +671,9 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PropertyCondition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyFor")
                         .HasColumnType("int");
 
                     b.Property<string>("PropertyName")
