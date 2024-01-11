@@ -19,201 +19,166 @@
     </div>
 
 
+    <form asp-action="SearchBlood" asp-controller="Home">
+        <h2>Get Blood</h2>
+        <div class="form-group">
+            <label class="control-label">By Area</label>
+            <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
+                <option>Area</option>
+            </select>
+        </div>
+        <div class="form-group mt-3">
+            <label class="control-label">By Blood Group</label>
+            <select class="form-control" asp-items="ViewBag.BloodgroupId" name="BloodgroupId" id="BloodgroupId">
+                <option>Blood Group</option>
+            </select>
+        </div>
+        <div class="col-lg-2 mt-2 hero_submit">
+            @*<a class="btn btn-primary" asp-controller="Home" asp-route-AreaId=""  asp-action="SearchBlood">Search</a>*@
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+
+
     <!--======= FIND PROPERTY =========-->
     <div class="finder">
         <div class="container">
-            <form asp-action="MoreSearch"  asp-controller="PropertyDetails" method="get"> 
-            <h1>Us-Bd Properties Ltd.</h1>
-            <!--======= FORM SECTION =========-->
-            <div class="find-sec">
-                <div class="search-type">
-                    <span class="search-type-tab active">
-                        <img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">
-                        Sale
-                    </span>
-                    <span class="search-type-tab">
-                        <img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">
-                        Rent
-                    </span>
+            <form asp-action="MoreSearch" asp-controller="PropertyDetails" method="get">
+                <h1>Us-Bd Properties Ltd.</h1>
+                <!--======= FORM SECTION =========-->
+                <div class="find-sec">
+                    <div class="search-type">
+                        <span class="search-type-tab active">
+                            <img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">
+                            Sale
+                        </span>
+                        <span class="search-type-tab">
+                            <img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">
+                            Rent
+                        </span>
+                    </div>
+
+                    <ul class="row">
+
+                        <!--======= FORM =========-->
+                        <li class="col-sm-6">
+                            <label>Choose The City</label>
+                            <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
+                                <option>Area</option>
+                            </select>
+                            @*<select class="selectpicker" id="areas">
+                                <option></option>
+                                <option>New York</option>
+                                <option>Sydany</option>
+                                <option>Relish</option>
+                                </select>*@
+                        </li>
+
+                        <!--======= FORM =========-->
+                        <li class="col-sm-6">
+                            <label>Location</label>
+                            <select class="form-control" asp-items="ViewBag.PropertyInfoId" name="PropertyInfoId" id="PropertyInfoId">
+                <option>Location</option>
+            </select>
+                             @*<select class="selectpicker" id="location">
+                                <option></option>
+                               <option>National parks</option>
+                                    <option>State parks</option>
+                                    <option>City parks</option>
+                            </select>*@
+                        </li>
+   
+                    </ul>
                 </div>
-                
-                <ul class="row">
+                <div class="search-btn-container">
+                    <button type="submit" class="search-btn">Search</button>
 
-                    <!--======= FORM =========-->
-                    <li class="col-sm-6">
-                        <label>Choose The City</label>
-                        <select class="selectpicker" id="areas">
-                            <option></option>
-                            @*<option>New York</option>
-                            <option>Sydany</option>
-                            <option>Relish</option>*@
-                        </select>
-                    </li>
-
-                    <!--======= FORM =========-->
-                    <li class="col-sm-6">
-                        <label>Location</label>
-                        <select class="selectpicker" id="location">
-                            <option></option>
-                            @*<option>National parks</option>
-                            <option>State parks</option>
-                            <option>City parks</option>*@
-                        </select>
-                    </li>
-
-                    <!--======= FORM =========-->
-                    @*<li class="col-sm-3">
-                        <label>Property Status</label>
-                        <select class="selectpicker">
-                            <option>Appartment</option>
-                            <option>House</option>
-                            <option>Villa</option>
-                            <option>Land</option>
-                        </select>
-                    </li>*@
-
-                    <!--======= FORM =========-->
-                    @*<li class="col-sm-3">
-                        <label>Property Type</label>
-                        <select class="selectpicker">
-                            <option>Choose</option>
-                            <option>Rent</option>
-                            <option>Sale</option>
-                        </select>
-                    </li>*@
-
-                    <!--======= FORM =========-->
-                    @* <li class="col-sm-3">
-                        <label>No of Bedrooms</label>
-                        <select class="selectpicker">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        </select>
-                        </li>*@
-
-                    <!--======= FORM =========-->
-                    @* <li class="col-sm-3">
-                        <label>No of Bathrooms</label>
-                        <select class="selectpicker">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        </select>
-                        </li>*@
-
-                    <!--======= Pricing Range =========-->
-                    @*<li class="col-sm-6">
-                        <div class="row">
-                        <div class="col-xs-9">
-                        <div class="cost-price-content">
-                        <label>Pricing Range: <span id="price-min" class="price-min"></span> <i>-</i> <span id="price-max" class="price-max"></span></label>
-                        <div id="price-range" class="price-range"></div>
-                        </div>
-                        </div>
-
-                        <!--======= BUTTON =========-->
-                        <div class="col-xs-3 search">
-                        <button type="submit" class="btn">Search</button>
-                        </div>
-                        </div>
-                        </li>*@
-                </ul>
-            </div>
-            <div class="search-btn-container">
-                <button type="submit" class="search-btn" >Search</button>
-              
-            </div>
-            @*</div>*@
-</form>
+                </div>
+                @*</div>*@
+            </form>
         </div>
     </div>
 
 
 </div>
 
- @*<div class="bProperty">
+@*<div class="bProperty">
 
-            </div>*@
+    </div>*@
 
 <!--======= PROPERTY =========-->
+<!--======= PROPERTY =========-->
+<section class="property-slide">
 
- <!--======= PROPERTY =========-->
-  <section class="property-slide"> 
-      
     <!--======= PROPERTY SLIDER =========-->
-    <div class="prot-slide"> 
-      
+    <div class="prot-slide">
 
-      <!--======= PROPERTY SLIDE =========-->
-      <div id="bannerslide" class="owl-carousel owl-theme">
 
-      </div>
+        <!--======= PROPERTY SLIDE =========-->
+        <div id="bannerslide" class="owl-carousel owl-theme">
+        </div>
 
-     @* <div class="plots">
-        <div class="row">
-          <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-1.jpg" alt="" > </a> </div>
-          <div class="col-xs-8">
+        @* <div class="plots">
+            <div class="row">
+            <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-1.jpg" alt="" > </a> </div>
+            <div class="col-xs-8">
             <div class="pri-info"> <span class="sale">For Sale</span> <a class="f-mont" href="#.">$ 13,512,002 3 Bed Room At Newyork</a>
-              <p><i class="fa fa-map-marker"></i> Down Street</p>
-              <div class="auther"> <img src="images/auther-1.jpg" alt="">
-                <h6>Anderia jus</h6>
-              </div>
+            <p><i class="fa fa-map-marker"></i> Down Street</p>
+            <div class="auther"> <img src="images/auther-1.jpg" alt="">
+            <h6>Anderia jus</h6>
             </div>
-          </div>
-        </div>
-      </div>*@
-      
-      <!--======= PROPERTY SLIDE =========-->
-      @*<div class="plots">
-        <div class="row">
-          <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-1.jpg" alt="" > </a> </div>
-          <div class="col-xs-8">
+            </div>
+            </div>
+            </div>
+            </div>*@
+
+        <!--======= PROPERTY SLIDE =========-->
+        @*<div class="plots">
+            <div class="row">
+            <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-1.jpg" alt="" > </a> </div>
+            <div class="col-xs-8">
             <div class="pri-info"> <span class="sale">For Sale</span> <a class="f-mont" href="#.">$ 13,512,002 3 Bed Room At Newyork</a>
-              <p><i class="fa fa-map-marker"></i> Down Street</p>
-              <div class="auther"> <img src="images/auther-1.jpg" alt="">
-                <h6>Anderia jus</h6>
-              </div>
+            <p><i class="fa fa-map-marker"></i> Down Street</p>
+            <div class="auther"> <img src="images/auther-1.jpg" alt="">
+            <h6>Anderia jus</h6>
             </div>
-          </div>
-        </div>
-      </div>*@
-      
-      <!--======= PROPERTY SLIDE =========-->
-    @*  <div class="plots">
-        <div class="row">
-          <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>
-          <div class="col-xs-8">
+            </div>
+            </div>
+            </div>
+            </div>*@
+
+        <!--======= PROPERTY SLIDE =========-->
+        @*  <div class="plots">
+            <div class="row">
+            <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>
+            <div class="col-xs-8">
             <div class="pri-info"> <span class="sale">For Sale</span> <a class="f-mont" href="#.">$ 13,512,002 3 Bed Room At Newyork</a>
-              <p><i class="fa fa-map-marker"></i> Down Street</p>
-              <div class="auther"> <img src="images/auther-1.jpg" alt="">
-                <h6>Anderia jus</h6>
-              </div>
+            <p><i class="fa fa-map-marker"></i> Down Street</p>
+            <div class="auther"> <img src="images/auther-1.jpg" alt="">
+            <h6>Anderia jus</h6>
             </div>
-          </div>
-        </div>
-      </div>*@
-      
-      <!--======= PROPERTY SLIDE =========-->
-      @*<div class="plots">
-        <div class="row">
-          <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-3.jpg" alt="" > </a> </div>
-          <div class="col-xs-8">
+            </div>
+            </div>
+            </div>
+            </div>*@
+
+        <!--======= PROPERTY SLIDE =========-->
+        @*<div class="plots">
+            <div class="row">
+            <div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="images/propt-img-3.jpg" alt="" > </a> </div>
+            <div class="col-xs-8">
             <div class="pri-info"> <span class="sale">For Sale</span> <a class="f-mont" href="#.">$ 13,512,002 3 Bed Room At Newyork</a>
-              <p><i class="fa fa-map-marker"></i> Down Street</p>
-              <div class="auther"> <img src="images/auther-1.jpg" alt="">
-                <h6>Anderia jus</h6>
-              </div>
+            <p><i class="fa fa-map-marker"></i> Down Street</p>
+            <div class="auther"> <img src="images/auther-1.jpg" alt="">
+            <h6>Anderia jus</h6>
             </div>
-          </div>
-        </div>
-      </div>*@
+            </div>
+            </div>
+            </div>
+            </div>*@
     </div>
-  </section>
+</section>
 <!--======= SERVICES =========-->
 <section class="services">
     <div class="container">
@@ -780,136 +745,87 @@
 
 @section Scripts{
 <script>
-        $(document).ready(function (){
-            $('.search-type span').on('click',function() {
-               
-                $(this).addClass('active').siblings().removeClass('active');
-            });
-             
-            getProperty()
-            getBannerProperty()
-            GetAreas()
-            //getHomeSearch()
-   //         $('.search-type span').on('click', function(){
-   //$(this).addClass('active').siblings().removeClass('active');
-//});
-        })
-        function getProperty(){
-            //alert("helo")
-            $.ajax({
-                url: "/PropertyDetails/HomeProperty",
-                method: "Get",
-                success: function(res){
-                    console.log(res.data)
-                    var propertylist = "";
-                    $.each(res.data, function(index, value){
-                        console.log(value )
-                        console.log(value.numberOfBedrooms )
-                        propertylist += '<ul class="row">';
-                        propertylist += '<li class="col-sm-6 col-md-4"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.propertyName + '</a><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.price + '</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + " TROPICAL HOMES LTD" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>'
-                    });
-                    console.log(propertylist);
-                    //console.log(PropertySize);
-                    propertylist += '</ul>';
-                    $(".load_Property").empty();
-                    $(".load_Property").html(propertylist);
-                }
-            })
-        }
-         function GetAreas(){
-            $.ajax({
-                url: "/Areas/GetArea",
-                method: "GET",
-                success: function(res){
-                     console.log("Area list")
-                    console.log(res)
-                    var tableString = "";
-                    tableString += "<option value='0' selected> Select Areas </option>"
-                    $.each(res, function(index, value){
-                        tableString += "<option value='"+value.areaId+"'>" +     value.areaName + "</option>"
-                    });
-                    //alert()
-                    console.log("hello")
-                    console.log(tableString)
-                    $("#areas").append(tableString);
-                },
-                error: function(error){
-                    console.log(error);
-                }
-            })
-        }
-        //function getHomeSearch(){
-        //    //alert("helo")
-        //    $.ajax({
-        //        url: "/PropertyDetails/HomeProperty",
-        //        method: "Get",
-        //        success: function(res){
-        //            console.log(res.data)
-        //            var propertySearch = "";
-        //            $.each(res.data, function(index, value){
-        //                console.log(value )
-        //                console.log(value.numberOfBedrooms )
-        //                //propertySearch += '<ul class="row">';
-        //                var tableString = "";
-        //                 tableString += "<option value='0' selected> Select Employees </option>"
-        //            $.each(res, function(index, value){
-        //                tableString += "<option value='"+value.area+"'>" +     value.areaName + "</option>"
-        //            });
-        //            //    propertySearch += '<li class="col-sm-6 col-md-4"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.propertyName + '</a><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.price + '</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + " TROPICAL HOMES LTD" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>'
-        //            //});
-        //            console.log(tableString);
-        //            //console.log(PropertySize);
-        //            //tableString += '</ul>';
-        //            $("#areas").empty();
-        //            $("#areas").html(tableString);
-        //        };
-        //    })
-        //}
-         function getBannerProperty(){
-            //alert("helo")
-            $.ajax({
-                url: "/PropertyDetails/BannerProperty",
-                method: "Get",
-                success: function(res){
-                    console.log("Banner")
-                    console.log(res.data)
-                    var bannerProperty = "";
-                    $.each(res.data, function(index, value){
-                        console.log(value )
-                        //console.log(value.numberOfBedrooms )
+            $(document).ready(function (){
+                $('.search-type span').on('click',function() {
 
-                        bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
-                        //<div class="prot-slide">
-                        //bannerProperty += '<div class="row">';
-                        //bannerProperty = '<div class="row">';
-                        //bannerProperty = '<div class="prot-slide"><div class="plots">';
-                        //bannerProperty += '<div class="plots">';
-                        //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
-                    });
-                    console.log(bannerProperty);
-                    //console.log(PropertySize);
-                    //bannerProperty += '</div>';
-                    //bannerProperty = '</div>';
-                    $("#bannerslide").empty();
-                    $("#bannerslide").html(bannerProperty);
-                }
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                getProperty()
+                getBannerProperty()
+                //getHomeSearch()
+       //         $('.search-type span').on('click', function(){
+       //$(this).addClass('active').siblings().removeClass('active');
+    //});
             })
+            function getProperty(){
+                //alert("helo")
+                $.ajax({
+                    url: "/PropertyDetails/HomeProperty",
+                    method: "Get",
+                    success: function(res){
+                        console.log(res.data)
+                        var propertylist = "";
+                        $.each(res.data, function(index, value){
+                            console.log(value )
+                            console.log(value.numberOfBedrooms )
+                            propertylist += '<ul class="row">';
+                            propertylist += '<li class="col-sm-6 col-md-4"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.propertyName + '</a><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.price + '</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + " TROPICAL HOMES LTD" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>'
+                        });
+                        console.log(propertylist);
+                        //console.log(PropertySize);
+                        propertylist += '</ul>';
+                        $(".load_Property").empty();
+                        $(".load_Property").html(propertylist);
+                    }
+                })
+            }
+           
+             function getBannerProperty(){
+                //alert("helo")
+                $.ajax({
+                    url: "/PropertyDetails/BannerProperty",
+                    method: "Get",
+                    success: function(res){
+                        console.log("Banner")
+                        console.log(res.data)
+                        var bannerProperty = "";
+                        $.each(res.data, function(index, value){
+                            console.log(value )
+                            //console.log(value.numberOfBedrooms )
+
+                            bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
+                            //<div class="prot-slide">
+                            //bannerProperty += '<div class="row">';
+                            //bannerProperty = '<div class="row">';
+                            //bannerProperty = '<div class="prot-slide"><div class="plots">';
+                            //bannerProperty += '<div class="plots">';
+                            //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
+                        });
+                        console.log(bannerProperty);
+                        //console.log(PropertySize);
+                        //bannerProperty += '</div>';
+                        //bannerProperty = '</div>';
+                        $("#bannerslide").empty();
+                        $("#bannerslide").html(bannerProperty);
+                    }
+                })
+            }
+            $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
         }
-        $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
-        }
-    }
-})
+    })
 </script>
 }

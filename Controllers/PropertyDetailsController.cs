@@ -28,6 +28,9 @@ namespace USBDProperty.Controllers
             return View(data);
         }
 
+        
+
+
         public JsonResult Search()
         {
             return Json("Result");
