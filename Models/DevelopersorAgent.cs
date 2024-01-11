@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using USBDProperty.DTO;
 
 namespace USBDProperty.Models
@@ -31,7 +32,12 @@ namespace USBDProperty.Models
         [StringLength(150)]
         [DisplayName("Posted By")]
         public string PostedBy { get; set; }
-
+        [Required]
+         
+        public string Address { get; set; }
+        [ForeignKey("Area")]
+        public int AreaID { get; set; }
+        public Area Area { get; set; }
         public ICollection<ProjectsInfo> projectsInfos { get; set; }
     }
 }

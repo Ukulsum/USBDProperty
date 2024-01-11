@@ -301,7 +301,45 @@
                 </ul>
             </li><!-- End Location Nav -->
 
-
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#Devlopers" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-building"></i><span>Developer or Agent or Individual</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="Devlopers" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-action="Index" asp-controller="DevelopersorAgents">
+                            <i class="bi bi-circle"></i><span>All Devlopers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="PropertyFeatures">
+                            <i class="bi bi-circle"></i><span>All Individuals</span>
+                        </a>
+                    </li>
+                 
+                </ul>
+            </li><!-- End Developer/Agent Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#Propject" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-building"></i><span>Projects Information</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="Propject" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-action="Index" asp-controller="PropertyTypes">
+                            <i class="bi bi-circle"></i><span>Projects</span>
+                        </a>
+                    </li>
+                 
+                    <li>
+                        <a asp-action="Index" asp-controller="PropertyDetails">
+                            <i class="bi bi-circle"></i><span>Property Information</span>
+                        </a>
+                        <a asp-action="Index" asp-controller="MultipleImageUploads">
+                            <i class="bi bi-circle"></i><span>Propject Images</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Propject Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-building"></i><span>Properties</span><i class="bi bi-chevron-down ms-auto"></i>

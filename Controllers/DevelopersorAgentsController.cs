@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class DevelopersorAgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public DevelopersorAgentsController(ApplicationDbContext context)
+        private readonly IWebHostEnvironment _environment;
+        public DevelopersorAgentsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: DevelopersorAgents
@@ -43,7 +47,7 @@ namespace USBDProperty.Controllers
 
             return View(developersorAgent);
         }
-
+        [HttpGet]
         // GET: DevelopersorAgents/Create
         public IActionResult Create()
         {
@@ -55,10 +59,28 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Logo,Banner,CompanyName,ContactNo,Email,Name,PostedBy,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] DevelopersorAgent developersorAgent)
+        public async Task<IActionResult> Create( DevelopersorAgent developersorAgent,IFormFile logo,IFormFile banner)
         {
             if (ModelState.IsValid)
             {
+
+                string wwwRootPath = "";
+                if (_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                }
+                string extension = Path.GetExtension(logo.FileName);
+                string fileName = developersorAgent.CompanyName + extension;
+                string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
+                using (var fileStrem = new FileStream(path, FileMode.Create))
+                {
+                    await logo.CopyToAsync(fileStrem);
+                }
+
                 _context.Add(developersorAgent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
