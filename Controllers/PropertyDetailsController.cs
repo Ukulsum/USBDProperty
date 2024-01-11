@@ -21,6 +21,18 @@ namespace USBDProperty.Controllers
             environment = _environment;
         }
 
+        [HttpGet]
+        public IActionResult MoreSearch( int? forid,int? AreaId, string location="" )
+        {
+          var data=  _context.PropertyDetails.Where(p=>p.AreaId.Equals(AreaId) || p.PropertyFor.Equals(forid) || p.Location.Contains(location));
+            return View(data);
+        }
+
+        public JsonResult Search()
+        {
+            return Json("Result");
+        }
+
        
         public JsonResult HomeProperty()
         {
