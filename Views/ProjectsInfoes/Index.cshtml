@@ -4,7 +4,11 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AgentLayout.cshtml";
 }
+<div class="card">
+    <div class="card-body">
 
+        <div class="row">
+            <div class="col-md-12">
 <h1>Index</h1>
 
 <p>
@@ -29,7 +33,7 @@
                 @Html.DisplayNameFor(model => model.LocationMap)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Developers)
+                @Html.DisplayNameFor(model => model.ProjectVideo)
             </th>
             <th></th>
         </tr>
@@ -50,10 +54,19 @@
                 @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LocationMap)
+            @*     @Html.DisplayFor(modelItem => item.LocationMap) *@
+                                    @if (item.LocationMap != null)
+                                    {
+                                        <img src="@Url.Content(item.LocationMap)"  />
+                                    }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Developers.Banner)
+              @*   @Html.DisplayFor(modelItem => item.Developers.Banner) *@
+                                    @if (item.ProjectVideo != null)
+                                    {
+                                       <video src="@Url.Content(item.ProjectVideo)"></video>
+
+                                    }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -64,3 +77,5 @@
 }
     </tbody>
 </table>
+
+</div></div></div></div>

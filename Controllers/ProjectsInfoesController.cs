@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
@@ -14,10 +15,12 @@ namespace USBDProperty.Controllers
     public class ProjectsInfoesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public ProjectsInfoesController(ApplicationDbContext context)
+        private readonly IWebHostEnvironment _environment;
+        public ProjectsInfoesController(ApplicationDbContext context, 
+            IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: ProjectsInfoes
@@ -26,7 +29,11 @@ namespace USBDProperty.Controllers
             var applicationDbContext = _context.ProjectsInfo.Include(p => p.Developers);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        public JsonResult GetProjects(int id)
+        {
+            var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id));
+            return Json(new { Data = data });
+        }
         // GET: ProjectsInfoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,7 +56,7 @@ namespace USBDProperty.Controllers
         // GET: ProjectsInfoes/Create
         public IActionResult Create()
         {
-            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner");
+            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
             return View();
         }
 
@@ -58,15 +65,76 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ProjectName,Location,LocationMap,AgentID")] ProjectsInfo projectsInfo)
+         
+        public async Task<IActionResult> Create(  ProjectsInfo projectsInfo)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+                string wwwRootPath = "";
+                string rpath = "";
+                if (_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    rpath = wwwRootPath + "/Developer";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
+                }
+                if (projectsInfo.MapPath != null)
+                {
+                    string extension = Path.GetExtension(projectsInfo.MapPath.FileName).ToLower();
+                    if (extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
+                    {
+                        //string fileName = developersorAgent.CompanyName + extension;
+                        string fileName = $" {projectsInfo.Title} _map {extension}";
+                        string path = Path.Combine(rpath, "LaocationMap", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await projectsInfo.MapPath.CopyToAsync(fileStrem);
+                        }
+                        projectsInfo.LocationMap = "~/Developer/LaocationMap/" + fileName;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide jpg|.jpeg|png");
+                        return View(projectsInfo);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Please provide location map ");
+                   // return View(projectsInfo);
+                }
+            if (projectsInfo.ProjectVideoPath != null)
             {
-                _context.Add(projectsInfo);
-                await _context.SaveChangesAsync();
+                string extension = Path.GetExtension(projectsInfo.ProjectVideoPath.FileName).ToLower();
+                if (extension == ".mp4" || extension == ".gif" || extension == ".vlc")
+                {
+                    //string fileName = developersorAgent.CompanyName + extension;
+                    string fileName = $" {projectsInfo.Title} _video {extension}";
+                    string path = Path.Combine(rpath, "Video", fileName);
+                    using (var fileStrem = new FileStream(path, FileMode.Create))
+                    {
+                        await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
+                    }
+                    projectsInfo.LocationMap = "~/Developer/Video/" + fileName;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Please provide mp4|.vlc|gif");
+                    //return View(projectsInfo);
+                }
+            }
+            _context.Add(projectsInfo);
+               if( await _context.SaveChangesAsync()>0)
+            {
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner", projectsInfo.AgentID);
+               
+            //}
+            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
             return View(projectsInfo);
         }
 

@@ -17,13 +17,18 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
-        public JsonResult GetChildType(int? pid)
+        public JsonResult GetChildType(int? pid=0)
         {
             try
             {
-                if (pid.Value  != null)
+                if (pid.Value  != null || pid.Value>0)
                 {
                     var result = _context.PropertyTypes.OrderBy(p => p.PropertyTypeName).Where(p => p.ParentPropertyTypeId.Equals(pid));
+                    return Json(result);
+                }
+                else
+                {
+                    var result = _context.PropertyTypes.OrderBy(p => p.PropertyTypeName).Where(p => p.ParentPropertyTypeId.Equals(0));
                     return Json(result);
                 }
             }

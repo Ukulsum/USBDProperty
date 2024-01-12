@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240111235307_dv")]
+    partial class dv
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -546,9 +548,6 @@ namespace USBDProperty.Migrations
                     b.Property<int>("AgentID")
                         .HasColumnType("int");
 
-                    b.Property<int>("AreaID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -558,6 +557,7 @@ namespace USBDProperty.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LocationMap")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -565,9 +565,6 @@ namespace USBDProperty.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("ProjectVideo")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -577,8 +574,6 @@ namespace USBDProperty.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AgentID");
-
-                    b.HasIndex("AreaID");
 
                     b.ToTable("ProjectsInfo");
                 });
@@ -1008,14 +1003,6 @@ namespace USBDProperty.Migrations
                         .HasForeignKey("AgentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("USBDProperty.Models.Area", "Area")
-                        .WithMany()
-                        .HasForeignKey("AreaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Area");
 
                     b.Navigation("Developers");
                 });

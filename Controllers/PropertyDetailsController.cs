@@ -190,9 +190,9 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-               ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner");
-                ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
+               // ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
+              // ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner");
+               // ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon");
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
