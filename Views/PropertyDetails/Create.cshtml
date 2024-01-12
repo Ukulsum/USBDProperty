@@ -181,7 +181,11 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Furnishing" class="control-label"></label>
-                            <input type="text" asp-for="Furnishing" class="form-control" />
+                           
+                            <select asp-for="Furnishing" class="form-control"
+                                    asp-items="@Html.GetEnumSelectList<Furnished>()">
+                                <option>Select Property Decoration</option>
+                            </select>
                             <span asp-validation-for="Furnishing" class="text-danger"></span>
                         </div>
                     </div>
@@ -190,7 +194,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Facing" class="control-label"></label>
-                            <input type="text" asp-for="Facing" class="form-control" />
+                            <select   asp-for="Facing" class="form-control" 
+                            asp-items="@Html.GetEnumSelectList<Facing>()">
+                                <option>Select Property Face</option>
+                            </select>
                             <span asp-validation-for="Facing" class="text-danger"></span>
                         </div>
                     </div>
@@ -212,9 +219,11 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="Measurement" class="control-label"></label>
-                            <input type="text" asp-for="Measurement" class="form-control" />
-                            <span asp-validation-for="Measurement" class="text-danger"></span>
+                            <label asp-for="MeasurementID" class="control-label"></label>
+                            <select     asp-for="MeasurementID" class="form-control"   >
+
+                            </select>
+                            <span asp-validation-for="MeasurementID" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -271,7 +280,11 @@
                         <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
                     </label>
                 </div>
-
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="ISFeatured" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
                 </div>
                 <div class="row">
                     <div class="col-md-8">
@@ -422,5 +435,6 @@
 
             })
         }
+
 </script>
 }

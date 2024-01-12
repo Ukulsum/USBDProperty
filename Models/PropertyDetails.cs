@@ -10,14 +10,24 @@ namespace USBDProperty.Models
     {
         New=1,Used
     }
+    public enum Facing
+    {
+        South = 1, North,East,West,NotApplicable
+    }
+    public enum Furnished
+    {
+      Furnished=1,  Semi_Furnished  , Un_Furnished
+    }
+    public enum ConstructionStatus
+    {
+        Ready = 1, UpComing, UnderConstruction
+    }
     public class PropertyDetails : BaseDTO
     {
         [Key]
         [DisplayName("ID")]
         public int PropertyInfoId { get; set; }
-        //[ValidateNever]
-        //public IFormFile Image { get;set; }
-        //public string Path { get; set; } = "";
+        public bool ISFeatured { get; set; }
         [StringLength(255)]
         public string Title { get; set; }
         [MaxLength]
@@ -31,7 +41,7 @@ namespace USBDProperty.Models
         public string Location { get; set; }
         [StringLength(150)]
         [DisplayName("Construction Status")]
-        public string ConstructionStatus { get; set; }
+        public ConstructionStatus ConstructionStatus { get; set; }
         [Required]
         [StringLength(100)]
         [DisplayName("Property Size")]
@@ -59,22 +69,23 @@ namespace USBDProperty.Models
         [DisplayName("Floor Available No")]
         public string FloorAvailableNo { get; set; }
         [StringLength(150)]
-        public string Furnishing { get; set; }
+        public Furnished Furnishing { get; set; }
         [StringLength(150)]
-        public string Facing { get; set; }
+        public Facing Facing { get; set; }
         [StringLength(150)]
         [DisplayName("Land Area")]
         public string LandArea { get; set; }
         [StringLength(100)]
         public string Price { get; set; }
         [ValidateNever]
-        public string Path { get; set; }
+        public string? Path { get; set; }
         [NotMapped]
         [ValidateNever]
         [DisplayName("Photos")]
         public IFormFile Image { get; set; }
         [StringLength(100)]
-        public string Measurement { get; set; }
+        [ForeignKey("MeasurementUnit")]
+        public int MeasurementID { get; set; }
         [StringLength(255)]
         public string Comments { get; set; }
         [DisplayName("Propety Condition")]
@@ -109,6 +120,8 @@ namespace USBDProperty.Models
         [ValidateNever]
         public Area Area { get; set; }
         public PropertyFor PropertyFor { get; set; }
+        [ValidateNever]
+        public MeasurementUnit MeasurementUnit { get; set; }
     }
     public enum PropertyFor
     {

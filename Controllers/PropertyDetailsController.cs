@@ -252,7 +252,7 @@ namespace USBDProperty.Controllers
                     Facing = propertyDetails.Facing,
                     LandArea = propertyDetails.LandArea,
                     Price = propertyDetails.Price,
-                    Measurement = propertyDetails.Measurement,
+                    MeasurementID = propertyDetails.MeasurementID,
                     Comments = propertyDetails.Comments,
                     HandOverDate = propertyDetails.HandOverDate,
                     PropertyTypeId = propertyDetails.PropertyTypeId,
@@ -269,7 +269,6 @@ namespace USBDProperty.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
-
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
