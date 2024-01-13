@@ -25,6 +25,7 @@ namespace USBDProperty.Controllers
         public IActionResult MoreSearch( int? forid,int? AreaId, string location="" )
         {
           var data=  _context.PropertyDetails.Where(p=>p.AreaId.Equals(AreaId) || p.PropertyFor.Equals(forid) || p.Location.Contains(location));
+            ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
             return View(data);
         }
 

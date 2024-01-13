@@ -19,7 +19,7 @@ namespace USBDProperty.Controllers
         public IActionResult Index()
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-            ViewData["BloodgroupId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
+            ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
 
             return View();
         }

@@ -1180,6 +1180,12 @@ ul.dropdown li:hover {
 	width: 100%;
 	height: 37px;
 }
+.properties .home_in {
+	background: #f2f2f2;
+	display: inline-block;
+	width: 50%;
+	height: 100%;
+}
 .properties .home-in li {
 	display: inline-block;
 	float: left;
