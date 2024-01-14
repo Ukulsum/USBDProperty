@@ -20,7 +20,7 @@ namespace USBDProperty.Models
     }
     public enum ConstructionStatus
     {
-        Ready = 1, UpComing, UnderConstruction
+        Ready = 1, UpComing, UnderConstruction, UnderDevelopment, AlmostReady, Upcoming, Used
     }
     public class PropertyDetails : BaseDTO
     {

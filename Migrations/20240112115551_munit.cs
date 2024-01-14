@@ -62,7 +62,7 @@ namespace USBDProperty.Migrations
                 table: "PropertyDetails",
                 type: "int",
                 maxLength: 100,
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.CreateTable(
@@ -90,7 +90,7 @@ namespace USBDProperty.Migrations
                 column: "MeasurementID",
                 principalTable: "MeasurementUnit",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

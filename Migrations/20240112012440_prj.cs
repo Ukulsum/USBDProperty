@@ -12,7 +12,7 @@ namespace USBDProperty.Migrations
                 name: "AreaID",
                 table: "ProjectsInfo",
                 type: "int",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(

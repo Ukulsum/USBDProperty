@@ -19,7 +19,7 @@ namespace USBDProperty.Migrations
                 name: "AreaID",
                 table: "DevelopersorAgent",
                 type: "int",
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(

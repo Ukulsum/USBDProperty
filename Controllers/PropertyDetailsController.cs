@@ -24,9 +24,41 @@ namespace USBDProperty.Controllers
         [HttpGet]
         public IActionResult MoreSearch( int? forid,int? AreaId, string location="" )
         {
-          var data=  _context.PropertyDetails.Where(p=>p.AreaId.Equals(AreaId) || p.PropertyFor.Equals(forid) || p.Location.Contains(location));
-            ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
-            return View(data);
+            try
+            {
+                var data = _context.PropertyDetails.Where(p=>p.IsActive)
+                                                   .Include(p => p.Area)
+                                                   //.Include(p => p.ProjectsInfo)
+                                                   .Include(p => p.PropertyType)
+                                                   .Include(p => p.MeasurementUnit)
+                                                    .ToList();
+                 if (forid != null || forid>0)
+                {
+                    data = data.Where(p => p.PropertyFor.Equals(forid)).ToList();
+                }
+                if (AreaId != null || AreaId>0)
+                {
+                    data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
+                }
+                if (!string.IsNullOrEmpty(location))
+                {
+                    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
+                }
+                //var data=  _context.PropertyDetails.Where(p=>p.AreaId.Equals(AreaId) || p.PropertyFor.Equals(forid) || p.Location.Contains(location));
+
+
+
+                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "PropertyFor");
+
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View();
+            }
+
+           
         }
 
         

@@ -1152,6 +1152,10 @@ ul.dropdown li:hover {
 	padding: 0 0 0 10px;
 	margin-top: 35px;
 }
+.properties li .tagg {
+	padding: 0 !important;
+	right: 342px !important;
+}
 .properties li .tag.rent {
 	background: url(../images/for-rent.png) no-repeat;
 }
@@ -1183,7 +1187,7 @@ ul.dropdown li:hover {
 .properties .home_in {
 	background: #f2f2f2;
 	display: inline-block;
-	width: 50%;
+	width: 28%;
 	height: 100%;
 }
 .properties .home-in li {
@@ -1218,6 +1222,8 @@ ul.dropdown li:hover {
 	margin: 0px;
 	text-transform: uppercase;
 }
+
+
 .properties .detail-sec span.locate {
 	display: inline-block;
 	width: 100%;
@@ -1244,6 +1250,100 @@ ul.dropdown li:hover {
 	font-size: 16px;
 	color: #777777;
 }
+/*============= Custom css start =============*/
+.properties .details-sec span.locate {
+	display: inline-block;
+	width: 100%;
+	margin: 8px 0;
+	color: #666666;
+}
+
+.properties .details-sec span.locate i {
+	margin-right: 10px;
+}
+
+.properties .details-sec .share-p {
+	display: inline-block;
+	width: 100%;
+	border-top: 1px solid #dddddd;
+	padding-top: 10px;
+}
+
+.properties .details-sec .share-p span {
+	color: #222222;
+	font-size: 16px;
+}
+
+.properties .details-sec .share-p i {
+	float: right;
+	margin-left: 10px;
+	margin-top: 5px;
+	font-size: 16px;
+	color: #777777;
+}
+.properties .details-sec {
+	background: #fff;
+	padding: 15px;
+	border: 1px solid #ececec;
+	border-top: 2px solid #ff5722;
+	margin-top: -6px;
+}
+.properties .details-sec p {
+	font-weight: 800;
+	font-size: 14px;
+	color: #2B3990;
+	display: inline-block;
+	width: 100%;
+	margin: 0px;
+	/*text-transform: uppercase;*/
+}
+.properties .details-sec p.ptype {
+	font-weight: 800;
+	font-size: 14px;
+	color: #fff;
+	display: inline-block;
+	background-color: #006838 ;
+	width: 40%;
+	padding: 0 5px;
+	/*margin: 5px;*/
+	/*text-transform: uppercase;*/
+}
+
+.properties .details-sec ul {
+	/*background: #f2f2f2;*/
+	display: inline-block;
+	width: 100%;
+	height: 37px;
+}
+
+/*.properties .home_in {*/
+	/*background: #f2f2f2;*/
+	/*display: inline-block;
+	width: 28%;
+	height: 100%;
+}*/
+
+.properties .details-sec ul li {
+	display: inline-block;
+	float: left;
+	width: 33.3333%;
+	margin-bottom: 0px;
+	/*padding-left: 10px;*/
+	line-height: 37px;
+}
+
+.properties .home-in li span {
+	font-size: 12px;
+	color: #777777;
+}
+
+.properties .home-in li span i {
+	font-size: 14px;
+	margin-right: 5px;
+}
+
+/*============ Custom Css End =========*/
+
 .properties .img {
 	position: relative;
 	overflow: hidden;

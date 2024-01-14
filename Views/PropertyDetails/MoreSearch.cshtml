@@ -1,278 +1,145 @@
 ﻿@model IEnumerable<USBDProperty.Models.PropertyDetails>
+<link href="~/AdminAsserts/vendor/simple-datatables/style.css" rel="stylesheet" />
 
 @{
     ViewData["Title"] = "MoreSearch";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+ <div class="datatable"></div>
+<div class="row ">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <section class="properties">
+                    <div class="container">
+                        <div class="home_in">
+                            <form asp-action="MoreSearch" asp-controller="PropertyDetails" method="">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Search Keyword</label>
+                                        <input class="form-control" value="Search keyword" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        @*<label>Property Purposes</label>*@
+                                        <input type="radio" asp-items="PropertyFor" name="Buy" value=1 />
+                                        <label for="">Buy</label>
 
+                                        <input type="radio" asp-items="PropertyFor" name="Sale" value="2" />
+                                        <label for="">Sale</label>
 
-<section class="properties">
-    <div class="container">
-        <div class="home_in">
-            <div class="row">
-                <div class="col-md-12">
-                    <form asp-action="" asp-controller="" method="" class="datatable">
-                        @*@foreach (var property in PropertyDetails)
-                        {*@
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Search Keyword</label>
-                                    <input class="form-control" value="Search keyword" />
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="radio" name="Sale" value="Sale" />
-                                    <label for="">Sale</label>
+                                        <input type="radio" asp-items="PropertyFor" name="Rent" value="3" />
+                                        <label for="">Rent</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Property Catrgory</label>
+                                        <select class="form-control" name="PropertyTypeId" id="PropertyTypeId">
+                                            <option>All Property Type</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>size (sqft)</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="number" asp-items="PropertySize" placeholder="Min" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="number" asp-items="PropertySize" placeholder="Max" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Min No. of Bed</label>
+                                        <input class="form-control" asp-items="NumberOfBedrooms" type="text" name="NumberOfBedrooms" placeholder="Number of Bedroom" value="" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Price</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="number" asp-items="Price" placeholder="Min" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="number" asp-items="Price " placeholder="Max" />
+                                            </div>
+                                        </div>
 
-                                    <input type="radio" name="Buy" value="Buy" />
-                                    <label for="">Buy</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Property Purposes</label>
+                                        <select class="form-control" asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
+                                            <option>Property Construction</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Search</button>
+                                    <button type="reset" class="btn btn-danger">Clear</button>
+                                </div>
 
-                                    <input type="radio" name="Rent" value="Rent" />
-                                    <label for="">Rent</label>
-                                    
-                                </div>
-                                <div class="col-md-12">
-                                     <label>Property Catrgory</label>
-                            <select class="form-control" asp-items="ViewBag.PropertyInfoId" name="PropertyInfoId" id="PropertyInfoId">
-                                <option>All Property Type</option>
-                            </select>
-                                </div>
-                                <div class="col-md-12">
-                                     <label>Size (sqft)</label>
-                            <select class="form-control" asp-items="ViewBag.PropertyInfoId" name="PropertyInfoId" id="PropertyInfoId">
-                                <option>All Property Type</option>
-                            </select>
-                                </div>
-                                <div class="col-md-12">
-                                     @Html.DisplayNameFor(model => model.NumberOfBedrooms)
-                                     <input type="text" name="NumberOfBedrooms" value="NumberOfBedrooms" />
-                                </div>
-                                <div class="12">
-                                    <label>Price</label>
-                                    <input type="number" name="Price" value="Min" />
-                                    <input type="number" name="Price" value="Max" />
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Posted By</label>
-                                    <input type="checkbox" name="" value="Company" />
-                                    <label>Company</label>
-                                    <input type="checkbox" name="" value="Individual" />
-                                    <label>Individual</label>
-                                </div>
-                            </div>
-                        @*}*@
-
-
-                    </form>
-                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
             </div>
+            <div class="col-md-8">
+                <section class="properties">
+                    @*<div class="container">*@
 
+                    <ul class="row">
+                        @foreach(var pinfo in Model)
+                        {
+                            <li class="col-md-12">
+                            <span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>
+                            <section class="row flex-row">
+                                <div class="col-md-6">
+                                    <div class="img">
+                                        <img class="img-responsive" src="~/Asserts/banner/Dharittree banner-1.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                      <div class="details-sec">
+                                          @*@Html.Raw(pinfo.PropertySize + " " + @pinfo.MeasurementUnit.ShortName) *@
+                                        <p class="font-montserrat">@(pinfo.PropertySize + " " + pinfo.MeasurementUnit.ShortName + ", " + pinfo.NumberOfBedrooms + " Beds " + pinfo.ConstructionStatus + " " + pinfo.PropertyType.PropertyTypeName + " for " + pinfo.PropertyFor + " at " + pinfo.Location)</p> 
+                                       <p class="ptype">@pinfo.PropertyType.PropertyTypeName </p>
+                                        <span class="locate m-0"><i class="fa fa-map-marker"></i> @(pinfo.Location + " " + pinfo.Area.AreaName)</span>
+
+                                        <ul>
+                                        <li><span><i class="fa fa-home"></i> @(pinfo.PropertySize + " " + @pinfo.MeasurementUnit.ShortName)</span></li>
+                                        <li><span><i class="fa fa-bed"></i> @(pinfo.NumberOfBedrooms + " Beds")</span></li>
+                                        <li><span><i class="fa fa-tty"></i> @(pinfo.NumberOfBaths + " Baths")</span></li>
+                                    </ul>
+                                    </div>
+                                </div>
+                            </section>
+                        </li>
+                        }
+                    </ul>
+                </section>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>  
+ <script src="~/AdminAsserts/vendor/simple-datatables/simple-datatables.js"></script>
+ <script src="~/AdminAsserts/vendor/tinymce/tinymce.min.js"></script>
+ <script src="~/AdminAsserts/Js/main.js" asp-append-version="true"></script>
 
+@section scripts{
+<script>
+        $(document).ready(function(){
 
-<h1>MoreSearch</h1>
+            loadParentType();
+        })
+    function loadParentType() {
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConstructionStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertySize)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfBedrooms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfBaths)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfBalconies)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfGarages)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalFloor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FloorAvailableNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Furnishing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LandArea)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Path)
-            </th>
-          @*   <th>
-                @Html.DisplayNameFor(model => model.Measurement)
-            </th> *@
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyCondition)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HandOverDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectsInfo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyFor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConstructionStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertySize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBedrooms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBaths)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBalconies)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfGarages)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalFloor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FloorAvailableNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Furnishing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Facing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LandArea)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Path)
-            </td>
-          @*   <td>
-                @Html.DisplayFor(modelItem => item.Measurement)
-            </td> *@
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyCondition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HandOverDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectsInfo.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area.AreaName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyFor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PropertyInfoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PropertyInfoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PropertyInfoId">Delete</a>
-            </td>
-        </tr>
+                        $.get("/PropertyTypes/GetChildType" , function (data, status) {
+                console.log(data)
+                $("#PropertyTypeId").empty();
+                $("#PropertyTypeId").append($('<option></option>').val("0").html("Select type"));
+                $.each(data, function (i, v) {
+                    $("#PropertyTypeId").append($('<option></option>').val(v.propertyTypeId).html(v.propertyTypeName));
+                })
+
+            })
+        }
+</script>
 }
-    </tbody>
-</table>
