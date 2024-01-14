@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -16,18 +18,26 @@ namespace USBDProperty.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _environment;
-        public DevelopersorAgentsController(ApplicationDbContext context, IWebHostEnvironment environment)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public DevelopersorAgentsController(ApplicationDbContext context, 
+            IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _environment = environment;
+            _userManager = userManager;
         }
 
         // GET: DevelopersorAgents
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool?isActive)
         {
               return _context.DevelopersorAgent != null ? 
-                          View(await _context.DevelopersorAgent.ToListAsync()) :
+                          View(await _context.DevelopersorAgent.Where(d=>d.IsActive).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
+        }
+        public  JsonResult  GetDeveloper( )
+        {
+            var data = _context.DevelopersorAgent.Where(d=>d.IsActive);
+            return Json(new { Data = data });
         }
 
         // GET: DevelopersorAgents/Details/5
@@ -61,30 +71,108 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( DevelopersorAgent developersorAgent,IFormFile logo,IFormFile banner)
         {
-            if (ModelState.IsValid)
-            {
-
-                string wwwRootPath = "";
-                if (_environment != null)
+            //if (ModelState.IsValid)
+            //{
+                ////https://www.milanjovanovic.tech/blog/working-with-transactions-in-ef-core
+                using var transaction = _context.Database.BeginTransaction();
+                try
                 {
-                    wwwRootPath = _environment.WebRootPath;
+                    string wwwRootPath = "";
+                string rpath = "";
+                    if (_environment != null)
+                    {
+                        wwwRootPath = _environment.WebRootPath;
+                    rpath = wwwRootPath + "/Developer";
+                    }
+                    else
+                    {
+                        wwwRootPath = Directory.GetCurrentDirectory();
+                    rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
                 }
-                else
+                    if (logo.FileName != null)
+                    {
+                        string extension = Path.GetExtension(logo.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
+                        {
+                            //string fileName = developersorAgent.CompanyName + extension;
+                        string fileName = $" {developersorAgent.CompanyName} logo {extension}";
+                        string path = Path.Combine(rpath,"Logo", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await logo.CopyToAsync(fileStrem);
+                            }
+                            developersorAgent.Logo = "~/Developer/Logo/" + fileName;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide jpg|.jpeg|png");
+                            return View(developersorAgent);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide logo ");
+                        return View(developersorAgent);
+                    }
+                    if (banner.FileName != null)
+                    {
+                        string extension = Path.GetExtension(banner.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
+                        {
+                            string fileName =$" {developersorAgent.CompanyName} _banner {extension}";
+                        //string path = Path.Combine(wwwRootPath + "/wwwroot/Developer/Banner", fileName);
+                        string path = Path.Combine(rpath,"Banner", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await banner.CopyToAsync(fileStrem);
+                            }
+                            developersorAgent.Banner = "~/Developer/Banner/" + fileName;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide jpg|jpeg|png");
+                            return View(developersorAgent);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide logo ");
+                        return View(developersorAgent);
+                    }
+                    developersorAgent.CreatedBy = User.Identity.Name ?? "";
+                    developersorAgent.CreatedDate = DateTime.Now.Date;
+                    _context.Add(developersorAgent);
+                    if (await _context.SaveChangesAsync() > 0)
+                    {
+                        var result = await _userManager.CreateAsync(new ApplicationUser { UserName = developersorAgent.Email, Email = developersorAgent.Email, PhoneNumber = developersorAgent.ContactNo }, password: "@Test123");
+                        if (result.Succeeded)
+                        {
+                            transaction.Commit();
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            string errormsg = "";
+                            if (result.Errors.Count() > 0)
+                            {
+                                foreach (var item in result.Errors)
+                                {
+                                    errormsg += item.Description;
+                                }
+                            }
+                            transaction.Rollback();
+                            ModelState.AddModelError("", errormsg);
+                            return View(developersorAgent);
+                        }
+                    }
+                }
+                catch(Exception ex)
                 {
-                    wwwRootPath = Directory.GetCurrentDirectory();
+                    transaction.Rollback();
+                    ModelState.AddModelError("", ex.Message);
+                return View(developersorAgent);
                 }
-                string extension = Path.GetExtension(logo.FileName);
-                string fileName = developersorAgent.CompanyName + extension;
-                string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
-                using (var fileStrem = new FileStream(path, FileMode.Create))
-                {
-                    await logo.CopyToAsync(fileStrem);
-                }
-
-                _context.Add(developersorAgent);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            //}
             return View(developersorAgent);
         }
 

@@ -7,7 +7,7 @@
 
 
 
-<main id="main">
+ 
     <div class="card">
         <div class="card-body">
 
@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Area</label>
-                                    <select id="drpArea" class="form-control"></select>
+                                    <select asp-for="AreaID" id="drpArea" class="form-control"></select>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -136,9 +136,89 @@
             </div>
         </div>
     </div>
-</main>
+ 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+
+            $(document).ready(function () {
+                loadCountry();
+                CKEDITOR.replace('Description', {
+                    height: 300,
+                    width: '100%',
+                });
+                $("#imageInput").change(function () {
+                    const file = this.files[0];
+                    console.log(file);
+                    if (file) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            console.log(event.target.result);
+                            $("#imgPreview").attr('src', event.target.result);
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+              
+
+                $("#drpCountry").change(function () {
+                    loadDivision($(this).val())
+                })
+                $("#drpDivision").change(function () {
+                    loadCity($(this).val())
+                })
+
+                $("#drpCity").change(function () {
+                    loadArea($(this).val())
+                })
+            });
+            function loadCountry() {
+                $.get("/Countries/GetCountry", function (data, status) {
+                    console.log(data)
+                    $("#drpCountry").empty();
+                    $("#drpCountry").append($('<option></option>').val("0").html("Select country"));
+                    $.each(data, function (i, v) {
+                        $("#drpCountry").append($('<option></option>').val(v.countryID).html(v.countryName));
+                    })
+
+                })
+            }
+
+            function loadDivision(cid) {
+                $.get("/Divisions/GetDivision?cid=" + cid, function (data, status) {
+                    console.log(data)
+                    $("#drpDivision").empty();
+                    $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
+                    $.each(data, function (i, v) {
+                        $("#drpDivision").append($('<option></option>').val(v.divisionID).html(v.divisionName));
+                    })
+
+                })
+            }
+            function loadCity(did) {
+                $.get("/Cities/GetCities?did=" + did, function (data, status) {
+                    console.log(data)
+                    $("#drpCity").empty();
+                    $("#drpCity").append($('<option></option>').val("0").html("Select City"));
+                    $.each(data, function (i, v) {
+                        $("#drpCity").append($('<option></option>').val(v.cityId).html(v.cityName));
+                    })
+
+                })
+            }
+            function loadArea(cid) {
+                $.get("/Areas/GetArea?cid=" + cid, function (data, status) {
+                    console.log(data)
+                    $("#drpArea").empty();
+                    $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
+                    $.each(data, function (i, v) {
+                        $("#drpArea").append($('<option></option>').val(v.areaId).html(v.areaName));
+                    })
+
+                })
+            }
+        </script>
     }
 }

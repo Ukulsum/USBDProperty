@@ -132,9 +132,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Path)
             </th>
-            <th>
+          @*   <th>
                 @Html.DisplayNameFor(model => model.Measurement)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Comments)
             </th>
@@ -175,105 +175,104 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConstructionStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertySize)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfBedrooms)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfBaths)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfBalconies)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfGarages)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalFloor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FloorAvailableNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Furnishing)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Facing)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LandArea)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Path)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Measurement)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comments)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertyCondition)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HandOverDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectsInfo.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Area.AreaName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertyFor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.PropertyInfoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.PropertyInfoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PropertyInfoId">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConstructionStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertySize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBedrooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBaths)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBalconies)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfGarages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalFloor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FloorAvailableNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Furnishing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Facing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandArea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Path)
+            </td>
+          @*   <td>
+                @Html.DisplayFor(modelItem => item.Measurement)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyCondition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HandOverDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectsInfo.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area.AreaName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyFor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PropertyInfoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PropertyInfoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PropertyInfoId">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

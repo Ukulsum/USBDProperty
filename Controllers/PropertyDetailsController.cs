@@ -191,9 +191,9 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-               ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner");
-                ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
+               // ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
+              // ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner");
+               // ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon");
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
@@ -253,7 +253,7 @@ namespace USBDProperty.Controllers
                     Facing = propertyDetails.Facing,
                     LandArea = propertyDetails.LandArea,
                     Price = propertyDetails.Price,
-                    Measurement = propertyDetails.Measurement,
+                    MeasurementID = propertyDetails.MeasurementID,
                     Comments = propertyDetails.Comments,
                     HandOverDate = propertyDetails.HandOverDate,
                     PropertyTypeId = propertyDetails.PropertyTypeId,
@@ -270,7 +270,6 @@ namespace USBDProperty.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
-
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
