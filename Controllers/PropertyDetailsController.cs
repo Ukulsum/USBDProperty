@@ -262,7 +262,7 @@ namespace USBDProperty.Controllers
                     CreatedDate = DateTime.Now,
                     Path = "/Content/Images/" + fileName
                 };
-                _context.Add(propertyDetails);
+                _context.Add(PropertyInfo);
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
