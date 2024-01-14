@@ -29,6 +29,7 @@ namespace USBDProperty.Controllers
             var applicationDbContext = _context.ProjectsInfo.Include(p => p.Developers);
             return View(await applicationDbContext.ToListAsync());
         }
+        [AllowAnonymous]
         public JsonResult GetProjects(int id)
         {
             var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id));

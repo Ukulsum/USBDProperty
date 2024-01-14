@@ -39,51 +39,51 @@ namespace USBDProperty.Models
         [Required]
         [StringLength(100)]
         public string Location { get; set; }
-        [StringLength(150)]
+       
         [DisplayName("Construction Status")]
         public ConstructionStatus ConstructionStatus { get; set; }
         [Required]
-        [StringLength(100)]
+    
         [DisplayName("Property Size")]
-        public string PropertySize { get; set; }
+        public int PropertySize { get; set; }
         [Required]
-        [StringLength(50)]
+        
         [DisplayName("Bedrooms")]
-        public string NumberOfBedrooms { get; set; }
+        public int NumberOfBedrooms { get; set; }
         [Required]
-        [StringLength(50)]
+        
         [DisplayName("Baths")]
-        public string NumberOfBaths { get; set; }
+        public int NumberOfBaths { get; set; }
         [Required]
-        [StringLength(50)]
+        
         [DisplayName("Balconies")]
-        public string NumberOfBalconies { get; set; }
+        public int NumberOfBalconies { get; set; }
         [Required]
-        [StringLength(50)]
+        
         [DisplayName("Garages")]
-        public string NumberOfGarages { get; set; }
-        [StringLength(50)]
+        public int NumberOfGarages { get; set; }
+        
         [DisplayName("Total Floor")]
-        public string TotalFloor { get; set; }
-        [StringLength(50)]
+        public int TotalFloor { get; set; }
+        
         [DisplayName("Floor Available No")]
-        public string FloorAvailableNo { get; set; }
-        [StringLength(150)]
+        public int FloorAvailableNo { get; set; }
+        
         public Furnished Furnishing { get; set; }
-        [StringLength(150)]
+        
         public Facing Facing { get; set; }
-        [StringLength(150)]
+        
         [DisplayName("Land Area")]
-        public string LandArea { get; set; }
-        [StringLength(100)]
-        public string Price { get; set; }
+        public int LandArea { get; set; }
+        
+        public float Price { get; set; }
         [ValidateNever]
         public string? Path { get; set; }
         [NotMapped]
         [ValidateNever]
         [DisplayName("Photos")]
         public IFormFile Image { get; set; }
-        [StringLength(100)]
+    
         [ForeignKey("MeasurementUnit")]
         public int MeasurementID { get; set; }
         [StringLength(255)]

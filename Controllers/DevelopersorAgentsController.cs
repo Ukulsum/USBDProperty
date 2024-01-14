@@ -34,6 +34,7 @@ namespace USBDProperty.Controllers
                           View(await _context.DevelopersorAgent.Where(d=>d.IsActive).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
         }
+        [AllowAnonymous]
         public  JsonResult  GetDeveloper( )
         {
             var data = _context.DevelopersorAgent.Where(d=>d.IsActive);

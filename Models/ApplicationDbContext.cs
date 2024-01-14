@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using USBDProperty.Models;
 
 namespace USBDProperty.Models
 {
@@ -30,5 +31,6 @@ namespace USBDProperty.Models
         public DbSet<PropertyWithFeatures> PropertyWithFeatures { get; set; }
         public DbSet<ProjectsInfo> ProjectsInfo { get; set; }
         public DbSet<ProjectImageGallery> ProjectImageGallery { get; set; }
+        public DbSet<USBDProperty.Models.MeasurementUnit>? MeasurementUnit { get; set; }
     }
 }

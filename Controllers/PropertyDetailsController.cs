@@ -208,11 +208,9 @@ namespace USBDProperty.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
-
-        //[Bind("PropertyInfoId,Title,Description,PropertyName,Location,ConstructionStatus,PropertySize,NumberOfBedrooms,NumberOfBaths,NumberOfBalconies,NumberOfGarages,TotalFloor,FloorAvailableNo,Furnishing,Facing,LandArea,Price,Measurement,Comments,HandOverDate,PropertyTypeId,TransactionTypeId,OwnerId,IconId,AreaId,PropertyForId,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( PropertyDetails propertyDetails)
+        public async Task<IActionResult> Create(PropertyDetails propertyDetails)
         {
             try
             {
@@ -260,11 +258,11 @@ namespace USBDProperty.Controllers
                     ProjectId = propertyDetails.ProjectId,
                     //IconId = propertyDetails.IconId,
                     AreaId = propertyDetails.AreaId,
-                    CreatedBy =User.Identity.Name?? "umme",
+                    CreatedBy = User.Identity.Name ?? "umme",
                     CreatedDate = DateTime.Now,
-                    Path = "/Content/Images/"+fileName
+                    Path = "/Content/Images/" + fileName
                 };
-                _context.Add(PropertyInfo);
+                _context.Add(propertyDetails);
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
@@ -276,7 +274,7 @@ namespace USBDProperty.Controllers
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, ex.Message);
             }
@@ -317,7 +315,7 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertyInfoId,Title,Description,PropertyName,Location,ConstructionStatus,PropertySize,NumberOfBedrooms,NumberOfBaths,NumberOfBalconies,NumberOfGarages,TotalFloor,FloorAvailableNo,Furnishing,Facing,LandArea,Price,Measurement,Comments,HandOverDate,PropertyTypeId,TransactionTypeId,OwnerId,IconId,AreaId,PropertyForId,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] PropertyDetails propertyDetails)
+        public async Task<IActionResult> Edit(int id,  PropertyDetails propertyDetails)
         {
             try
             {
