@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
+@{
+    @User.Identity.Name
+}
 @* <main id="main"> *@
     <div class="card">
         <div class="card-body">

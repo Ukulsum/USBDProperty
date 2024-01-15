@@ -30,6 +30,7 @@ namespace USBDProperty.Controllers
         // GET: DevelopersorAgents
         public async Task<IActionResult> Index(bool?isActive)
         {
+
               return _context.DevelopersorAgent != null ? 
                           View(await _context.DevelopersorAgent.Where(d=>d.IsActive).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
