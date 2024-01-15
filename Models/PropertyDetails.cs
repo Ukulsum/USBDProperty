@@ -30,6 +30,9 @@ namespace USBDProperty.Models
         public bool ISFeatured { get; set; }
         [StringLength(255)]
         public string Title { get; set; }
+        //public string Title { get {
+        //        return $" {PropertySize } sqft {ConstructionStatus} {PropertyType} {Facing} {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+        //    } }
         [MaxLength]
         public string? Description { get; set; }
         [Required]

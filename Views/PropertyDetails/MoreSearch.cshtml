@@ -81,7 +81,7 @@
             <div class="col-md-8">
                 <section class="properties">
                     @*<div class="container">*@
-
+                        @*@("~/image/"+item.ImageName)*@
                     <ul class="row">
                         @foreach(var pinfo in Model)
                         {
@@ -90,7 +90,7 @@
                             <section class="row flex-row">
                                 <div class="col-md-6">
                                     <div class="img">
-                                        <img class="img-responsive" src="~/Asserts/banner/Dharittree banner-1.jpg" alt="">
+                                        <img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">

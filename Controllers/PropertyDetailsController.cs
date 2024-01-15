@@ -21,22 +21,33 @@ namespace USBDProperty.Controllers
             environment = _environment;
         }
 
+        //public JsonResult Getlocation(int aid)
+        //{
+        //    var record = _context.PropertyDetails.OrderBy(c => c.Location)
+        //                                    .Where(d => d.Area.AreaId.Equals(aid)).ToList();
+        //    return Json(record);
+        //}
+
+
         [HttpGet]
-        public IActionResult MoreSearch( int? forid,int? AreaId, string location="" )
+        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? ptypeid, int? nobed, int? pPrice, int? conStatus, string location="")
         {
             try
             {
+                ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
+                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
+                ViewData["NumberOfBedrooms"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "NumberOfBedrooms");
                 var data = _context.PropertyDetails.Where(p=>p.IsActive)
                                                    .Include(p => p.Area)
                                                    //.Include(p => p.ProjectsInfo)
                                                    .Include(p => p.PropertyType)
                                                    .Include(p => p.MeasurementUnit)
                                                     .ToList();
-                 if (forid != null || forid>0)
+                if (forid != null || forid > 0)
                 {
                     data = data.Where(p => p.PropertyFor.Equals(forid)).ToList();
                 }
-                if (AreaId != null || AreaId>0)
+                if (AreaId != null || AreaId > 0)
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
@@ -44,11 +55,33 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
                 }
+                if(pSize != null || pSize > 0)
+                {
+                    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
+                }
+                if(ptypeid != null || ptypeid > 0)
+                {
+                    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
+                }
+                if(nobed != null || nobed > 0)
+                {
+                    data = data.Where(p => p.NumberOfBedrooms.Equals(nobed)).ToList();
+                }
+                if(pPrice != null || pPrice > 0)
+                {
+                    data = data.Where(p => p.Price.Equals(pPrice)).ToList();
+                }
+                if(conStatus != null || conStatus > 0)
+                {
+                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                }
+
                 //var data=  _context.PropertyDetails.Where(p=>p.AreaId.Equals(AreaId) || p.PropertyFor.Equals(forid) || p.Location.Contains(location));
 
 
 
                 ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "PropertyFor");
+                
 
                 return View(data);
             }
