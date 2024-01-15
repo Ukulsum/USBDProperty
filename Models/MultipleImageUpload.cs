@@ -9,9 +9,11 @@ namespace USBDProperty.Models
         [Key]
         public int ID { get; set; }
         public string Title { get; set; }
+        [ValidateNever]
         public string MultiImagePath { get; set; }
-        [NotMapped]
-        public IFormFile MultipleImage { get; set; }
+        //[NotMapped]
+        //[ValidateNever]
+        //public IFormFile MultipleImage { get; set; }
         [ForeignKey("PropertyDetails")]
         public int propertyInfoId { get; set; }
 

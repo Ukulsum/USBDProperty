@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240113075519_cs")]
+    partial class cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -631,12 +633,16 @@ namespace USBDProperty.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Facing")
+                        .HasMaxLength(150)
                         .HasColumnType("int");
 
-                    b.Property<int>("FloorAvailableNo")
-                        .HasColumnType("int");
+                    b.Property<string>("FloorAvailableNo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Furnishing")
+                        .HasMaxLength(150)
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("HandOverDate")
@@ -648,8 +654,10 @@ namespace USBDProperty.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LandArea")
-                        .HasColumnType("int");
+                    b.Property<string>("LandArea")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -660,23 +668,33 @@ namespace USBDProperty.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBalconies")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberOfBalconies")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("NumberOfBaths")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberOfBaths")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("NumberOfBedrooms")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberOfBedrooms")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("NumberOfGarages")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberOfGarages")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
@@ -692,8 +710,10 @@ namespace USBDProperty.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("PropertySize")
-                        .HasColumnType("int");
+                    b.Property<string>("PropertySize")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("PropertyTypeId")
                         .HasColumnType("int");
@@ -703,8 +723,10 @@ namespace USBDProperty.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("TotalFloor")
-                        .HasColumnType("int");
+                    b.Property<string>("TotalFloor")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
