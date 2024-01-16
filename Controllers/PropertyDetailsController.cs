@@ -30,7 +30,8 @@ namespace USBDProperty.Controllers
 
 
         [HttpGet]
-        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? ptypeid, int? nobed, int? pPrice, int? conStatus, string location="" /* String SearchText=""*/)
+        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, 
+             int? minprice, int? maxprice, string location = "")
         {
             try
             {
@@ -55,22 +56,22 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
                 }
-                if (ptypeid != null || ptypeid > 0)
-                {
-                    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
-                }
-                if (nobed != null || nobed > 0)
-                {
-                    data = data.Where(p => p.NumberOfBedrooms.Equals(nobed)).ToList();
-                }
-                if (pPrice != null || pPrice > 0)
-                {
-                    data = data.Where(p => p.Price.Equals(pPrice)).ToList();
-                }
-                if (conStatus != null || conStatus > 0)
-                {
-                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
-                }
+                //if (ptypeid != null || ptypeid > 0)
+                //{
+                //    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
+                //}
+                //if (nobed != null || nobed > 0)
+                //{
+                //    data = data.Where(p => p.NumberOfBedrooms.Equals(nobed)).ToList();
+                //}
+                //if (pPrice != null || pPrice > 0)
+                //{
+                //    data = data.Where(p => p.Price.Equals(pPrice)).ToList();
+                //}
+                //if (conStatus != null || conStatus > 0)
+                //{
+                //    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                //}
                 if (!string.IsNullOrEmpty(location))
                 {
                     data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
