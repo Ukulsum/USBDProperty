@@ -26,7 +26,7 @@ namespace USBDProperty.Controllers
         public IActionResult Index()
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-            ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
+            //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
             //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "location");
             //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails.OrderBy(c => c.Location)
             //               .Where(d => d.Area.AreaId.Equals(aid)).ToList(), "PropertyInfoId", "Location");

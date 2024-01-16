@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label   class="control-label">Purposes</label>
                             <select asp-for="PropertyFor" class="form-control" asp-items="Html.GetEnumSelectList<PropertyFor>()">
-                                <option value="0">Select Type</option>
+                                <option value="1">Select Type</option>
                             </select>
                             <span asp-validation-for="PropertyFor" class="text-danger"></span>
                         </div>
@@ -90,8 +90,8 @@
                     </div>
                 </div>
             </div>
-                <div class="row">
-                    <h2>Property's' Information</h2>
+            <div class="row">
+                <h2>Property's' Information</h2>
              <hr />
 
                 <div class="row">
@@ -361,9 +361,8 @@
                 loadArea($(this).val())
             })
     });
-        function loadParentType() {
-       
-                        $.get("/PropertyTypes/GetChildType" , function (data, status) {
+        function loadParentType() {    
+            $.get("/PropertyTypes/GetChildType" , function (data, status) {
                 console.log(data)
                 $("#parenTypes").empty();
                 $("#parenTypes").append($('<option></option>').val("0").html("Select type"));
@@ -397,7 +396,7 @@
 
             })
         }
-    function loadCountry(){
+        function loadCountry(){
             $.get("/Countries/GetCountry" , function (data, status) {
                 console.log(data)
                 $("#drpCountry").empty();
@@ -407,7 +406,7 @@
                 })
 
             })
-    }
+        }
 
         function loadDivision( cid) {
             $.get("/Divisions/GetDivision?cid="+cid, function (data, status) {

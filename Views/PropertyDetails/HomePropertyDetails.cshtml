@@ -7,18 +7,29 @@
         <div class="row">
             <div class="card">
                 <div class="card-body">
+                    <ul class="row">
                     <div class="load_HomePropertyDetailsById">
 
                     </div>
+                   <div class="load_HomePropertyDetails">
+                    </div>
+                    </ul>
                 </div>
+            </div>
+             <div class="card">
+                <div class="card-body">
+                    
+                    @*<h5 class="card-title text-center">Property Owner Details</h5>
+                    <hr style="width:100%"/>*@
+                </div>
+
             </div>
         </div>
         <div class="row">
             <div class="card">
                 <div class="card-body">
-                    @*<h5 class="card-title">Property Summary</h5>*@
-                    <div class="load_HomePropertyDetails">
-                    </div>
+                    @*<div class="load_HomePropertyDetails">
+                    </div>*@
                 </div>
 
             </div>
@@ -44,32 +55,6 @@
         //getHomePropertyDetails()
         getHomePropertyDetailsById()
     })
-    //function getHomePropertyDetails(id){
-    //    alert("helo")
-    //    var curloc = $(location).attr('href');
-    //    var url = curloc.split('/');
-    //    console.log("HomePropertyDetails");
-    //    console.log(url);
-    //    var id = url[url.length-1];
-    //    console.log(id)
-    //    $.ajax({
-    //        url: "/PropertyDetails/HomeProperty/"+ id,
-    //        method: "Get",
-    //        success: function(res){
-    //            console.log(res.data)
-    //            var propertylist = "";
-    //            $.each(res.data, function(index, value){
-    //                console.log(value )
-    //                console.log(value.numberOfBedrooms )
-    //                propertylist += '<ul><li><span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span><section><div class="img"><img class="img-responsive" src="/Asserts/images/ca.png" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.title + '</a> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><p> ' + value.description + ' </p><div class="share-p"> <span class="price font-montserrat">' + value.price + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
-    //            });
-    //            console.log(propertylist);
-    //            //console.log(PropertySize);
-    //            $(".load_HomePropertyDetails").empty();
-    //            $(".load_HomePropertyDetails").html(propertylist);
-    //        }
-    //    })
-    //}
     function getHomePropertyDetailsById(id){
         //alert("helo")
         var curloc = $(location).attr('href');
@@ -87,7 +72,7 @@
                 $.each(res.data, function(index, value){
                     console.log(value )
                     console.log(value.numberOfBedrooms )
-                    propertylist = '<h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><ul><li class="col-sm-12 col-md-10"><section><div class="img"><img class="img-responsive" src="/Asserts/images/bdh.jpeg" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" +'</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
+                    propertylist = '<li class="col-sm-12 col-md-8"><h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><section><div class="img"><img class="img-responsive" src="https://localhost:7247/' + value.path +'" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" +'</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>                                  <li class="col-md-4">  <section><h5 class="card-title text-center">Property Owner Details</h5><hr style="width:100%"/><div><img src="https://localhost:7247/'"></div></section></li>        </div>'
                 });
                  console.log(propertylist);
                 //console.log(PropertySize);
@@ -100,7 +85,7 @@
                     //console.log(pinfo)
                     //console.log(pinfo.numberOfBaths)
                      //class="detail-sec"
-                    propertyInfo = '<ul class="row"><li class="col-sm-12 col-md-10"><section><h3 class="m-2"> Property Summary</h3><hr/><div><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>'+ value.propertyName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>'+ " Sale" +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>'+ value.constructionStatus +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>'+ value.propertyCondition +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>'+ value.numberOfBedrooms +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>'+ value.numberOfBaths +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>'+ value.totalFloor +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>'+ value.facing +'</span></li></ul><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>'+ value.propertyType.propertyTypeName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>'+ value.location +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>'+ value.propertySize +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>'+ value.floorAvailableNo +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>'+ value.numberOfBalconies +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>'+ value.numberOfGarages +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>'+ value.furnishing +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>'+ value.landArea+'</span></li></ul></div></section></li></ul> </div>'
+                    propertyInfo = '<ul class="row"><li class="col-sm-12 col-md-8"><section><h3 class="m-2"> Property Summary</h3><hr/><div><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>'+ value.propertyName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>'+ " Sale" +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>'+ value.constructionStatus +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>'+ value.propertyCondition +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>'+ value.numberOfBedrooms +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>'+ value.numberOfBaths +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>'+ value.totalFloor +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>'+ value.facing +'</span></li></ul><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>'+ value.propertyType.propertyTypeName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>'+ value.location +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>'+ value.propertySize +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>'+ value.floorAvailableNo +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>'+ value.numberOfBalconies +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>'+ value.numberOfGarages +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>'+ value.furnishing +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>'+ value.landArea+'</span></li></ul></div></section></li></ul> </div>'
                 });
                 
                 $(".load_HomePropertyDetails").empty();
@@ -108,48 +93,5 @@
             }
         })
     }
-    // function getHomePropertyDetailsById(id){
-    //    //alert("helo")
-    //    var curloc = $(location).attr('href');
-    //    var url = curloc.split('/');
-    //    console.log("HomePropertyDetails");
-    //    console.log(url);
-    //    var id = url[url.length-1];
-    //    console.log(id)
-    //    $.ajax({
-    //        url: "/PropertyDetails/HomeProperty/"+ id,
-    //        method: "Get",
-    //        success: function(res){
-    //            console.log(res.data)
-    //            var propertylist = "";
-    //            $.each(res.data, function(index, value){
-    //                console.log(value )
-    //                console.log(value.numberOfBedrooms )
-    //                propertylist = '<h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><ul><li class="col-sm-12 col-md-10"><section><div class="img"><img class="img-responsive" src="/Asserts/images/bdh.jpeg" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" +'</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li></ul>'
-    //            });
-    //            console.log(propertylist);
-    //            //console.log(PropertySize);
-    //            $(".load_HomePropertyDetailsById").empty();
-    //            $(".load_HomePropertyDetailsById").html(propertylist);
-    //        }
-    //    })
-    //}
 </script>
 }
-
-@*<span class="tag font-montserrat sale">For ' + value.propertyType.propertyTypeName + '</span>*@
-
-@*<main id="main">
-    <div class="card">
-    <div class="card-body">
-    <h5 class="card-title">Property Information</h5>
-    <hr />
-
-
-    <div>
-    <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-    </div>
-    </div>
-    </div>
-    </main>*@

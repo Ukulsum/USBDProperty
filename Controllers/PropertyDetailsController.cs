@@ -21,22 +21,22 @@ namespace USBDProperty.Controllers
             environment = _environment;
         }
 
-        //public JsonResult Getlocation(int aid)
-        //{
-        //    var record = _context.PropertyDetails.OrderBy(c => c.Location)
-        //                                    .Where(d => d.Area.AreaId.Equals(aid)).ToList();
-        //    return Json(record);
-        //}
+        public JsonResult Getlocation(int aid)
+        {
+            var record = _context.PropertyDetails.OrderBy(c => c.Location)
+                                            .Where(d => d.Area.AreaId.Equals(aid)).ToList();
+            return Json(record);
+        }
 
 
         [HttpGet]
-        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? ptypeid, int? nobed, int? pPrice, int? conStatus, string location="")
+        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? ptypeid, int? nobed, int? pPrice, int? conStatus, string location="" /* String SearchText=""*/)
         {
             try
             {
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
-                ViewData["NumberOfBedrooms"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "NumberOfBedrooms");
+                //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
+                ViewData["NumberOfBedrooms"] = (_context.PropertyDetails, "PropertyInfoId", "NumberOfBedrooms");
                 var data = _context.PropertyDetails.Where(p=>p.IsActive)
                                                    .Include(p => p.Area)
                                                    //.Include(p => p.ProjectsInfo)
@@ -51,37 +51,41 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
+                if (pSize != null || pSize > 0)
+                {
+                    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
+                }
+                if (ptypeid != null || ptypeid > 0)
+                {
+                    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
+                }
+                if (nobed != null || nobed > 0)
+                {
+                    data = data.Where(p => p.NumberOfBedrooms.Equals(nobed)).ToList();
+                }
+                if (pPrice != null || pPrice > 0)
+                {
+                    data = data.Where(p => p.Price.Equals(pPrice)).ToList();
+                }
+                if (conStatus != null || conStatus > 0)
+                {
+                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                }
                 if (!string.IsNullOrEmpty(location))
                 {
                     data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
                 }
-                if(pSize != null || pSize > 0)
-                {
-                    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
-                }
-                if(ptypeid != null || ptypeid > 0)
-                {
-                    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
-                }
-                if(nobed != null || nobed > 0)
-                {
-                    data = data.Where(p => p.NumberOfBedrooms.Equals(nobed)).ToList();
-                }
-                if(pPrice != null || pPrice > 0)
-                {
-                    data = data.Where(p => p.Price.Equals(pPrice)).ToList();
-                }
-                if(conStatus != null || conStatus > 0)
-                {
-                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
-                }
+                //if (SearchText != " " || SearchText != null)
+                //{
+                //    data = data.Where(p => p.PropertyName!.Contains(SearchText).ToList());
+                //}
+
+
 
                 //var data=  _context.PropertyDetails.Where(p=>p.AreaId.Equals(AreaId) || p.PropertyFor.Equals(forid) || p.Location.Contains(location));
 
+                //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "PropertyFor");
 
-
-                ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "PropertyFor");
-                
 
                 return View(data);
             }
@@ -93,8 +97,6 @@ namespace USBDProperty.Controllers
 
            
         }
-
-        
 
 
         public JsonResult Search()
@@ -365,6 +367,7 @@ namespace USBDProperty.Controllers
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "MeasurementID", "Name", propertyDetails.MeasurementID);
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
@@ -376,12 +379,97 @@ namespace USBDProperty.Controllers
             }
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(PropertyDetails propertyDetails)
+        //{
+        //    try
+        //    {
+        //        //if (ModelState.IsValid)
+        //        //{
+        //        //    var data = _context.PropertyDetails.Where(m => m.PropertyInfoId == propertyDetails.PropertyInfoId).SingleOrDefaultAsync();
+        //        //    if(data != null)
+        //        //    {
+        //        //        var uniqueFileName = string.Empty;
+        //        //        if(propertyDetails.Image != null)
+        //        //        {
+        //        //            string filePath = Path.Combine(_environment.WebRootPath, "Content/Images/", data);
+        //        //        }
+        //        //    }
+        //        //}
+        //        var data = _context.PropertyDetails.Where(m => m.PropertyInfoId == propertyDetails.PropertyInfoId).SingleOrDefaultAsync();
+        //        string wwwRootPath = "";
+        //        if (propertyDetails.Path.Length > 0)
+        //        {
+        //            if (_environment != null)
+        //            {
+        //                wwwRootPath = _environment.WebRootPath;
+        //            }
+        //            else
+        //            {
+        //                wwwRootPath = Directory.GetCurrentDirectory();
+        //            }
+        //            string extention = Path.GetExtension(propertyDetails.Image.FileName);
+        //            string fileName = propertyDetails.Title + extention;
+        //            string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
+        //            using (var fileStrem = new FileStream(path, FileMode.Create))
+        //            {
+        //                await propertyDetails.Image.CopyToAsync(fileStrem);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //data.Path = data.Path
+        //        }
+
+        //        if (id != propertyDetails.PropertyInfoId)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        if (ModelState.IsValid)
+        //        {
+        //            try
+        //            {
+        //                _context.Update(propertyDetails);
+        //                await _context.SaveChangesAsync();
+        //            }
+        //            catch (DbUpdateConcurrencyException)
+        //            {
+        //                if (!PropertyDetailsExists(propertyDetails.PropertyInfoId))
+        //                {
+        //                    return NotFound();
+        //                }
+        //                else
+        //                {
+        //                    throw;
+        //                }
+        //            }
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //        ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
+        //        ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+        //        ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+        //        ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "MeasurementID", "Name", propertyDetails.MeasurementID);
+        //        //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
+        //        //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
+        //        //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
+        //        return View(propertyDetails);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
         // POST: PropertyDetails/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,  PropertyDetails propertyDetails)
+        public async Task<IActionResult> Edit(int id, PropertyDetails propertyDetails)
         {
             try
             {
@@ -413,12 +501,13 @@ namespace USBDProperty.Controllers
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "MeasurementID", "Name", propertyDetails.MeasurementID);
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

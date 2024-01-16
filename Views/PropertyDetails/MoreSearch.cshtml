@@ -17,7 +17,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Search Keyword</label>
-                                        <input class="form-control" value="Search keyword" />
+                                        <input type="text" class="form-control"  name="SearchText" placeholder="Search Text"/>
                                     </div>
                                     <div class="col-md-12">
                                         @*<label>Property Purposes</label>*@
@@ -90,7 +90,7 @@
                             <section class="row flex-row">
                                 <div class="col-md-6">
                                     <div class="img">
-                                        <img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt="">
+                                        <a href="/PropertyDetails/HomePropertyDetails/+@pinfo.PropertyInfoId)"><img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -125,13 +125,13 @@
 
 @section scripts{
 <script>
-        $(document).ready(function(){
+    $(document).ready(function(){
 
-            loadParentType();
-        })
+        loadParentType();
+    })
     function loadParentType() {
 
-                        $.get("/PropertyTypes/GetChildType" , function (data, status) {
+               $.get("/PropertyTypes/GetChildType" , function (data, status) {
                 console.log(data)
                 $("#PropertyTypeId").empty();
                 $("#PropertyTypeId").append($('<option></option>').val("0").html("Select type"));
