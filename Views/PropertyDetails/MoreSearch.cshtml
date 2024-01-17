@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label>Min No. of Bed</label>
-                                        <input class="form-control" asp-items="NumberOfBedrooms" type="text" name="NumberOfBedrooms" placeholder="Number of Bedroom" value="" />
+                                        <input class="form-control" type="number" asp-items="NumberOfBedrooms" name="NumberOfBedrooms" placeholder="Number of Bedroom" value="" />
                                     </div>
                                     <div class="col-md-12">
                                         <label>Price</label>
@@ -90,7 +90,7 @@
                             <section class="row flex-row">
                                 <div class="col-md-6">
                                     <div class="img">
-                                        <a href="/PropertyDetails/HomePropertyDetails/"+@pinfo.PropertyInfoId><img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt=""></a>
+                                        <a href="/PropertyDetails/HomePropertyDetails/"+@pinfo.PropertyInfoId><img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt=""/></a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

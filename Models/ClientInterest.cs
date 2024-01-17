@@ -14,9 +14,12 @@ namespace USBDProperty.Models
         [Required]
         [DisplayName("Purposes")] // (Sell/Buy/Rent)
         [ForeignKey("PropertyFor")]
-        public string PropertyForId { get; set; }
+        public int PropertyForId { get; set; }
         [ForeignKey("PropertyType")]
         public int PropertyTypeId { get; set; }
+        [Required]
+        [MaxLength]
+        public string Message { get; set; }
         public virtual PropertyType PropertyType { get; set; }
         public virtual PropertyFor PropertyFor { get; set; }
         public virtual ClientContact Client { get; set; }

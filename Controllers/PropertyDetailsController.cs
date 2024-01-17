@@ -37,7 +37,7 @@ namespace USBDProperty.Controllers
             {
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
                 //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
-                ViewData["NumberOfBedrooms"] = (_context.PropertyDetails, "PropertyInfoId", "NumberOfBedrooms");
+                //ViewData["NumberOfBedrooms"] = (_context.PropertyDetails, "PropertyInfoId", "NumberOfBedrooms");
                 var data = _context.PropertyDetails.Where(p=>p.IsActive)
                                                    .Include(p => p.Area)
                                                    //.Include(p => p.ProjectsInfo)
@@ -60,10 +60,10 @@ namespace USBDProperty.Controllers
                 //{
                 //    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
                 //}
-                //if (nobed != null || nobed > 0)
-                //{
-                //    data = data.Where(p => p.NumberOfBedrooms.Equals(nobed)).ToList();
-                //}
+                if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
+                {
+                    data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
+                }
                 //if (pPrice != null || pPrice > 0)
                 //{
                 //    data = data.Where(p => p.Price.Equals(pPrice)).ToList();
@@ -156,16 +156,19 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                var joinPropertyInfoDb = from pd in _context.PropertyDetails join p in _context.ProjectsInfo on pd.ProjectId equals p.Id join devInfo in _context.DevelopersorAgent on p.Id equals devInfo.ID select pd;
                 var applicationDbContext = _context.PropertyDetails
                                                 .Include(p => p.Area)
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
                                                 .Where(p=>p.PropertyInfoId.Equals(Id));
+
+
                 //.Include(p => p.SocialIcon)
                 //.Include(p => p.propertyFor).ToList();
                 //.Include(p => p.TransactionType)
 
-                return Json(new { data = applicationDbContext });
+                return Json(new { data = applicationDbContext, joinPropertyInfoDb});
             }
             catch (Exception ex)
             {

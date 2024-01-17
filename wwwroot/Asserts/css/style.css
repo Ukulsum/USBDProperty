@@ -561,7 +561,7 @@ ul.dropdown li:hover {
 	padding: 30px;
 	display: inline-block;
 	width: 90%;
-	margin-top: 122px;
+	margin-top: 197px;
 	position: relative;
 	border-radius: 15px;
 }
@@ -1129,7 +1129,7 @@ ul.dropdown li:hover {
 			PROPERTY
 ========================================================*/
 .properties {
-	padding: 80px 0;
+	padding: 50px 0;
 	background: url(../images/property-bg.jpg) repeat;
 }
 .properties.white-bg {
@@ -1808,7 +1808,7 @@ ul.dropdown li:hover {
 			CALL US
 ========================================================*/
 .call-us {
-	background: url(../images/call-us.jpg) no-repeat;
+	background: url('../Banner/Dharittree banner-1.jpg') no-repeat;
 	background-size: cover;
 }
 .call-us .overlay {
@@ -2004,7 +2004,7 @@ ul.dropdown li:hover {
 			SERVICES
 ========================================================*/
 .services {
-	padding: 80px 0;
+	padding: 0px 0;
 }
 .services li .icon {
 	position: absolute;
@@ -2014,7 +2014,7 @@ ul.dropdown li:hover {
 	width: 72px;
 	text-align: center;
 	line-height: 72px;
-	background: #4caf50;
+	background: #006838;
 	z-index: 99;
 	-webkit-transition: all 0.4s ease-in-out;
 	-moz-transition: all 0.4s ease-in-out;
@@ -2022,6 +2022,9 @@ ul.dropdown li:hover {
 	-ms-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
 }
+/*.services li .icon:hover{
+	display: block;
+}*/
 .services li section:before {
 	position: absolute;
 	bottom: -58px;
@@ -2053,7 +2056,7 @@ ul.dropdown li:hover {
 	margin: 0px;
 	padding: 0px;
 	line-height: 36px;
-	background: #4caf50;
+	background: #006838;
 	font-size: 16px;
 	font-weight: bold;
 	color: #fff;
@@ -2061,15 +2064,16 @@ ul.dropdown li:hover {
 	left: 0px;
 	text-transform: uppercase;
 }
-.services .ser-hover {
-	padding: 20px;
-	padding-top: 80px;
-	-webkit-transition: all 0.4s ease-in-out;
-	-moz-transition: all 0.4s ease-in-out;
-	-o-transition: all 0.4s ease-in-out;
-	-ms-transition: all 0.4s ease-in-out;
-	transition: all 0.4s ease-in-out;
-}
+	.services .ser-hover {
+		padding: 20px;
+		/*padding-top: 80px;*/
+		padding-top:5px;
+		-webkit-transition: all 0.4s ease-in-out;
+		-moz-transition: all 0.4s ease-in-out;
+		-o-transition: all 0.4s ease-in-out;
+		-ms-transition: all 0.4s ease-in-out;
+		transition: all 0.4s ease-in-out;
+	}
 .services .ser-hover a.read-more {
 	display: inline-block;
 	width: 100%;
@@ -2082,7 +2086,7 @@ ul.dropdown li:hover {
 }
 .services li .heading:hover {
 	background: #fff;
-	color: #4caf50;
+	color: #006838;
 }
 .services li p {
 	color: #fff;
@@ -2094,18 +2098,20 @@ ul.dropdown li:hover {
 	transition: all 0.4s ease-in-out;
 }
 .services li:hover .ser-hover {
-	background: rgba(25,182,37,0.85);
+	background: rgba(5,104,57,0.85);
 }
 .services li:hover .ser-hover p {
 	opacity: 1;
 }
 .services li:hover .icon {
 	background: none;
+	
 }
-.services li:hover .heading {
-	background: #fff;
-	color: #4caf50;
-}
+	.services li:hover .heading {
+		background: #fff;
+		color: #006838;
+		top: 337px;
+	}
 /*=======================================================
 			WELCOME
 ========================================================*/
@@ -4533,7 +4539,7 @@ ul.dropdown li:hover {
 .regi-sec {
 	padding: 20px;
 	display: inline-block;
-	width: 100%;
+	width: 87%;
 	box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
 }
 .regi-sec li {

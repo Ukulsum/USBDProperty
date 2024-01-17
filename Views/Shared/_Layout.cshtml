@@ -412,7 +412,7 @@
     <script src="~/Asserts/js/jquery.nouislider.min.js"></script>
     <script src="~/Asserts/js/main.js"></script>
 
-
+    @await Component.InvokeAsync("Notyf") 
 
     @*<script type="text/javascript">*@
     @await RenderSectionAsync("Scripts", required: false)

@@ -13,7 +13,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    [Authorize(Roles = "Admin,Agent")]
+    //[Authorize(Roles = "Admin,Agent")]
     public class DevelopersorAgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,6 +25,22 @@ namespace USBDProperty.Controllers
             _context = context;
             _environment = environment;
             _userManager = userManager;
+        }
+
+        public JsonResult HomeDeveloperOrAgentsbyID(int Id)
+        {
+            try
+            {
+                var applicationDbContext = _context.DevelopersorAgent.Include(d => d.Area).Where(p => p.ID.Equals(Id));
+
+                return Json(new { data = applicationDbContext });
+            }
+            catch (Exception ex)
+            {
+                //return BadRequest(ex.Message);
+                return Json(new { data = "No record" });
+            }
+
         }
 
         // GET: DevelopersorAgents
