@@ -24,6 +24,7 @@ namespace USBDProperty.Models
         public DbSet<SocialIcon> SocialIcons { get; set; }
         public DbSet<PropertyDetails> PropertyDetails { get; set; }
         public DbSet<ClientContact> ClientContacts { get; set; }
+        public DbSet<ClientInterest> ClientInterest { get; set; }
         public DbSet<DevelopersorAgent> DevelopersorAgent { get; set; }
         public DbSet<PrivacyPolicy> PrivacyPolicy { get; set; }
         public DbSet<PropertyImages> PropertyImages { get; set; }

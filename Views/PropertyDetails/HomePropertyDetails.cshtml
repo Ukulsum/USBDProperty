@@ -1,4 +1,7 @@
-﻿@{
+﻿@model  USBDProperty.ViewModels.ClientVM
+
+
+@{
     ViewData["Title"] = "HomePropertyDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,37 +9,80 @@
     <div class="container">
         <div class="row">
             <div class="card">
-                <div class="card-body">
-                    
-                    <div class="load_HomePropertyDetailsById">
+                <div class="card-body row">
 
+                    <div class="load_HomePropertyDetailsById col-md-8">
                     </div>
-                   @* <div class="load_HomePropertyDetails">
-                    </div> *@
-                    @* </ul> *@
+                    <div class="col-md-4">
+                        <div>
+                            <div class="regi-sec">
+                                <p class="text-center">Property Owner Details</p>
+                                <hr style="width:100%"/>
+
+                                @*<span class="regi-tag text-center">Send Message to Property Owner</span>*@
+                                <form asp-action="Create" asp-controller="ClientContacts" method="post">
+                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <ul>
+                                        <li>
+                                            <p class="text-center">Send Message to Property Owner</p>
+                                           <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name"/>
+                                           <input type="hidden" name="PropertyID" asp-for="PropertyID"  id="prid" />
+                                            <input type="hidden" name="PropertyTypeId"  id="typeID" asp-for="PropertyTypeId"/>
+                                             <input type="hidden" name="PropertyForId"  id="forid" asp-for="PropertyForId"/>
+                                           <span asp-validation-for="ClientName" class="text-danger"></span>
+                                         </li>
+                                        <li>
+                                            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail"/>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </li>
+                                        <li>
+                                            <input type="number" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                                        </li>
+                                        <li>
+                                            <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                                            <span asp-validation-for="Message" class="text-danger"></span>
+                                        </li>
+                                        <li>
+                                            <input type="submit" value="Send Message" class="btn btn-primary center" />
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-             <div class="card">
+
+            <div class="card">
                 <div class="card-body">
-                    
-                    @*<h5 class="card-title text-center">Property Owner Details</h5>
-                    <hr style="width:100%"/>*@
+                    <ul class="row">
+                        <li class="col-md-4">
+                            <section>
+                                <h5 class="card-title text-center">property owner details</h5>
+                                <hr style="width:100%" />
+                            </section>
+
+                        </li>
+
+                    </ul>
                 </div>
+                <!--======= SIGN UP =========-->
 
             </div>
         </div>
         <div class="row">
             <div class="card">
                 <div class="card-body">
-                    @*<div class="load_HomePropertyDetails">
-                    </div>*@
+                    <div class="load_HomePropertyDetails">
+                    </div>
                 </div>
 
             </div>
         </div>
-
-
     </div>
+
+    @*</div>*@
 </section>
 
 
@@ -109,7 +155,7 @@ $(document).ready(function (){
         console.log("HomePropertyDetails");
         console.log(url);
         var id = url[url.length-1];
-        console.log("D :"+ id)
+        //console.log(id)
         $.ajax({
                 url: "/PropertyDetails/HomePropertybyID/" + id,
             method: "Get",
@@ -119,7 +165,7 @@ $(document).ready(function (){
                 $.each(res.data, function(index, value){
                     console.log(value )
                     console.log(value.numberOfBedrooms )
-                        propertylist = '<ul class="row"><li class="col-sm-12 col-md-8"><h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><section><div class="img"><img class="img-responsive" src="https://localhost:7247/' + value.path + '" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>                                  <li class="col-md-4">  <section><h5 class="card-title text-center">Property Owner Details</h5><hr style="width:100%"/><div><img src="https://localhost:7247/'"></div></section></li> </ul>       </div>'
+                    propertylist = '<ul><li><section><h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><div class="img"><img class="img-responsive" src="https://localhost:7247/' + value.path +'" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" +'</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>                       </ul>                                     </div>'
                 });
                  console.log(propertylist);
                 //console.log(PropertySize);
@@ -129,16 +175,38 @@ $(document).ready(function (){
 
                 var propertyInfo = "";
                 $.each(res.data, function(index, value){
-                    //console.log(pinfo)
+                    console.log("Here")
+                    console.log("propertyTypeId: "+ value.propertyTypeId)
+                    console.log("propertyInfoId: "+value.propertyInfoId)
+                    console.log("propertyFor: " +value.propertyFor)
                     //console.log(pinfo.numberOfBaths)
                      //class="detail-sec"
-                    propertyInfo = '<ul class="row"><li class="col-sm-12 col-md-8"><section><h3 class="m-2"> Property Summary</h3><hr/><div><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>'+ value.propertyName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>'+ " Sale" +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>'+ value.constructionStatus +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>'+ value.propertyCondition +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>'+ value.numberOfBedrooms +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>'+ value.numberOfBaths +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>'+ value.totalFloor +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>'+ value.facing +'</span></li></ul><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>'+ value.propertyType.propertyTypeName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>'+ value.location +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>'+ value.propertySize +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>'+ value.floorAvailableNo +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>'+ value.numberOfBalconies +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>'+ value.numberOfGarages +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>'+ value.furnishing +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>'+ value.landArea+'</span></li></ul></div></section></li></ul> </div>'
+                     $("#forid").val(value.propertyFor)
+                         $("#typeID").val(value.propertyTypeId)
+                         $("#prid").val(value.propertyInfoId)
+                    propertyInfo = '<ul class="row"><li class="col-sm-12 col-md-8"><section><h3 class="m-2"> Property Summary</h3><hr/><div><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>'+ value.propertyName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>'+ value.propertyFor +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>'+ value.constructionStatus +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>'+ value.propertyCondition +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>'+ value.numberOfBedrooms +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>'+ value.numberOfBaths +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>'+ value.totalFloor +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>'+ value.facing +'</span></li></ul><ul class="col-md-6"><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>'+ value.propertyType.propertyTypeName +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>'+ value.location +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>'+ value.propertySize +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>'+ value.floorAvailableNo +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>'+ value.numberOfBalconies +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>'+ value.numberOfGarages +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>'+ value.furnishing +'</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>'+ value.landArea+'</span></li></ul></div></section></li></ul> </div>'
                 });
-                
+
                 $(".load_HomePropertyDetails").empty();
                 $(".load_HomePropertyDetails").html(propertyInfo);
             }
         })
+
+        //$.ajax({
+        //     url: "/DevelopersorAgents/HomeDeveloperOrAgentsbyID/"+ id,
+        //     method: "Get",
+        //     success: function(res){
+        //        console.log(res.data)
+        //        var DevInfolist = "";
+        //        $.each(res.data, function(index, value){
+        //            console.log(value )
+        //            //console.log(value.numberOfBedrooms)
+        //            DevInfolist = '<ul class="row"><li class="col-sm-12 col-md-8">  <h5 class="card-title text-center">property owner details</h5><hr style="width:100%"/><section></section></li><div><img class="img-responsive" src="https://localhost:7247/' + value.logo +'" alt=""></div> </ul>'
+        //        });
+        //        $(".load_HomeDevInfo").empty();
+        //        $(".load_HomeDevInfo").html(DevInfolist);
+        //     }
+        //})
     }
 </script>
 } *@ 

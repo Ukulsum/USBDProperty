@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using USBDProperty.Models;
+using USBDProperty.ViewModels;
 
 namespace USBDProperty.Controllers
 {
     public class ClientContactsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly INotyfService _notyf;
 
-        public ClientContactsController(ApplicationDbContext context)
+        public ClientContactsController(ApplicationDbContext context, INotyfService srv)
         {
             _context = context;
+            _notyf = srv;
         }
 
         // GET: ClientContacts
@@ -58,18 +62,37 @@ namespace USBDProperty.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-             ClientContact clientContact)
+             ClientVM clientContact)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(clientContact);
+            int Id = 0;
+             if (ModelState.IsValid)
+                             {
+                var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, ContactDate = DateTime.Now };
+                  _context.ClientContacts.Add(client);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                _context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
+
+                 Id = clientContact.PropertyID;
+                //_context.Add(clientContact);
+                var r= await _context.SaveChangesAsync();
+                if (r> 0)
+                {
+                     
+
+                    _notyf.Success("As soon as possible we will contact with u");
+                    // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
+                  
+                    return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id  });
+                }
+
+                //  return RedirectToAction(nameof(Index));
             }
             //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", 
             //    clientContact.PropertyTypeId);
             ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName"      );
-            return View(clientContact);
+            // return View(clientContact);
+            return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
         }
 
         // GET: ClientContacts/Edit/5
