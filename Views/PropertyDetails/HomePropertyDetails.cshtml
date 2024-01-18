@@ -10,7 +10,6 @@
         <div class="row">
             <div class="card">
                 <div class="card-body row">
-
                     <div class="load_HomePropertyDetailsById col-md-8">
                     </div>
                     <div class="col-md-4">
@@ -53,7 +52,7 @@
                     </div>
                 </div>
             </div>
-
+@* 
             <div class="card">
                 <div class="card-body">
                     <ul class="row">
@@ -67,10 +66,11 @@
 
                     </ul>
                 </div>
-                <!--======= SIGN UP =========-->
+               
 
-            </div>
+            </div> *@
         </div>
+        <!--======= SIGN UP =========-->
         <div class="row">
             <div class="card">
                 <div class="card-body">
@@ -84,20 +84,15 @@
 
     @*</div>*@
 </section>
-
-
-
 <h1>HomePropertyDetails</h1>
-
-
 
 
 
 @section Scripts{
 <script>
 $(document).ready(function (){
-   alert("p")
-           // getHomePropertyDetailsById()
+  
+            getHomePropertyDetailsById()
 })
         function getHomePropertyDetailsById() {
             //alert("helo")
@@ -114,9 +109,13 @@ $(document).ready(function (){
                     console.log(res.data)
                     var propertylist = "";
                     $.each(res.data, function (index, value) {
-                        console.log(value)
+                        console.log("Propertyimage")
+                        console.log(value.path)
                         console.log(value.numberOfBedrooms)
-                        propertylist = '<ul class="row"><li class="col-sm-12 col-md-8"><h5 class="card-title">' + value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " + value.location + '</h5><section><div class="img"><img class="img-responsive" src="https://localhost:7247/ + value.path + '" alt=""></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>                                  <li class="col-md-4">  <section><h5 class="card-title text-center">Property Owner Details</h5><hr style="width:100%"/><div><img src="https://localhost:7247/'"></div></section></li> </ul>       </div>'
+                        propertylist = '<ul class="row"><li class="col-sm-12 col-md-8"><h5 class="card-title">' + 
+                                    value.propertySize + ", " + value.numberOfBedrooms + " " + value.constructionStatus + " " + value.propertyType.propertyTypeName + " for Sale at " +
+                                        value.location + 
+                                        '</h5><section><div class="img"><img class="img-responsive" src="' + value.path + '" alt="'+ value.propertyName+'"></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.price + '</a><span> ' + value.propertyType.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li><li class="col-md-4"><section><h5 class="card-title text-center">Property Owner Details</h5><hr style="width:100%"/><div><img src=""></div></section></li> </ul>       </div>'
                     });
                     console.log(propertylist);
                     //console.log(PropertySize);
