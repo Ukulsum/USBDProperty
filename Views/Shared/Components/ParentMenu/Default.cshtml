@@ -1,21 +1,36 @@
 ﻿@model IEnumerable<USBDProperty.Models.PropertyType>
+
 @foreach(var item in Model)
 {
 <li>
   
-        @if (item.ParentPropertyTypeId > 0)
-        {
+        @* @if (item.ParentPropertyTypeId > 0)
+        { *@
             <a href="#">
                 @item.PropertyTypeName
             </a>
-            @await Component.InvokeAsync("Submenu", new { pid = item.ParentPropertyTypeId })
+        @{
+            var r = Model.Select(p => p.ParentPropertyTypeId).ToList();
+
+            if (r.Contains(item.PropertyTypeId))
+            {
+                @await Component.InvokeAsync("Submenu", new { pid = item.ParentPropertyTypeId })
+            }
+            else
+            {
+                <a href="/PropertyDetails/GetPropertyByParent/@item.PropertyTypeId">
+                    @item.PropertyTypeName
+                </a>
+            }
         }
+            
+       @*  }
         else
         {
-            <a href="/PropertyDetails/Details/@item.ParentPropertyTypeId">
+            <a href="/PropertyDetails/Details/@item.PropertyTypeId">
                 @item.PropertyTypeName
             </a>
-        }
+        } *@
 
 
    @*  <ul class="dropdown">

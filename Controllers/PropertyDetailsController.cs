@@ -28,7 +28,11 @@ namespace USBDProperty.Controllers
             return Json(record);
         }
 
-
+        public IActionResult GetPropertyByParent(int id)
+        {
+            var data = _context.PropertyDetails.Where(p => p.PropertyTypeId.Equals(id));
+            return View(data);
+        }
         [HttpGet]
         public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, 
              int? minprice, int? maxprice, string location = "")
