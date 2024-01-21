@@ -375,10 +375,61 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
-                ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-                ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+
+                //var area = _context.Areas.Where(a => a.AreaId.Equals(propertyDetails.AreaId)).FirstOrDefault();
+                //var cities = _context.Citys.Where(d => d.CityId.Equals(area.CityId));
+                //ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
+                //ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
+
+
+                var allid = (from a in _context.Areas join c in _context.Citys on a.CityId equals c.CityId 
+                            join d in _context.Divisions on c.DivisionId equals d.DivisionID 
+                            join cc in _context.Countries on d.CountryId equals cc.CountryID 
+                            where a.AreaId==propertyDetails.AreaId
+                            select new { 
+                                DivisionId=d.DivisionID,
+                                CityId=c.CityId,
+                                CountryId=cc.CountryID
+                            
+                            } ).FirstOrDefault();
+
+
+
+
+                //var devprojectid = from p in _context.ProjectsInfo
+                //                   join d in _context.DevelopersorAgent on p.AgentID equals d.ID
+                //                   where p.Id == propertyDetails.ProjectId
+                //                   select p;
+
+                //var dp = (from pr in _context.PropertyDetails 
+                //         join  p in _context.ProjectsInfo on pr.ProjectId equals p.Id
+                //         join d in _context.DevelopersorAgent on p.AgentID equals d.ID
+                //         //where p.Id == propertyDetails.ProjectId
+                //         select new
+                //         {
+                //             Id = p.Id,
+                //             AgentID = d.ID
+                //         }).FirstOrDefault();
+
+                //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
+                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", dp.AgentID);
+
+                var project = _context.ProjectsInfo.Where(p => p.Id.Equals(propertyDetails.ProjectId)).FirstOrDefault();
+                var devloper = _context.DevelopersorAgent.Where(d => d.ID.Equals(project.AgentID));
+
+                ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
+                ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", devloper);
+
+
+                //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName).Where(p => p.Id.Equals(propertyDetails.ProjectId)), "Id", "ProjectName", propertyDetails.ProjectId);
+                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName).Where(p => p.ID.Equals(ProjectsInfo.ID)), "Id", "ProjectName", propertyDetails.ProjectId);
+                ViewData["AreaId"] = new SelectList(_context.Areas.OrderBy(a => a.AreaName), "AreaId", "AreaName", propertyDetails.AreaId);
+                ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allid.CityId);
+                ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allid.DivisionId);
+                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);
+                //ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "MeasurementID", "Name", propertyDetails.MeasurementID);
+                ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "Id", "Name", propertyDetails.MeasurementID);
                 //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
                 //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
                 //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
