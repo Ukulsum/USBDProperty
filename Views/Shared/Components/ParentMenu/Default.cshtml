@@ -6,15 +6,20 @@
   
         @* @if (item.ParentPropertyTypeId > 0)
         { *@
-            <a href="#">
-                @item.PropertyTypeName
-            </a>
+           
         @{
             var r = Model.Select(p => p.ParentPropertyTypeId).ToList();
 
             if (r.Contains(item.PropertyTypeId))
             {
-                @await Component.InvokeAsync("Submenu", new { pid = item.ParentPropertyTypeId })
+                @foreach (var p in Model.Where(t=>t.ParentPropertyTypeId==0))
+                {
+                     <a href="#">
+                @p.PropertyTypeName
+            </a>
+                      @await Component.InvokeAsync("Submenu", new { pid = item.ParentPropertyTypeId })
+                }
+              
             }
             else
             {
