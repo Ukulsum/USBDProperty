@@ -393,7 +393,7 @@ namespace USBDProperty.Controllers
                             
                             } ).FirstOrDefault();
 
-                
+
 
 
                 //var devprojectid = from p in _context.ProjectsInfo
@@ -401,17 +401,28 @@ namespace USBDProperty.Controllers
                 //                   where p.Id == propertyDetails.ProjectId
                 //                   select p;
 
-                //var dp = from p in _context.pro
-
-                //var project = _context.ProjectsInfo.Where(p => p.Id.Equals(propertyDetails.ProjectId)).FirstOrDefault();
-                //var devloper = _context.DevelopersorAgent.Where(d => d.ID.Equals(project.AgentID));
+                //var dp = (from pr in _context.PropertyDetails 
+                //         join  p in _context.ProjectsInfo on pr.ProjectId equals p.Id
+                //         join d in _context.DevelopersorAgent on p.AgentID equals d.ID
+                //         //where p.Id == propertyDetails.ProjectId
+                //         select new
+                //         {
+                //             Id = p.Id,
+                //             AgentID = d.ID
+                //         }).FirstOrDefault();
 
                 //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
-                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", devloper);
+                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", dp.AgentID);
+
+                var project = _context.ProjectsInfo.Where(p => p.Id.Equals(propertyDetails.ProjectId)).FirstOrDefault();
+                var devloper = _context.DevelopersorAgent.Where(d => d.ID.Equals(project.AgentID));
+
+                ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
+                ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", devloper);
 
 
-                //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName).Where(p=>p.Id.Equals(propertyDetails.ProjectId)), "Id", "ProjectName", propertyDetails.ProjectId);
-                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName).Where(p=>p.ID.Equals(ProjectsInfo.ID)), "Id", "ProjectName", propertyDetails.ProjectId);
+                //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName).Where(p => p.Id.Equals(propertyDetails.ProjectId)), "Id", "ProjectName", propertyDetails.ProjectId);
+                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName).Where(p => p.ID.Equals(ProjectsInfo.ID)), "Id", "ProjectName", propertyDetails.ProjectId);
                 ViewData["AreaId"] = new SelectList(_context.Areas.OrderBy(a => a.AreaName), "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allid.CityId);
                 ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allid.DivisionId);
