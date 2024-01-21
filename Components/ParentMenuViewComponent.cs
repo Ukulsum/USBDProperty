@@ -14,7 +14,8 @@ namespace USBDProperty.Components
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var data = _context.PropertyTypes.Where(m => m.ParentPropertyTypeId == 0).ToList();
+            //var data = _context.PropertyTypes.Where(m => m.ParentPropertyTypeId == 0).ToList();
+            var data = _context.PropertyTypes.ToList();
             return View(data);
         }
     }

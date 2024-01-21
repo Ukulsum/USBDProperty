@@ -2,25 +2,27 @@
 
 @foreach(var item in Model)
 {
-<li>
+<li>    
   
         @* @if (item.ParentPropertyTypeId > 0)
         { *@
-            <a href="#">
-                @item.PropertyTypeName
-            </a>
+           
         @{
             var r = Model.Select(p => p.ParentPropertyTypeId).ToList();
 
-            if (r.Contains(item.PropertyTypeId))
+                if (r.Contains(item.PropertyTypeId))
             {
-                @await Component.InvokeAsync("Submenu", new { pid = item.ParentPropertyTypeId })
+                  <a href="/PropertyDetails/GetPropertyByParent/@item.PropertyTypeId">
+                    @item.PropertyTypeName
+                </a>
+               
             }
             else
             {
-                <a href="/PropertyDetails/GetPropertyByParent/@item.PropertyTypeId">
+                <a href="#">
                     @item.PropertyTypeName
                 </a>
+                @await Component.InvokeAsync("Submenu", new { pid = item.ParentPropertyTypeId })
             }
         }
             
