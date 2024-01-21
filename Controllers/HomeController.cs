@@ -36,10 +36,10 @@ namespace USBDProperty.Controllers
         }
 
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        public IActionResult ContactUSBDProperty()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

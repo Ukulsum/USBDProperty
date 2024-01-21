@@ -6,19 +6,33 @@
     {
         <li>
          
-            @if (item.PropertyTypeId > 0)
-                {
+        @*     @if (item.PropertyTypeId > 0)
+                { *@
                       <a href="#">
                         @item.PropertyTypeName
                     </a>
-                @await Component.InvokeAsync("Submenu", new { pid = item.PropertyTypeId })
-            }
+                @{
+                    var r = Model.Select(p => p.ParentPropertyTypeId).ToList();
+
+                    if (r.Contains(item.PropertyTypeId))
+                    {
+                        @await Component.InvokeAsync("Submenu", new { pid = item.PropertyTypeId })
+                    }
+                    else
+                    {
+                        <a href="/PropertyDetails/GetPropertyByParent/@item.PropertyTypeId">
+                            @item.PropertyTypeName
+                        </a>
+                    }
+                }
+                
+          @*   }
                 else
                 {
                     <a href="/PropertyDetails/Details/@item.ParentPropertyTypeId">
                         @item.PropertyTypeName
                     </a>
-                }
+                } *@
 
             </li>
     }

@@ -5049,6 +5049,36 @@ footer .loc-info p i {
 	margin-top: 6px;
 	margin-bottom: 10px;
 }
+/*Shahanaj for layout footer*/
+	footer .fb a {
+		color: #28a9e2;
+	}
+
+	footer .fb li {
+		padding-left: 40px;
+		margin-bottom: 30px;
+	}
+
+		footer .fb li:before {
+			content: "\f09a";
+			font-family: FontAwesome;
+			padding: 0px;
+			color: #414141;
+			float: left;
+			position: absolute;
+			left: 0px;
+			font-size: 26px;
+			padding: 0px 15px;
+			font-weight: 100;
+		}
+
+	footer .fb span {
+		text-transform: uppercase;
+		color: #fff;
+		font-size: 12px;
+	}
+/*end*/
+
 footer .tweet a {
 	color: #28a9e2;
 }
@@ -5056,18 +5086,19 @@ footer .tweet li {
 	padding-left: 40px;
 	margin-bottom: 30px;
 }
-footer .tweet li:before {
-	content: "\f099";
-	font-family: FontAwesome;
-	padding: 0px;
-	color: #414141;
-	float: left;
-	position: absolute;
-	left: 0px;
-	font-size: 26px;
-	padding: 0px 15px;
-	font-weight: 100;
-}
+	footer .tweet li:before {
+		/*content: "\f099";*/
+		content: "\f09a";
+		font-family: FontAwesome;
+		padding: 0px;
+		color: #414141;
+		float: left;
+		position: absolute;
+		left: 0px;
+		font-size: 26px;
+		padding: 0px 15px;
+		font-weight: 100;
+	}
 footer .tweet span {
 	text-transform: uppercase;
 	color: #fff;
