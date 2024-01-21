@@ -113,6 +113,11 @@ section {
 	overflow: hidden;
 	width: 100%;
 }
+@media (max-width:991px) {
+	section {
+		width: 72%;
+	}
+}
 /*=======================================================
 			BUTTON
 ========================================================*/
@@ -571,11 +576,32 @@ ul.dropdown li:hover {
 	border-radius: 10px;
 	position: absolute;
 	top: -50px;
-	left: 20%;
+	left: 30%;
 	justify-content: space-evenly;
 	padding: 25px 112px;
 	width: auto;
 }
+@media (max-width:991px) {
+	.search-type {
+		padding: 17px 18px;
+		justify-content: space-evenly;
+		width: 80%;
+		left : 10%;
+	}
+}
+/*@media (max-width: 767px) .search-type {
+	width: 100%;
+}*/
+/*@media only screen and (max-width: 991px) .search-type {
+	width: 80%;
+	-webkit-box-pack: space-evenly;
+	-ms-flex-pack: space-evenly;
+	justify-content: space-evenly;
+	-webkit-box-align: end;
+	-ms-flex-align: end;
+	align-items: flex-end;
+	padding: 0 10px;
+}*/
 /*.search-type {
 	background: #fff;
 	box-shadow: 0 4px 10px rgba(0,117,255,.0898711);
@@ -2039,8 +2065,7 @@ ul.dropdown li:hover {
 	-o-transform: rotate(45deg);
 	z-index: 99;
 }
-.services li .heading {
-}
+
 .services li .ser-hover {
 	position: absolute;
 	top: 0px;
@@ -2204,7 +2229,7 @@ ul.dropdown li:hover {
 	color: #fff;
 	font-size: 20px;
 	display: none;
-	opacity: 0;
+	services opacity: 0;
 }
 .link-up i {
 	-ms-transform: rotate(-45deg); /* IE 9 */
