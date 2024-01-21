@@ -196,6 +196,7 @@
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td> *@
             <td>
+                           @*  @Html.DisplayFor(modelItem => item.PropertyFor) *@
                             <a asp-action="Create" asp-controller="PropertyImages" asp-route-id="@item.PropertyInfoId">Add More Pic</a>
                 <a asp-action="Edit" asp-route-id="@item.PropertyInfoId"><i class="bi bi-pencil-square"></i></a> |
                 <a asp-action="Details" asp-route-id="@item.PropertyInfoId"><i class="bi bi-eye-fill"></i></a> |

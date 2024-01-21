@@ -30,15 +30,25 @@ namespace USBDProperty.Models
         public bool ISFeatured { get; set; }
         [StringLength(255)]
         public string Title { get; set; }
-        //public string Title { get {
-        //        return $" {PropertySize } sqft {ConstructionStatus} {PropertyType} {Facing} {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
-        //    } }
+       
+
+        public double TotalPrice
+        {
+            get { return this.PropertySize* Price; }
+        }
         [MaxLength]
         public string? Description { get; set; }
         [Required]
         [StringLength(150)]
         [DisplayName("Property Name")]
-        public string PropertyName { get; set; }
+        //public string PropertyName { get; set; }
+        public string PropertyName
+        {
+            get
+            {
+                return $" {PropertySize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+            }
+        }
         [Required]
         [StringLength(100)]
         public string Location { get; set; }

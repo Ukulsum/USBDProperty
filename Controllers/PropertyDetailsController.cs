@@ -312,7 +312,7 @@ namespace USBDProperty.Controllers
                 {
                     Title = propertyDetails.Title,
                     Description = propertyDetails.Description,
-                    PropertyName = propertyDetails.PropertyName,
+                    //PropertyName = propertyDetails.PropertyName,
                     Location = propertyDetails.Location,
                     ConstructionStatus = propertyDetails.ConstructionStatus,
                     PropertySize = propertyDetails.PropertySize,
@@ -475,7 +475,7 @@ namespace USBDProperty.Controllers
                     PropertyInfoId = propertyDetails.PropertyInfoId,
                     Title = propertyDetails.Title,
                     Description = propertyDetails.Description,
-                    PropertyName = propertyDetails.PropertyName,
+                    //PropertyName = propertyDetails.PropertyName,
                     Location = propertyDetails.Location,
                     ConstructionStatus = propertyDetails.ConstructionStatus,
                     PropertySize = propertyDetails.PropertySize,
