@@ -117,11 +117,15 @@ namespace USBDProperty.Controllers
                 var applicationDbContext = _context.PropertyDetails
                                                 .Include(p => p.Area)
                                                  .Include(p => p.ProjectsInfo)
-                                                .Include(p => p.PropertyType);
-                                                //.Include(p => p.SocialIcon)
-                                                //.Include(p => p.propertyFor).ToList();
-                                              //.Include(p => p.TransactionType)
-                                                
+                                                .Include(p => p.PropertyType).ToList();
+                //.Include(p => p.SocialIcon)
+                //.Include(p => p.propertyFor).ToList();
+                //.Include(p => p.TransactionType)
+                //if (ISFeatured == true)
+                //{
+                    
+                //}
+
                 return Json(new { data = applicationDbContext });
             }
             catch (Exception ex)

@@ -113,11 +113,11 @@ section {
 	overflow: hidden;
 	width: 100%;
 }
-@media (max-width:991px) {
+/*@media (max-width:991px) {
 	section {
 		width: 72%;
 	}
-}
+}*/
 /*=======================================================
 			BUTTON
 ========================================================*/
@@ -321,7 +321,7 @@ header:before {
 	content: "";
 	position: absolute;
 	width: 38%;
-	background: #f2f0f0;
+	/*background: #f2f0f0;*/
 	height: 100%;
 	z-index: -1;
 }
@@ -587,6 +587,7 @@ ul.dropdown li:hover {
 		justify-content: space-evenly;
 		width: 80%;
 		left : 10%;
+		top : -17%;
 	}
 }
 /*@media (max-width: 767px) .search-type {
@@ -1178,6 +1179,13 @@ ul.dropdown li:hover {
 	padding: 0 0 0 10px;
 	margin-top: 35px;
 }
+
+/*@media (max-width:991px) {
+	.properties li .tag {
+		right: 101px;
+	}
+}*/
+
 .properties li .tagg {
 	padding: 0 !important;
 	right: 342px !important;
@@ -5018,7 +5026,7 @@ ul.dropdown li:hover {
 			FOOTER
 ========================================================*/
 footer {
-	padding: 0;
+	padding: 35px;
 	background: #006838 url(../images/map-bottom.png) bottom repeat-x;
 	padding-bottom: 60px;
 }
@@ -5232,19 +5240,21 @@ footer button {
 }
 footer .social_icons {
 	display: inline-block;
-	margin-top: 20px;
+	margin-top: 0px;
 }
 footer .social_icons li {
-	background: #333333;
+	/*background: #333333;*/
+	background: #fff;
 	margin-right: 10px;
 }
-footer .social_icons a {
-	font-size: 14px;
-	height: 35px;
-	width: 35px;
-	line-height: 35px;
-	color: #fff;
-}
+	footer .social_icons a {
+		font-size: 14px;
+		height: 35px;
+		width: 35px;
+		line-height: 35px;
+		/*color: #fff;*/
+		color: #2B3990;
+	}
 
 
 strong {

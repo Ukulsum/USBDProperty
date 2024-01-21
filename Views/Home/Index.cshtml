@@ -9,7 +9,7 @@
             <!--======= SLIDER =========-->
             <li> <img src="~/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </li>
 
-            <!--======= SLIDER =========-->
+            <li> <img src="~/Asserts/Banner/service-img-1.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-2.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-3.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-4.jpg" alt=""> </li>
@@ -51,10 +51,10 @@
                         <!--======= FORM =========-->
                         <li class="col-sm-6">
                             <label>Location</label>
-                            <select id="propertyInfoId" class="form-control"  ></select>
-                          @*  <select class="form-control" asp-items="ViewBag.PropertyInfoId" name="PropertyInfoId" id="PropertyInfoId">
-                <option value="0">Location</option>
-            </select>*@
+                            <select id="propertyInfoId" class="form-control"></select>
+                            @*  <select class="form-control" asp-items="ViewBag.PropertyInfoId" name="PropertyInfoId" id="PropertyInfoId">
+                                <option value="0">Location</option>
+                                </select>*@
                         </li>
 
                     </ul>
@@ -75,16 +75,16 @@
 
     <!--======= PROPERTY SLIDER =========-->
     <div class="prot-slide">
-        <!--======= PROPERTY SLIDE =========-->
-        <div id="bannerslide" class="owl-carousel owl-theme">
-        </div>
+    <!--======= PROPERTY SLIDE =========-->
+    <div id="bannerslide" class="owl-carousel owl-theme">
     </div>
-</section>*@
+    </div>
+    </section>*@
 
 <!--======= SERVICES =========-->
 <section class="services">
     <div class="container">
-
+        @*height="337px" width="271px" *@
         <!--======= TITTLE =========-->
         <div class="tittle">
             <img src="~/Asserts/images/head-top.png" alt="">
@@ -94,34 +94,35 @@
         <ul class="row">
 
             <!--======= SERVICE SECTION =========-->
-            <li class="col-sm-3">
+            <li class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <section>
                     <!--======= SERVICE IMG =========-->
-                    <img class="img-responsive" src="~/Asserts/Banner/service-img-1.jpg" height="337px" width="271px" alt="">
+                    <img class="img-responsive" src="~/Asserts/Banner/service-img-1.jpg" alt="">
                     @*<div class="icon"> <img src="~/Asserts/images/icon-services-1.png" alt=""> </div>*@
 
                     <!--======= SERVICE HOVER =========-->
                     <div class="ser-hover">
-                        <p>Are you ready to embark on the journey of a lifetime, securing your own piece of paradise? At USBDPROPERTY, we understand that buying a property is more than a transaction; it's an smart investment and you can call your own.
-                    @* <a href="#." class="read-more">Read more <i class="fa fa-angle-double-right"></i></a>*@
-                            </p>
+                        <p>
+                            Are you ready to embark on the journey of a lifetime, securing your own piece of paradise? At USBDPROPERTY, we understand that buying a property is more than a transaction; it's an smart investment and you can call your own.
+                            @* <a href="#." class="read-more">Read more <i class="fa fa-angle-double-right"></i></a>*@
+                        </p>
                     </div>
                     <a href="#." class="heading">Buy</a>
                 </section>
             </li>
 
             <!--======= SERVICE SECTION =========-->
-            <li class="col-sm-3">
+            <li class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <section>
                     <!--======= SERVICE IMG =========-->
-                    <img class="img-responsive" src="~/Asserts/Banner/service-img-2.jpg" height="337px" width="271px" alt="">
+                    <img class="img-responsive" src="~/Asserts/Banner/service-img-2.jpg" alt="">
                     @*<div class="icon"> <img src="~/Asserts/images/icon-services-2.png" alt=""> </div>*@
 
                     <!--======= SERVICE HOVER =========-->
                     <div class="ser-hover">
                         <p>
                             "Your Property, Your Journey: Sell with USBDPROPERTY"
-Selling your property is more than a transaction; it's a significant milestone in your life. At USBDPROPERTY, we understand the importance of this journey, and we're here to make it seamless, rewarding, and tailored to your needs.
+                            Selling your property is more than a transaction; it's a significant milestone in your life. At USBDPROPERTY, we understand the importance of this journey, and we're here to make it seamless, rewarding, and tailored to your needs.
 
                         </p>
                     </div>
@@ -130,27 +131,29 @@ Selling your property is more than a transaction; it's a significant milestone i
             </li>
 
             <!--======= SERVICE SECTION =========-->
-            <li class="col-sm-3">
+            <li class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <section>
                     <!--======= SERVICE IMG =========-->
-                    <img class="img-responsive" src="~/Asserts/Banner/service-img-3.jpg" height="537px" width="271px" alt="">
+                    <img class="img-responsive" src="~/Asserts/Banner/service-img-3.jpg" alt="">
                     @*<div class="icon"> <img src="~/Asserts/images/icon-services-3.png" alt=""> </div>*@
 
                     <!--======= SERVICE HOVER =========-->
                     <div class="ser-hover">
-                        <p>Seamless Living Starts Here: Rent with USBDPROPERTY"
+                        <p>
+                            Seamless Living Starts Here: Rent with USBDPROPERTY"
 
-Your dream rental is more than just a space; it's a place where your lifestyle unfolds. At [Your Company], we understand the importance of finding the perfect rental property tailored to your needs </p>
+                            Your dream rental is more than just a space; it's a place where your lifestyle unfolds. At [Your Company], we understand the importance of finding the perfect rental property tailored to your needs
+                        </p>
                     </div>
                     <a href="#." class="heading">Rent</a>
                 </section>
             </li>
 
             <!--======= SERVICE SECTION =========-->
-            <li class="col-sm-3">
+            <li class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <section>
                     <!--======= SERVICE IMG =========-->
-                    <img class="img-responsive" src="~/Asserts/Banner/service-img-4.jpg" height="337px" width="271px" alt="">
+                    <img class="img-responsive" src="~/Asserts/Banner/service-img-4.jpg" alt="">
                     @*<div class="icon"> <img src="~/Asserts/images/icon-services-4.png" alt=""> </div>*@
 
                     <!--======= SERVICE HOVER =========-->
@@ -171,14 +174,14 @@ Your dream rental is more than just a space; it's a place where your lifestyle u
         <!--======= TITTLE =========-->
         <div class="tittle">
             <img src="~/Asserts/images/head-top.png" alt="">
-            <h3>new properties list</h3>
+            <h3>Featured Properties</h3>
         </div>
 
         <!--======= PROPERTIES ROW =========-->
-        <ul class="row">
+        @*<ul class="row">*@
             <div class="load_Property">
             </div>
-        </ul>
+        @*</ul>*@
     </div>
 </section>
 
@@ -193,106 +196,106 @@ Your dream rental is more than just a space; it's a place where your lifestyle u
         </div>
         <div class="row">
             @await Component.InvokeAsync("Developer")
-           @*  <div class="col-md-6">
+            @*  <div class="col-md-6">
 
                 <!--======= TEAM ROW =========-->
                 <ul class="row">
 
-                    <!--======= TEAM =========-->
-                    <li class="col-sm-6">
-                        <div class="team">
-                            <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt="">
-                            <div class="team-over">
-                                <!--======= SOCIAL ICON =========-->
-                                <ul class="social_icons animated-6s fadeInUp">
-                                    <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                    <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                    <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <!--======= TEAM DETAILS =========-->
-                            <div class="team-detail">
-                                <h6>David Martin</h6>
-                                <p>Founder</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!--======= TEAM =========-->
-                    <li class="col-sm-6">
-                        <div class="team">
-                            <img class="img-responsive" src="~/Asserts/images/agent-2.jpg" alt="">
-                            <div class="team-over">
-                                <!--======= SOCIAL ICON =========-->
-                                <ul class="social_icons animated-6s fadeInUp">
-                                    <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                    <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                    <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <!--======= TEAM DETAILS =========-->
-                            <div class="team-detail">
-                                <h6>Hendrick jack </h6>
-                                <p>co-Founder</p>
-                            </div>
-                        </div>
-                    </li>
+                <!--======= TEAM =========-->
+                <li class="col-sm-6">
+                <div class="team">
+                <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt="">
+                <div class="team-over">
+                <!--======= SOCIAL ICON =========-->
+                <ul class="social_icons animated-6s fadeInUp">
+                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
+                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
+                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
+                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
                 </ul>
-            </div>
-            <div class="col-md-6">
+                </div>
+
+                <!--======= TEAM DETAILS =========-->
+                <div class="team-detail">
+                <h6>David Martin</h6>
+                <p>Founder</p>
+                </div>
+                </div>
+                </li>
+
+                <!--======= TEAM =========-->
+                <li class="col-sm-6">
+                <div class="team">
+                <img class="img-responsive" src="~/Asserts/images/agent-2.jpg" alt="">
+                <div class="team-over">
+                <!--======= SOCIAL ICON =========-->
+                <ul class="social_icons animated-6s fadeInUp">
+                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
+                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
+                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
+                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+                </div>
+
+                <!--======= TEAM DETAILS =========-->
+                <div class="team-detail">
+                <h6>Hendrick jack </h6>
+                <p>co-Founder</p>
+                </div>
+                </div>
+                </li>
+                </ul>
+                </div>
+                <div class="col-md-6">
 
                 <!--======= TEAM ROW =========-->
                 <ul class="row">
 
-                    <!--======= TEAM =========-->
-                    <li class="col-sm-6">
-                        <div class="team">
-                            <img class="img-responsive" src="~/Asserts/images/agent-3.jpg" alt="">
-                            <div class="team-over">
-                                <!--======= SOCIAL ICON =========-->
-                                <ul class="social_icons animated-6s fadeInUp">
-                                    <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                    <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                    <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <!--======= TEAM DETAILS =========-->
-                            <div class="team-detail">
-                                <h6>charles edward </h6>
-                                <p>team leader </p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!--======= TEAM =========-->
-                    <li class="col-sm-6">
-                        <div class="team">
-                            <img class="img-responsive" src="~/Asserts/images/agent-4.jpg" alt="">
-                            <div class="team-over">
-                                <!--======= SOCIAL ICON =========-->
-                                <ul class="social_icons animated-6s fadeInUp">
-                                    <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                                    <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                                    <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <!--======= TEAM DETAILS =========-->
-                            <div class="team-detail">
-                                <h6>jessica wevins </h6>
-                                <p>team leader</p>
-                            </div>
-                        </div>
-                    </li>
+                <!--======= TEAM =========-->
+                <li class="col-sm-6">
+                <div class="team">
+                <img class="img-responsive" src="~/Asserts/images/agent-3.jpg" alt="">
+                <div class="team-over">
+                <!--======= SOCIAL ICON =========-->
+                <ul class="social_icons animated-6s fadeInUp">
+                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
+                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
+                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
+                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
                 </ul>
-            </div> *@
+                </div>
+
+                <!--======= TEAM DETAILS =========-->
+                <div class="team-detail">
+                <h6>charles edward </h6>
+                <p>team leader </p>
+                </div>
+                </div>
+                </li>
+
+                <!--======= TEAM =========-->
+                <li class="col-sm-6">
+                <div class="team">
+                <img class="img-responsive" src="~/Asserts/images/agent-4.jpg" alt="">
+                <div class="team-over">
+                <!--======= SOCIAL ICON =========-->
+                <ul class="social_icons animated-6s fadeInUp">
+                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
+                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
+                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
+                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+                </div>
+
+                <!--======= TEAM DETAILS =========-->
+                <div class="team-detail">
+                <h6>jessica wevins </h6>
+                <p>team leader</p>
+                </div>
+                </div>
+                </li>
+                </ul>
+                </div> *@
         </div>
     </div>
 </section>
@@ -301,55 +304,55 @@ Your dream rental is more than just a space; it's a place where your lifestyle u
 @*<section id="testimonials">
     <div class="container">
 
-        <!--======= TITTLE =========-->
-        <div class="tittle">
-            <h3>some words from our customer</h3>
-        </div>
-        <div class="testi">
-
-            <!--======= TESTIMONIALS SLIDERS CAROUSEL =========-->
-            <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="~/Asserts/images/comment-icon.png" alt="">
-                        <div class="carousel-inner" role="listbox">
-
-                            <!--======= SLIDER 1 =========-->
-                            <div class="item active">
-                                <p>Can you tell me how to get how to get to Sesame Street. Believe it or not I'm walking on air. I never thought I could feel so free. The movie star the professor and Mary Ann here on Gilligans Isle. Just two good ol' boys</p>
-                                <h5>mitchell warner</h5>
-                                <span>Sydney, Australia</span>
-                            </div>
-
-                            <!--======= SLIDER 2 =========-->
-                            <div class="item">
-                                <p>Can you tell me how to get how to get to Sesame Street. Believe it or not I'm walking on air. I never thought I could feel so free. The movie star the professor and Mary Ann here on Gilligans Isle. Just two good ol' boys</p>
-                                <h5>JHON SMITH</h5>
-                                <span>Sydney, Australia</span>
-                            </div>
-
-                            <!--======= SLIDER 3 =========-->
-                            <div class="item">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                <h5>JHON SMITH</h5>
-                                <span>Sydney, Australia</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--======= SLIDER AVATARS =========-->
-                    <div class="col-md-12">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"> <img src="~/Asserts/images/avatar-1.jpg" alt=""> </li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"> <img src="~/Asserts/images/avatar-2.jpg" alt=""></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"> <img src="~/Asserts/images/avatar-3.jpg" alt=""></li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!--======= TITTLE =========-->
+    <div class="tittle">
+    <h3>some words from our customer</h3>
     </div>
-</section>*@
+    <div class="testi">
+
+    <!--======= TESTIMONIALS SLIDERS CAROUSEL =========-->
+    <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="row">
+    <div class="col-md-12">
+    <img src="~/Asserts/images/comment-icon.png" alt="">
+    <div class="carousel-inner" role="listbox">
+
+    <!--======= SLIDER 1 =========-->
+    <div class="item active">
+    <p>Can you tell me how to get how to get to Sesame Street. Believe it or not I'm walking on air. I never thought I could feel so free. The movie star the professor and Mary Ann here on Gilligans Isle. Just two good ol' boys</p>
+    <h5>mitchell warner</h5>
+    <span>Sydney, Australia</span>
+    </div>
+
+    <!--======= SLIDER 2 =========-->
+    <div class="item">
+    <p>Can you tell me how to get how to get to Sesame Street. Believe it or not I'm walking on air. I never thought I could feel so free. The movie star the professor and Mary Ann here on Gilligans Isle. Just two good ol' boys</p>
+    <h5>JHON SMITH</h5>
+    <span>Sydney, Australia</span>
+    </div>
+
+    <!--======= SLIDER 3 =========-->
+    <div class="item">
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    <h5>JHON SMITH</h5>
+    <span>Sydney, Australia</span>
+    </div>
+    </div>
+    </div>
+
+    <!--======= SLIDER AVATARS =========-->
+    <div class="col-md-12">
+    <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"> <img src="~/Asserts/images/avatar-1.jpg" alt=""> </li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"> <img src="~/Asserts/images/avatar-2.jpg" alt=""></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"> <img src="~/Asserts/images/avatar-3.jpg" alt=""></li>
+    </ol>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>*@
 
 <!--======= CALL US =========-->
 
@@ -372,72 +375,72 @@ Your dream rental is more than just a space; it's a place where your lifestyle u
 
 <!--======= CLIENTS FEEDBACK =========-->
 <section class="blog">
-   @* <div class="container">
+    @* <div class="container">
 
         <!--======= TITTLE =========-->
         <div class="tittle">
-            <h3>recent from our blog</h3>
+        <h3>recent from our blog</h3>
         </div>
         <ul class="row">
 
-            <!--======= BLOG 1 =========-->
-            <li class="col-sm-4">
-                <div class="b-inner">
-                    <img class="img-responsive" src="~/Asserts/images/blog-img-1.jpg" alt="">
-                    <div class="b-details">
-                        <div class="post-admin">
-                            <img src="~/Asserts/images/auther-1.jpg" alt="">
-                            <h6>By Mike</h6>
-                            <span class="pull-right"><i class="fa fa-comment-o"></i> 6 </span> <span class="pull-right"><i class="fa fa-heart-o"></i> 10 &nbsp; &nbsp;| &nbsp;&nbsp;</span>
-                        </div>
-                        <div class="bottom-sec">
-                            <span><i class="fa fa-calendar"></i> mar 23 ,2015</span> <a class="font-montserrat" href="#.">Sweet home for your sweet family</a>
-                            <hr>
-                            <p>We've been waiting for you. Where the kisses are hers and hers and his. </p>
-                        </div>
-                    </div>
-                </div>
-            </li>
+        <!--======= BLOG 1 =========-->
+        <li class="col-sm-4">
+        <div class="b-inner">
+        <img class="img-responsive" src="~/Asserts/images/blog-img-1.jpg" alt="">
+        <div class="b-details">
+        <div class="post-admin">
+        <img src="~/Asserts/images/auther-1.jpg" alt="">
+        <h6>By Mike</h6>
+        <span class="pull-right"><i class="fa fa-comment-o"></i> 6 </span> <span class="pull-right"><i class="fa fa-heart-o"></i> 10 &nbsp; &nbsp;| &nbsp;&nbsp;</span>
+        </div>
+        <div class="bottom-sec">
+        <span><i class="fa fa-calendar"></i> mar 23 ,2015</span> <a class="font-montserrat" href="#.">Sweet home for your sweet family</a>
+        <hr>
+        <p>We've been waiting for you. Where the kisses are hers and hers and his. </p>
+        </div>
+        </div>
+        </div>
+        </li>
 
-            <!--======= BLOG 2 =========-->
-            <li class="col-sm-4">
-                <div class="b-inner">
-                    <img class="img-responsive" src="~/Asserts/images/blog-img-2.jpg" alt="">
-                    <div class="b-details">
-                        <div class="post-admin">
-                            <img src="~/Asserts/images/auther-1.jpg" alt="">
-                            <h6>By Mike</h6>
-                            <span class="pull-right"><i class="fa fa-comment-o"></i> 6 </span> <span class="pull-right"><i class="fa fa-heart-o"></i> 10 &nbsp; &nbsp;| &nbsp;&nbsp;</span>
-                        </div>
-                        <div class="bottom-sec">
-                            <span><i class="fa fa-calendar"></i> mar 23 ,2015</span> <a class="font-montserrat" href="#.">Sweet home for your sweet family</a>
-                            <hr>
-                            <p>We've been waiting for you. Where the kisses are hers and hers and his. </p>
-                        </div>
-                    </div>
-                </div>
-            </li>
+        <!--======= BLOG 2 =========-->
+        <li class="col-sm-4">
+        <div class="b-inner">
+        <img class="img-responsive" src="~/Asserts/images/blog-img-2.jpg" alt="">
+        <div class="b-details">
+        <div class="post-admin">
+        <img src="~/Asserts/images/auther-1.jpg" alt="">
+        <h6>By Mike</h6>
+        <span class="pull-right"><i class="fa fa-comment-o"></i> 6 </span> <span class="pull-right"><i class="fa fa-heart-o"></i> 10 &nbsp; &nbsp;| &nbsp;&nbsp;</span>
+        </div>
+        <div class="bottom-sec">
+        <span><i class="fa fa-calendar"></i> mar 23 ,2015</span> <a class="font-montserrat" href="#.">Sweet home for your sweet family</a>
+        <hr>
+        <p>We've been waiting for you. Where the kisses are hers and hers and his. </p>
+        </div>
+        </div>
+        </div>
+        </li>
 
-            <!--======= BLOG 3 =========-->
-            <li class="col-sm-4">
-                <div class="b-inner">
-                    <img class="img-responsive" src="~/Asserts/images/blog-img-3.jpg" alt="">
-                    <div class="b-details">
-                        <div class="post-admin">
-                            <img src="~/Asserts/images/auther-1.jpg" alt="">
-                            <h6>By Mike</h6>
-                            <span class="pull-right"><i class="fa fa-comment-o"></i> 6 </span> <span class="pull-right"><i class="fa fa-heart-o"></i> 10 &nbsp; &nbsp;| &nbsp;&nbsp;</span>
-                        </div>
-                        <div class="bottom-sec">
-                            <span><i class="fa fa-calendar"></i> mar 23 ,2015</span> <a class="font-montserrat" href="#.">Sweet home for your sweet family</a>
-                            <hr>
-                            <p>We've been waiting for you. Where the kisses are hers and hers and his. </p>
-                        </div>
-                    </div>
-                </div>
-            </li>
+        <!--======= BLOG 3 =========-->
+        <li class="col-sm-4">
+        <div class="b-inner">
+        <img class="img-responsive" src="~/Asserts/images/blog-img-3.jpg" alt="">
+        <div class="b-details">
+        <div class="post-admin">
+        <img src="~/Asserts/images/auther-1.jpg" alt="">
+        <h6>By Mike</h6>
+        <span class="pull-right"><i class="fa fa-comment-o"></i> 6 </span> <span class="pull-right"><i class="fa fa-heart-o"></i> 10 &nbsp; &nbsp;| &nbsp;&nbsp;</span>
+        </div>
+        <div class="bottom-sec">
+        <span><i class="fa fa-calendar"></i> mar 23 ,2015</span> <a class="font-montserrat" href="#.">Sweet home for your sweet family</a>
+        <hr>
+        <p>We've been waiting for you. Where the kisses are hers and hers and his. </p>
+        </div>
+        </div>
+        </div>
+        </li>
         </ul>
-    </div>*@
+        </div>*@
 </section>
 @* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Extra Large Modal
@@ -467,124 +470,124 @@ Your dream rental is more than just a space; it's a place where your lifestyle u
     <!--======= TAGS =========-->
     <span class="tag font-montserrat rent">FOR RENT</span>
     <section>
-        <!--======= IMAGE =========-->
-        <div class="img">
-            <img class="img-responsive" src="~/Asserts/images/img-1.jpg" alt="">
-            <!--======= IMAGE HOVER =========-->
+    <!--======= IMAGE =========-->
+    <div class="img">
+    <img class="img-responsive" src="~/Asserts/images/img-1.jpg" alt="">
+    <!--======= IMAGE HOVER =========-->
 
-            <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
-        </div>
-        <!--======= HOME INNER DETAILS =========-->
-        <ul class="home-in">
-            <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
-            <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
-            <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
-        </ul>
-        <!--======= HOME DETAILS =========-->
-        <div class="detail-sec">
-            <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
-            <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
-            <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
-        </div>
+    <div class="over-proper"> <a href="#." class="btn font-montserrat">more details</a> </div>
+    </div>
+    <!--======= HOME INNER DETAILS =========-->
+    <ul class="home-in">
+    <li><span><i class="fa fa-home"></i> 20,000 Acres</span></li>
+    <li><span><i class="fa fa-bed"></i> 3 Bedrooms</span></li>
+    <li><span><i class="fa fa-tty"></i> 3 Bathrooms</span></li>
+    </ul>
+    <!--======= HOME DETAILS =========-->
+    <div class="detail-sec">
+    <a href="#." class="font-montserrat">sweet home for small family</a> <span class="locate"><i class="fa fa-map-marker"></i> Boston,USA</span>
+    <p>Till the one day when the lady met this fellow and they knew it was much more than </p>
+    <div class="share-p"> <span class="price font-montserrat">$ 256,596</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div>
+    </div>
     </section>
-</li>*@
+    </li>*@
 
 
 
 
 @section Scripts{
 <script>
-$(document).ready(function (){
-    $('.search-type span').on('click',function() {
+    $(document).ready(function (){
+        $('.search-type span').on('click',function() {
 
-        $(this).addClass('active').siblings().removeClass('active');
-    });
-    $("#AreaId").change(function () {
-        loadLocation($(this).val())
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+        $("#AreaId").change(function () {
+            loadLocation($(this).val())
+        })
+
+        getProperty()
+        getBannerProperty()
     })
 
-    getProperty()
-    getBannerProperty()
-})
-
-function loadLocation( aid) {
-   $.get("/PropertyDetails/Getlocation?aid=" +aid, function (data, status) {
-       console.log(data)
-       $("#propertyInfoId").empty();
-       $("#propertyInfoId").append($('<option></option>').val("0").html("Select Location"));
-       $.each(data, function (i, v) {
-           $("#propertyInfoId").append($('<option></option>').val(v.propertyInfoId).html(v.location));
+    function loadLocation( aid) {
+       $.get("/PropertyDetails/Getlocation?aid=" +aid, function (data, status) {
+           console.log(data)
+           $("#propertyInfoId").empty();
+           $("#propertyInfoId").append($('<option></option>').val("0").html("Select Location"));
+           $.each(data, function (i, v) {
+               $("#propertyInfoId").append($('<option></option>').val(v.propertyInfoId).html(v.location));
+           })
        })
-   })
- }
-                function getProperty(){
-                    //alert("helo")
-                    $.ajax({
-                        url: "/PropertyDetails/HomeProperty",
-                        method: "Get",
-                        success: function(res){
-                            console.log(res.data)
-                            var propertylist = "";
-                            $.each(res.data, function(index, value){
-                                console.log(value )
-                                console.log(value.numberOfBedrooms )
-                                propertylist += '<ul class="row">';
-                                propertylist += '<li class="col-sm-6 col-md-4 "><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'" class="btn font-montserrat">more details</a> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">' + value.propertyName + '</a><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.price + '</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + " TROPICAL HOMES LTD" + '</span> <i class="fa fa-star-o"></i> <i class="fa fa-share-alt"></i> </div></div></section></li>'
-                            });
-                            console.log(propertylist);
-                            //console.log(PropertySize);
-                            propertylist += '</ul>';
-                            $(".load_Property").empty();
-                            $(".load_Property").html(propertylist);
-                        }
-                    })
-                }
+     }
+                    function getProperty(){
+                        //alert("helo")
+                        $.ajax({
+                            url: "/PropertyDetails/HomeProperty",
+                            method: "Get",
+                            success: function(res){
+                                console.log(res.data)
+                                var propertylist = "";
+                                $.each(res.data, function(index, value){
+                                    console.log(value )
+                                    console.log(value.numberOfBedrooms )
+                                    propertylist += '<ul class="row">';
+                                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + " More Details" + '</span> </div></div></a></section></li>'
+                                });
+                                console.log(propertylist);
+                                //console.log(PropertySize);
+                                propertylist += '</ul>';
+                                $(".load_Property").empty();
+                                $(".load_Property").html(propertylist);
+                            }
+                        })
+                    }
 
-                 function getBannerProperty(){
-                    //alert("helo")
-                    $.ajax({
-                        url: "/PropertyDetails/BannerProperty",
-                        method: "Get",
-                        success: function(res){
-                            console.log("Banner")
-                            console.log(res.data)
-                            var bannerProperty = "";
-                            $.each(res.data, function(index, value){
-                                console.log(value )
-                                //console.log(value.numberOfBedrooms )
+                     function getBannerProperty(){
+                        //alert("helo")
+                        $.ajax({
+                            url: "/PropertyDetails/BannerProperty",
+                            method: "Get",
+                            success: function(res){
+                                console.log("Banner")
+                                console.log(res.data)
+                                var bannerProperty = "";
+                                $.each(res.data, function(index, value){
+                                    console.log(value )
+                                    //console.log(value.numberOfBedrooms )
 
-                                bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
-                                //<div class="prot-slide">
-                                //bannerProperty += '<div class="row">';
-                                //bannerProperty = '<div class="row">';
-                                //bannerProperty = '<div class="prot-slide"><div class="plots">';
-                                //bannerProperty += '<div class="plots">';
-                                //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
-                            });
-                            console.log(bannerProperty);
-                            //console.log(PropertySize);
-                            //bannerProperty += '</div>';
-                            //bannerProperty = '</div>';
-                            $("#bannerslide").empty();
-                            $("#bannerslide").html(bannerProperty);
-                        }
-                    })
-                }
-                $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:true,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:3
-                },
-                1000:{
-                    items:5
-                }
-            }
-        })
+                                    bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
+                                    //<div class="prot-slide">
+                                    //bannerProperty += '<div class="row">';
+                                    //bannerProperty = '<div class="row">';
+                                    //bannerProperty = '<div class="prot-slide"><div class="plots">';
+                                    //bannerProperty += '<div class="plots">';
+                                    //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
+                                });
+                                console.log(bannerProperty);
+                                //console.log(PropertySize);
+                                //bannerProperty += '</div>';
+                                //bannerProperty = '</div>';
+                                $("#bannerslide").empty();
+                                $("#bannerslide").html(bannerProperty);
+                            }
+                        })
+                    }
+            //        $('.owl-carousel').owlCarousel({
+            //    loop:true,
+            //    margin:10,
+            //    nav:true,
+            //    responsive:{
+            //        0:{
+            //            items:1
+            //        },
+            //        600:{
+            //            items:3
+            //        },
+            //        1000:{
+            //            items:5
+            //        }
+            //    }
+            //})
 </script>
 }
