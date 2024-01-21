@@ -376,12 +376,6 @@ namespace USBDProperty.Controllers
                     return NotFound();
                 }
 
-                //var area = _context.Areas.Where(a => a.AreaId.Equals(propertyDetails.AreaId)).FirstOrDefault();
-                //var cities = _context.Citys.Where(d => d.CityId.Equals(area.CityId));
-                //ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
-                //ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", area.CityId);
-
-
                 var allid = (from a in _context.Areas join c in _context.Citys on a.CityId equals c.CityId 
                             join d in _context.Divisions on c.DivisionId equals d.DivisionID 
                             join cc in _context.Countries on d.CountryId equals cc.CountryID 
@@ -417,8 +411,8 @@ namespace USBDProperty.Controllers
                 var project = _context.ProjectsInfo.Where(p => p.Id.Equals(propertyDetails.ProjectId)).FirstOrDefault();
                 var devloper = _context.DevelopersorAgent.Where(d => d.ID.Equals(project.AgentID));
 
-                ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
-                ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", devloper);
+                ViewData["ProjectsId"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
+                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", devloper);
 
 
                 //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName).Where(p => p.Id.Equals(propertyDetails.ProjectId)), "Id", "ProjectName", propertyDetails.ProjectId);
