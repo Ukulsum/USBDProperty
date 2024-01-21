@@ -10,7 +10,6 @@
         <div class="row">
             <div class="card">
                 <div class="card-body row">
-
                     <div class="load_HomePropertyDetailsById col-md-8">
                     </div>
                     <div class="col-md-4">
@@ -67,15 +66,17 @@
 
     @*</div>*@
 </section>
+<h1>HomePropertyDetails</h1>
 
 
 
 
-@section Scripts{
+@* @section Scripts{
 <script>
     $(document).ready(function (){
+        alert("HELLO")
         //getHomePropertyDetails()
-        getHomePropertyDetailsById()
+        getHomePropertyDetailsById(id)
     })
     function getHomePropertyDetailsById(id){
         //alert("helo")
@@ -86,7 +87,7 @@
         var id = url[url.length-1];
         //console.log(id)
         $.ajax({
-            url: "/PropertyDetails/HomePropertybyID/"+ id,
+                url: "/PropertyDetails/HomePropertybyID/" + id,
             method: "Get",
             success: function(res){
                 console.log(res.data)
@@ -138,4 +139,4 @@
         //})
     }
 </script>
-}
+} *@ 

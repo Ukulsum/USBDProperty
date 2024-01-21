@@ -51,6 +51,11 @@ namespace USBDProperty.Controllers
                           View(await _context.DevelopersorAgent.Where(d=>d.IsActive).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
         }
+        public async Task<IActionResult> Developer(bool? isActive=true)
+        {
+
+            return View();
+        }
         [AllowAnonymous]
         public  JsonResult  GetDeveloper( )
         {
