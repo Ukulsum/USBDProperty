@@ -139,6 +139,29 @@ section {
 	-ms-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
 }
+.btn_more {
+	background: #006838;
+	text-transform: uppercase;
+	color: #fff !important;
+	border-radius: 0px;
+	display: inline-block;
+	padding: 6px 12px;
+	border-radius: 2px;
+	margin: 0 auto;
+	margin-top: 15px;
+	font-size: 12px !important;
+	font-weight: bold;
+	font-family: 'Montserrat', sans-serif;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+.btn_more:hover {
+	background: #ED1C24;
+	color: #fff;
+}
 .btn:hover {
 	/*background: #ff5722;*/
 	background: #ED1C24;
@@ -399,7 +422,8 @@ header .ownmenu ul.dropdown li a {
 }
 header .ownmenu ul.dropdown li a:hover {
 	background: none;
-	color: #4caf50;
+	/*color: #4caf50;*/
+	color: #006838;
 }
 header .ownmenu ul.dropdown li:nth-last-child(1) a {
 }
@@ -1160,6 +1184,7 @@ ul.dropdown li:hover {
 			PROPERTY
 ========================================================*/
 .properties {
+	/*padding: 50px 0;*/
 	padding: 50px 0;
 	background: url(../images/property-bg.jpg) repeat;
 }
@@ -1192,7 +1217,7 @@ ul.dropdown li:hover {
 
 .properties li .tagg {
 	padding: 0 !important;
-	right: 342px !important;
+	right: 400px !important;
 }
 .properties li .tag.rent {
 	background: url(../images/for-rent.png) no-repeat;
@@ -1223,9 +1248,10 @@ ul.dropdown li:hover {
 	height: 37px;
 }
 .properties .home_in {
-	background: #f2f2f2;
+	background: #fff;
+	padding: 44px;
 	display: inline-block;
-	width: 28%;
+	width: 37%;
 	height: 100%;
 }
 .properties .home-in li {
@@ -1880,7 +1906,9 @@ ul.dropdown li:hover {
 .call-us .btn {
 	display: inline-block;
 	width: 100%;
-	border-bottom: 2px solid #1b7d1f;
+	/*border-bottom: 2px solid #1b7d1f;*/
+	/*border-bottom: 2px solid #ED1C24;*/
+	border-bottom: 2px solid #006838;
 }
 /*=======================================================
 			CALL US

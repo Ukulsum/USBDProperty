@@ -1,4 +1,7 @@
-﻿@{
+﻿@model USBDProperty.ViewModels.ClientVM
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -179,8 +182,8 @@
 
         <!--======= PROPERTIES ROW =========-->
         @*<ul class="row">*@
-            <div class="load_Property">
-            </div>
+        <div class="load_Property">
+        </div>
         @*</ul>*@
     </div>
 </section>
@@ -191,12 +194,12 @@
         <!--======= TITTLE =========-->
         <div class="tittle">
             <img src="~/Asserts/images/head-top.png" alt="">
-            <h3>our great agents</h3>
+            <h3>our great Property Owners</h3>
             <p>Searching for the best builder or developer companies in Bangladesh? You have certainly arrived at the right destination. bdHousing.com is working in hand to hand with the following top real estate companies in Bangladesh. We believe the BDHOUSING member list will facilitate in a way that you will be amazed at the collection of properties like apartment or flat, commercial space, industrial space, office space, shop. Most importantly, you will get to know some of the current and most valuable apartment and land projects in Bangladesh run by those.</p>
         </div>
         <div class="row">
             @await Component.InvokeAsync("Developer")
-            @*  <div class="col-md-6">
+            @*<div class="col-md-6">
 
                 <!--======= TEAM ROW =========-->
                 <ul class="row">
@@ -367,11 +370,76 @@
                 <li class="col-sm-4">
                     <h1>01712-532107</h1>
                 </li>
-                <li class="col-sm-2 no-padding"> <a href="#." class="btn">just contact us</a> </li>
+                <li class="col-sm-2 no-padding">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
+                    @*<a href="#." class="btn">just contact us</a> *@
+                </li>
             </ul>
         </div>
     </div>
 </section>
+
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+    </button>*@
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+             <form asp-action="Create" asp-controller="ClientContacts" method="post">
+            <div class="modal-body">
+               
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <ul>
+                        <li class="mb-2">
+                            <p class="text-center">Send Message to Property Owner</p>
+                            <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
+                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
+                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
+                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </li>
+                        <li>
+                            @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+                        </li>
+                    </ul>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+            </form>
+        </div>
+         
+    </div>
+</div>
+
 
 <!--======= CLIENTS FEEDBACK =========-->
 <section class="blog">
@@ -532,7 +600,7 @@
                                     console.log(value )
                                     console.log(value.numberOfBedrooms )
                                     propertylist += '<ul class="row">';
-                                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + " More Details" + '</span> </div></div></a></section></li>'
+                                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                                 });
                                 console.log(propertylist);
                                 //console.log(PropertySize);

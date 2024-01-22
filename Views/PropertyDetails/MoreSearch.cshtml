@@ -5,123 +5,125 @@
     ViewData["Title"] = "MoreSearch";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- <div class="datatable"></div>
-<div class="row ">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-4">
-                <section class="properties">
-                    <div class="container">
-                        <div class="home_in">
-                            <form asp-action="MoreSearch" asp-controller="PropertyDetails" >
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Search Keyword</label>
-                                        <input type="text" class="form-control"  name="SearchText" placeholder="Search Text"/>
-                                    </div>
-                                    <div class="col-md-12">
-                                        @*<label>Property Purposes</label>*@
-                                        <input type="radio" asp-items="PropertyFor" name="Buy" value=1 />
-                                        <label for="">Buy</label>
+<div class="datatable"></div>
+<section class="properties">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <section class="properties">
+                        <div class="container">
+                            <div class="home_in">
+                                <form asp-action="MoreSearch" asp-controller="PropertyDetails">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Search Keyword</label>
+                                            <input type="text" class="form-control" name="SearchText" placeholder="Search Text" />
+                                        </div>
+                                        <div class="col-md-12">
+                                            @*<label>Property Purposes</label>*@
+                                            <input type="radio" asp-items="PropertyFor" name="Buy" value=1 />
+                                            <label for="">Buy</label>
 
-                                        <input type="radio" asp-items="PropertyFor" name="Sale" value="2" />
-                                        <label for="">Sale</label>
+                                            <input type="radio" asp-items="PropertyFor" name="Sale" value="2" />
+                                            <label for="">Sale</label>
 
-                                        <input type="radio" asp-items="PropertyFor" name="Rent" value="3" />
-                                        <label for="">Rent</label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Property Catrgory</label>
-                                        <select class="form-control" name="PropertyTypeId" id="PropertyTypeId">
-                                            <option>All Property Type</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>size (sqft)</label>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" asp-items="PropertySize" name="minsize" placeholder="Min" />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" asp-items="PropertySize" placeholder="Max" name="maxsize" />
+                                            <input type="radio" asp-items="PropertyFor" name="Rent" value="3" />
+                                            <label for="">Rent</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Property Catrgory</label>
+                                            <select class="form-control" name="PropertyTypeId" id="PropertyTypeId">
+                                                <option>All Property Type</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>size (sqft)</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="number" asp-items="PropertySize" name="minsize" placeholder="Min" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="number" asp-items="PropertySize" placeholder="Max" name="maxsize" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Min No. of Bed</label>
-                                        <input class="form-control" type="number" asp-items="NumberOfBedrooms" name="NumberOfBedrooms" placeholder="Number of Bedroom" value="" />
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Price</label>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" asp-items="Price" placeholder="Min" name="minprice" />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" asp-items="Price " placeholder="Max" name="maxprice" />
-                                            </div>
+                                        <div class="col-md-12">
+                                            <label>Min No. of Bed</label>
+                                            <input class="form-control" type="number" asp-items="NumberOfBedrooms" name="NumberOfBedrooms" placeholder="Number of Bedroom" value="" />
                                         </div>
+                                        <div class="col-md-12">
+                                            <label>Price</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="number" asp-items="Price" placeholder="Min" name="minprice" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="number" asp-items="Price " placeholder="Max" name="maxprice" />
+                                                </div>
+                                            </div>
 
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Property Purposes</label>
+                                            <select class="form-control" asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
+                                                <option>Property Construction</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Search</button>
+                                        <button type="reset" class="btn btn-danger">Clear</button>
                                     </div>
-                                    <div class="col-md-12">
-                                        <label>Property Purposes</label>
-                                        <select class="form-control" asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
-                                            <option>Property Construction</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Search</button>
-                                    <button type="reset" class="btn btn-danger">Clear</button>
-                                </div>
 
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-md-8">
-                <section class="properties">
+                    </section>
+                </div>
+                <div class="col-md-8">
+                    @* <section class="properties">*@
                     @*<div class="container">*@
-                        @*@("~/image/"+item.ImageName)*@
+                    @*@("~/image/"+item.ImageName)*@
                     <ul class="row">
-                        @foreach(var pinfo in Model)
+                        @foreach (var pinfo in Model)
                         {
                             <li class="col-md-12">
-                            <span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>
-                            <section class="row flex-row">
-                                <div class="col-md-6">
-                                    <div class="img">
-                                        <a href="/PropertyDetails/HomePropertyDetails/@pinfo.PropertyInfoId"><img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt=""></a>
+                                <span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>
+                                <section class="row flex-row">
+                                    <div class="col-md-6">
+                                        <div class="img">
+                                            <a href="/PropertyDetails/HomePropertyDetails/@pinfo.PropertyInfoId"><img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt=""></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                      <div class="details-sec">
-                                          @*@Html.Raw(pinfo.PropertySize + " " + @pinfo.MeasurementUnit.ShortName) *@
-                                        <p class="font-montserrat">@(pinfo.PropertySize + " " + pinfo.MeasurementUnit.ShortName + ", " + pinfo.NumberOfBedrooms + " Beds " + pinfo.ConstructionStatus + " " + pinfo.PropertyType.PropertyTypeName + " for " + pinfo.PropertyFor + " at " + pinfo.Location)</p> 
-                                       <p class="ptype">@pinfo.PropertyType.PropertyTypeName </p>
-                                        <span class="locate m-0"><i class="fa fa-map-marker"></i> @(pinfo.Location + " " + pinfo.Area.AreaName)</span>
+                                    <div class="col-md-6">
+                                        <div class="details-sec">
+                                            @*@Html.Raw(pinfo.PropertySize + " " + @pinfo.MeasurementUnit.ShortName) *@
+                                            <p class="font-montserrat">@(pinfo.PropertySize + " " + pinfo.MeasurementUnit.ShortName + ", " + pinfo.NumberOfBedrooms + " Beds " + pinfo.ConstructionStatus + " " + pinfo.PropertyType.PropertyTypeName + " for " + pinfo.PropertyFor + " at " + pinfo.Location)</p>
+                                            <p class="ptype">@pinfo.PropertyType.PropertyTypeName </p>
+                                            <span class="locate m-0"><i class="fa fa-map-marker"></i> @(pinfo.Location + " " + pinfo.Area.AreaName)</span>
 
-                                        <ul>
-                                        <li><span><i class="fa fa-home"></i> @(pinfo.PropertySize + " " + @pinfo.MeasurementUnit.ShortName)</span></li>
-                                        <li><span><i class="fa fa-bed"></i> @(pinfo.NumberOfBedrooms + " Beds")</span></li>
-                                        <li><span><i class="fa fa-tty"></i> @(pinfo.NumberOfBaths + " Baths")</span></li>
-                                    </ul>
+                                            <ul>
+                                                <li><span><i class="fa fa-home"></i> @(pinfo.PropertySize + " " + @pinfo.MeasurementUnit.ShortName)</span></li>
+                                                <li><span><i class="fa fa-bed"></i> @(pinfo.NumberOfBedrooms + " Beds")</span></li>
+                                                <li><span><i class="fa fa-tty"></i> @(pinfo.NumberOfBaths + " Baths")</span></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            </section>
-                        </li>
+                                    </section>
+                            </li>
                         }
                     </ul>
-                </section>
+                @*</section>*@
             </div>
         </div>
     </div>
 </div>
+</section>
 
 
- <script src="~/lib/jquery/dist/jquery.min.js"></script>  
- <script src="~/AdminAsserts/vendor/simple-datatables/simple-datatables.js"></script>
- <script src="~/AdminAsserts/vendor/tinymce/tinymce.min.js"></script>
- <script src="~/AdminAsserts/Js/main.js" asp-append-version="true"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/AdminAsserts/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="~/AdminAsserts/vendor/tinymce/tinymce.min.js"></script>
+<script src="~/AdminAsserts/Js/main.js" asp-append-version="true"></script>
 
 @section scripts{
 <script>

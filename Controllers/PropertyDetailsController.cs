@@ -28,14 +28,41 @@ namespace USBDProperty.Controllers
             return Json(record);
         }
 
+        //public IActionResult GetPropertyByParent(int id)
+        //{
+        //    var data = _context.PropertyDetails.Where(p => p.PropertyTypeId.Equals(id));
+        //    return View(data);
+        //}
+
+        [HttpGet]
         public IActionResult GetPropertyByParent(int id)
         {
-            var data = _context.PropertyDetails.Where(p => p.PropertyTypeId.Equals(id));
-            return View(data);
+            try
+            {
+                var data = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
+                                               .Include(p => p.Area)
+                                               .Include(p => p.ProjectsInfo)
+                                               .Include(p => p.PropertyType)
+                                               .Include(p => p.MeasurementUnit)
+                                               .Where(p => p.PropertyTypeId.Equals(id));
+                return View(data);
+                //if (pforid != null || pforid > 0)
+                //{
+                //    //data = data.Where(p => p.PropertyFor.Equals(pforid)).ToList();
+                //    data = data.Where(p => p.PropertyFor.Equals(pforid)).ToList();
+                //}
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View();
+            }
         }
+
+
+
         [HttpGet]
-        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, 
-             int? minprice, int? maxprice, string location = "")
+        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, string location = "")
         {
             try
             {
@@ -109,6 +136,27 @@ namespace USBDProperty.Controllers
             return Json("Result");
         }
 
+
+        public JsonResult HomeFooterProperty()
+        {
+            try
+            {
+                var propertyDbContext = _context.PropertyDetails
+                                        .Include(p => p.Area)
+                                        .Include(p => p.ProjectsInfo)
+                                        .Include(p => p.PropertyType)
+                                        .OrderByDescending(p => p.PropertyInfoId)
+                                        .Take(3)
+                                        .ToList();
+
+                return Json(new {data = propertyDbContext});
+            }
+            catch(Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+            
+        }
        
         public JsonResult HomeProperty()
         {
