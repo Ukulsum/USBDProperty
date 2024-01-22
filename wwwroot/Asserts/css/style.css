@@ -122,7 +122,8 @@ section {
 			BUTTON
 ========================================================*/
 .btn {
-	background: #4caf50;
+	/*background: #4caf50;*/
+	background: #006838;
 	text-transform: uppercase;
 	color: #fff;
 	border-radius: 0px;
@@ -139,7 +140,8 @@ section {
 	transition: all 0.4s ease-in-out;
 }
 .btn:hover {
-	background: #ff5722;
+	/*background: #ff5722;*/
+	background: #ED1C24;
 	color: #fff;
 }
 /*=======================================================
@@ -371,10 +373,12 @@ header nav li.active {
 	background: url(../images/nav-head.png) center 0px no-repeat;
 }
 header nav li.active a {
-	color: #ff5722;
+	/*color: #ff5722;*/
+	color: #ED1C24;
 }
 header nav li:hover a {
-	color: #ff5722;
+	/*color: #ff5722;*/
+	color: #ED1C24;
 }
 header nav li:hover {
 	background: url(../images/nav-head.png) center 0px no-repeat;
@@ -576,7 +580,7 @@ ul.dropdown li:hover {
 	border-radius: 10px;
 	position: absolute;
 	top: -50px;
-	left: 30%;
+	left: 32%;
 	justify-content: space-evenly;
 	padding: 25px 112px;
 	width: auto;
