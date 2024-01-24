@@ -8,5 +8,10 @@ namespace USBDProperty.Controllers
         {
             return View("Dashboard");
         }
+
+        public IActionResult AgentIndex()
+        {
+            return View();
+        }
     }
 }
