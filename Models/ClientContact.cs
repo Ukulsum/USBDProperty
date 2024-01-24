@@ -26,8 +26,8 @@ namespace USBDProperty.Models
         //public int PropertyTypeId { get; set; }
         public DateTime ContactDate { get; set; } =  DateTime.Now.Date;
         //[Required]
-        //[MaxLength]
-        //public string Message { get; set; }
+        [MaxLength]
+        public string? Message { get; set; }
 
 
         //public PropertyFor PropertyFor { get; set; }

@@ -17,9 +17,9 @@ namespace USBDProperty.Models
         public int PropertyForId { get; set; }
         [ForeignKey("PropertyType")]
         public int PropertyTypeId { get; set; }
-        [Required]
+        //[Required]
         [MaxLength]
-        public string Message { get; set; }
+        public string? Message { get; set; }
         public virtual PropertyType PropertyType { get; set; }
         public virtual PropertyFor PropertyFor { get; set; }
         public virtual ClientContact Client { get; set; }
