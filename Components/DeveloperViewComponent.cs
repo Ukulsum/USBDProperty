@@ -14,7 +14,7 @@ namespace USBDProperty.Components
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var data = _context.DevelopersorAgent.OrderBy(d=>d.CompanyName).ToList();
+            var data = _context.DevelopersorAgent.OrderBy(d=>d.CompanyName).Where(c=>c.IsActive && c.Membership.Equals(Membership.Platinum)).ToList();
             return View(data);
         }
     }

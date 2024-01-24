@@ -6,6 +6,10 @@ using USBDProperty.DTO;
 
 namespace USBDProperty.Models
 {
+   public  enum Membership
+    {
+        Platinum=1,Gold,Silver
+    }
     public class DevelopersorAgent : BaseDTO
     {
         [Key]
@@ -16,6 +20,7 @@ namespace USBDProperty.Models
         [Required]
         [ValidateNever]
         public string Banner { get; set; }
+        public Membership Membership { get; set; }
         [Required]
         [StringLength(100)] 
         [DisplayName("Company Name")]

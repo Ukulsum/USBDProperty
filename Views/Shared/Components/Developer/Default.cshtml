@@ -1,4 +1,9 @@
 ﻿@model IEnumerable<USBDProperty.Models.DevelopersorAgent>
+<div class="tittle">
+    <img src="~/Asserts/images/head-top.png" alt="">
+    <h3>our great Property Owners</h3>
+    <p>Searching for the best builder or developer companies in Bangladesh? You have certainly arrived at the right destination. bdHousing.com is working in hand to hand with the following top real estate companies in Bangladesh. We believe the BDHOUSING member list will facilitate in a way that you will be amazed at the collection of properties like apartment or flat, commercial space, industrial space, office space, shop. Most importantly, you will get to know some of the current and most valuable apartment and land projects in Bangladesh run by those.</p>
+</div>
 <div class="col-md-12">
 
     <!--======= TEAM ROW =========-->
@@ -6,8 +11,9 @@
                 @foreach(var item in Model )
                 {
                     
-            <a href="/DevelopersorAgents/agent/@item.ID">
+            
             <li class="col-sm-4">
+                <a href="/DevelopersorAgents/agent/@item.ID">
                 <div class="team">
                     @*  <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt=""> *@
                     @if (item.Banner != null)
@@ -19,7 +25,7 @@
                     {
                         <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt="">
                     }
-                    <div class="team-over">
+                  @*   <div class="team-over">
                         <!--======= SOCIAL ICON =========-->
                         <ul class="social_icons animated-6s fadeInUp">
                             <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
@@ -27,16 +33,17 @@
                             <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
                             <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
                         </ul>
-                    </div>
+                    </div> *@
 
                     <!--======= TEAM DETAILS =========-->
                     <div class="team-detail">
                         <h6>@item.CompanyName</h6>
                       
                     </div>
-                </div>
+                    </div>
+                </a>
             </li>
-            </a>
+         
                 }
 
         </ul></div>
