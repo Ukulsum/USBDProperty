@@ -65,35 +65,139 @@ namespace USBDProperty.Controllers
              ClientVM clientContact)
         {
             int Id = 0;
-             if (ModelState.IsValid)
-                             {
-                var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, ContactDate = DateTime.Now };
-                  _context.ClientContacts.Add(client);
-                await _context.SaveChangesAsync();
-
-                _context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
-
-                 Id = clientContact.PropertyID;
-                //_context.Add(clientContact);
-                var r= await _context.SaveChangesAsync();
-                if (r> 0)
+            int r = 0;
+            if (ModelState.IsValid)
+            {
+                if(clientContact.PropertyID > 0)
                 {
-                     
+                    var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now };
+                    _context.ClientContacts.Add(client);
+                    await _context.SaveChangesAsync();
 
-                    _notyf.Success("As soon as possible we will contact with u");
-                    // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
-                  
-                    return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id  });
+                    _context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
+
+                    Id = clientContact.PropertyID;
+
+                    r = await _context.SaveChangesAsync();
+                    if (r > 0)
+                    {
+
+
+                        _notyf.Success("As soon as possible we will contact with u");
+                        // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
+
+                        return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
+                    }
                 }
+
+                else
+                {
+                    var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now };
+                    _context.ClientContacts.Add(client);
+                    r = await _context.SaveChangesAsync();
+
+                    if (r > 0)
+                    {
+
+
+                        _notyf.Success("As soon as possible we will contact with u");
+                        // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+
+
+                //var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, ContactDate = DateTime.Now };
+                //_context.ClientContacts.Add(client);
+                //await _context.SaveChangesAsync();
+
+                //if (clientContact.PropertyID > 0)
+                //{
+                //_context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
+
+                //Id = clientContact.PropertyID;
+                //}
+                //else
+                //{
+                //    _context.ClientContacts.Add(client);
+                //    await _context.SaveChangesAsync();
+                //}
+
+                //_context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
+
+                //Id = clientContact.PropertyID;
+
+
+                //_context.Add(clientContact);
+                //r = await _context.SaveChangesAsync();
+                //if (r > 0)
+                //{
+
+
+                //    _notyf.Success("As soon as possible we will contact with u");
+                //    // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
+
+                //    return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
+                //}
 
                 //  return RedirectToAction(nameof(Index));
             }
             //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", 
             //    clientContact.PropertyTypeId);
-            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName"      );
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
             // return View(clientContact);
             return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
         }
+
+
+        //public async Task<IActionResult> Create(
+        //     ClientVM clientContact)
+        //{
+        //    int Id = 0;
+        //     if (ModelState.IsValid)
+        //                     {
+        //        var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now };
+        //        _context.ClientContacts.Add(client);
+        //        await _context.SaveChangesAsync();
+
+        //        //if (clientContact.PropertyID > 0)
+        //        //{
+        //        _context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
+
+        //            Id = clientContact.PropertyID;
+        //        //}
+        //        //else
+        //        //{
+        //        //    _context.ClientContacts.Add(client);
+        //        //    await _context.SaveChangesAsync();
+        //        //}
+
+        //        //_context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
+
+        //        //Id = clientContact.PropertyID;
+
+
+        //        //_context.Add(clientContact);
+        //        var r= await _context.SaveChangesAsync();
+        //        if (r> 0)
+        //        {
+
+
+        //            _notyf.Success("As soon as possible we will contact with u");
+        //            // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
+
+        //            return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id  });
+        //        }
+
+        //        //  return RedirectToAction(nameof(Index));
+        //    }
+        //    //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", 
+        //    //    clientContact.PropertyTypeId);
+        //    ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName"      );
+        //    // return View(clientContact);
+        //    return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
+        //}
 
         // GET: ClientContacts/Edit/5
         public async Task<IActionResult> Edit(int? id)

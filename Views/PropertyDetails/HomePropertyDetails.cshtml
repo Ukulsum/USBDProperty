@@ -36,7 +36,7 @@
                                             <span asp-validation-for="Email" class="text-danger"></span>
                                         </li>
                                         <li>
-                                            <input type="number" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                                            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
                                             <span asp-validation-for="ContactNo" class="text-danger"></span>
                                         </li>
                                         <li>
@@ -92,6 +92,9 @@ $(document).ready(function (){
                     console.log(res.data)
                     var propertylist = "";
                     $.each(res.data, function (index, value) {
+                        $("#forid").val(value.propertyFor)
+                        $("#typeID").val(value.propertyTypeId)
+                        $("#prid").val(value.propertyInfoId)
                         console.log("Propertyimage")
                         console.log(value.path)
                         console.log(value.numberOfBedrooms)
