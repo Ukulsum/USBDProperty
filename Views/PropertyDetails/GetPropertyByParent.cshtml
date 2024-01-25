@@ -86,9 +86,10 @@
                         @foreach (var pinfo in Model)
                         {
                             <li class="col-md-12">
-                                <span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>
+                                @*<span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>*@
                                 <section class="row flex-row">
                                     <div class="col-md-6">
+                                        <span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>
                                         <div class="img">
                                             <a href="/PropertyDetails/HomePropertyDetails/@pinfo.PropertyInfoId"><img class="img-responsive" src="@Url.Content(@pinfo.Path)" alt=""></a>
                                         </div>

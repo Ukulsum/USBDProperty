@@ -1185,7 +1185,7 @@ ul.dropdown li:hover {
 ========================================================*/
 .properties {
 	/*padding: 50px 0;*/
-	padding: 50px 0;
+	padding: 0;
 	background: url(../images/property-bg.jpg) repeat;
 }
 .properties.white-bg {
@@ -1196,6 +1196,7 @@ ul.dropdown li:hover {
 }
 .properties li .tag {
 	position: absolute;
+	/*right: 4px;*/
 	right: 4px;
 	z-index: 99;
 	font-size: 11px;
@@ -1217,7 +1218,7 @@ ul.dropdown li:hover {
 
 .properties li .tagg {
 	padding: 0 !important;
-	right: 400px !important;
+	/*right: 373px !important;*/
 }
 .properties li .tag.rent {
 	background: url(../images/for-rent.png) no-repeat;
