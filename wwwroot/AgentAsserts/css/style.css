@@ -110,7 +110,8 @@ h6 {
   background: #fff;
   transition: all 0.5s;
   z-index: 997;
-  padding: 20px 0;
+  /*padding: 20px 0;*/
+  padding: 0 0;
 }
 
 #header.header-scrolled {
@@ -182,12 +183,14 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #ed502e;
+  /*color: #ed502e;*/
+  color: #ed1c24;
 }
 
 .navbar .getstarted,
 .navbar .getstarted:focus {
-  background: #ed502e;
+  /*background: #ed502e;*/
+  background: #ed1c24;
   padding: 8px 20px;
   margin-left: 30px;
   border-radius: 4px;
@@ -1537,7 +1540,8 @@ section {
 
 .contact .info-box i {
   font-size: 32px;
-  color: #ed502e;
+  /*color: #ed502e;*/
+  color: #ed1c24;
   border-radius: 50%;
   padding: 8px;
   border: 2px dotted #fbdad2;
@@ -1567,6 +1571,7 @@ section {
   display: none;
   color: #fff;
   background: #ed3c0d;
+  /*background: #ED1C24;*/
   text-align: left;
   padding: 15px;
   font-weight: 600;
@@ -1626,7 +1631,8 @@ section {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #ed502e;
+  /*background: #ed502e;*/
+  background: #ed1c24;
   border: 0;
   padding: 10px 30px;
   border-radius: 4px;

@@ -193,14 +193,14 @@
 <section id="team">
     <div class="container">
         <!--======= TITTLE =========-->
-       @*  <div class="tittle">
+        @*  <div class="tittle">
             <img src="~/Asserts/images/head-top.png" alt="">
             <h3>our great Property Owners</h3>
             <p>Searching for the best builder or developer companies in Bangladesh? You have certainly arrived at the right destination. bdHousing.com is working in hand to hand with the following top real estate companies in Bangladesh. We believe the BDHOUSING member list will facilitate in a way that you will be amazed at the collection of properties like apartment or flat, commercial space, industrial space, office space, shop. Most importantly, you will get to know some of the current and most valuable apartment and land projects in Bangladesh run by those.</p>
-        </div> *@
+            </div> *@
         <div class="row">
             @*<a href="/AgentHome/AgentIndex/ID/">*@
-                @await Component.InvokeAsync("Developer")
+            @await Component.InvokeAsync("Developer")
             @*</a>*@
 
             @*<div class="col-md-6">
@@ -396,9 +396,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-             <form asp-action="Create" asp-controller="ClientContacts" method="post">
-            <div class="modal-body">
-               
+            <form asp-action="Create" asp-controller="ClientContacts" method="post">
+                <div class="modal-body">
+
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <ul>
                         <li class="mb-2">
@@ -425,16 +425,16 @@
                             @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
                         </li>
                     </ul>
-               
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />
-                @*<button type="button" class="btn btn-primary">Save changes</button>*@
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
             </form>
         </div>
-         
+
     </div>
 </div>
 
@@ -563,97 +563,97 @@
 
 @section Scripts{
 <script>
-    $(document).ready(function (){
-        $('.search-type span').on('click',function() {
+        $(document).ready(function (){
+            $('.search-type span').on('click',function() {
 
-            $(this).addClass('active').siblings().removeClass('active');
-        });
-        $("#AreaId").change(function () {
-            loadLocation($(this).val())
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+            $("#AreaId").change(function () {
+                loadLocation($(this).val())
+            })
+
+            getProperty()
+            getBannerProperty()
         })
 
-        getProperty()
-        getBannerProperty()
-    })
-
-    function loadLocation( aid) {
-       $.get("/PropertyDetails/Getlocation?aid=" +aid, function (data, status) {
-           console.log(data)
-           $("#propertyInfoId").empty();
-           $("#propertyInfoId").append($('<option></option>').val("0").html("Select Location"));
-           $.each(data, function (i, v) {
-               $("#propertyInfoId").append($('<option></option>').val(v.propertyInfoId).html(v.location));
+        function loadLocation( aid) {
+           $.get("/PropertyDetails/Getlocation?aid=" +aid, function (data, status) {
+               console.log(data)
+               $("#propertyInfoId").empty();
+               $("#propertyInfoId").append($('<option></option>').val("0").html("Select Location"));
+               $.each(data, function (i, v) {
+                   $("#propertyInfoId").append($('<option></option>').val(v.propertyInfoId).html(v.location));
+               })
            })
-       })
-     }
-                    function getProperty(){
-                        //alert("helo")
-                        $.ajax({
-                            url: "/PropertyDetails/HomeProperty",
-                            method: "Get",
-                            success: function(res){
-                                console.log(res.data)
-                                var propertylist = "";
-                                $.each(res.data, function(index, value){
-                                    console.log(value )
-                                    console.log(value.numberOfBedrooms )
-                                    propertylist += '<ul class="row">';
-                                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
-                                });
-                                console.log(propertylist);
-                                //console.log(PropertySize);
-                                propertylist += '</ul>';
-                                $(".load_Property").empty();
-                                $(".load_Property").html(propertylist);
-                            }
-                        })
-                    }
+         }
+    function getProperty(){
+        //alert("helo")
+        $.ajax({
+            url: "/PropertyDetails/HomeProperty",
+            method: "Get",
+            success: function(res){
+                console.log(res.data)
+                var propertylist = "";
+                $.each(res.data, function(index, value){
+                    console.log(value )
+                    console.log(value.numberOfBedrooms )
+                    propertylist += '<ul class="row">';
+                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                });
+                console.log(propertylist);
+                //console.log(PropertySize);
+                propertylist += '</ul>';
+                $(".load_Property").empty();
+                $(".load_Property").html(propertylist);
+            }
+        })
+    }
 
-                     function getBannerProperty(){
-                        //alert("helo")
-                        $.ajax({
-                            url: "/PropertyDetails/BannerProperty",
-                            method: "Get",
-                            success: function(res){
-                                console.log("Banner")
-                                console.log(res.data)
-                                var bannerProperty = "";
-                                $.each(res.data, function(index, value){
-                                    console.log(value )
-                                    //console.log(value.numberOfBedrooms )
+     function getBannerProperty(){
+        //alert("helo")
+        $.ajax({
+            url: "/PropertyDetails/BannerProperty",
+            method: "Get",
+            success: function(res){
+                console.log("Banner")
+                console.log(res.data)
+                var bannerProperty = "";
+                $.each(res.data, function(index, value){
+                    console.log(value )
+                    //console.log(value.numberOfBedrooms )
 
-                                    bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
-                                    //<div class="prot-slide">
-                                    //bannerProperty += '<div class="row">';
-                                    //bannerProperty = '<div class="row">';
-                                    //bannerProperty = '<div class="prot-slide"><div class="plots">';
-                                    //bannerProperty += '<div class="plots">';
-                                    //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
-                                });
-                                console.log(bannerProperty);
-                                //console.log(PropertySize);
-                                //bannerProperty += '</div>';
-                                //bannerProperty = '</div>';
-                                $("#bannerslide").empty();
-                                $("#bannerslide").html(bannerProperty);
-                            }
-                        })
-                    }
-            //        $('.owl-carousel').owlCarousel({
-            //    loop:true,
-            //    margin:10,
-            //    nav:true,
-            //    responsive:{
-            //        0:{
-            //            items:1
-            //        },
-            //        600:{
-            //            items:3
-            //        },
-            //        1000:{
-            //            items:5
-            //        }
-            //    }
-            //})
+                    bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
+                    //<div class="prot-slide">
+                    //bannerProperty += '<div class="row">';
+                    //bannerProperty = '<div class="row">';
+                    //bannerProperty = '<div class="prot-slide"><div class="plots">';
+                    //bannerProperty += '<div class="plots">';
+                    //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
+                });
+                console.log(bannerProperty);
+                //console.log(PropertySize);
+                //bannerProperty += '</div>';
+                //bannerProperty = '</div>';
+                $("#bannerslide").empty();
+                $("#bannerslide").html(bannerProperty);
+            }
+        })
+    }
+                //        $('.owl-carousel').owlCarousel({
+                //    loop:true,
+                //    margin:10,
+                //    nav:true,
+                //    responsive:{
+                //        0:{
+                //            items:1
+                //        },
+                //        600:{
+                //            items:3
+                //        },
+                //        1000:{
+                //            items:5
+                //        }
+                //    }
+                //})
 </script>
 }
