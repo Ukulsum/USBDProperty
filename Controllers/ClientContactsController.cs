@@ -65,22 +65,23 @@ namespace USBDProperty.Controllers
              ClientVM clientContact)
         {
             int Id = 0;
+            int r = 0;
              if (ModelState.IsValid)
                              {
                 var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, ContactDate = DateTime.Now };
                   _context.ClientContacts.Add(client);
-                await _context.SaveChangesAsync();
+           r=    await _context.SaveChangesAsync();
 
                 _context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
 
                  Id = clientContact.PropertyID;
                 //_context.Add(clientContact);
-                var r= await _context.SaveChangesAsync();
+                 r= await _context.SaveChangesAsync();
                 if (r> 0)
                 {
                      
 
-                    _notyf.Success("As soon as possible we will contact with u");
+                    _notyf.Success("Thanks for your information.As soon as possible we will contact with u");
                     // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
                   
                     return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id  });
