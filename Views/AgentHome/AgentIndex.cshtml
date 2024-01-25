@@ -1,4 +1,4 @@
-﻿
+﻿@model  IEnumerable<USBDProperty.Models.DevelopersorAgent>
 @{
     Layout = null;
 }
@@ -8,14 +8,43 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Multi Bootstrap Template - Index</title>
+    @foreach (var dev in Model)
+    {
+        <title>USBD Property's - @dev.CompanyName </title>
+    }
+    @*<title></title>*@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="~/AgentAsserts/img/favicon.png" rel="icon">
-  <link href="~/AgentAsserts/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/favicon_io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon_io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon_io//apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon_io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon_io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon_io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon_io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon_io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon_io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+
+
+@*  <link href="~/AgentAsserts/img/favicon.png" rel="icon">
+  <link href="~/AgentAsserts/img/apple-touch-icon.png" rel="apple-touch-icon">*@
+
+
+  <link href="~/Asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/main.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/responsive.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -33,13 +62,6 @@
   <!-- Template Main CSS File -->
   <link href="~/AgentAsserts/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Multi
-  * Updated: Jan 09 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/multi-responsive-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -48,7 +70,13 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">Multi</a></h1>
+      @*<h1 class="logo"><a href="index.html">Multi</a></h1>*@
+            @foreach(var item in Model)
+            {
+                @*<h1 class="logo"><a href="index.html">@Url.Content(@item.Logo)</a></h1>*@
+                <h1 class="logo"><a href="index.html"><img src="@Url.Content(@item.Logo)" ></a></h1>
+            }
+            
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -56,28 +84,10 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
+          <li><a class="nav-link scrollto" href="#about">Projects</a></li>
+
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="getstarted scrollto" href="/Home/Index">Back Home</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -91,7 +101,12 @@
 
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-      <div class="carousel-inner" role="listbox">
+            @foreach(var item in Model)
+            {
+                <img src="@Url.Content(@item.Banner)" />
+            }
+
+      @*<div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
         <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
@@ -134,7 +149,7 @@
 
       <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-      </a>
+      </a>*@
 
     </div>
   </section><!-- End Hero -->
@@ -223,7 +238,7 @@
     </section><!-- End Counts Section -->
 
     <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us section-bg">
+    @*<section id="why-us" class="why-us section-bg">
       <div class="container-fluid" data-aos="fade-up">
 
         <div class="row">
@@ -278,7 +293,8 @@
         </div>
 
       </div>
-    </section><!-- End Why Us Section -->
+    </section>*@
+    <!-- End Why Us Section -->
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
@@ -344,7 +360,7 @@
     </section><!-- End Services Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials section-bg">
+    @*<section id="testimonials" class="testimonials section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -435,10 +451,11 @@
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section>*@
+    <!-- End Testimonials Section -->
 
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
+@*    <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
 
         <div class="text-center">
@@ -448,10 +465,11 @@
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section>*@
+    <!-- End Cta Section -->
 
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+   @* <section id="portfolio" class="portfolio">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -565,10 +583,11 @@
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section>*@
+    <!-- End Portfolio Section -->
 
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+    @*<section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -653,10 +672,11 @@
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section>*@
+    <!-- End Team Section -->
 
     <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    @*<section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -714,10 +734,11 @@
         </div>
 
       </div>
-    </section><!-- End Pricing Section -->
+    </section>*@
+    <!-- End Pricing Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq">
+   @* <section id="faq" class="faq">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -786,7 +807,9 @@
         </div><!-- End F.A.Q Item-->
 
       </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section>*@
+    
+    <!-- End Frequently Asked Questions Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact section-bg">
@@ -806,21 +829,21 @@
                 <div class="info-box">
                   <i class="bx bx-map"></i>
                   <h3>Our Address</h3>
-                  <p>A108 Adam Street, New York, NY 535022</p>
+                  <p>39 Headline Rd, Deer Park, NY 11729</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@example.com<br>contact@example.com</p>
+                  <p>ashraf@usbdproperty.com</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-phone-call"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                  <p>+88 0188660077</p>
                 </div>
               </div>
             </div>
@@ -860,79 +883,117 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
+  <footer>
+            <div class="container">
 
-          <div class="col-lg-4 col-md-6">
-            <div class="footer-info">
-              <h3>Multi</h3>
-              <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam excepturi quod.</em></p>
-              <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
+                <!--======= NEWSLETTER =========-->
+                @*<div class="subcribe">
+                    <div class="col-sm-5 no-padding">
+                    <h4>Subscribe to our newsletter</h4>
+                    </div>
+                    <div class="col-sm-7 no-padding">
+                    <form>
+                    <input class="font-montserrat" type="email" placeholder="E-mail Address" value="" required>
+                    <button type="submit" class="btn"> Subscribe</button>
+                    </form>
+                    </div>
+                    </div>*@
+                <ul class="row">
+
+                    <!--======= HAPPY CLIENTS =========-->
+                    <li class="col-sm-6 col-md-3">
+                        <h5>About us</h5>
+                        <hr>
+                        <p>
+                            Partner with USBD-PROPERTY for a global real estate journey. Whether you're a US resident or an investor from Bangladesh, our joint venture offers a comprehensive solution for navigating and thriving in the dynamic US real estate market.
+                        </p>
+
+                        <!--======= SOCIAL ICONS =========-->
+
+                        <ul class="social_icons">
+                            <li class="facebook"> <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf"><i class="fa fa-facebook"></i> </a></li>
+                            @*<li class="twitter"> <a href="#."><i class="fa fa-twitter"></i> </a></li>
+                            <li class="linkedin"> <a href="#."><i class="fa fa-linkedin"></i> </a></li>
+                            <li class="tumblr"> <a href="#."><i class="fa fa-tumblr"></i> </a></li>*@
+                        </ul>
+                    </li>
+
+                    <!--======= HAPPY CLIENTS =========-->
+                    <li class="col-sm-6 col-md-3">
+                        <!--======= LINKS =========-->
+                        <h5>latest from Facebook</h5>
+                        <hr>
+                        <ul class="tweet">
+                            <li>
+                                <p>
+                                    US-BDProperty is one of the excellent realestate market place
+                                    <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf">Facebook page</a> one of the excellent realestate market place
+                                    on facebook.
+                                </p>
+                                @*  <span>1 hours ago</span> *@
+                            </li>
+                            <li>
+                                <p>Join our    <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf">Facebook Group</a> to touch with us. </p>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="col-sm-6 col-md-3">
+                        <h5>recent properties</h5>
+                        <hr>
+                        @*<ul class="recent-come">*@
+                            <div class="load_FooterProperty">
+
+                            </div>
+                            @*<li>
+                                <div class="img-post"> <img src="~/Asserts/images/recent-img.jpg" alt=""> </div>
+                                <div class="img-post"> <img src="~/Asserts//Banner/Dharittree banner-1.jpg" alt="" height="59px" width="59px"> </div>
+                                <div class="text-post"> <a href="#.">On your mark get set and go now</a> <span>$956,205</span> </div>
+                                </li>
+                                <li>
+                                <div class="img-post"> <img src="~/Asserts/images/recent-img-1.jpg" alt=""> </div>
+                                <div class="img-post"> <img src="~/Asserts//Banner/Dharittree banner-1.jpg" alt="" height="59px" width="59px"></div>
+                                <div class="text-post"> <a href="#.">On your mark get set and go now</a> <span>$956,205</span> </div>
+                                </li>
+                                <li>
+                                <div class="img-post"> <img src="~/Asserts/images/recent-img-2.jpg" alt=""> </div>
+                                <div class="img-post"> <img src="~/Asserts//Banner/Dharittree banner-1.jpg" alt="" height="59px" width="59px"></div>
+                                <div class="text-post"> <a href="#.">On your mark get set and go now</a> <span>$956,205</span> </div>
+                                </li>*@
+                        @*</ul>*@
+                    </li>
+
+                    <!--======= HAPPY CLIENTS =========-->
+                    <li class="col-sm-6 col-md-3">
+                        <!--======= LINKS =========-->
+                        <h5>Contact</h5>
+                        <hr>
+                        <div class="loc-info">
+                            <p>
+                                <address>
+                                    <i class="fa fa-map-marker"></i>
+
+                                    567,East-Kazipara,Mirpur,Dhaka-1216
+
+                                </address>
+                            </p>
+                            <p><i class="fa fa-phone"></i> +88 01712532107</p>
+                            <p><i class="fa fa-print"></i> +880 1881-660077 (WhatsApp)</p>
+                            <p><i class="fa fa-envelope-o"></i>	ashraf@usbdproperty.com</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
-          </div>
+        </footer>
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
-          </div>
-
+        <div class="rights">
+            <div class="container">
+                <p class="font-montserrat">
+                    ©Copyright US-BDProperty All Rights Reserved 2023- @DateTime.Now.Year| Design &amp; Developed by <a href="https://www.powersoftit.com/" target="_blank"><strong><span>PowersoftIT</span></strong></a>
+                </p>
+            </div>
         </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Multi</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/multi-responsive-bootstrap-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+  <!-- End Footer -->
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
