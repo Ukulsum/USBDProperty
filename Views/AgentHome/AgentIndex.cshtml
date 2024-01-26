@@ -1,10 +1,6 @@
-﻿@*@model  IEnumerable<USBDProperty.Models.DevelopersorAgent>*@
+﻿@model  USBDProperty.Models.DevelopersorAgent
 @*@model USBDProperty.ViewModels.ClientVM*@
-@model USBDProperty.ViewModels.DeveloperPropertyVm
-
-
-
-
+@* @model USBDProperty.ViewModels.DeveloperPropertyVm *@
 
 
 @{
@@ -16,10 +12,10 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    @foreach (var dev in Model.developersorAgents)
-    {
-        <title>USBD Property's - @dev.CompanyName </title>
-    }
+    @* @foreach (var dev in Model)
+    { *@
+        <title>USBD Property's - @Model.CompanyName </title>
+    @* } *@
     @*<title></title>*@
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -78,12 +74,10 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      @*<h1 class="logo"><a href="index.html">Multi</a></h1>*@
-            @foreach(var item in Model.developersorAgents)
-            {
+      
                 @*<h1 class="logo"><a href="index.html">@Url.Content(@item.Logo)</a></h1>*@
-                <h1 class="logo"><a href="index.html"><img src="@Url.Content(@item.Logo)" ></a></h1>
-            }
+                <h1 class="logo"><a href="index.html"><img src="@Url.Content(@Model.Logo)" ></a></h1>
+           
             
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -109,10 +103,9 @@
 
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-            @foreach(var item in Model.developersorAgents)
-            {
-                <img src="@Url.Content(@item.Banner)" />
-            }
+         
+                <img src="@Url.Content(Model.Banner)" />
+          
 
       @*<div class="carousel-inner" role="listbox">
 
@@ -258,10 +251,10 @@
         </div>
 
         <!--======= PROPERTIES ROW =========-->
-        <ul class="row">
+        @* <ul class="row"> *@
         <div class="load_Property">
         </div>
-        </ul>
+        @* </ul> *@
     @*</div>*@
 </section>
     <!-- End Property Section -->
@@ -730,13 +723,13 @@
                 $.each(res.data, function(index, value){
                     console.log(value )
                     console.log(value.numberOfBedrooms )
-                    //propertylist += '<ul class="row">';
+                    propertylist += '<ul class="row">';
                     propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
                 console.log(propertylist);
                 console.log("Hello");
                 //console.log(PropertySize);
-                //propertylist += '</ul>';
+                propertylist += '</ul>';
                 $(".load_Property").empty();
                 $(".load_Property").html(propertylist);
             }

@@ -19,7 +19,7 @@ namespace USBDProperty.Controllers
 
         public IActionResult AgentIndex(int id)
         {
-            var data = _context.DevelopersorAgent.Where(p => p.ID == id).ToList();
+            var data = _context.DevelopersorAgent.Where(p => p.ID == id).FirstOrDefault();
             
             return View(data);
         }
