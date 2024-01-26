@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using USBDProperty.Models;
+using USBDProperty.ViewModels;
 
 namespace USBDProperty.Controllers
 {
@@ -8,7 +9,7 @@ namespace USBDProperty.Controllers
         private readonly ApplicationDbContext _context;
 
         public AgentHomeController(ApplicationDbContext context)
-        {
+        { 
             _context = context;
         }
         public IActionResult Index()
@@ -19,7 +20,7 @@ namespace USBDProperty.Controllers
         public IActionResult AgentIndex(int id)
         {
             var data = _context.DevelopersorAgent.Where(p => p.ID == id).ToList();
-
+            
             return View(data);
         }
     }

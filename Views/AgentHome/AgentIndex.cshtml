@@ -1,5 +1,10 @@
-﻿@model  IEnumerable<USBDProperty.Models.DevelopersorAgent>
+﻿@*@model  IEnumerable<USBDProperty.Models.DevelopersorAgent>*@
 @*@model USBDProperty.ViewModels.ClientVM*@
+@model USBDProperty.ViewModels.DeveloperPropertyVm
+
+
+
+
 
 
 @{
@@ -11,7 +16,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    @foreach (var dev in Model)
+    @foreach (var dev in Model.developersorAgents)
     {
         <title>USBD Property's - @dev.CompanyName </title>
     }
@@ -74,7 +79,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       @*<h1 class="logo"><a href="index.html">Multi</a></h1>*@
-            @foreach(var item in Model)
+            @foreach(var item in Model.developersorAgents)
             {
                 @*<h1 class="logo"><a href="index.html">@Url.Content(@item.Logo)</a></h1>*@
                 <h1 class="logo"><a href="index.html"><img src="@Url.Content(@item.Logo)" ></a></h1>
@@ -104,7 +109,7 @@
 
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-            @foreach(var item in Model)
+            @foreach(var item in Model.developersorAgents)
             {
                 <img src="@Url.Content(@item.Banner)" />
             }
@@ -244,7 +249,7 @@
     
     <!-- ======= PropertySection Section ======= -->
     <section class="properties">
-    <div class="container">
+    @*<div class="container">*@
 
         <!--======= TITTLE =========-->
         <div class="tittle">
@@ -257,7 +262,7 @@
         <div class="load_Property">
         </div>
         </ul>
-    </div>
+    @*</div>*@
 </section>
     <!-- End Property Section -->
 
@@ -726,7 +731,7 @@
                     console.log(value )
                     console.log(value.numberOfBedrooms )
                     //propertylist += '<ul class="row">';
-                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
                 console.log(propertylist);
                 console.log("Hello");
