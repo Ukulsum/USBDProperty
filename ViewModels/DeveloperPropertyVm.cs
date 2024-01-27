@@ -23,6 +23,7 @@ namespace USBDProperty.ViewModels
         public string Address { get; set; }
         public int AreaID { get; set; }
         public int PropertyID { get; set; }
+        //public int ProjectsID { get; set; }
         public int PropertyForId { get; set; }
         public int PropertyTypeId { get; set; }
         public int ClientContactId { get; set; }
@@ -33,6 +34,7 @@ namespace USBDProperty.ViewModels
         public List<DevelopersorAgent> developersorAgents { get; set; }
         public List<PropertyDetails> propertyDetails { get; set; }
         public List<PropertyType> propertyTypes { get; set; }
+        //public List<ProjectsInfo> projectsInfos { get; set; }
 
        
     }
