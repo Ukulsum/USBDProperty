@@ -771,12 +771,12 @@
 
         function PostClientData(){
             alert("Hello Client");
-            var obj = {
-                ClientName = $("#clientName").val(),
-                Email = $("#email").val(),
-                ContactNo = $("#contactNo").val(),
-                Message = $("#message").val(),
-            }
+            //var obj = {
+            //    ClientName = $("#clientName").val(),
+            //    Email = $("#email").val(),
+            //    ContactNo = $("#contactNo").val(),
+            //    Message = $("#message").val(),
+            //}
             console.log(obj);
             $.ajax({
                 url: "/ClientContacts/Save",
@@ -790,7 +790,7 @@
                      $("#clientName").val(''),
                      $("#email").val(''),
                      $("#contactNo").val(''),
-                     $("#message").val('')
+                     $("#message").val(''),
 
                      $("#btnSave").val('Save')
                     
