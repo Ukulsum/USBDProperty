@@ -18,7 +18,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
                 .AddEntityFrameworkStores<ApplicationDbContext>()   ;
 builder.Services.AddControllersWithViews();
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 15; config.IsDismissable = true; config.Position = NotyfPosition.TopCenter; });
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
