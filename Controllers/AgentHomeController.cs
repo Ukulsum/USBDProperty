@@ -17,6 +17,10 @@ namespace USBDProperty.Controllers
         {
             return View("Dashboard");
         }
+        //public IActionResult About(DeveloperPropertyVm developerPropertyVm)
+        //{
+        //    return View();
+        //}
 
         public IActionResult AgentIndex(int id)
         {
@@ -42,5 +46,10 @@ namespace USBDProperty.Controllers
                 return Json(new { data = "No record" });
             }
         }
+
+        //public JsonResult Save(DeveloperPropertyVm developerPropertyVm)
+        //{
+        //    return Json()
+        //}
     }
 }

@@ -150,6 +150,28 @@ namespace USBDProperty.Controllers
             return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
         }
 
+        public JsonResult Save(ClientVM client)
+        {
+            int r = 0;
+            var clientData = new ClientContact { ClientName = client.ClientName, ContactNo = client.ContactNo, Email = client.Email, Message = client.Message, ContactDate = DateTime.Now };
+            _context.ClientContacts.Add(clientData);
+            r = _context.SaveChanges();
+
+            if (r > 0)
+            {
+
+
+                _notyf.Success("As soon as possible we will contact with u");
+                // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
+
+                //return RedirectToAction("Index", "Home");
+                return Json(new { Data = clientData });
+            }
+            return Json(new { clientData = "AgentHome/AgentIndex" });
+            
+        }
+
+
 
         //public async Task<IActionResult> Create(
         //     ClientVM clientContact)

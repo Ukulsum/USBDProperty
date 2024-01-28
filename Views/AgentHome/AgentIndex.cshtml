@@ -1,6 +1,6 @@
 ﻿@model USBDProperty.Models.DevelopersorAgent
 @*@model USBDProperty.ViewModels.ClientVM*@
-@* @model USBDProperty.ViewModels.DeveloperPropertyVm *@
+ @*@model USBDProperty.ViewModels.DeveloperPropertyVm *@
 
 
 @{
@@ -12,11 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    @* @foreach (var dev in Model)
-        { *@
     <title>USBD Property's - @Model.CompanyName </title>
-    @* } *@
-    @*<title></title>*@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -166,25 +162,26 @@
                 </div>
 
                 <div class="row content">
-                    <div class="col-lg-6">
+                    <p>@Model.AboutUs </p>
+                    @* <div class="col-lg-6">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
                         </p>
                         <ul>
-                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                            <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                        <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                        <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+                        <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
                         </ul>
-                    </div>
-                    <div class="col-lg-6 pt-4 pt-lg-0">
+                        </div>
+                        <div class="col-lg-6 pt-4 pt-lg-0">
                         <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.
+                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
                         </p>
                         <a href="#" class="btn-learn-more">Learn More</a>
-                    </div>
+                        </div>*@
                 </div>
 
             </div>
@@ -247,7 +244,6 @@
 
                 <div class="row">
                     <div class='load_projects'>
-
                     </div>
                     @*<div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box">
@@ -511,30 +507,97 @@
 
                     </div>
 
+
                     <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                                </div>
-                                <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                                </div>
-                            </div>
-                            <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                            </div>
-                            <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                            </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
-                            <div class="text-center"><button type="submit">Send Message</button></div>
+                        @*<form asp-action="Create" asp-controller="ClientContacts" method="post">
+
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <ul>
+                                    <li class="mb-2">
+                                        <p class="text-center">Send Message to Property Owner</p>
+                                        <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
+                                        <span asp-validation-for="ClientName" class="text-danger"></span>
+                                        
+                                    </li>
+                                    <li class="mb-2">
+                                        <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+                                         <span asp-validation-for="Email" class="text-danger"></span>
+                                       
+                                    </li>
+                                    <li class="mb-2">
+                                        <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                                        
+                                    </li>
+                                    <li class="mb-2">
+                                        <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                                        <span asp-validation-for="Message" class="text-danger"></span>
+               
+                                        
+                                    </li>
+
+                                </ul>
+
+                                
+                                <input type="submit" value="Send Message" class="btn btn-primary center mb-2"/>
+
+
+                        </form>*@
+
+                          <form >
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <ul>
+                                    <li class="mb-2">
+                                        <p class="text-center">Send Message to Property Owner</p>
+                                        <input type="text" class="form-control" placeholder="Enter Your Name" id="clientName"/>
+                                        
+                                    </li>
+                                    <li class="mb-2">
+                                        <input type="email" class="form-control" placeholder="Enter Your E-mail" id="email" />
+                                       
+                                    </li>
+                                    <li class="mb-2">
+                                        <input type="text" class="form-control" placeholder="Enter Your Phone" id="contactNo"/>
+                                        
+                                    </li>
+                                    <li class="mb-2">
+                                        <textarea type="text" class="form-control" placeholder="Please Type Your Message" id="message"></textarea>
+                                        
+                                    </li>
+
+                                </ul>
+
+                                <input type="submit" value="Send Message" class="btn btn-primary center mb-2" id="btnSave"/>
                         </form>
+
                     </div>
+
+                    @* <div class="col-lg-6">
+                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <div class="row">
+                        <div class="col-md-6 form-group">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        </div>
+                        <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group mt-3">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                        </div>
+                        <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                        </div>
+                        <div class="text-center"><button type="submit">Send Message</button></div>
+                        </form>
+                        </div>*@
 
                 </div>
 
@@ -675,12 +738,67 @@
 
     <script>
         $(document).ready(function (){
+            $("#btnsave").click(function () {
+                postclientdata();
+            });
 
             getFooterProperty()
             getProperty()
             GetHomeProjects()
-
         })
+
+        //function PostClientData(){
+        //    alert("Hello");
+        //    var obj = {
+        //        //Name = $("#clientName").val(),
+        //        Email = $("#email").val(),
+        //        ContactNo = $("#contactNo").val(),
+        //        Message = $("#message").val(),
+        //    }
+        //    console.log(obj);
+        //    $.ajax({
+        //        url: "/ClientContacts/Create",
+        //        method: "Post",
+        //        data: JSON.stringify(obj),
+        //        contentType: "application/json",
+        //        success: function(res){
+        //            console.log(res);
+
+        //        }
+        //    })
+        //}
+
+
+        function PostClientData(){
+            alert("Hello Client");
+            var obj = {
+                ClientName = $("#clientName").val(),
+                Email = $("#email").val(),
+                ContactNo = $("#contactNo").val(),
+                Message = $("#message").val(),
+            }
+            console.log(obj);
+            $.ajax({
+                url: "/ClientContacts/Save",
+                method: "Post",
+                //data: JSON.stringify(data),
+                data: JSON.stringify(data),
+                dataType: "JSON",
+                contentType: "application/json",
+                success: function(res){
+                    console.log(res);
+                     $("#clientName").val(''),
+                     $("#email").val(''),
+                     $("#contactNo").val(''),
+                     $("#message").val('')
+
+                     $("#btnSave").val('Save')
+                    
+
+                }
+            })
+        }
+
 
         function getFooterProperty(){
               //alert("helo")

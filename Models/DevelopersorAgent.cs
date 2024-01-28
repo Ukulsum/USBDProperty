@@ -15,6 +15,8 @@ namespace USBDProperty.Models
         [Key]
         [DisplayName("ID")]
         public int ID { get; set; }
+        [DisplayName("About Us")]
+        public string AboutUs { get; set; }
         [ValidateNever]
         public string Logo { get; set; }
         [Required]
