@@ -777,15 +777,17 @@
         function PostClientData(){
             alert("Hello Client");
             var client = {
+                ClientContactId:0,
                 ClientName: $("#clientName").val(),
                 Email: $("#email").val(),
                 ContactNo: $("#contactNo").val(),
                 Message: $("#message").val(),
+                ContactDate: Date
             }
             console.log(client);
             $.ajax({
                 url: "/ClientContacts/Save",
-                method: "Post",
+                type: "POST",
                 //data: JSON.stringify(data),
                 data: JSON.stringify(client),
                 dataType: "JSON",

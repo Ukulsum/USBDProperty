@@ -150,9 +150,10 @@ namespace USBDProperty.Controllers
             return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
         }
 
-        public JsonResult Save(ClientContact client)
+        public JsonResult Save([FromBody] ClientContact client)
         {
             int r = 0;
+
            if(client != null ||   client.ClientName!=null ) { 
             var clientData = new ClientContact { ClientName = client.ClientName, ContactNo = client.ContactNo, Email = client.Email, Message = client.Message, ContactDate = DateTime.Now };
             _context.ClientContacts.Add(clientData);
