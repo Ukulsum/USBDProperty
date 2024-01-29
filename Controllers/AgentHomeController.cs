@@ -37,7 +37,7 @@ namespace USBDProperty.Controllers
                                                         .OrderByDescending(p => p.Id)
                                                         .Include(p => p.Developers)
                                                         .Include(p => p.Area)
-                                                        .FirstOrDefault();                            
+                                                        .ToList();                            
 
                 return Json(new { data = projectsData });
             }
