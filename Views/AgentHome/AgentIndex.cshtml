@@ -1,6 +1,6 @@
 ﻿@model USBDProperty.Models.DevelopersorAgent
 @*@model USBDProperty.ViewModels.ClientVM*@
- @*@model USBDProperty.ViewModels.DeveloperPropertyVm *@
+@*@model USBDProperty.ViewModels.DeveloperPropertyVm *@
 
 
 @{
@@ -38,7 +38,7 @@
         <link href="~/AgentAsserts/img/apple-touch-icon.png" rel="apple-touch-icon">*@
 
 
-    <link href="~/Asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    @*<link href="~/Asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css">*@
     <link href="~/Asserts/css/main.css" rel="stylesheet" type="text/css">
     <link href="~/Asserts/css/style.css" rel="stylesheet" type="text/css">
     <link href="~/Asserts/css/animate.css" rel="stylesheet" type="text/css">
@@ -163,76 +163,10 @@
 
                 <div class="row content">
                     <p>@Model.AboutUs </p>
-                    @* <div class="col-lg-6">
-                        <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                        </p>
-                        <ul>
-                        <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                        <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                        <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                        </ul>
-                        </div>
-                        <div class="col-lg-6 pt-4 pt-lg-0">
-                        <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <a href="#" class="btn-learn-more">Learn More</a>
-                        </div>*@
                 </div>
 
             </div>
         </section><!-- End About Section -->
-        <!-- ======= Counts Section ======= -->
-        @*<section id="counts" class="counts">
-            <div class="container" data-aos="fade-up">
-
-            <div class="row no-gutters">
-
-            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-            <i class="bi bi-emoji-smile"></i>
-            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Happy Clients</strong> consequuntur quae qui deca rode</p>
-            <a href="#">Find out more &raquo;</a>
-            </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-            <i class="bi bi-journal-richtext"></i>
-            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Projects</strong> adipisci atque cum quia aut numquam delectus</p>
-            <a href="#">Find out more &raquo;</a>
-            </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-            <i class="bi bi-headset"></i>
-            <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Hours Of Support</strong> aut commodi quaerat. Aliquam ratione</p>
-            <a href="#">Find out more &raquo;</a>
-            </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-            <i class="bi bi-people"></i>
-            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-            <p><strong>Hard Workers</strong> rerum asperiores dolor molestiae doloribu</p>
-            <a href="#">Find out more &raquo;</a>
-            </div>
-            </div>
-
-            </div>
-
-            </div>
-            </section>*@
-        <!-- End Counts Section -->
         <!-- ======= Services Section ======= -->
         <section id="services" class="services">
             <div class="container" data-aos="fade-up">
@@ -243,59 +177,11 @@
                 </div>
 
                 <div class="row">
+
+                    @*<div type="button" data-bs-toggle="modal" data-bs-target="#exampleModalXl" id="btnModal">*@
                     <div id="load_projects">
-                        
                     </div>
-                   @*  <div class='load_projects1'>
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">Dharitree Garden city</a></h4><p>null</p></div></div>
-                    </div> *@
-                    @*<div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4><a href="">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="icon-box">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="icon-box">
-                        <div class="icon"><i class="bx bx-slideshow"></i></div>
-                        <h4><a href="">Dele cardo</a></h4>
-                        <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="icon-box">
-                        <div class="icon"><i class="bx bx-arch"></i></div>
-                        <h4><a href="">Divera don</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                        </div>
-                        </div>*@
+                    @*</div>*@
 
                 </div>
 
@@ -320,158 +206,105 @@
             @*</div>*@
         </section>
         <!-- End Property Section -->
-        <!-- ======= Why Us Section ======= -->
-        @*<section id="why-us" class="why-us section-bg">
-            <div class="container-fluid" data-aos="fade-up">
 
-            <div class="row">
 
-            <div class="col-lg-5 align-items-stretch video-box" style='background-image: url("assets/img/why-us.jpg");' data-aos="zoom-in" data-aos-delay="100">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button>
+
+
+        @*<section class="properties">*@
+        @*<div class="container">*@
+        <div class="modal fade " id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: block;" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <section class="properties">
+                        @*<div class="container">*@
+
+                        <!--======= TITTLE =========-->
+                        <div class="tittle">
+                            <img src="~/Asserts/images/head-top.png" alt="">
+                            <h3>Featured Properties</h3>
+                            @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+                        </div>
+
+                        <!--======= PROPERTIES ROW =========-->
+                        @* <ul class="row"> *@
+                        <div class="load_properties">
+                        </div>
+                        @* </ul> *@
+                        @*</div>*@
+                    </section>
+                    @*<div class="modal-header">
+                        <div class="tittle">
+                        <img src="~/Asserts/images/head-top.png" alt="">
+                        <h3>Featured Properties</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        </div>*@
+                    @*<div class="modal-body">
+
+                        </div>*@
+                </div>
             </div>
+        </div>
+        @*</div>*@
+        @*</section>*@
 
-            <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch">
 
-            <div class="content">
-            <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto</strong></h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-            </p>
+
+
+        @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
             </div>
+            <form>
+            <div class="modal-body">
 
-            <div class="accordion-list">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <ul>
-            <li>
-            <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-            <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-            <p>
-            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-            </p>
-            </div>
-            </li>
+            <li class="mb-2">
+            <p class="text-center">Send Message to Property Owner</p>
+            <input type="text" class="form-control" placeholder="Enter Your Name" />
 
-            <li>
-            <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-            <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-            <p>
-            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-            </p>
-            </div>
-            </li>
 
-            <li>
-            <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-            <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-            <p>
-            Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-            </p>
-            </div>
             </li>
+            <li class="mb-2">
+            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+            </li>
+            <li class="mb-2">
+            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+            <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </li>
+            <li class="mb-2">
+            <textarea type="text" class="form-control" placeholder="Please Type Your Message"></textarea>
 
+            </li>
+            <li>
+
+            </li>
             </ul>
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />
+
+            </div>
+            </form>
             </div>
 
             </div>
+            </div>*@
 
-            </div>
 
-            </div>
-            </section>*@
-        <!-- End Why Us Section -->
-        <!-- ======= Testimonials Section ======= -->
-        @*<section id="testimonials" class="testimonials section-bg">
-            <div class="container" data-aos="fade-up">
-
-            <div class="section-title">
-            <h2>Testimonials</h2>
-            <p>Testimonials</p>
-            </div>
-
-            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-            <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-            <div class="testimonial-wrap">
-            <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-            <h3>Saul Goodman</h3>
-            <h4>Ceo &amp; Founder</h4>
-            <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            </div>
-            </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-            <div class="testimonial-wrap">
-            <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-            <h3>Sara Wilsson</h3>
-            <h4>Designer</h4>
-            <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            </div>
-            </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-            <div class="testimonial-wrap">
-            <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-            <h3>Jena Karlis</h3>
-            <h4>Store Owner</h4>
-            <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            </div>
-            </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-            <div class="testimonial-wrap">
-            <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-            <h3>Matt Brandon</h3>
-            <h4>Freelancer</h4>
-            <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            </div>
-            </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-            <div class="testimonial-wrap">
-            <div class="testimonial-item">
-            <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-            <h3>John Larson</h3>
-            <h4>Entrepreneur</h4>
-            <p>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            </div>
-            </div>
-            </div><!-- End testimonial item -->
-
-            </div>
-            <div class="swiper-pagination"></div>
-            </div>
-
-            </div>
-            </section>*@
-        <!-- End Testimonials Section -->
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact section-bg">
             <div class="container" data-aos="fade-up">
@@ -512,97 +345,48 @@
                     </div>
 
 
+
+
+
+
+
+
                     <div class="col-lg-6">
-                        @*<form asp-action="Create" asp-controller="ClientContacts" method="post">
-
-
+                        <form class="php-email-form">
+                            <p class="text-center">Send Message to Property Owner</p>
+                            <div class="row">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <ul>
-                                    <li class="mb-2">
-                                        <p class="text-center">Send Message to Property Owner</p>
-                                        <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
-                                        <span asp-validation-for="ClientName" class="text-danger"></span>
-                                        
-                                    </li>
-                                    <li class="mb-2">
-                                        <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
-                                         <span asp-validation-for="Email" class="text-danger"></span>
-                                       
-                                    </li>
-                                    <li class="mb-2">
-                                        <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
-                                        <span asp-validation-for="ContactNo" class="text-danger"></span>
-                                        
-                                    </li>
-                                    <li class="mb-2">
-                                        <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
-                                        <span asp-validation-for="Message" class="text-danger"></span>
-               
-                                        
-                                    </li>
+                                <div class="col-md-6 form-group">
 
-                                </ul>
+                                    <input type="text" class="form-control" placeholder="Enter Your Name" id="clientName" />
+                                    @*<input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>*@
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <input type="email" class="form-control" placeholder="Enter Your E-mail" id="email" />
+                                    @*<input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>*@
+                                </div>
+                                <div class="form-group mt-3">
+                                    <input type="text" class="form-control" placeholder="Enter Your Phone" id="contactNo" />
+                                    @*<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>*@
+                                </div>
 
-                                
-                                <input type="submit" value="Send Message" class="btn btn-primary center mb-2"/>
-
-
-                        </form>*@
-
-                          <form >
-
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <ul>
-                                    <li class="mb-2">
-                                        <p class="text-center">Send Message to Property Owner</p>
-                                        <input type="text" class="form-control" placeholder="Enter Your Name" id="clientName"/>
-                                        
-                                    </li>
-                                    <li class="mb-2">
-                                        <input type="email" class="form-control" placeholder="Enter Your E-mail" id="email" />
-                                       
-                                    </li>
-                                    <li class="mb-2">
-                                        <input type="text" class="form-control" placeholder="Enter Your Phone" id="contactNo"/>
-                                        
-                                    </li>
-                                    <li class="mb-2">
-                                        <textarea type="text" class="form-control" placeholder="Please Type Your Message" id="message"></textarea>
-                                        
-                                    </li>
-
-                                </ul>
-
-                                <input type="button" value="Send Message" class="btn btn-primary center mb-2" id="btnSave"/>
+                                <div class="form-group mt-3">
+                                    <textarea type="text" class="form-control" rows="5" placeholder="Please Type Your Message" id="message"></textarea>
+                                    @*<textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>*@
+                                </div>
+                                @*<div class="my-3">
+                                    <div class="loading">Loading</div>
+                                    <div class="error-message"></div>
+                                    <div class="sent-message">Your message has been sent. Thank you!</div>
+                                    </div>*@
+                                <div class="text-center">
+                                    <input type="button" value="Send Message" class="btn btn-primary" id="btnSave" />
+                                    @*<input type="button" value="Send Message" id="btnSave" />*@
+                                </div>
+                            </div>
                         </form>
 
                     </div>
-
-                    @* <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                        <div class="row">
-                        <div class="col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="col-md-6 form-group mt-3 mt-md-0">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                        </div>
-                        </div>
-                        <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group mt-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                        </div>
-                        <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"><button type="submit">Send Message</button></div>
-                        </form>
-                        </div>*@
-
                 </div>
 
             </div>
@@ -612,50 +396,20 @@
     <!-- ======= Footer ======= -->
     <footer>
         <div class="container">
-
-            <!--======= NEWSLETTER =========-->
-            @*<div class="subcribe">
-                <div class="col-sm-5 no-padding">
-                <h4>Subscribe to our newsletter</h4>
-                </div>
-                <div class="col-sm-7 no-padding">
-                <form>
-                <input class="font-montserrat" type="email" placeholder="E-mail Address" value="" required>
-                <button type="submit" class="btn"> Subscribe</button>
-                </form>
-                </div>
-                </div>*@
             <ul class="row">
 
-                <!--======= HAPPY CLIENTS =========-->
-                @* <li class="col-sm-6 col-md-3">
-                    <h5>About us</h5>
-                    <hr>
-                    <p>
-                    Partner with USBD-PROPERTY for a global real estate journey. Whether you're a US resident or an investor from Bangladesh, our joint venture offers a comprehensive solution for navigating and thriving in the dynamic US real estate market.
-                    </p>
-
-                    <!--======= SOCIAL ICONS =========-->
-
-                    <ul class="social_icons">
-                    <li class="facebook"> <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf"><i class="fa fa-facebook"></i> </a></li>
-
-                    </ul>
-                    </li>*@
 
                 <!--======= HAPPY CLIENTS =========-->
                 <li class="col-sm-6 col-md-4">
                     <!--======= LINKS =========-->
                     <h5>latest from Facebook</h5>
                     <hr>
-                    <ul class="tweet">
+                    <ul>
                         <li>
                             <p>
                                 US-BDProperty is one of the excellent realestate market place
-                                <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf">Facebook page</a> one of the excellent realestate market place
-                                on facebook.
+                                <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf">Facebook page</a> one of the excellent realestate market place on facebook.
                             </p>
-                            @*  <span>1 hours ago</span> *@
                         </li>
                         <li>
                             <p>Join our    <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf">Facebook Group</a> to touch with us. </p>
@@ -679,12 +433,12 @@
                     <hr>
                     <div class="loc-info">
                         <p>
-                            <address>
-                                <i class="fa fa-map-marker"></i>
+                            @*<address>*@
+                            <i class="fa fa-map-marker"></i>
 
-                                567,East-Kazipara,Mirpur,Dhaka-1216
+                            567,East-Kazipara,Mirpur,Dhaka-1216
 
-                            </address>
+                            @*</address>*@
                         </p>
                         <p><i class="fa fa-phone"></i> +88 01712532107</p>
                         <p><i class="fa fa-print"></i> +880 1881-660077 (WhatsApp)</p>
@@ -743,36 +497,20 @@
     <script>
         $(document).ready(function (){
             $("#btnSave").click(  function () {
-                
+
                 PostClientData();
             });
+            //$("#examplemodalxl").modal('show');
+            //$("#examplemodalxl").modal('hide');
+            //$("#examplemodalxl").click( function () {
+                $("#exampleModalXl").modal('show');
+            //})
+
             getFooterProperty()
             getProperty()
             GetHomeProjects()
-            
-        })
 
-        //function PostClientData(){
-        //    alert("Hello");
-        //    var obj = {
-        //        //Name = $("#clientName").val(),
-        //        Email = $("#email").val(),
-        //        ContactNo = $("#contactNo").val(),
-        //        Message = $("#message").val(),
-        //    }
-        //    console.log(obj);
-        //    $.ajax({
-        //        url: "/ClientContacts/Create",
-        //        method: "Post",
-        //        data: JSON.stringify(obj),
-        //        contentType: "application/json",
-        //        success: function(res){
-        //            console.log(res);
-
-        //        }
-        //    })
-        //}
-
+        });
 
         function PostClientData(){
             alert("Hello Client");
@@ -797,10 +535,10 @@
                      $("#clientName").val(''),
                      $("#email").val(''),
                      $("#contactNo").val(''),
-                     $("#message").val(''),
+                     $("#message").val('')
 
-                     $("#btnSave").val('Save')
-                    
+                     //$("#btnSave").val('Save')
+
 
                 }
             })
@@ -839,18 +577,19 @@
                 success: function(res){
                     console.log(res.data)
                     var propertylist = "";
+                    propertylist += '<ul class="row">';
                     $.each(res.data, function(index, value){
                         console.log(value )
                         console.log(value.numberOfBedrooms )
-                        propertylist += '<ul class="row">';
-                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+
+                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><div class="img"><img class="img-responsive" src="' + value.path +'" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
                     });
                     console.log(propertylist);
                     console.log("Hello");
                     //console.log(PropertySize);
                     propertylist += '</ul>';
-                    $(".load_Property").empty();
-                    $(".load_Property").html(propertylist);
+                    $(".load_properties").empty();
+                    $(".load_properties").html(propertylist);
                 }
             })
         }

@@ -185,6 +185,24 @@ namespace USBDProperty.Controllers
 
         }
 
+
+        //public JsonResult DevProjectProperty(int id)
+        //{
+        //    try
+        //    {
+        //        var propertyData = _context.PropertyDetails
+        //                                   .Include(p => p.Area)
+        //                                   .Include(p => p.ProjectsInfo)
+        //                                   .Include(p => p.PropertyType)
+        //                                   .Where(p => p.ProjectsInfo.Id == id).ToList();
+        //        return Json (new { data = propertyData });
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return Json(new { data = "No record" });
+        //    }
+        //}
+
         public JsonResult BannerProperty()
         {
             try

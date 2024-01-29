@@ -83,7 +83,7 @@
             <div class="container">
 
                 <!--======= LOGO =========-->
-                <div class="logo"> <a href="#"><img src="~/Asserts/logo/Us--Bangla-logo-web-03.png" height="80px" width="200px" alt=""></a> </div>
+                <div class="logo"> <a asp-action="Index" asp-controller="Home"><img src="~/Asserts/logo/Us--Bangla-logo-web-03.png" height="80px" width="200px" alt=""></a> </div>
                 <!--======= NAV =========-->
                 <nav>
 
@@ -93,52 +93,7 @@
                         @await Component.InvokeAsync("ParentMenu" )
 
                         <li><a href="/DevelopersorAgents/Developer">Developers</a></li>
-                        <li><a href="/Home/ContactUSBDProperty">Contact us</a></li>
-                        @* <li><a href="#">My Accounts</a>
-                            <ul style="background-color: #efefef;" class="dropdown account">
-                            <li style="background-color:white; padding:10px; border-radius:10px; box-shadow:10px #000; margin: 15px 0px;">
-                            <div class="row">
-                            <div class="col-md-3">
-                            <i class="fa fa-user"></i>
-                            </div>
-                            <div class="col-md-9">
-                            <p><strong>Individuals Developers</strong></p>
-                            <p>Sign in or create your account to manage your account</p>
-                            <div class="row">
-                            <div class="col-md-5">
-                            <a class="btn btn-info">Sign in</a>
-                            </div>
-                            <div class="col-md-7">
-                            <a class="btn btn-info">Create Account</a>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </li>
-                            <li><a href="#">Login</a></li>
-                            <li style="background-color:white; padding:10px; border-radius:10px; box-shadow:10px #000; margin: 15px 0;">
-                            <div class="row">
-                            <div class="col-md-3">
-                            <i class="fa fa-users"></i>
-                            </div>
-                            <div class="col-md-9">
-                            <p><strong>Developers/Agents</strong></p>
-                            <p>Sign in or create your account to manage your account</p>
-                            <div class="row">
-                            <div class="col-md-5">
-                            <a class="btn btn-info">Sign in</a>
-                            </div>
-                            <div class="col-md-7">
-                            <a class="btn btn-info">Create Account</a>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </li>
-                            </ul>
-                            </li>*@
-
-
+                        <li><a href="/Home/ContactUSBDProperty">Contact us</a></li>                      
                     </ul>
 
                     <!--======= SUBMIT COUPON =========-->
