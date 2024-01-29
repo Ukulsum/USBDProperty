@@ -189,26 +189,21 @@
         </section>
         <!-- End Services Section -->
         <!-- ======= PropertySection Section ======= -->
-        <section class="properties">
-            @*<div class="container">*@
-
-            <!--======= TITTLE =========-->
+        @* <section class="properties" id="property">
+        
             <div class="tittle">
                 <img src="~/Asserts/images/head-top.png" alt="">
                 <h3>Featured Properties</h3>
             </div>
-
-            <!--======= PROPERTIES ROW =========-->
-            @* <ul class="row"> *@
+         
             <div class="load_properties">
             </div>
-            @* </ul> *@
-            @*</div>*@
-        </section>
+           
+        </section> *@
         <!-- End Property Section -->
 
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button>
+        @* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button> *@
 
 
         @*<section class="properties">*@
@@ -223,8 +218,8 @@
                         <!--======= TITTLE =========-->
                         <div class="tittle">
                             <img src="~/Asserts/images/head-top.png" alt="">
-                            <h3>Featured Properties</h3>
-                            @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+                            <h3 id="prjid">  </h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <!--======= PROPERTIES ROW =========-->
@@ -233,17 +228,9 @@
                         </div>
                         @* </ul> *@
                         @*</div>*@
+                       @*  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
                     </section>
-                    @*<div class="modal-header">
-                        <div class="tittle">
-                        <img src="~/Asserts/images/head-top.png" alt="">
-                        <h3>Featured Properties</h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        </div>*@
-                    @*<div class="modal-body">
-
-                        </div>*@
+                  
                 </div>
             </div>
         </div>
@@ -457,7 +444,7 @@
         </div>
     </div>
     <!-- End Footer -->
-
+    <button onclick="Getpropertiesbyproject()"></button>
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -496,15 +483,14 @@
 
     <script>
         $(document).ready(function (){
+            $("#property").hide();
             $("#btnSave").click(  function () {
 
                 PostClientData();
             });
-            //$("#examplemodalxl").modal('show');
-            //$("#examplemodalxl").modal('hide');
-            //$("#examplemodalxl").click( function () {
-                $("#exampleModalXl").modal('show');
-            //})
+            
+               // $("#exampleModalXl").modal('show');
+            
 
             getFooterProperty()
             getProperty()
@@ -612,8 +598,9 @@
                 console.log("Projects");
                 var projectdata = "";
                 $.each(res.data, function(index, value){
-                        console.log(value)
-                        projectdata += ' <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div> '
+                        console.log(value.id)
+                        $("#prjid").html("All properties under " + value.projectName)
+                        projectdata += '<button onclick="Getpropertiesbyproject('+ value.id+')"> <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div></button > '
                 });
                 console.log(projectdata);
                 console.log("DataProjects");
@@ -624,8 +611,35 @@
 
         }
 
+        function Getpropertiesbyproject(id)
+        {
+            alert(id)
+            $.ajax({
+                url: "/PropertyDetails/PropertybyProjects?prjId="+id,
+                method: "Get",
+                success: function (res) {
+                    console.log(res.data)
+                    var propertylist = "";
+                    propertylist += '<ul class="row">';
+                    $.each(res.data, function (index, value) {
+                        console.log(value)
+                        console.log(value.numberOfBedrooms)
+                        
+                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><div class="img"><img class="img-responsive" src="' + value.path + '" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
+                    });
+                    console.log(propertylist);
+                    console.log("Hello");
+                    //console.log(PropertySize);
+                    propertylist += '</ul>';
+                   
+                    $("#property").show();
+                    $(".load_properties").empty();
+                    $(".load_properties").html(propertylist);
+                    $("#exampleModalXl").modal('show')
+                }
+            })
+        }
     </script>
-
 </body>
 
 </html>
