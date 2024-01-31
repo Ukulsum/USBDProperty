@@ -34,7 +34,7 @@
                     <div class="search-type">
                         <span class="search-type-tab active">
                             @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
-                            Sale
+                            Buy
                         </span>
                         <span class="search-type-tab">
                             @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
@@ -458,10 +458,12 @@
                  //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
                     var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].path + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
                  //$.each(res.data, function(index, value){
-                 //    noticedata += '<div>'+ value.description +'<div>';
+                 //    NoticeData +=  "<div class='img'><img class='img-responsive' src='" + value.path + "' alt='" + value.title + "'><div class='over-proper'></div><div>" + value.description + "</div> ";
                  //});
                     console.log(res.data[0].title);
                   $("#exampleModalLabel").innerText=res.data[0].title
+                  //$("#exampleModalLabel").innerText=value.title
+                  //$("#exampleModalLabel").modal('show')
                 $("#load_Notification").empty();
                 $("#load_Notification").html(NoticeData);
                 $("#NoticeModal").modal('show')
