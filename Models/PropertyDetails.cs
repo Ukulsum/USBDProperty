@@ -27,17 +27,19 @@ namespace USBDProperty.Models
         [Key]
         [DisplayName("ID")]
         public int PropertyInfoId { get; set; }
+        [ValidateNever]
         public bool ISFeatured { get; set; }
         [StringLength(255)]
         public string Title { get; set; }
        
-
+        [ValidateNever]
         public double TotalPrice
         {
             get { return this.PropertySize* Price; }
         }
         [MaxLength]
         public string? Description { get; set; }
+        [ValidateNever]
         [Required]
         [StringLength(150)]
         [DisplayName("Property Name")]

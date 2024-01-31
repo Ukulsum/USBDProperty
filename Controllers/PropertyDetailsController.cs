@@ -401,6 +401,7 @@ namespace USBDProperty.Controllers
                     Title = propertyDetails.Title,
                     Description = propertyDetails.Description,
                     //PropertyName = propertyDetails.PropertyName,
+                    ISFeatured = propertyDetails.ISFeatured,
                     Location = propertyDetails.Location,
                     ConstructionStatus = propertyDetails.ConstructionStatus,
                     PropertySize = propertyDetails.PropertySize,
@@ -424,6 +425,7 @@ namespace USBDProperty.Controllers
                     AreaId = propertyDetails.AreaId,
                     CreatedBy = User.Identity.Name ?? "umme",
                     CreatedDate = DateTime.Now,
+                    Image = propertyDetails.Image,
                     Path = "/Content/Images/" + fileName
                 };
                 _context.Add(PropertyInfo);
@@ -588,7 +590,8 @@ namespace USBDProperty.Controllers
                     UpdateDate = DateTime.Now,
                     Path = fpath
                 };
-                _context.Entry(propertyDetails).State = EntityState.Modified;
+                //_context.Entry(propertyDetails).State = EntityState.Modified;
+                _context.Update(propertyDetails);
                 if(await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));

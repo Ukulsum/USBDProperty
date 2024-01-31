@@ -10,7 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class NoticesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +20,14 @@ namespace USBDProperty.Controllers
         {
             _context = context;
             environment = _environment;
+        }
+
+        public JsonResult HomeNotice()
+        {
+            var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
+                                             .Where(p => p.IsActive == true).ToList();
+
+            return Json(new { data = noticeData});
         }
 
         // GET: Notices

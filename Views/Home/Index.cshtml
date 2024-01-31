@@ -23,8 +23,7 @@
     </div>
 
 
-
-
+ 
     <!--======= FIND PROPERTY =========-->
     <div class="finder">
         <div class="container">
@@ -170,6 +169,48 @@
         </ul>
     </div>
 </section>
+
+
+
+
+   <!-------- Start Modal Notification -->
+   
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            @*<form>*@
+            <div class="modal-body">
+                <div id="load_Notification">
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+            @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+
+            </div>
+            @*</form>*@
+            </div>
+
+            </div>
+            </div>
+
+
+    <!-------- End Modal Notification -->
+
+
+
+
 
 <!--======= PROPERTY =========-->
 <section class="properties">
@@ -398,12 +439,37 @@
             $("#AreaId").change(function () {
                 loadLocation($(this).val())
             })
-
+            //$("#exampleModal").modal('Show');
+            loadNotice();
             getProperty()
             getBannerProperty()
         })
 
-        function loadLocation( aid) {
+
+    function loadNotice(){
+        alert("Welcome to");
+        $.ajax({
+            url: "/Notices/HomeNotice",
+            method: "Get",
+            success: function(res){
+                console.log("Notification");
+                console.log(res.data);
+                 var NoticeData = "";
+                 //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
+                 var NoticeData = '<div>'+ res.data.description +'<div>';
+                 //$.each(res.data, function(index, value){
+                 //    noticedata += '<div>'+ value.description +'<div>';
+                 //});
+                //console.log(data)
+                $("#load_Notification").empty();
+                $("#load_Notification").html(NoticeData);
+
+            }
+        })
+    }
+
+
+    function loadLocation( aid) {
            $.get("/PropertyDetails/Getlocation?aid=" +aid, function (data, status) {
                console.log(data)
                $("#propertyInfoId").empty();
@@ -412,7 +478,7 @@
                    $("#propertyInfoId").append($('<option></option>').val(v.propertyInfoId).html(v.location));
                })
            })
-         }
+     }
     function getProperty(){
         //alert("helo")
         $.ajax({
