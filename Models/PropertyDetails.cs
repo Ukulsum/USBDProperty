@@ -40,7 +40,7 @@ namespace USBDProperty.Models
         [MaxLength]
         public string? Description { get; set; }
         [ValidateNever]
-        [Required]
+        
         [StringLength(150)]
         [DisplayName("Property Name")]
         //public string PropertyName { get; set; }

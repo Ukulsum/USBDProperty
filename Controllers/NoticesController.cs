@@ -10,7 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class NoticesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +21,7 @@ namespace USBDProperty.Controllers
             _context = context;
             environment = _environment;
         }
-
+        [AllowAnonymous]
         public JsonResult HomeNotice()
         {
             var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)

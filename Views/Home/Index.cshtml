@@ -456,13 +456,14 @@
                 console.log(res.data);
                  var NoticeData = "";
                  //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
-                 var NoticeData = '<div>'+ res.data.description +'<div>';
+                    var NoticeData = "<div>" + res.data.description + "<div>";
                  //$.each(res.data, function(index, value){
                  //    noticedata += '<div>'+ value.description +'<div>';
                  //});
-                //console.log(data)
+                    console.log( res.data.description)
                 $("#load_Notification").empty();
                 $("#load_Notification").html(NoticeData);
+                    console.log(NoticeData)
 
             }
         })

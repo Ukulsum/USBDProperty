@@ -444,7 +444,15 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, ex.Message);
+
+                if (ex.InnerException != null)
+                {
+                    ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
             }
             return View(propertyDetails);
         }
