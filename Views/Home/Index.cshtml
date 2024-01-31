@@ -174,14 +174,14 @@
 
 
    <!-------- Start Modal Notification -->
-   
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="NoticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
+            <h5 class="modal-title" id="exampleModalLabel">
+               
+                
+            </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -447,7 +447,7 @@
 
 
     function loadNotice(){
-        alert("Welcome to");
+       
         $.ajax({
             url: "/Notices/HomeNotice",
             method: "Get",
@@ -456,15 +456,15 @@
                 console.log(res.data);
                  var NoticeData = "";
                  //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
-                    var NoticeData = "<div>" + res.data.description + "<div>";
+                    var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].path + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
                  //$.each(res.data, function(index, value){
                  //    noticedata += '<div>'+ value.description +'<div>';
                  //});
-                    console.log( res.data.description)
+                    console.log(res.data[0].title);
+                  $("#exampleModalLabel").innerText=res.data[0].title
                 $("#load_Notification").empty();
                 $("#load_Notification").html(NoticeData);
-                    console.log(NoticeData)
-
+                $("#NoticeModal").modal('show')
             }
         })
     }

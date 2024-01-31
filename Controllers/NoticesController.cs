@@ -25,7 +25,7 @@ namespace USBDProperty.Controllers
         public JsonResult HomeNotice()
         {
             var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
-                                             .Where(p => p.IsActive == true).ToList();
+                                             .Where(p => p.IsActive   && p.IsFeatured).ToList();
 
             return Json(new { data = noticeData});
         }

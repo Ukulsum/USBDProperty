@@ -14,6 +14,7 @@ namespace USBDProperty.Models
         [Required]
         [StringLength(150)]
         public string Title { get; set; }
+        public bool IsFeatured { get; set; }
         [MaxLength]
         public string Description { get; set; }
         [ValidateNever]
