@@ -200,6 +200,7 @@ namespace USBDProperty.Controllers
         }
 
         // GET: DevelopersorAgents/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             try
@@ -242,7 +243,8 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, DevelopersorAgent developersorAgent, IFormFile logo, IFormFile banner)
+        public async Task<IActionResult> Edit(int id, DevelopersorAgent developersorAgent)
+        //public async Task<IActionResult> Edit(int id, DevelopersorAgent developersorAgent, IFormFile logofile, IFormFile bannerFile)
         {
             using var transaction = _context.Database.BeginTransaction();
             try
@@ -251,7 +253,7 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
-
+                var data =await  _context.DevelopersorAgent.FindAsync( id);
                 var wwwRootPath = "";
                 var rPath = "";
                 if(_environment != null)
@@ -264,42 +266,62 @@ namespace USBDProperty.Controllers
                     wwwRootPath = Directory.GetCurrentDirectory();
                     rPath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
                 }
-                if(logo.FileName != null)
+                if (developersorAgent.logofile != null)
                 {
-                    string extension = Path.GetExtension(logo.FileName).ToLower();
+
+                ////}
+                ////if (developersorAgent.logofile.FileName.Length > 0)
+                //    //if (logofile.FileName != null && logofile.FileName.Length > 0)
+                //{
+                    string extension = Path.GetExtension(developersorAgent.logofile.FileName).ToLower();
                     if(extension == ".jpg" || extension == ".png" || extension == ".jepg")
                     {
                         string fileName = $" {developersorAgent.CompanyName} logo {extension}";
                         string path = Path.Combine(rPath, "Logo", fileName);
                         using (var fileStrem = new FileStream (path, FileMode.Create))
                         {
-                            await logo.CopyToAsync(fileStrem);
+                            await developersorAgent.logofile.CopyToAsync(fileStrem);
                         }
                         developersorAgent.Logo = "~/Developer/Logo/" + fileName;
+                        if (System.IO.File.Exists(rPath))
+                        {
+                            System.IO.File.Delete(rPath);
+                        }
+                         
                     }
+                   
                     else
                     {
                         ModelState.AddModelError("", "Please provide .jpg|.jpeg|png");
                         return View(developersorAgent);
                     }
+
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Please Provide logo");
-                    return View(developersorAgent);
+                    //ModelState.AddModelError("", "Please Provide logo");
+                    //return View(developersorAgent);
+                    data.Logo = developersorAgent.Logo;
                 }
-                if(banner.FileName != null)
+
+
+                if(developersorAgent.bannerFile != null)
                 {
-                    string extension = Path.GetExtension(banner.FileName).ToLower();
+                    string extension = Path.GetExtension(developersorAgent.bannerFile.FileName).ToLower();
                     if(extension == ".jpg" || extension == ".png" || extension == ".jepg")
                     {
                         string fileName = $" {developersorAgent.CompanyName} banner {extension}";
                         string path = Path.Combine(rPath, "Banner", fileName);
                         using(var fileStrem = new FileStream (path, FileMode.Create))
                         {
-                            await banner.CopyToAsync(fileStrem);
+                            await developersorAgent.bannerFile.CopyToAsync(fileStrem);
                         }
                         developersorAgent.Banner = "~/Developer/Banner/" + fileName;
+                        if (System.IO.File.Exists(rPath))
+                        {
+                            System.IO.File.Delete(rPath);
+                        }
+                        //data.Banner = "~/Developer/Banner/" + fileName;
                     }
                     else
                     {
@@ -309,34 +331,57 @@ namespace USBDProperty.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Please provide Banner");
-                    return View(developersorAgent);
+                    //ModelState.AddModelError("", "Please provide Banner");
+                    ////return View(developersorAgent);
+                    ///
+                    data.Banner = developersorAgent.Banner;
                 }
-                developersorAgent.UpdateBy = User.Identity.Name ?? "";
-                developersorAgent.UpdateDate = DateTime.Now.Date;
-                _context.Update(developersorAgent);
+
+                data.UpdateBy = User.Identity.Name ?? "";
+                data.UpdateDate = DateTime.Now.Date;
+                data.Banner=developersorAgent.Banner;
+                data.Email = developersorAgent.Email;
+                data.AreaID = developersorAgent.AreaID;
+                data.Address = developersorAgent.Address;
+                data.AboutUs = developersorAgent.AboutUs;
+                data.CompanyName = developersorAgent.CompanyName;
+                data.ContactNo = developersorAgent.ContactNo;
+                data.IsActive = developersorAgent.IsActive;
+                data.Membership = developersorAgent.Membership;
+                data.CreatedDate = developersorAgent.CreatedDate;
+                data.CreatedBy =  developersorAgent.CreatedBy;  
+                
+                
+                _context.Update(data);
                 if(await _context.SaveChangesAsync() > 0)
                 {
-                    var result = await _userManager.CreateAsync(new ApplicationUser { UserName = developersorAgent.Email, Email = developersorAgent.Email, PhoneNumber = developersorAgent.ContactNo }, password: "@Test123");
-                    if (result.Succeeded)
+                   
+                 var isExist=   await _userManager.FindByEmailAsync(data.Email);
+                    if (isExist ==null)
                     {
-                        transaction.Commit();
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        string errorMessage = "";
-                        if(result.Errors.Count() > 0)
+                        var result = await _userManager.CreateAsync(new ApplicationUser { UserName = developersorAgent.Email, Email = developersorAgent.Email, PhoneNumber = developersorAgent.ContactNo }, password: "@Test123");
+                        if (result.Succeeded)
                         {
-                            foreach(var item in result.Errors)
-                            {
-                                errorMessage += item.Description;
-                            }
+                            transaction.Commit();
+                            return RedirectToAction(nameof(Index));
                         }
-                        transaction.Rollback();
-                        ModelState.AddModelError("", errorMessage);
-                        return View(developersorAgent);
+                        else
+                        {
+                            string errorMessage = "";
+                            if (result.Errors.Count() > 0)
+                            {
+                                foreach (var item in result.Errors)
+                                {
+                                    errorMessage += item.Description;
+                                }
+                            }
+                            transaction.Rollback();
+                            ModelState.AddModelError("", errorMessage);
+                            return View(developersorAgent);
+                        }
                     }
+                    transaction.Commit();
+                    return RedirectToAction(nameof(Index));
                 }
             }
             catch(Exception ex)

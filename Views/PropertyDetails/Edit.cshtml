@@ -17,7 +17,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label   class="control-label">Purposes</label>
-                            <select asp-for="PropertyFor" class="form-control" asp-items="Html.GetEnumSelectList<PropertyFor>()">
+                            <select asp-for="PropertyFor" class="form-control" asp-items="@Html.GetEnumSelectList<PropertyFor>()">
                                 <option value="1">Select Type</option>
                             </select>
                             <span asp-validation-for="PropertyFor" class="text-danger"></span>
