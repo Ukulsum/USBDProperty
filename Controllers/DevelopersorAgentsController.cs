@@ -105,12 +105,12 @@ namespace USBDProperty.Controllers
                     if (_environment != null)
                     {
                         wwwRootPath = _environment.WebRootPath;
-                    rpath = wwwRootPath + "/Developer";
+                        rpath = wwwRootPath + "/Developer";
                     }
                     else
                     {
                         wwwRootPath = Directory.GetCurrentDirectory();
-                    rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
+                        rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
                     }
                     if (logo.FileName != null)
                     {

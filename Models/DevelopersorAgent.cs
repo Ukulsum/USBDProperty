@@ -22,7 +22,7 @@ namespace USBDProperty.Models
         [ValidateNever]
         [NotMapped]
 
-     public   IFormFile bannerFile { get; set; }
+        public   IFormFile bannerFile { get; set; }
 
         [DisplayName("About Us")]
         public string AboutUs { get; set; }

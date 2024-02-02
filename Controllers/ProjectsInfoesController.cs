@@ -67,7 +67,7 @@ namespace USBDProperty.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
          
-        public async Task<IActionResult> Create(  ProjectsInfo projectsInfo)
+        public async Task<IActionResult> Create(ProjectsInfo projectsInfo)
         {
             //if (ModelState.IsValid)
             //{
@@ -90,12 +90,12 @@ namespace USBDProperty.Controllers
                     {
                         //string fileName = developersorAgent.CompanyName + extension;
                         string fileName = $" {projectsInfo.Title} _map {extension}";
-                        string path = Path.Combine(rpath, "LaocationMap", fileName);
+                        string path = Path.Combine(rpath, "LocationMap", fileName);
                         using (var fileStrem = new FileStream(path, FileMode.Create))
                         {
                             await projectsInfo.MapPath.CopyToAsync(fileStrem);
                         }
-                        projectsInfo.LocationMap = "~/Developer/LaocationMap/" + fileName;
+                        projectsInfo.LocationMap = "~/Developer/LocationMap/" + fileName;
                     }
                     else
                     {
