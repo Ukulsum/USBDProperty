@@ -102,13 +102,28 @@
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                   @* <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="PropertyName" class="control-label"></label>
                             <input type="text" asp-for="PropertyName" class="form-control" />
                             <span asp-validation-for="PropertyName" class="text-danger"></span>
                         </div>
+                    </div>*@
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="PropertyCondition" class="control-label"></label>
+                           
+
+                            <select asp-for="PropertyCondition" class="form-control"
+                                    asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
+                                <option value="0">Select Property's condition</option>
+                            </select>
+                            
+                            <span asp-validation-for="PropertyCondition" class="text-danger"></span>
+                        </div>
                     </div>
+
                    @*  <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="PropertyTypeId" class="control-label"></label>
@@ -125,7 +140,7 @@
 
                             <select asp-for="ConstructionStatus" class="form-control"
                                     asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
-                                <option value="0">Select Property's condition</option>
+                                <option value="0">Select Construction's' Status</option>
                             </select>
                             
                             <span asp-validation-for="ConstructionStatus" class="text-danger"></span>

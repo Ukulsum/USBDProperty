@@ -23,8 +23,7 @@
     </div>
 
 
-
-
+ 
     <!--======= FIND PROPERTY =========-->
     <div class="finder">
         <div class="container">
@@ -35,7 +34,7 @@
                     <div class="search-type">
                         <span class="search-type-tab active">
                             @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
-                            Sale
+                            Buy
                         </span>
                         <span class="search-type-tab">
                             @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
@@ -170,6 +169,48 @@
         </ul>
     </div>
 </section>
+
+
+
+
+   <!-------- Start Modal Notification -->
+              <div class="modal fade" id="NoticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+               
+                
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            @*<form>*@
+            <div class="modal-body">
+                <div id="load_Notification">
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+            @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+
+            </div>
+            @*</form>*@
+            </div>
+
+            </div>
+            </div>
+
+
+    <!-------- End Modal Notification -->
+
+
+
+
 
 <!--======= PROPERTY =========-->
 <section class="properties">
@@ -398,12 +439,40 @@
             $("#AreaId").change(function () {
                 loadLocation($(this).val())
             })
-
+            //$("#exampleModal").modal('Show');
+            loadNotice();
             getProperty()
             getBannerProperty()
         })
 
-        function loadLocation( aid) {
+
+    function loadNotice(){
+       
+        $.ajax({
+            url: "/Notices/HomeNotice",
+            method: "Get",
+            success: function(res){
+                console.log("Notification");
+                console.log(res.data);
+                 var NoticeData = "";
+                 //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
+                    var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].path + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
+                 //$.each(res.data, function(index, value){
+                 //    NoticeData +=  "<div class='img'><img class='img-responsive' src='" + value.path + "' alt='" + value.title + "'><div class='over-proper'></div><div>" + value.description + "</div> ";
+                 //});
+                    console.log(res.data[0].title);
+                  $("#exampleModalLabel").innerText=res.data[0].title
+                  //$("#exampleModalLabel").innerText=value.title
+                  //$("#exampleModalLabel").modal('show')
+                $("#load_Notification").empty();
+                $("#load_Notification").html(NoticeData);
+                $("#NoticeModal").modal('show')
+            }
+        })
+    }
+
+
+    function loadLocation( aid) {
            $.get("/PropertyDetails/Getlocation?aid=" +aid, function (data, status) {
                console.log(data)
                $("#propertyInfoId").empty();
@@ -412,7 +481,7 @@
                    $("#propertyInfoId").append($('<option></option>').val(v.propertyInfoId).html(v.location));
                })
            })
-         }
+     }
     function getProperty(){
         //alert("helo")
         $.ajax({

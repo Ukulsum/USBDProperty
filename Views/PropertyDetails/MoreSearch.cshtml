@@ -10,17 +10,17 @@
     <div class="row ">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-sm-12 col-md-4">
                     <section class="properties">
                         <div class="container">
                             <div class="home_in">
                                 <form asp-action="MoreSearch" asp-controller="PropertyDetails">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Search Keyword</label>
                                             <input type="text" class="form-control" name="SearchText" placeholder="Search Text" />
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             @*<label>Property Purposes</label>*@
                                             <input type="radio" asp-items="PropertyFor" name="Buy" value=1 />
                                             <label for="">Buy</label>
@@ -31,40 +31,40 @@
                                             <input type="radio" asp-items="PropertyFor" name="Rent" value="3" />
                                             <label for="">Rent</label>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Property Catrgory</label>
                                             <select class="form-control" name="PropertyTypeId" id="PropertyTypeId">
                                                 <option>All Property Type</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>size (sqft)</label>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-sm-6 col-md-6">
                                                     <input class="form-control" type="number" asp-items="PropertySize" name="minsize" placeholder="Min" />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-sm-6 col-md-6">
                                                     <input class="form-control" type="number" asp-items="PropertySize" placeholder="Max" name="maxsize" />
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Min No. of Bed</label>
                                             <input class="form-control" type="number" asp-items="NumberOfBedrooms" name="NumberOfBedrooms" placeholder="Number of Bedroom" value="" />
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Price</label>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-sm-6 col-md-6">
                                                     <input class="form-control" type="number" asp-items="Price" placeholder="Min" name="minprice" />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-sm-6 col-md-6">
                                                     <input class="form-control" type="number" asp-items="Price " placeholder="Max" name="maxprice" />
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12 col-md-12">
                                             <label>Property Purposes</label>
                                             <select class="form-control" asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
                                                 <option>Property Construction</option>
@@ -79,7 +79,7 @@
                         </div>
                     </section>
                 </div>
-                <div class="col-md-8">
+                <div class="col-sm-12 col-md-8">
                     @* <section class="properties">*@
                     @*<div class="container">*@
                     @*@("~/image/"+item.ImageName)*@

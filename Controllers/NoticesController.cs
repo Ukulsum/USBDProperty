@@ -21,6 +21,14 @@ namespace USBDProperty.Controllers
             _context = context;
             environment = _environment;
         }
+        [AllowAnonymous]
+        public JsonResult HomeNotice()
+        {
+            var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
+                                             .Where(p => p.IsActive   && p.IsFeatured).ToList();
+
+            return Json(new { data = noticeData});
+        }
 
         // GET: Notices
         public async Task<IActionResult> Index()
