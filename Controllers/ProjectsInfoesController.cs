@@ -234,7 +234,7 @@ namespace USBDProperty.Controllers
             catch(Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return RedirectToAction(nameof(index));
+                return RedirectToAction(nameof(Index));
             }
             
         }
