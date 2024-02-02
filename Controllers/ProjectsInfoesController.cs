@@ -120,7 +120,7 @@ namespace USBDProperty.Controllers
                     {
                         await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
                     }
-                    projectsInfo.LocationMap = "~/Developer/Video/" + fileName;
+                    projectsInfo.ProjectVideo = "~/Developer/Video/" + fileName;
                 }
                 else
                 {
@@ -142,18 +142,40 @@ namespace USBDProperty.Controllers
         // GET: ProjectsInfoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ProjectsInfo == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.ProjectsInfo == null)
+                {
+                    return NotFound();
+                }
 
-            var projectsInfo = await _context.ProjectsInfo.FindAsync(id);
-            if (projectsInfo == null)
-            {
-                return NotFound();
+                var projectsInfo = await _context.ProjectsInfo.FindAsync(id);
+                if (projectsInfo == null)
+                {
+                    return NotFound();
+                }
+                var allprojectId = (from a in _context.Areas
+                                    join c in _context.Citys on a.CityId equals c.CityId
+                                    join d in _context.Divisions on c.DivisionId equals d.DivisionID
+                                    join cc in _context.Countries on d.CountryId equals cc.CountryID
+                                    where a.AreaId == projectsInfo.AreaID
+                                    select new
+                                    {
+                                        DivitionId = d.DivisionID,
+                                        CityId = c.CityId,
+                                        CountryId = cc.CountryID
+                                    }).FirstOrDefault();
+                ViewData["AreaId"] = new SelectList(_context.Areas.OrderBy(a => a.AreaId), "AreaId", "AreaName", projectsInfo.AgentID);
+                ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allprojectId.CityId);
+                ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allprojectId.DivitionId);
+                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allprojectId.CountryId);
+                    //ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner", projectsInfo.AgentID);
+                return View(projectsInfo);
             }
-            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner", projectsInfo.AgentID);
-            return View(projectsInfo);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: ProjectsInfoes/Edit/5
@@ -161,35 +183,60 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ProjectName,Location,LocationMap,AgentID")] ProjectsInfo projectsInfo)
+        public async Task<IActionResult> Edit(int id, ProjectsInfo projectsInfo)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ProjectName,Location,LocationMap,AgentID")] ProjectsInfo projectsInfo)
         {
-            if (id != projectsInfo.Id)
+            try
             {
-                return NotFound();
-            }
+                if (id != projectsInfo.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                var data = await _context.ProjectsInfo.FindAsync(id);
+                string wwwRootPath = "";
+                string rPath = "";
+                if (_environment != null)
                 {
-                    _context.Update(projectsInfo);
-                    await _context.SaveChangesAsync();
+                    wwwRootPath = _environment.WebRootPath;
+                    rPath = wwwRootPath + "/Developer";
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ProjectsInfoExists(projectsInfo.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    rPath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
                 }
-                return RedirectToAction(nameof(Index));
+                
+
+                //if (modelstate.isvalid)
+                //{
+                //    try
+                //    {
+                //        _context.update(projectsinfo);
+                //        await _context.savechangesasync();
+                //    }
+                //    catch (dbupdateconcurrencyexception)
+                //    {
+                //        if (!projectsinfoexists(projectsinfo.id))
+                //        {
+                //            return notfound();
+                //        }
+                //        else
+                //        {
+                //            throw;
+                //        }
+                //    }
+                //    return redirecttoaction(nameof(index));
+                //}
+                //ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner", projectsInfo.AgentID);
+                return View(projectsInfo);
             }
-            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner", projectsInfo.AgentID);
-            return View(projectsInfo);
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return RedirectToAction(nameof(index));
+            }
+            
         }
 
         // GET: ProjectsInfoes/Delete/5
