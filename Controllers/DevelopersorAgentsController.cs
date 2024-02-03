@@ -340,6 +340,7 @@ namespace USBDProperty.Controllers
                 data.UpdateBy = User.Identity.Name ?? "";
                 data.UpdateDate = DateTime.Now.Date;
                 data.Banner=developersorAgent.Banner;
+                data.Logo = developersorAgent.Logo;
                 data.Email = developersorAgent.Email;
                 data.AreaID = developersorAgent.AreaID;
                 data.Address = developersorAgent.Address;

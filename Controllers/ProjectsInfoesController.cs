@@ -35,6 +35,11 @@ namespace USBDProperty.Controllers
             var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id));
             return Json(new { Data = data });
         }
+        public JsonResult GetProjectsVideo()
+        {
+            var data = _context.ProjectsInfo.OrderByDescending(p => p.Id).ToList();
+            return Json(new { Data = data });
+        }
         // GET: ProjectsInfoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -169,7 +174,7 @@ namespace USBDProperty.Controllers
                 ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allprojectId.CityId);
                 ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allprojectId.DivitionId);
                 ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allprojectId.CountryId);
-                    //ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner", projectsInfo.AgentID);
+                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
                 return View(projectsInfo);
             }
             catch (Exception ex)
@@ -196,6 +201,7 @@ namespace USBDProperty.Controllers
                 var data = await _context.ProjectsInfo.FindAsync(id);
                 string wwwRootPath = "";
                 string rPath = "";
+
                 if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
@@ -206,7 +212,74 @@ namespace USBDProperty.Controllers
                     wwwRootPath = Directory.GetCurrentDirectory();
                     rPath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
                 }
-                
+                if(projectsInfo.MapPath != null)
+                {
+                    string extension = Path.GetExtension(projectsInfo.MapPath.FileName).ToLower();
+                    if(extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
+                    {
+                        string fileName = $" {projectsInfo.Title} _map {extension}";
+                        string path = Path.Combine(rPath, "LocationMap", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await projectsInfo.MapPath.CopyToAsync(fileStrem);
+                        }
+                        projectsInfo.LocationMap = "~/Developer/LocationMap/" + fileName;
+                        if (System.IO.File.Exists(rPath))
+                        {
+                            System.IO.File.Delete(rPath);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide .jpg|.jpeg|.png");
+                        return View(projectsInfo);
+                    }
+                }
+                else
+                {
+                    data.LocationMap = projectsInfo.LocationMap;
+                }
+                if(projectsInfo.ProjectVideoPath != null)
+                {
+                    string extension = Path.GetExtension(projectsInfo.ProjectVideoPath.FileName).ToLower();
+                    if(extension == ".mp4" || extension == ".gif" || extension == ".vlc")
+                    {
+                        string fileName = $" {projectsInfo.Title} _video {extension}";
+                        string path = Path.Combine(rPath, "Video", fileName);
+                        using(var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
+                        }
+                        projectsInfo.ProjectVideo = "~/Developer/Video/" + fileName;
+                        if (System.IO.File.Exists(rPath))
+                        {
+                            System.IO.File.Delete(rPath);
+                        }
+                    }
+                    else{
+                        ModelState.AddModelError("", "Please provide .jpg| .png | .jepg");
+                        return View(projectsInfo);
+                    }
+                }
+                else
+                {
+                    data.ProjectVideo = projectsInfo.ProjectVideo;
+                }
+                data.ProjectVideo = projectsInfo.ProjectVideo;
+                data.ProjectName = projectsInfo.ProjectName;
+                data.Title = projectsInfo.Title;
+                data.Description = projectsInfo.Description;
+                data.LocationMap = projectsInfo.LocationMap;
+                data.AgentID = projectsInfo.AgentID;
+                data.AreaID = projectsInfo.AreaID;
+                data.Location = projectsInfo.Location;
+
+                _context.Update(data);
+                if(await _context.SaveChangesAsync() > 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
 
                 //if (modelstate.isvalid)
                 //{
@@ -228,13 +301,13 @@ namespace USBDProperty.Controllers
                 //    }
                 //    return redirecttoaction(nameof(index));
                 //}
-                //ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "Banner", projectsInfo.AgentID);
+                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
                 return View(projectsInfo);
             }
             catch(Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return RedirectToAction(nameof(Index));
+                return View(projectsInfo);
             }
             
         }

@@ -15,7 +15,7 @@
                 <h2>Projects Information</h2>
                 <div class="form-group col-md-4">
                     <label asp-for="AgentID" class="control-label"></label>
-                    <select asp-for="AgentID" class="form-control" asp-items="ViewBag.AgentID">
+                    <select  asp-for="AgentID" class="form-control" asp-items="ViewBag.AgentID">
                         <option value="0">Select Developer or Agent</option>
                     </select>
                 </div>
@@ -32,6 +32,7 @@
                 <div class="form-group col-md-12">
                     <label asp-for="Description" class="control-label"></label>
                     <textarea asp-for="Description" class="form-control" id="Description"></textarea>
+                    @*<textarea type="text" asp-for="Description" class="form-control"></textarea>*@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="row">
@@ -42,6 +43,7 @@
                     <div class="col-md-4">
                         <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
                             <video controls style="width:145px;height:145px;" alt="Image Upload" id="videoPreview"><source src="@Url.Content(Model.ProjectVideo)"/></video>
+                            <input type="text" class="form-control" name="ProjectVideo" id="video" asp-for="ProjectVideo" accept="video/*" hidden />
                         </div>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Area</label>
-                            <select asp-items="ViewBag.AreaId" id="drpArea" class="form-control"></select>
+                            <select asp-items="ViewBag.AreaId" id="drpArea" class="form-control" asp-for="AreaID"></select>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -85,6 +87,7 @@
                         <div class="col-md-4">
                             <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
                                 <img src="@Url.Content(Model.LocationMap)" style="width:145px;height:145px;" alt="Image Upload" id="imgPreview">
+                                <input type="text" class="form-control" name="LocationMap" id="LocationMap" asp-for="LocationMap" hidden/>
                             </div>
                         </div>
                     </div>

@@ -148,237 +148,252 @@
 
         </div>
     </section><!-- End Hero -->
+    @*<main id="main">*@
+    <section></section>
 
-    <main id="main">
-
-        <!-- ======= About Section ======= -->
-        <section id="about" class="about">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>About</h2>
-                    <p>About Us</p>
-                </div>
-
-                <div class="row content">
-                    <p>@Model.AboutUs </p>
-                </div>
+    <section id="cta" class="cta">
+        <div class="container" data-aos="zoom-in">
+            <div class="load_video">
 
             </div>
-        </section><!-- End About Section -->
-        <!-- ======= Services Section ======= -->
-        <section id="services" class="services">
-            <div class="container" data-aos="fade-up">
+            @*<img src="@Url.Content(Model.)" class="img-responsive"/>*@
+            @*<div class="text-center">
+                <h3>Call To Action</h3>
+                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <a class="cta-btn" href="#">Call To Action</a>
+                </div>*@
 
-                <div class="section-title">
-                    <h2>Projects</h2>
-                    <p>Check @Model.CompanyName 's Projects</p>
+        </div>
+    </section>
+
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>About</h2>
+                <p>About Us</p>
+            </div>
+
+            <div class="row content">
+                @*<p>@Model.AboutUs </p>*@
+                <p>@Html.Raw(Model.AboutUs)</p>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Projects</h2>
+                <p>Check @Model.CompanyName 's Projects</p>
+            </div>
+
+            <div class="row">
+
+                @*<div type="button" data-bs-toggle="modal" data-bs-target="#exampleModalXl" id="btnModal">*@
+                <div id="load_projects">
                 </div>
-
-                <div class="row">
-
-                    @*<div type="button" data-bs-toggle="modal" data-bs-target="#exampleModalXl" id="btnModal">*@
-                    <div id="load_projects">
-                    </div>
-                    @*</div>*@
-
-                </div>
+                @*</div>*@
 
             </div>
-        </section>
-        <!-- End Services Section -->
-        <!-- ======= PropertySection Section ======= -->
-        @* <section class="properties" id="property">
-        
-            <div class="tittle">
-                <img src="~/Asserts/images/head-top.png" alt="">
-                <h3>Featured Properties</h3>
-            </div>
-         
-            <div class="load_properties">
-            </div>
-           
+
+        </div>
+    </section>
+    <!-- End Services Section -->
+    <!-- ======= PropertySection Section ======= -->
+    @* <section class="properties" id="property">
+
+        <div class="tittle">
+        <img src="~/Asserts/images/head-top.png" alt="">
+        <h3>Featured Properties</h3>
+        </div>
+
+        <div class="load_properties">
+        </div>
+
         </section> *@
-        <!-- End Property Section -->
+    <!-- End Property Section -->
+    @* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button> *@
 
 
-        @* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button> *@
+    @*<section class="properties">*@
+    @*<div class="container">*@
+    <div class="modal fade " id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
 
+                <section class="properties">
+                    @*<div class="container">*@
 
-        @*<section class="properties">*@
-        @*<div class="container">*@
-        <div class="modal fade " id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: block;" aria-modal="true" role="dialog">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
+                    <!--======= TITTLE =========-->
+                    <div class="tittle">
+                        <img src="~/Asserts/images/head-top.png" alt="">
+                        <h3 id="prjid">  </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                    <section class="properties">
-                        @*<div class="container">*@
+                    <!--======= PROPERTIES ROW =========-->
+                    @* <ul class="row"> *@
+                    <div class="load_properties">
+                    </div>
+                    @* </ul> *@
+                    @*</div>*@
+                    @*  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
+                </section>
 
-                        <!--======= TITTLE =========-->
-                        <div class="tittle">
-                            <img src="~/Asserts/images/head-top.png" alt="">
-                            <h3 id="prjid">  </h3>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <!--======= PROPERTIES ROW =========-->
-                        @* <ul class="row"> *@
-                        <div class="load_properties">
-                        </div>
-                        @* </ul> *@
-                        @*</div>*@
-                       @*  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
-                    </section>
-                  
-                </div>
             </div>
         </div>
-        @*</div>*@
-        @*</section>*@
+    </div>
+    @*</div>*@
+    @*</section>*@
 
 
 
 
-        @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
+    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <form>
+        <div class="modal-body">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <ul>
+        <li class="mb-2">
+        <p class="text-center">Send Message to Property Owner</p>
+        <input type="text" class="form-control" placeholder="Enter Your Name" />
+
+
+        </li>
+        <li class="mb-2">
+        <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        </li>
+        <li class="mb-2">
+        <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+        <span asp-validation-for="ContactNo" class="text-danger"></span>
+        </li>
+        <li class="mb-2">
+        <textarea type="text" class="form-control" placeholder="Please Type Your Message"></textarea>
+
+        </li>
+        <li>
+
+        </li>
+        </ul>
+
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />
+
+        </div>
+        </form>
+        </div>
+
+        </div>
+        </div>*@
+
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>Contact Us</p>
             </div>
-            <form>
-            <div class="modal-body">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <ul>
-            <li class="mb-2">
-            <p class="text-center">Send Message to Property Owner</p>
-            <input type="text" class="form-control" placeholder="Enter Your Name" />
+            <div class="row">
 
+                <div class="col-lg-6">
 
-            </li>
-            <li class="mb-2">
-            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-            </li>
-            <li class="mb-2">
-            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
-            <span asp-validation-for="ContactNo" class="text-danger"></span>
-            </li>
-            <li class="mb-2">
-            <textarea type="text" class="form-control" placeholder="Please Type Your Message"></textarea>
-
-            </li>
-            <li>
-
-            </li>
-            </ul>
-
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />
-
-            </div>
-            </form>
-            </div>
-
-            </div>
-            </div>*@
-
-
-        <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact section-bg">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Contact</h2>
-                    <p>Contact Us</p>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-lg-6">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="info-box">
-                                    <i class="bx bx-map"></i>
-                                    <h3>Our Address</h3>
-                                    <p>39 Headline Rd, Deer Park, NY 11729</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box mt-4">
-                                    <i class="bx bx-envelope"></i>
-                                    <h3>Email Us</h3>
-                                    <p>ashraf@usbdproperty.com</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box mt-4">
-                                    <i class="bx bx-phone-call"></i>
-                                    <h3>Call Us</h3>
-                                    <p>+88 0188660077</p>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="info-box">
+                                <i class="bx bx-map"></i>
+                                <h3>Our Address</h3>
+                                <p>39 Headline Rd, Deer Park, NY 11729</p>
                             </div>
                         </div>
-
-                    </div>
-
-
-
-
-
-
-
-
-                    <div class="col-lg-6">
-                        <form class="php-email-form">
-                            <p class="text-center">Send Message to Property Owner</p>
-                            <div class="row">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="col-md-6 form-group">
-
-                                    <input type="text" class="form-control" placeholder="Enter Your Name" id="clientName" />
-                                    @*<input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>*@
-                                </div>
-                                <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" placeholder="Enter Your E-mail" id="email" />
-                                    @*<input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>*@
-                                </div>
-                                <div class="form-group mt-3">
-                                    <input type="text" class="form-control" placeholder="Enter Your Phone" id="contactNo" />
-                                    @*<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>*@
-                                </div>
-
-                                <div class="form-group mt-3">
-                                    <textarea type="text" class="form-control" rows="5" placeholder="Please Type Your Message" id="message"></textarea>
-                                    @*<textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>*@
-                                </div>
-                                @*<div class="my-3">
-                                    <div class="loading">Loading</div>
-                                    <div class="error-message"></div>
-                                    <div class="sent-message">Your message has been sent. Thank you!</div>
-                                    </div>*@
-                                <div class="text-center">
-                                    <input type="button" value="Send Message" class="btn btn-primary" id="btnSave" />
-                                    @*<input type="button" value="Send Message" id="btnSave" />*@
-                                </div>
+                        <div class="col-md-6">
+                            <div class="info-box mt-4">
+                                <i class="bx bx-envelope"></i>
+                                <h3>Email Us</h3>
+                                <p>ashraf@usbdproperty.com</p>
                             </div>
-                        </form>
-
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box mt-4">
+                                <i class="bx bx-phone-call"></i>
+                                <h3>Call Us</h3>
+                                <p>+88 0188660077</p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
-        </section><!-- End Contact Section -->
 
-    </main><!-- End #main -->
+
+
+
+
+
+
+                <div class="col-lg-6">
+                    <form class="php-email-form">
+                        <p class="text-center">Send Message to Property Owner</p>
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="col-md-6 form-group">
+
+                                <input type="text" class="form-control" placeholder="Enter Your Name" id="clientName" />
+                                @*<input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>*@
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" placeholder="Enter Your E-mail" id="email" />
+                                @*<input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>*@
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" placeholder="Enter Your Phone" id="contactNo" />
+                                @*<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>*@
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <textarea type="text" class="form-control" rows="5" placeholder="Please Type Your Message" id="message"></textarea>
+                                @*<textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>*@
+                            </div>
+                            @*<div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                                </div>*@
+                            <div class="text-center">
+                                <input type="button" value="Send Message" class="btn btn-primary" id="btnSave" />
+                                @*<input type="button" value="Send Message" id="btnSave" />*@
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Contact Section -->
+    @*</main>*@
+    <!-- End #main -->
     <!-- ======= Footer ======= -->
     <footer>
         <div class="container">
@@ -487,9 +502,10 @@
 
                 PostClientData();
             });
-            
+
                // $("#exampleModalXl").modal('show');
-            
+
+            getVideo()
 
             getFooterProperty()
             getProperty()
@@ -529,6 +545,29 @@
             })
         }
 
+         //type='video/mp4'
+         function getVideo(){
+              //alert("helo")
+              $.ajax({
+                  url: "/ProjectsInfoes/GetProjectsVideo",
+                  method: "Get",
+                  success: function(res){
+                      console.log(res.data)
+                      var ProjectVideolist = "";
+                      $.each(res.data, function(index, value){
+                          console.log(value )
+                          //propertylist += '<ul class="recent-come">';
+                          ProjectVideolist += "<video controls width='100%' height='236'><source src='"+value.projectVideo +"'></video>"
+                      });
+                      console.log("Image")
+                      console.log(ProjectVideolist);
+                      //console.log(PropertySize);
+                      //propertylist += '</ul>';
+                      $(".load_video").empty();
+                      $(".load_video").html(ProjectVideolist);
+                  }
+              })
+        }
 
         function getFooterProperty(){
               //alert("helo")
@@ -622,14 +661,14 @@
                     $.each(res.data, function (index, value) {
                         console.log(value)
                         console.log(value.numberOfBedrooms)
-                        
+
                         propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><div class="img"><img class="img-responsive" src="' + value.path + '" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
                     });
                     console.log(propertylist);
                     console.log("Hello");
                     //console.log(PropertySize);
                     propertylist += '</ul>';
-                   
+
                     $("#property").show();
                     $(".load_properties").empty();
                     $(".load_properties").html(propertylist);
