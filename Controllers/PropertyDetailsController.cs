@@ -416,6 +416,7 @@ namespace USBDProperty.Controllers
                     LandArea = propertyDetails.LandArea,
                     Price = propertyDetails.Price,
                     MeasurementID = propertyDetails.MeasurementID,
+                    PropertyFor = propertyDetails.PropertyFor,
                     Comments = propertyDetails.Comments,
                     HandOverDate = propertyDetails.HandOverDate,
                     PropertyTypeId = propertyDetails.PropertyTypeId,
@@ -542,10 +543,15 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var data = _context.PropertyDetails.Where(m => m.PropertyInfoId == propertyDetails.PropertyInfoId).SingleOrDefaultAsync();
+                if (id != propertyDetails.PropertyInfoId)
+                {
+                    return NotFound();
+                }
+                //var data = _context.PropertyDetails.Where(m => m.PropertyInfoId == propertyDetails.PropertyInfoId).SingleOrDefaultAsync();
+                var data = await _context.PropertyDetails.FindAsync(id);
                 string fpath = "";
                 string wwwRootPath = "";
-                if (propertyDetails.Path.Length > 0)
+                if (propertyDetails.Path != null)
                 {
                     if (_environment != null)
                     {
@@ -562,42 +568,49 @@ namespace USBDProperty.Controllers
                     {
                         await propertyDetails.Image.CopyToAsync(fileStrem);
                     }
+                    propertyDetails.Path = fpath;
+                    if (System.IO.File.Exists(fpath))
+                    {
+                        System.IO.File.Delete(fpath);
+                    }
                 }
                 else
                 {
-                    fpath = data.Result.Path;
+                    //return View(propertyDetails);
+                    //fpath = data.Result.Path;
+                    data.Path = propertyDetails.Path;
                 }
 
-                var propertyInfo = new PropertyDetails
-                {
-                    PropertyInfoId = propertyDetails.PropertyInfoId,
-                    Title = propertyDetails.Title,
-                    Description = propertyDetails.Description,
-                    //PropertyName = propertyDetails.PropertyName,
-                    Location = propertyDetails.Location,
-                    ConstructionStatus = propertyDetails.ConstructionStatus,
-                    PropertySize = propertyDetails.PropertySize,
-                    NumberOfBedrooms = propertyDetails.NumberOfBedrooms,
-                    NumberOfBaths = propertyDetails.NumberOfBaths,
-                    NumberOfBalconies = propertyDetails.NumberOfBalconies,
-                    NumberOfGarages = propertyDetails.NumberOfGarages,
-                    TotalFloor = propertyDetails.TotalFloor,
-                    FloorAvailableNo = propertyDetails.FloorAvailableNo,
-                    Furnishing = propertyDetails.Furnishing,
-                    Facing = propertyDetails.Facing,
-                    Price = propertyDetails.Price,
-                    LandArea = propertyDetails.LandArea,
-                    Comments = propertyDetails.Comments,
-                    MeasurementID = propertyDetails.MeasurementID,
-                    HandOverDate = propertyDetails.HandOverDate,
-                    PropertyTypeId = propertyDetails.PropertyTypeId,
-                    PropertyCondition = propertyDetails.PropertyCondition,
-                    ProjectId = propertyDetails.ProjectId,
-                    AreaId = propertyDetails.AreaId,
-                    UpdateBy = User.Identity.Name ?? "Kulsum",
-                    UpdateDate = DateTime.Now,
-                    Path = fpath
-                };
+                //var propertyInfo = new PropertyDetails
+                //{
+                data.PropertyInfoId = propertyDetails.PropertyInfoId;
+                data.Title = propertyDetails.Title;
+                data.Description = propertyDetails.Description;
+                //data.PropertyName = propertyDetails.PropertyName,
+                data.Location = propertyDetails.Location;
+                data.ConstructionStatus = propertyDetails.ConstructionStatus;
+                data.PropertySize = propertyDetails.PropertySize;
+                data.NumberOfBedrooms = propertyDetails.NumberOfBedrooms;
+                data.NumberOfBaths = propertyDetails.NumberOfBaths;
+                data.NumberOfBalconies = propertyDetails.NumberOfBalconies;
+                data.NumberOfGarages = propertyDetails.NumberOfGarages;
+                data.TotalFloor = propertyDetails.TotalFloor;
+                data.FloorAvailableNo = propertyDetails.FloorAvailableNo;
+                data.Furnishing = propertyDetails.Furnishing;
+                data.Facing = propertyDetails.Facing;
+                data.Price = propertyDetails.Price;
+                data.LandArea = propertyDetails.LandArea;
+                data.Comments = propertyDetails.Comments;
+                data.MeasurementID = propertyDetails.MeasurementID;
+                data.HandOverDate = propertyDetails.HandOverDate;
+                data.PropertyTypeId = propertyDetails.PropertyTypeId;
+                data.PropertyCondition = propertyDetails.PropertyCondition;
+                data.ProjectId = propertyDetails.ProjectId;
+                    data.AreaId = propertyDetails.AreaId;
+                data.UpdateBy = User.Identity.Name ?? "Kulsum";
+                data.UpdateDate = DateTime.Now;
+                data.Path = propertyDetails.Path;
+                //};
                 //_context.Entry(propertyDetails).State = EntityState.Modified;
                 _context.Update(propertyDetails);
                 if(await _context.SaveChangesAsync() > 0)
@@ -642,6 +655,7 @@ namespace USBDProperty.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+                return View(propertyDetails);
             }
         }
 

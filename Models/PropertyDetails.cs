@@ -39,9 +39,8 @@ namespace USBDProperty.Models
         }
         [MaxLength]
         public string? Description { get; set; }
-        [ValidateNever]
-        
-        [StringLength(150)]
+        [ValidateNever]       
+        //[StringLength(150)]
         [DisplayName("Property Name")]
         //public string PropertyName { get; set; }
         public string PropertyName
@@ -51,6 +50,7 @@ namespace USBDProperty.Models
                 return $" {PropertySize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
             }
         }
+
         [Required]
         [StringLength(100)]
         public string Location { get; set; }

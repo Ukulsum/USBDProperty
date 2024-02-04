@@ -35,6 +35,7 @@ namespace USBDProperty.Controllers
             var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id));
             return Json(new { Data = data });
         }
+        [AllowAnonymous]
         public JsonResult GetProjectsVideo()
         {
             var data = _context.ProjectsInfo.OrderByDescending(p => p.Id).ToList();

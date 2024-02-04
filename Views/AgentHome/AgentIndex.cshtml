@@ -554,15 +554,23 @@
                   success: function(res){
                       console.log(res.data)
                       var ProjectVideolist = "";
-                      $.each(res.data, function(index, value){
-                          console.log(value )
-                          //propertylist += '<ul class="recent-come">';
-                          ProjectVideolist += "<video controls width='100%' height='236'><source src='"+value.projectVideo +"'></video>"
-                      });
+                      //$.each(res.data, function(index, value){
+                          //console.log(value )
+                          //if()
+                          //ProjectVideolist += "<li><video controls width='100%' height='236'><source src='"+res.data[0].projectVideo +"' type='video/mp4'></video></li>"
+                          if(res.data.projectVideo != null){
+                              ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[4].projectVideo +"' type='video/mp4'></video></li>"
+                          }
+                          else{
+                              ProjectVideolist = "<li><img src='"+res.data[4].locationMap +"' class='img-responsive' ></li>"
+                          }
+                          //else{
+                          //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].locationMap +"' type='video/mp4'></video></li>"
+                          //}
+                          
+                      //});
                       console.log("Image")
                       console.log(ProjectVideolist);
-                      //console.log(PropertySize);
-                      //propertylist += '</ul>';
                       $(".load_video").empty();
                       $(".load_video").html(ProjectVideolist);
                   }

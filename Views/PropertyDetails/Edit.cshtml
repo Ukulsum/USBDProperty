@@ -26,7 +26,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label   class="control-label">Property Types</label>
-                        <select id="parenTypes" class="form-control" asp-items="ViewBag.PropertyTypeId">
+                        <select id="parenTypes" class="form-control" asp-items="ViewBag.PropertyTypeId" asp-for="PropertyTypeId">
                                 <option value="0">Select Type</option>
                             </select>
                         </div>
@@ -92,6 +92,19 @@
                             <label   class="control-label">Projcts</label>
                             @*<select asp-for="ProjectId" id="drpprj" class="form-control"></select>*@
                         <select asp-items="ViewBag.ProjectsId" class="form-control"></select>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="PropertyCondition" class="control-label"></label>
+                           
+
+                            <select asp-for="PropertyCondition" class="form-control"
+                                    asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
+                                <option value="0">Select Property's condition</option>
+                            </select>
+                            
+                            <span asp-validation-for="PropertyCondition" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -231,7 +244,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="MeasurementID" class="control-label"></label>
-                            <select id="drpunit" class="form-control" asp-items="ViewBag.MeasurementID"></select>
+                            <select id="drpunit" class="form-control" asp-items="ViewBag.MeasurementID" asp-for="MeasurementID"></select>
                             @*<select id="drpunit" asp-items="ViewData.MeasurementID" class="form-control"   >
 
                             </select>*@
