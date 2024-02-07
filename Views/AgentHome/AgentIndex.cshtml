@@ -151,20 +151,23 @@
     @*<main id="main">*@
     <section></section>
 
-    <section id="cta" class="cta">
+       <section>
+        <div class="container">
+            <div class="load_video">
+
+            </div>
+
+        </div>
+    </section>
+
+ @*   <section id="cta" class="cta">
         <div class="container" data-aos="zoom-in">
             <div class="load_video">
 
             </div>
-            @*<img src="@Url.Content(Model.)" class="img-responsive"/>*@
-            @*<div class="text-center">
-                <h3>Call To Action</h3>
-                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <a class="cta-btn" href="#">Call To Action</a>
-                </div>*@
 
         </div>
-    </section>
+    </section>*@
 
 
     <!-- ======= About Section ======= -->
@@ -222,12 +225,12 @@
 
     @*<section class="properties">*@
     @*<div class="container">*@
-    <div class="modal fade " id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: block;" aria-modal="true" role="dialog">
+  @*  <div class="modal fade " id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: block;" aria-modal="true" role="dialog">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
 
                 <section class="properties">
-                    @*<div class="container">*@
+                    <div class="container">
 
                     <!--======= TITTLE =========-->
                     <div class="tittle">
@@ -237,17 +240,17 @@
                     </div>
 
                     <!--======= PROPERTIES ROW =========-->
-                    @* <ul class="row"> *@
+                     <ul class="row"> 
                     <div class="load_properties">
                     </div>
-                    @* </ul> *@
-                    @*</div>*@
-                    @*  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> *@
+                     </ul> 
+                    </div>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
                 </section>
 
             </div>
         </div>
-    </div>
+    </div>*@
     @*</div>*@
     @*</section>*@
 
@@ -554,22 +557,27 @@
                   success: function(res){
                       console.log(res.data)
                       var ProjectVideolist = "";
-                      //$.each(res.data, function(index, value){
-                          //console.log(value )
-                          //if()
-                          //ProjectVideolist += "<li><video controls width='100%' height='236'><source src='"+res.data[0].projectVideo +"' type='video/mp4'></video></li>"
-                          if(res.data.projectVideo != null){
-                              ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[4].projectVideo +"' type='video/mp4'></video></li>"
+                      $.each(res.data, function(index, value){
+                          console.log(value.projectVideo)
+                          console.log(value.locationMap)
+                          if(value.projectVideo != null){
+                               ProjectVideolist += "<li><video controls width='100%' height='256'><source src='"+value.projectVideo +"' ></video></li>"
                           }
                           else{
-                              ProjectVideolist = "<li><img src='"+res.data[4].locationMap +"' class='img-responsive' ></li>"
+                              ProjectVideolist = "<li><img src='"+value.locationMap +"' class='img-responsive' ></li>"
                           }
+                         
+                          //if(res.data.projectVideo != null){
+                          //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].projectVideo +"' type='video/mp4'></video></li>"
+                          //}
+                          //else{
+                          //    ProjectVideolist = "<li><img src='"+res.data[0].locationMap +"' class='img-responsive' ></li>"
+                          //}
                           //else{
                           //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].locationMap +"' type='video/mp4'></video></li>"
                           //}
                           
-                      //});
-                      console.log("Image")
+                      });                    
                       console.log(ProjectVideolist);
                       $(".load_video").empty();
                       $(".load_video").html(ProjectVideolist);
@@ -646,7 +654,7 @@
                 $.each(res.data, function(index, value){
                         console.log(value.id)
                         $("#prjid").html("All properties under " + value.projectName)
-                        projectdata += '<button onclick="Getpropertiesbyproject('+ value.id+')"> <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div></button > '
+                        projectdata += '  <div  onclick="Getpropertiesbyproject('+ value.id+')"  class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
                 });
                 console.log(projectdata);
                 console.log("DataProjects");

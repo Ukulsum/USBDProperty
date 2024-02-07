@@ -19,7 +19,7 @@ namespace USBDProperty.Controllers
         public NoticesController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
-            environment = _environment;
+            _environment = environment;
         }
         [AllowAnonymous]
         public JsonResult HomeNotice()
@@ -67,68 +67,68 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NoticeID,Title,Description,Images,StartDate,EndDate,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] Notice notice)
+        public async Task<IActionResult> Create(Notice notice)
         {
             try
             {
                 string wwwRootPath = "";
+                string fpath = "";
                 if (_environment!=null)
                 {
                      wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
                 }
                 else
                 {
                     wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
+                if(notice.Images != null)
+                {
+                    string extension = Path.GetExtension(notice.Images.FileName).ToLower();
+                    if(extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
+                    {
+                        string fileName = notice.Title + extension;
+                        string path = Path.Combine(fpath, "Images", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await notice.Images.CopyToAsync(fileStrem);
+                        }
+                        notice.ImagePath = "/Content/Images/" + fileName;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide .jpg|.jpeg|.png");
+                        return View(notice);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Please provide Photo ");
                 }
                // string fileName = Path.GetFileNameWithoutExtension(notice.Images.FileName);
-                string extension = Path.GetExtension(notice.Images.FileName);
-                string fileName =  notice.Title + extension;
-                string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
-                using (var fileStrem = new FileStream(path, FileMode.Create))
-                {
-                    await notice.Images.CopyToAsync(fileStrem);
-                }
-                //if (ModelState.IsValid)
+                //string extension = Path.GetExtension(notice.Images.FileName);
+                //string fileName =  notice.Title + extension;
+                //string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
+                //using (var fileStrem = new FileStream(path, FileMode.Create))
                 //{
-                //string fPath = "";
-                //if (notice.Images != null)
-                //{
-
-                //    string pathSave = "";
-                //    var folderName = Path.Combine("/Content/Images");
-                //    if (_environment != null)
-                //    {
-                //        pathSave = Path.Combine(_environment.WebRootPath, folderName);
-                //    }
-                //    else
-                //    {
-                //        pathSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                //    }
-
-                //    var fileName = notice.Title + Path.GetExtension(notice.Images.FileName);
-                //    var filePath = Path.Combine(pathSave, fileName);
-                //    fPath = "~/Content/Images/" + notice.Title + Path.GetExtension(notice.Images.FileName);
-                //    using (var stream = new FileStream(filePath, FileMode.Create))
-                //    {
-                //        await notice.Images.CopyToAsync(stream);
-                //    }
-                //notice.Path = fPath;
-                //return fPath;
+                //    await notice.Images.CopyToAsync(fileStrem);
                 //}
-                var noticeToInsert = new Notice
-                {
-                    Title = notice.Title,
-                    Description = notice.Description,
-                    StartDate = notice.StartDate,
-                    EndDate = notice.EndDate,
-                    CreatedBy = "Umme",
-                    CreatedDate = DateTime.Now,
-                    Path = "/Content/Images/"+fileName
-                    };
+                
+                //var noticeToInsert = new Notice
+                //{
+                //    Title = notice.Title,
+                //    Description = notice.Description,
+                //    StartDate = notice.StartDate,
+                //    EndDate = notice.EndDate,
+                //    CreatedBy = "Umme",
+                //    CreatedDate = DateTime.Now,
+                //    ImagePath = "/Content/Images/"+fileName
+                //    };
                     //string UniqueFileName = UploadImage(notice);
                     
                     //notice.Path = UniqueFileName;
-                    _context.Add(noticeToInsert);
+                    _context.Add(notice);
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
@@ -143,41 +143,6 @@ namespace USBDProperty.Controllers
             
             return View(notice);
         }
-
-        //private string UploadImage(Notice model)
-        //{
-        //    string fPath = "
-        //    ";
-        //    string uniqueFileName = string.Empty;
-        //    if(model.Images != null)
-        //    {
-        //        var folderName = Path.Combine("~/Content/Images");
-        //        var pathSave = Path.Combine(_environment.WebRootPath, folderName);
-        //        var fileName = model.Title + Path.GetExtension(model.Images.FileName);
-        //        var filePath = Path.Combine(pathSave, fileName);
-        //        fPath = "~/Content/Images/" + model.Title + Path.GetExtension(model.Images.FileName);
-        //        using (var stream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            model.Images.CopyTo(stream);
-        //        }
-        //        return fPath;
-        //    }
-            //if (notice.Images != null)
-            //{
-                
-            //    string uploadFolder = Path.Combine(_environment.WebRootPath, "Content/Images/");
-
-            //    string fileName = Guid.NewGuid().ToString() + "_" + notice.Images.FileName;
-            //    string filePath = Path.Combine(uploadFolder, fileName);
-            //    string filetosave = "~/Content/Images/" + fileName;
-            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        notice.Images.CopyTo(fileStream);
-            //    }
-            //    return filetosave;
-            //}
-        //    return "";
-        //}
 
         // GET: Notices/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -195,100 +160,85 @@ namespace USBDProperty.Controllers
             return View(notice);
         }
 
-        // POST: Notices/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("NoticeID,Title,Description,Images,StartDate,EndDate,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] Notice notice)
-        //{
 
-        //    if (id != notice.NoticeID)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(notice);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!NoticeExists(notice.NoticeID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(notice);
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NoticeID,Title,Description,Images,StartDate,EndDate,CreatedDate,CreatedBy,UpdateDate,UpdateBy,IsActive")] Notice notice)
+        public async Task<IActionResult> Edit(int id, Notice notice)
         {
-
             try
             {
-                if (ModelState.IsValid)
+                if (id != notice.NoticeID)
                 {
-                    //var data = _context.Notices.Where(n => n.NoticeID == notice.NoticeID).SingleOrDefaultAsync();
-                    if(notice!= null)
+                    return NotFound();
+                }
+                var data = await _context.Notices.FindAsync(id);
+                string fpath = "";
+                string wwwRootPath = "";
+                //if (notice.Images != null)
+                //{
+                if (_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
+                if(notice.Images != null)
+                {
+                    string extension = Path.GetExtension(notice.Images.FileName).ToLower();
+                    if(extension==".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
                     {
-                        var uniqueFileName = string.Empty;
-                        if (notice.Images != null)
+                        string fileName = notice.Title + extension;
+                        string path = Path.Combine(fpath, "Images", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
                         {
-                            string wwwRootPath = "";
-                            if (_environment != null)
-                            {
-                                wwwRootPath = _environment.WebRootPath;
-                            }
-                            else
-                            {
-                                wwwRootPath = Directory.GetCurrentDirectory();
-                            }
-                            // string fileName = Path.GetFileNameWithoutExtension(notice.Images.FileName);
-                            string extension = Path.GetExtension(notice.Images.FileName);
-                            string fileName = notice.Title + extension;
-                            string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
-                            using (var fileStrem = new FileStream(path, FileMode.Create))
-                            {
-                                await notice.Images.CopyToAsync(fileStrem);
-                            }
-                            var NoticeToUpdate = new Notice
-                            {
-                                NoticeID = notice.NoticeID,
-                                Title = notice.Title,
-                                Description = notice.Description,
-                                StartDate = notice.StartDate,
-                                EndDate = notice.EndDate,
-                                UpdateBy = "Kulsum",
-                                UpdateDate = DateTime.Now,
-                                Path = "/Content/Images/" + fileName
-                            };
-                            _context.Update(NoticeToUpdate);
-                            if (await _context.SaveChangesAsync() > 0)
-                            {
-                                return RedirectToAction(nameof(Index));
-                            }
-                        };
+                            await notice.Images.CopyToAsync(fileStrem);
+                        }
+                         notice.ImagePath = "/Content/Images/" + fileName;
+                        if (System.IO.File.Exists(fpath))
+                        {
+                            System.IO.File.Delete(fpath);
+                        }
                     }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide .jpg|.jpeg|.png");
+                        return View(notice);
+                    }
+                }
+                else
+                {
+                    data.ImagePath = notice.ImagePath;
+                }
+                  
+                data.NoticeID = notice.NoticeID;
+                data.Title = notice.Title;
+                data.Description = notice.Description;
+                data.ImagePath = notice.ImagePath;
+                data.UpdateBy = User.Identity.Name ?? "Umme";
+                data.UpdateDate = DateTime.Now;
+                data.StartDate = notice.StartDate;
+                data.EndDate = notice.EndDate;
+                data.IsActive = notice.IsActive;
+                data.IsFeatured = notice.IsFeatured;
 
+                _context.Update(data);
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    return RedirectToAction(nameof(Index));
                 }
 
+                return View(notice);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(notice);
             }
-            return View();         
         }
 
         // GET: Notices/Delete/5

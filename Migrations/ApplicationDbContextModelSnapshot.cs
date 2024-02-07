@@ -522,15 +522,15 @@ namespace USBDProperty.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -691,6 +691,9 @@ namespace USBDProperty.Migrations
                     b.Property<bool>("ISFeatured")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -716,9 +719,6 @@ namespace USBDProperty.Migrations
 
                     b.Property<int>("NumberOfGarages")
                         .HasColumnType("int");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");

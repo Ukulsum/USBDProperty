@@ -101,7 +101,7 @@ namespace USBDProperty.Controllers
                         {
                             await projectsInfo.MapPath.CopyToAsync(fileStrem);
                         }
-                        projectsInfo.LocationMap = "~/Developer/LocationMap/" + fileName;
+                        projectsInfo.LocationMap = "/Developer/LocationMap/" + fileName;
                     }
                     else
                     {
@@ -127,6 +127,7 @@ namespace USBDProperty.Controllers
                         await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
                     }
                     projectsInfo.ProjectVideo = "~/Developer/Video/" + fileName;
+                    //projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
                 }
                 else
                 {
@@ -282,26 +283,7 @@ namespace USBDProperty.Controllers
                 }
 
 
-                //if (modelstate.isvalid)
-                //{
-                //    try
-                //    {
-                //        _context.update(projectsinfo);
-                //        await _context.savechangesasync();
-                //    }
-                //    catch (dbupdateconcurrencyexception)
-                //    {
-                //        if (!projectsinfoexists(projectsinfo.id))
-                //        {
-                //            return notfound();
-                //        }
-                //        else
-                //        {
-                //            throw;
-                //        }
-                //    }
-                //    return redirecttoaction(nameof(index));
-                //}
+              
                 ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
                 return View(projectsInfo);
             }

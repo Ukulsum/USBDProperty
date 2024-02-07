@@ -62,8 +62,10 @@
                     @Html.Raw(item.Description)
                 </td>
                 <td>
+                    
                     @*@Html.DisplayFor(modelItem => item.Images)*@
-                    <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive">
+                   @* <img src=@Url.Content(item.ImagePath) alt=@item.Title width="250" height="200" class="img-responsive">*@
+                    <img src="@Url.Content(item.ImagePath)" style="width:155px;height:155px;" alt="@item.Title"  >
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StartDate)
@@ -101,88 +103,3 @@
 
 
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Images)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-                </th>
-                <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-                </th>
-                <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
-                </th>
-                <th>
-                @Html.DisplayNameFor(model => model.UpdateBy)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.Raw(item.Description)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.Images)*@
-                    <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive">
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.UpdateDate)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.UpdateBy)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.NoticeID"><i class="bi bi-pencil-square"></i></a> |
-                    <a asp-action="Details" asp-route-id="@item.NoticeID"><i class="bi bi-eye-fill"></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.NoticeID"><i class="bi bi-trash"></i></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

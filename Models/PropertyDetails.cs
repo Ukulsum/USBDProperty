@@ -93,7 +93,7 @@ namespace USBDProperty.Models
         
         public float Price { get; set; }
         [ValidateNever]
-        public string? Path { get; set; }
+        public string? ImagePath { get; set; }
         [NotMapped]
         [ValidateNever]
         [DisplayName("Photos")]
