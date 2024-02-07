@@ -45,7 +45,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="control-label">Country</label>
-                        <select  id="drpCountry" class="form-control" asp-items="ViewBag.CountryId"></select>
+                        <select id="drpCountry" class="form-control" asp-items="ViewBag.CountryId"></select>
                         @*<select  id="drpCountry" class="form-control"  ></select>*@
                     </div>
                     <div class="form-group">
@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label class="control-label">Developer</label>
                         @*<select id="drpDeveloper" class="form-control"  >*@
-                        <select  id="drpDeveloper" class="form-control" asp-items="ViewBag.AgentID">
+                        <select id="drpDeveloper" class="form-control" asp-items="ViewBag.AgentID">
                         </select>
 
                     </div>
@@ -93,19 +93,7 @@
                         <select asp-items="ViewBag.ProjectsId" id="drpprj" class="form-control" asp-for="ProjectId"></select>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label asp-for="PropertyCondition" class="control-label"></label>
 
-
-                        <select asp-for="PropertyCondition" class="form-control"
-                                asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
-                            <option value="0">Select Property's condition</option>
-                        </select>
-
-                        <span asp-validation-for="PropertyCondition" class="text-danger"></span>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <h2>Property's' Information</h2>
@@ -126,12 +114,19 @@
                             <span asp-validation-for="PropertyName" class="text-danger"></span>
                         </div>
                     </div>
-                    @*  <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="form-group">
-                        <label asp-for="PropertyTypeId" class="control-label"></label>
-                        <select asp-for="PropertyTypeId" class="form-control" asp-items="ViewBag.PropertyTypeId"></select>
+                            <label asp-for="PropertyCondition" class="control-label"></label>
+
+
+                            <select asp-for="PropertyCondition" class="form-control"
+                                    asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
+                                <option value="0">Select Property's condition</option>
+                            </select>
+
+                            <span asp-validation-for="PropertyCondition" class="text-danger"></span>
                         </div>
-                        </div> *@
+                    </div>
                 </div>
 
                 <div class="row">
@@ -150,18 +145,20 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="PropertySize" class="control-label"></label>
-                            <input type="text" asp-for="PropertySize" class="form-control" />
-                            <span asp-validation-for="PropertySize" class="text-danger"></span>
+                            <label asp-for="FlatSize" class="control-label"></label>
+                            <input type="text" asp-for="FlatSize" class="form-control" />
+                            <span asp-validation-for="FlatSize" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="NumberOfBedrooms" class="control-label"></label>
-                            <input type="number" asp-for="NumberOfBedrooms" class="form-control" />
-                            <span asp-validation-for="NumberOfBedrooms" class="text-danger"></span>
+                            <label asp-for="Price" class="control-label"></label>
+                            <input type="text" asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -171,6 +168,23 @@
                             <span asp-validation-for="NumberOfBaths" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="NumberOfBedrooms" class="control-label"></label>
+                            <input type="number" asp-for="NumberOfBedrooms" class="form-control" />
+                            <span asp-validation-for="NumberOfBedrooms" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="TotalFloor" class="control-label"></label>
+                            <input type="number" asp-for="TotalFloor" class="form-control" />
+                            <span asp-validation-for="TotalFloor" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="NumberOfBalconies" class="control-label"></label>
@@ -183,15 +197,6 @@
                             <label asp-for="NumberOfGarages" class="control-label"></label>
                             <input type="number" asp-for="NumberOfGarages" class="form-control" />
                             <span asp-validation-for="NumberOfGarages" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="TotalFloor" class="control-label"></label>
-                            <input type="number" asp-for="TotalFloor" class="form-control" />
-                            <span asp-validation-for="TotalFloor" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -212,8 +217,6 @@
                             <span asp-validation-for="Furnishing" class="text-danger"></span>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Facing" class="control-label"></label>
@@ -224,6 +227,8 @@
                             <span asp-validation-for="Facing" class="text-danger"></span>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="LandArea" class="control-label"></label>
@@ -231,15 +236,6 @@
                             <span asp-validation-for="LandArea" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="Price" class="control-label"></label>
-                            <input type="text" asp-for="Price" class="form-control" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="MeasurementID" class="control-label"></label>
@@ -272,16 +268,16 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label asp-for="Image" class="control-label"></label>
-                            <input type="file" class="form-control" asp-for="Image" id="imageInput"/>
+                            <input type="file" class="form-control" name="Image" id="imageInput" />
                             <span asp-validation-for="Image" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
-                            <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="Image Upload" />
+                            <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" />
                             @*<img src="#" style="width:155px;height:155px;" alt="Image Upload" id="imgPreview">*@
 
-                            <input type="text" class="form-control" name="Images" id="path" asp-for="ImagePath" hidden/>
+                            <input type="text" class="form-control" name="Image" id="path" hidden />
                         </div>
                     </div>
                 </div>
@@ -323,99 +319,99 @@
 
 @section Scripts{
 <script>
-        $(document).ready(function(){
+           $(document).ready(function(){
 
-         CKEDITOR.replace('Description', {
-            height: 300,
-            width: '100%',
-         });
+            CKEDITOR.replace('Description', {
+               height: 300,
+               width: '100%',
+            });
 
-         $("#parenTypes").change(function () {
-             alert("P type")
-             loadChild($(this).val());
-         })
+            $("#parenTypes").change(function () {
+                alert("P type")
+                loadChild($(this).val());
+            })
 
-        $("#drpDeveloper").change(function () {
-             alert($(this).val())
-             loadPrjbyDeveloper($(this).val())
-         })
+           $("#drpDeveloper").change(function () {
+                alert($(this).val())
+                loadPrjbyDeveloper($(this).val())
+            })
 
-         $("#drpCountry").change(function(){
-                loadDivision($(this).val())
-         })
+            $("#drpCountry").change(function(){
+                   loadDivision($(this).val())
+            })
 
-         $("#drpDivision").change(function () {
-                loadCity($(this).val())
-         })
+            $("#drpDivision").change(function () {
+                   loadCity($(this).val())
+            })
 
-         $("#drpCity").change(function () {
-                loadArea($(this).val())
-         })
+            $("#drpCity").change(function () {
+                   loadArea($(this).val())
+            })
 
 
-        })//document
+           })//document
 
-  function loadChild(id){
-       alert("Child id "+ id)
-       $.get("/PropertyTypes/GetChildType?pid=" + id , function (data, status) {
-             console.log(data)
-             $("#drptypes").empty();
-             $("#drptypes").append($('<option></option>').val("0").html("Select type"));
-             $.each(data, function (i, v) {
-                 $("#drptypes").append($('<option></option>').val(v.propertyTypeId).html(v.propertyTypeName));
-             })
-       
-       })
-  }
-  function loadPrjbyDeveloper(devid) {
-            console.log("dev id: "+devid)
-            $.get("/ProjectsInfoes/GetProjects?id=" + devid, function (data, status) {
-                console.log(data.data)
-                $("#drpprj").empty();
-                $("#drpprj").append($('<option></option>').val("0").html("Select Project"));
-                $.each(data.data, function (i, v) {
-
-                    $("#drpprj").append($('<option></option>').val(v.id).html(v.projectName));
+     function loadChild(id){
+          alert("Child id "+ id)
+          $.get("/PropertyTypes/GetChildType?pid=" + id , function (data, status) {
+                console.log(data)
+                $("#drptypes").empty();
+                $("#drptypes").append($('<option></option>').val("0").html("Select type"));
+                $.each(data, function (i, v) {
+                    $("#drptypes").append($('<option></option>').val(v.propertyTypeId).html(v.propertyTypeName));
                 })
 
-            })
- }
-
-  function loadDivision( cid) {
-      $.get("/Divisions/GetDivision?cid="+cid, function (data, status) {
-          console.log(data)
-          $("#drpDivision").empty();
-          $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
-          $.each(data, function (i, v) {
-              $("#drpDivision").append($('<option></option>').val(v.divisionID).html(v.divisionName));
           })
+     }
+     function loadPrjbyDeveloper(devid) {
+               console.log("dev id: "+devid)
+               $.get("/ProjectsInfoes/GetProjects?id=" + devid, function (data, status) {
+                   console.log(data.data)
+                   $("#drpprj").empty();
+                   $("#drpprj").append($('<option></option>').val("0").html("Select Project"));
+                   $.each(data.data, function (i, v) {
 
-      })
-  }
+                       $("#drpprj").append($('<option></option>').val(v.id).html(v.projectName));
+                   })
 
-  function loadCity( did) {
-      $.get("/Cities/GetCities?did="+did, function (data, status) {
-          console.log(data)
-          $("#drpCity").empty();
-          $("#drpCity").append($('<option></option>').val("0").html("Select City"));
-          $.each(data, function (i, v) {
-              $("#drpCity").append($('<option></option>').val(v.cityId).html(v.cityName));
-          })
+               })
+    }
 
-      })
-  }
+     function loadDivision( cid) {
+         $.get("/Divisions/GetDivision?cid="+cid, function (data, status) {
+             console.log(data)
+             $("#drpDivision").empty();
+             $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
+             $.each(data, function (i, v) {
+                 $("#drpDivision").append($('<option></option>').val(v.divisionID).html(v.divisionName));
+             })
 
-  function loadArea( cid) {
-     $.get("/Areas/GetArea?cid=" +cid, function (data, status) {
-          console.log(data)
-          $("#drpArea").empty();
-          $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
-          $.each(data, function (i, v) {
-              $("#drpArea").append($('<option></option>').val(v.areaId).html(v.areaName));
-          })
+         })
+     }
 
-     })
-  }
+     function loadCity( did) {
+         $.get("/Cities/GetCities?did="+did, function (data, status) {
+             console.log(data)
+             $("#drpCity").empty();
+             $("#drpCity").append($('<option></option>').val("0").html("Select City"));
+             $.each(data, function (i, v) {
+                 $("#drpCity").append($('<option></option>').val(v.cityId).html(v.cityName));
+             })
+
+         })
+     }
+
+     function loadArea( cid) {
+        $.get("/Areas/GetArea?cid=" +cid, function (data, status) {
+             console.log(data)
+             $("#drpArea").empty();
+             $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
+             $.each(data, function (i, v) {
+                 $("#drpArea").append($('<option></option>').val(v.areaId).html(v.areaName));
+             })
+
+        })
+     }
 
 
 </script>

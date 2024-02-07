@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="row">
-                <h2>Developer's Information</h2>
+                <h2>Owner's Information</h2>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Developer</label>
@@ -94,7 +94,7 @@
                 <hr />
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>
                             <input type="text" asp-for="Title" class="form-control" />
@@ -102,7 +102,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="PropertyCondition" class="control-label"></label>
 
@@ -116,22 +116,6 @@
                         </div>
                     </div>
 
-                    @*<div class="col-md-4">
-                        <div class="form-group">
-                        <label asp-for="PropertyName" class="control-label"></label>
-                        <input type="text" asp-for="PropertyName" class="form-control" />
-                        <span asp-validation-for="PropertyName" class="text-danger"></span>
-                        </div>
-                        </div>*@
-                    @*  <div class="col-md-4">
-                        <div class="form-group">
-                        <label asp-for="PropertyTypeId" class="control-label"></label>
-                        <select asp-for="PropertyTypeId" class="form-control" asp-items="ViewBag.PropertyTypeId"></select>
-                        </div>
-                        </div> *@
-                </div>
-
-                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="ConstructionStatus" class="control-label"></label>
@@ -145,11 +129,21 @@
                             <span asp-validation-for="ConstructionStatus" class="text-danger"></span>
                         </div>
                     </div>
+                </div>
+                @*if(@Model.PropertyType.IsLand == True){*@
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="PropertySize" class="control-label"></label>
-                            <input type="text" asp-for="PropertySize" class="form-control" />
-                            <span asp-validation-for="PropertySize" class="text-danger"></span>
+                            <label asp-for="FlatSize" class="control-label">Flat Size (sqft)</label>
+                            <input type="text" asp-for="FlatSize" class="form-control" />
+                            <span asp-validation-for="FlatSize" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label">Price (per sqft)</label>
+                            <input type="text" asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -210,6 +204,8 @@
                         </div>
                     </div>
                 </div>
+                @*}*@
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -228,13 +224,7 @@
                             <span asp-validation-for="LandArea" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="Price" class="control-label"></label>
-                            <input type="text" asp-for="Price" class="form-control" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-4">

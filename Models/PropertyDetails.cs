@@ -32,11 +32,6 @@ namespace USBDProperty.Models
         [StringLength(255)]
         public string Title { get; set; }
        
-        [ValidateNever]
-        public double TotalPrice
-        {
-            get { return this.PropertySize* Price; }
-        }
         [MaxLength]
         public string? Description { get; set; }
         [ValidateNever]       
@@ -47,51 +42,67 @@ namespace USBDProperty.Models
         {
             get
             {
-                return $" {PropertySize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+                return $" {FlatSize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+            }
+        }
+
+        public string LandInfo
+        {
+            get
+            {
+                return $" {LandArea} {MeasurementUnit.Name} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
             }
         }
 
         [Required]
         [StringLength(100)]
         public string Location { get; set; }
-       
+
         [DisplayName("Construction Status")]
         public ConstructionStatus ConstructionStatus { get; set; }
-        [Required]
     
-        [DisplayName("Property Size")]
-        public int PropertySize { get; set; }
-        [Required]
-        
+        [DisplayName("Flat Size")]
+        public int? FlatSize { get; set; }
+        public float? Price { get; set; }
+        [DisplayName("Total Price")]
+        [ValidateNever]
+        public double? TotalPrice
+        {
+            get { return this.FlatSize * Price; }
+        }
+
         [DisplayName("Bedrooms")]
-        public int NumberOfBedrooms { get; set; }
-        [Required]
+        public int? NumberOfBedrooms { get; set; }
         
         [DisplayName("Baths")]
-        public int NumberOfBaths { get; set; }
-        [Required]
+        public int? NumberOfBaths { get; set; }
         
         [DisplayName("Balconies")]
-        public int NumberOfBalconies { get; set; }
-        [Required]
+        public int? NumberOfBalconies { get; set; }
         
         [DisplayName("Garages")]
-        public int NumberOfGarages { get; set; }
+        public int? NumberOfGarages { get; set; }
         
         [DisplayName("Total Floor")]
-        public int TotalFloor { get; set; }
+        public int? TotalFloor { get; set; }
         
         [DisplayName("Floor Available No")]
-        public int FloorAvailableNo { get; set; }
+        public int? FloorAvailableNo { get; set; }
         
-        public Furnished Furnishing { get; set; }
+        public Furnished? Furnishing { get; set; }
         
-        public Facing Facing { get; set; }
+        public Facing? Facing { get; set; }
         
         [DisplayName("Land Area")]
         public int LandArea { get; set; }
         
-        public float Price { get; set; }
+        public float? LandPrice { get; set; }
+        //[ValidateNever]
+        //[DisplayName("Total Land Price")]
+        //public double? TotalLandPrice
+        //{
+        //    get { return this.LandArea * LandPrice; }
+        //}
         [ValidateNever]
         public string? ImagePath { get; set; }
         [NotMapped]
@@ -102,7 +113,7 @@ namespace USBDProperty.Models
         [ForeignKey("MeasurementUnit")]
         public int MeasurementID { get; set; }
         [StringLength(255)]
-        public string Comments { get; set; }
+        public string? Comments { get; set; }
         [DisplayName("Propety Condition")]
         public PropertyCondition PropertyCondition { get; set; }
         [DisplayName("Handover Date")]
@@ -117,18 +128,10 @@ namespace USBDProperty.Models
        
         [ForeignKey("Area")]
         public int AreaId { get; set; }
-        //[ForeignKey("propertyFor")]
-        //public int PropertyForId { get; set; }
 
-
-        //[ValidateNever]
-        //[DisplayName("Property For")]
-        //public PropertyFor propertyFor { get; set; }
         [ValidateNever]
         [DisplayName("Property Type")]
         public PropertyType PropertyType { get; set; }
-        //[ValidateNever]   
-        //public  DevelopersorAgent PropertyOwnerInfo { get; set; }
 
         [ValidateNever]
         public ProjectsInfo ProjectsInfo { get; set; }

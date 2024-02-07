@@ -83,10 +83,13 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
-                if (pSize != null || pSize > 0)
-                {
-                    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
-                }
+                //if (pSize != null || pSize > 0)
+                //{
+                //    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
+                //}
+
+
+
                 //if (ptypeid != null || ptypeid > 0)
                 //{
                 //    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
@@ -167,13 +170,6 @@ namespace USBDProperty.Controllers
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
                                                 .Where(p=>p.ISFeatured).ToList();
-                //.Include(p => p.SocialIcon)
-                //.Include(p => p.propertyFor).ToList();
-                //.Include(p => p.TransactionType)
-                //if (ISFeatured == true)
-                //{
-                    
-                //}
 
                 return Json(new { data = applicationDbContext });
             }
@@ -184,24 +180,6 @@ namespace USBDProperty.Controllers
             }
 
         }
-
-
-        //public JsonResult DevProjectProperty(int id)
-        //{
-        //    try
-        //    {
-        //        var propertyData = _context.PropertyDetails
-        //                                   .Include(p => p.Area)
-        //                                   .Include(p => p.ProjectsInfo)
-        //                                   .Include(p => p.PropertyType)
-        //                                   .Where(p => p.ProjectsInfo.Id == id).ToList();
-        //        return Json (new { data = propertyData });
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return Json(new { data = "No record" });
-        //    }
-        //}
 
         public JsonResult BannerProperty()
         {
@@ -322,12 +300,6 @@ namespace USBDProperty.Controllers
         {
             try
             {
-               // ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-              // ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner");
-               // ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
-                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon");
-                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
-                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
                 return View();
             }
             catch(Exception ex)
@@ -509,28 +481,38 @@ namespace USBDProperty.Controllers
                 var data = await _context.PropertyDetails.FindAsync(id);
                 string fpath = "";
                 string wwwRootPath = "";
+                
+                if (_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (propertyDetails.ImagePath != null)
                 {
-                    if (_environment != null)
+                    string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
+                    if(extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
                     {
-                        wwwRootPath = _environment.WebRootPath;
+                        string fileName = propertyDetails.Title + extention;
+                        string path = Path.Combine(fpath, "Images", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await propertyDetails.Image.CopyToAsync(fileStrem);
+                        }
+                        propertyDetails.ImagePath = "/Content/Images/" + fileName;
+                        if (System.IO.File.Exists(fpath))
+                        {
+                            System.IO.File.Delete(fpath);
+                        }
                     }
                     else
                     {
-                        wwwRootPath = Directory.GetCurrentDirectory();
-                    }
-                    string extention = Path.GetExtension(propertyDetails.Image.FileName);
-                    string fileName = propertyDetails.Title + extention;
-                    fpath = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
-                    using (var fileStrem = new FileStream(fpath, FileMode.Create))
-                    {
-                        await propertyDetails.Image.CopyToAsync(fileStrem);
-                    }
-                    propertyDetails.ImagePath = "/Content/Images/" + fileName;
-                    //propertyDetails.Path = fpath;
-                    if (System.IO.File.Exists(fpath))
-                    {
-                        System.IO.File.Delete(fpath);
+                        ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
+                        return View(propertyDetails);
                     }
                 }
                 else
@@ -544,7 +526,7 @@ namespace USBDProperty.Controllers
                 //data.PropertyName = propertyDetails.PropertyName,
                 data.Location = propertyDetails.Location;
                 data.ConstructionStatus = propertyDetails.ConstructionStatus;
-                data.PropertySize = propertyDetails.PropertySize;
+                data.FlatSize = propertyDetails.FlatSize;
                 data.NumberOfBedrooms = propertyDetails.NumberOfBedrooms;
                 data.NumberOfBaths = propertyDetails.NumberOfBaths;
                 data.NumberOfBalconies = propertyDetails.NumberOfBalconies;
