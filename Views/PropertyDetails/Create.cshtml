@@ -10,6 +10,7 @@
     <div class="card-body">
         <h5 class="card-title text-center">Property Listing</h5>
         <hr style="width:100%; " />
+       
         <form asp-action="Create" method="Post" enctype="multipart/form-data" asp-controller="PropertyDetails">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
@@ -75,7 +76,7 @@
                 <h2>Owner's Information</h2>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label">Developer</label>
+                        <label class="control-label">Owner</label>
                         <select id="drpDeveloper" class="form-control">
                         </select>
 
@@ -105,8 +106,6 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="PropertyCondition" class="control-label"></label>
-
-
                             <select asp-for="PropertyCondition" class="form-control"
                                     asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
                                 <option value="0">Select Property's condition</option>
@@ -131,6 +130,7 @@
                     </div>
                 </div>
                 @*if(@Model.PropertyType.IsLand == True){*@
+                  <div id="flatdiv">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -226,6 +226,7 @@
                     </div>
 
                 </div>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -315,6 +316,8 @@
 <script>
 
     $(document).ready(function (){
+        let isLand=false;
+
         loadCountry();
         loadDeveloper();
         loadParentType();
@@ -338,17 +341,36 @@
 
         $("#parenTypes").change(function () {
 
+
                 console.log($(this).val())
                 $.get("/PropertyTypes/GetChildType?pid=" + $(this).val(), function (data, status) {
                 console.log(data)
                     $("#drptypes").empty();
                     $("#drptypes").append($('<option></option>').val("0").html("Select"));
                     $.each(data, function (i,v) {
-                        $("#drptypes").append($('<option></option>').val(v.propertyTypeId).html(v.propertyTypeName));
+
+                        $("#drptypes").append($('<option data-island='+v.isLand +'></option>').val(v.propertyTypeId).html(v.propertyTypeName));
                     })
 
           })
         })
+
+          $("#drptypes").change(function () {
+                isLand=this.selectedOptions[0].getAttribute('data-island');
+                console.log(isLand)
+                        if(isLand === 'true') {
+                              console.log( "True part")
+                                    $("#flatdiv").hide();
+                                    console.log(isLand)
+                        }
+                       if(isLand === 'false') { 
+                             console.log("false part")
+                            console.log(isLand)
+                          
+                            $("#flatdiv").show();}
+                  console.log( " Land= "+isLand)
+
+          })
             $("#drpDeveloper").change(function () {
                 alert($(this).val())
                 loadPrjbyDeveloper($(this).val())

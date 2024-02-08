@@ -30,5 +30,7 @@ namespace USBDProperty.Models
         public int? ParentPropertyTypeId { get; set; } = 0;
         [NotMapped]
         public string ParentPropertyType { get; set; }
+        [ValidateNever]
+        public bool IsLand { get; set; }
     }
 }

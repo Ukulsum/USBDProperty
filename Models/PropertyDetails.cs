@@ -46,13 +46,13 @@ namespace USBDProperty.Models
             }
         }
 
-        public string LandInfo
-        {
-            get
-            {
-                return $" {LandArea} {MeasurementUnit.Name} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
-            }
-        }
+        //public string LandInfo
+        //{
+        //    get
+        //    {
+        //        return $" {LandArea} {MeasurementUnit.Name??"NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
+        //    }
+        //}
 
         [Required]
         [StringLength(100)]
