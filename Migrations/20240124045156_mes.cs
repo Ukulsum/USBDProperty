@@ -16,11 +16,11 @@ namespace USBDProperty.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Message",
-                table: "ClientContacts",
-                type: "nvarchar(max)",
-                nullable: true);
+            //migrationBuilder.AddColumn<string>(
+            //    name: "Message",
+            //    table: "ClientContacts",
+            //    type: "nvarchar(max)",
+            //    nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
