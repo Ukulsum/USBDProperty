@@ -4,57 +4,148 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_AgentLayout.cshtml";
 }
-
-<h1>Edit</h1>
-
-<h4>ProjectsInfo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Update Projects</h5>
+        <hr style="width:100%; " />
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" asp-controller="ProjectsInfoes">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProjectName" class="control-label"></label>
-                <input asp-for="ProjectName" class="form-control" />
-                <span asp-validation-for="ProjectName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LocationMap" class="control-label"></label>
-                <input asp-for="LocationMap" class="form-control" />
-                <span asp-validation-for="LocationMap" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AgentID" class="control-label"></label>
-                <select asp-for="AgentID" class="form-control" asp-items="ViewBag.AgentID"></select>
-                <span asp-validation-for="AgentID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="row">
+                <h2>Projects Information</h2>
+                <div class="form-group col-md-4">
+                    <label asp-for="AgentID" class="control-label"></label>
+                    <select  asp-for="AgentID" class="form-control" asp-items="ViewBag.AgentID">
+                        <option value="0">Select Developer or Agent</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="ProjectName" class="control-label"></label>
+                    <input asp-for="ProjectName" class="form-control" />
+                    <span asp-validation-for="ProjectName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" id="Description"></textarea>
+                    @*<textarea type="text" asp-for="Description" class="form-control"></textarea>*@
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 form-group">
+                        <label class="control-label">Project Overview Video</label>
+                        <input type="file" id="videoFile" name="ProjectVideoPath" class="form-control" accept="video/*" />
+                    </div>
+                    <div class="col-md-4">
+                        <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                            <video controls style="width:145px;height:145px;" alt="Image Upload" id="videoPreview"><source src="@Url.Content(Model.ProjectVideo)"/></video>
+                            @*<input type="text" class="form-control" name="ProjectVideo" id="video" asp-for="ProjectVideo" accept="video/*" hidden />*@
+                            <input type="text" class="form-control" name="ProjectVideoPath" id="video" asp-for="ProjectVideoPath" accept="video/*" hidden />
+                            @*<input type="text" class="form-control" name="ProjectVideoPath" id="video" hidden />*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 row">
+                    <h2>Location</h2>
+                    <hr />
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">Country</label>
+                            <select asp-items="ViewBag.CountryId" id="drpCountry" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Division</label>
+                            <select asp-items="ViewBag.DivisionId" id="drpDivision" class="form-control"></select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <select asp-items="ViewBag.CityId" id="drpCity" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Area</label>
+                            <select asp-items="ViewBag.AreaId" id="drpArea" class="form-control" asp-for="AreaID"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input type="text" asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 form-group">
+                            <label class="control-label">Location Map</label>
+                            <input type="file" name="MapPath" class="form-control" id="imgInput" />
+                        </div>
+                        <div class="col-md-4">
+                            <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                                <img src="@Url.Content(Model.LocationMap)" style="width:145px;height:145px;" alt="Image Upload" id="imgPreview">
+                                <input type="text" class="form-control" name="mappath" id="locationmap" hidden/>
+                                @*<input type="text" class="form-control" name="LocationMap" id="LocationMap"asp-for="LocationMap" hidden/>*@
+                                @*<input type="text" class="form-control" name="LocationMap" id="LocationMap" hidden/>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index">Back to List</a>
+                </div>
+
+
             </div>
         </form>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+<script>
+    $(document).ready(function (){
+        CKEDITOR.replace('Description', {
+            height: 300,
+            width: '100%',
+        });
+        $("#videoFile").change(function(){
+            const file = this.files[0];
+            console.log(file);
+            if(file){
+                let reader = new FileReader();
+                reader.onload = function(event){
+                    console.log(event.target.result);
+                    $("#videoPreview").attr('src', event.target.result);
+                }
+                reader.readAsDataURL(file);
+              }
+        });
+        $("#imgInput").change(function () {
+            const file = this.files[0];
+            console.log(file);
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    console.log(event.target.result);
+                    $("#imgPreview").attr('src', event.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    })
+</script>
 }

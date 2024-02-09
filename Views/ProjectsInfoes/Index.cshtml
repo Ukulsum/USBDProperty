@@ -4,78 +4,164 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AgentLayout.cshtml";
 }
+
 <div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="card-title">List of Property</h5>
+            </div>
+            <div class="col-md-3">
+                <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Location)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LocationMap)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectVideo)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.Raw(item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProjectName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @*     @Html.DisplayFor(modelItem => item.LocationMap) *@
+                            @if (item.LocationMap != null)
+                            {
+                                <img src="@Url.Content(item.LocationMap)" class="img-responsive" height="100px" width="100px" />
+                            }
+                        </td>
+                        <td>
+                            @*   @Html.DisplayFor(modelItem => item.Developers.Banner) *@
+                            @if (item.ProjectVideo != null)
+                            {
+                                @*<video src="@Url.Content(item.ProjectVideo)"></video>*@
+                                <video controls width='264' height='136'><source src="@Url.Content(item.ProjectVideo)"/></video>
+
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> |
+                            <a asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+@*<div class="card">
     <div class="card-body">
 
         <div class="row">
             <div class="col-md-12">
-<h1>Index</h1>
+                <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationMap)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectVideo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-            @*     @Html.DisplayFor(modelItem => item.LocationMap) *@
+                <p>
+                    <a asp-action="Create">Create New</a>
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProjectName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Location)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LocationMap)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProjectVideo)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjectName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Location)
+                                </td>
+                                <td>
+                                    
                                     @if (item.LocationMap != null)
                                     {
-                                        <img src="@Url.Content(item.LocationMap)"  />
+                                        <img src="@Url.Content(item.LocationMap)" />
                                     }
-            </td>
-            <td>
-              @*   @Html.DisplayFor(modelItem => item.Developers.Banner) *@
+                                </td>
+                                <td>
+                                    
                                     @if (item.ProjectVideo != null)
                                     {
-                                       <video src="@Url.Content(item.ProjectVideo)"></video>
+                                        <video src="@Url.Content(item.ProjectVideo)"></video>
 
                                     }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
-</div></div></div></div>
+            </div>
+        </div>
+    </div>
+</div>*@

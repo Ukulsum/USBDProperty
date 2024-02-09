@@ -522,15 +522,15 @@ namespace USBDProperty.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -660,7 +660,6 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -676,13 +675,16 @@ namespace USBDProperty.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Facing")
+                    b.Property<int?>("Facing")
                         .HasColumnType("int");
 
-                    b.Property<int>("FloorAvailableNo")
+                    b.Property<int?>("FlatSize")
                         .HasColumnType("int");
 
-                    b.Property<int>("Furnishing")
+                    b.Property<int?>("FloorAvailableNo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Furnishing")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("HandOverDate")
@@ -691,11 +693,17 @@ namespace USBDProperty.Migrations
                     b.Property<bool>("ISFeatured")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<int>("LandArea")
                         .HasColumnType("int");
+
+                    b.Property<float?>("LandPrice")
+                        .HasColumnType("real");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -705,22 +713,19 @@ namespace USBDProperty.Migrations
                     b.Property<int>("MeasurementID")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBalconies")
+                    b.Property<int?>("NumberOfBalconies")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBaths")
+                    b.Property<int?>("NumberOfBaths")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBedrooms")
+                    b.Property<int?>("NumberOfBedrooms")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfGarages")
+                    b.Property<int?>("NumberOfGarages")
                         .HasColumnType("int");
 
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
+                    b.Property<float?>("Price")
                         .HasColumnType("real");
 
                     b.Property<int>("ProjectId")
@@ -732,9 +737,6 @@ namespace USBDProperty.Migrations
                     b.Property<int>("PropertyFor")
                         .HasColumnType("int");
 
-                    b.Property<int>("PropertySize")
-                        .HasColumnType("int");
-
                     b.Property<int>("PropertyTypeId")
                         .HasColumnType("int");
 
@@ -743,7 +745,7 @@ namespace USBDProperty.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("TotalFloor")
+                    b.Property<int?>("TotalFloor")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdateBy")
@@ -820,6 +822,9 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyTypeId"), 1L, 1);
+
+                    b.Property<bool>("IsLand")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("ParentPropertyTypeId")
                         .HasColumnType("int");

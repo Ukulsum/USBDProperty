@@ -14,11 +14,12 @@ namespace USBDProperty.Models
         [Required]
         [StringLength(150)]
         public string Title { get; set; }
+        [ValidateNever]
         public bool IsFeatured { get; set; }
         [MaxLength]
         public string Description { get; set; }
         [ValidateNever]
-        public string Path { get; set; }
+        public string ImagePath { get; set; }
         [NotMapped]
         [ValidateNever]
         [DisplayName("Photos")]

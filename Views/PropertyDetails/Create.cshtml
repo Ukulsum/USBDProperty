@@ -4,95 +4,95 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@* 
-<main id="main"> *@
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title text-center">Property Listing</h5>
-            <hr  style="width:100%; "/>
+@*
+    <main id="main"> *@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Property Listing</h5>
+        <hr style="width:100%; " />
+       
         <form asp-action="Create" method="Post" enctype="multipart/form-data" asp-controller="PropertyDetails">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
-                    <h2>Property Types</h2>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label   class="control-label">Purposes</label>
-                            <select asp-for="PropertyFor" class="form-control" asp-items="Html.GetEnumSelectList<PropertyFor>()">
-                                <option value="1">Select Type</option>
-                            </select>
-                            <span asp-validation-for="PropertyFor" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label   class="control-label">Property Types</label>
-                        <select id="parenTypes" class="form-control" asp-items="ViewBag.PropertyTypeId">
-                                <option value="0">Select Type</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="PropertyTypeId" class="control-label">Types</label>
-                            <select asp-for="PropertyTypeId" id="drptypes" class="form-control" ></select>
-                        </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <h2>Property Types</h2>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Purposes</label>
+                        <select asp-for="PropertyFor" class="form-control" asp-items="Html.GetEnumSelectList<PropertyFor>()">
+                            <option value="1">Select Type</option>
+                        </select>
+                        <span asp-validation-for="PropertyFor" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row">
-                    <h2>Location</h2>
-                    <hr />
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label   class="control-label">Country</label>
-                            <select  id="drpCountry" class="form-control"  ></select>
-                        </div>
-                        <div class="form-group">
-                            <label   class="control-label">Division</label>
-                            <select id="drpDivision"  class="form-control"  ></select>
-                        </div>
-                      
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Property Types</label>
+                        <select id="parenTypes" class="form-control" asp-items="ViewBag.PropertyTypeId">
+                            <option value="0">Select Type</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="PropertyTypeId" class="control-label">Types</label>
+                        <select asp-for="PropertyTypeId" id="drptypes" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h2>Location</h2>
+                <hr />
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label">Country</label>
+                        <select id="drpCountry" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Division</label>
+                        <select id="drpDivision" class="form-control"></select>
                     </div>
 
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label  class="control-label">City</label>
-                            <select id="drpCity"   class="form-control"  ></select>
-                        </div>
-                        <div class="form-group">
-                            <label   class="control-label">Area</label>
-                            <select id="drpArea"  asp-for="AreaId"  class="form-control"  ></select>
-                        </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label">City</label>
+                        <select id="drpCity" class="form-control"></select>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label   class="control-label">Address</label>
-                            <input type="text" asp-for="Location" class="form-control" />
-                            <span asp-validation-for="Location" class="text-danger"></span>
-                        </div>
+                    <div class="form-group">
+                        <label class="control-label">Area</label>
+                        <select id="drpArea" asp-for="AreaId" class="form-control"></select>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+                        <input type="text" asp-for="Location" class="form-control" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
             <div class="row">
-                <h2>Developer's Information</h2>
+                <h2>Owner's Information</h2>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label">Developer</label>
-                        <select id="drpDeveloper" class="form-control"  >
-                           
+                        <label class="control-label">Owner</label>
+                        <select id="drpDeveloper" class="form-control">
                         </select>
-                        
+
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label   class="control-label">Projcts</label>
+                        <label class="control-label">Projcts</label>
                         <select asp-for="ProjectId" id="drpprj" class="form-control"></select>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <h2>Property's' Information</h2>
-             <hr />
+                <hr />
 
                 <div class="row">
                     <div class="col-md-4">
@@ -102,55 +102,48 @@
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                     </div>
-                   @* <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="PropertyName" class="control-label"></label>
-                            <input type="text" asp-for="PropertyName" class="form-control" />
-                            <span asp-validation-for="PropertyName" class="text-danger"></span>
-                        </div>
-                    </div>*@
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="PropertyCondition" class="control-label"></label>
-                           
-
                             <select asp-for="PropertyCondition" class="form-control"
                                     asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
                                 <option value="0">Select Property's condition</option>
                             </select>
-                            
+
                             <span asp-validation-for="PropertyCondition" class="text-danger"></span>
                         </div>
                     </div>
 
-                   @*  <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="PropertyTypeId" class="control-label"></label>
-                            <select asp-for="PropertyTypeId" class="form-control" asp-items="ViewBag.PropertyTypeId"></select>
-                        </div>
-                    </div> *@
-                </div>
-              
-                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="ConstructionStatus" class="control-label"></label>
-                           
+
 
                             <select asp-for="ConstructionStatus" class="form-control"
                                     asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
-                                <option value="0">Select Construction's' Status</option>
+                                <option value="0">Select Property's condition</option>
                             </select>
-                            
+
                             <span asp-validation-for="ConstructionStatus" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                @*if(@Model.PropertyType.IsLand == True){*@
+                  <div id="flatdiv">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="FlatSize" class="control-label">Flat Size (sqft)</label>
+                            <input type="text" asp-for="FlatSize" class="form-control" />
+                            <span asp-validation-for="FlatSize" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="PropertySize" class="control-label"></label>
-                            <input type="text" asp-for="PropertySize" class="form-control" />
-                            <span asp-validation-for="PropertySize" class="text-danger"></span>
+                            <label asp-for="Price" class="control-label">Price (per sqft)</label>
+                            <input type="text" asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -202,7 +195,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Furnishing" class="control-label"></label>
-                           
+
                             <select asp-for="Furnishing" class="form-control"
                                     asp-items="@Html.GetEnumSelectList<Furnished>()">
                                 <option>Select Property Decoration</option>
@@ -211,12 +204,14 @@
                         </div>
                     </div>
                 </div>
+                @*}*@
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Facing" class="control-label"></label>
-                            <select   asp-for="Facing" class="form-control" 
-                            asp-items="@Html.GetEnumSelectList<Facing>()">
+                            <select asp-for="Facing" class="form-control"
+                                    asp-items="@Html.GetEnumSelectList<Facing>()">
                                 <option>Select Property Face</option>
                             </select>
                             <span asp-validation-for="Facing" class="text-danger"></span>
@@ -229,20 +224,14 @@
                             <span asp-validation-for="LandArea" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="Price" class="control-label"></label>
-                            <input type="text" asp-for="Price" class="form-control" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-                    </div>
+
+                </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="MeasurementID" class="control-label"></label>
-                            <select id="drpunit"     asp-for="MeasurementID" class="form-control"   >
-
+                            <select id="drpunit" asp-for="MeasurementID" class="form-control">
                             </select>
                             <span asp-validation-for="MeasurementID" class="text-danger"></span>
                         </div>
@@ -254,7 +243,7 @@
                             <span asp-validation-for="HandOverDate" class="text-danger"></span>
                         </div>
                     </div>
-                   
+
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -264,18 +253,18 @@
                             <span asp-validation-for="Comments" class="text-danger"></span>
                         </div>
                     </div>
-                @*     <div class="col-md-4">
+                    @*     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="IconId" class="control-label"></label>
-                            <select asp-for="IconId" class="form-control" asp-items="ViewBag.IconId"></select>
+                        <label asp-for="IconId" class="control-label"></label>
+                        <select asp-for="IconId" class="form-control" asp-items="ViewBag.IconId"></select>
                         </div>
-                    </div> *@
-                   @*  <div class="col-md-4">
+                        </div> *@
+                    @*  <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="ProjectId" class="control-label"></label>
-                            <select asp-for="ProjectId" class="form-control" asp-items="ViewBag.OwnerId"></select>
+                        <label asp-for="ProjectId" class="control-label"></label>
+                        <select asp-for="ProjectId" class="form-control" asp-items="ViewBag.OwnerId"></select>
                         </div>
-                    </div> *@
+                        </div> *@
                 </div>
                 <div class="row">
                     <div class="col-md-8">
@@ -291,7 +280,7 @@
                         </div>
                     </div>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
                     <textarea type="text" asp-for="Description" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
@@ -306,27 +295,29 @@
                         <input class="form-check-input" asp-for="ISFeatured" /> @Html.DisplayNameFor(model => model.ISFeatured)
                     </label>
                 </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div><a asp-action="Index">Back to List</a></div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="col-md-4">
+                    <div><a asp-action="Index">Back to List</a></div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 @* </main>
- *@
+*@
 
 @section Scripts{
 <script>
 
     $(document).ready(function (){
+        let isLand=false;
+
         loadCountry();
         loadDeveloper();
         loadParentType();
@@ -350,17 +341,36 @@
 
         $("#parenTypes").change(function () {
 
+
                 console.log($(this).val())
                 $.get("/PropertyTypes/GetChildType?pid=" + $(this).val(), function (data, status) {
                 console.log(data)
                     $("#drptypes").empty();
                     $("#drptypes").append($('<option></option>').val("0").html("Select"));
                     $.each(data, function (i,v) {
-                        $("#drptypes").append($('<option></option>').val(v.propertyTypeId).html(v.propertyTypeName));
+
+                        $("#drptypes").append($('<option data-island='+v.isLand +'></option>').val(v.propertyTypeId).html(v.propertyTypeName));
                     })
-                   
+
           })
         })
+
+          $("#drptypes").change(function () {
+                isLand=this.selectedOptions[0].getAttribute('data-island');
+                console.log(isLand)
+                        if(isLand === 'true') {
+                              console.log( "True part")
+                                    $("#flatdiv").hide();
+                                    console.log(isLand)
+                        }
+                       if(isLand === 'false') { 
+                             console.log("false part")
+                            console.log(isLand)
+                          
+                            $("#flatdiv").show();}
+                  console.log( " Land= "+isLand)
+
+          })
             $("#drpDeveloper").change(function () {
                 alert($(this).val())
                 loadPrjbyDeveloper($(this).val())
@@ -371,12 +381,12 @@
             $("#drpDivision").change(function () {
                 loadCity($(this).val())
             })
-           
+
             $("#drpCity").change(function () {
                 loadArea($(this).val())
             })
     });
-        function loadParentType() {    
+        function loadParentType() {
             $.get("/PropertyTypes/GetChildType" , function (data, status) {
                 console.log(data)
                 $("#parenTypes").empty();

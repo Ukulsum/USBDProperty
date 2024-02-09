@@ -105,12 +105,12 @@ namespace USBDProperty.Controllers
                     if (_environment != null)
                     {
                         wwwRootPath = _environment.WebRootPath;
-                    rpath = wwwRootPath + "/Developer";
+                        rpath = wwwRootPath + "/Developer";
                     }
                     else
                     {
                         wwwRootPath = Directory.GetCurrentDirectory();
-                    rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
+                        rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
                     }
                     if (logo.FileName != null)
                     {
@@ -340,6 +340,7 @@ namespace USBDProperty.Controllers
                 data.UpdateBy = User.Identity.Name ?? "";
                 data.UpdateDate = DateTime.Now.Date;
                 data.Banner=developersorAgent.Banner;
+                data.Logo = developersorAgent.Logo;
                 data.Email = developersorAgent.Email;
                 data.AreaID = developersorAgent.AreaID;
                 data.Address = developersorAgent.Address;

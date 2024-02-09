@@ -18,7 +18,7 @@ namespace USBDProperty.Controllers
         public PropertyDetailsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
-            environment = _environment;
+            _environment = environment;
         }
 
         public JsonResult Getlocation(int aid)
@@ -83,10 +83,13 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
-                if (pSize != null || pSize > 0)
-                {
-                    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
-                }
+                //if (pSize != null || pSize > 0)
+                //{
+                //    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
+                //}
+
+
+
                 //if (ptypeid != null || ptypeid > 0)
                 //{
                 //    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
@@ -167,13 +170,6 @@ namespace USBDProperty.Controllers
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
                                                 .Where(p=>p.ISFeatured).ToList();
-                //.Include(p => p.SocialIcon)
-                //.Include(p => p.propertyFor).ToList();
-                //.Include(p => p.TransactionType)
-                //if (ISFeatured == true)
-                //{
-                    
-                //}
 
                 return Json(new { data = applicationDbContext });
             }
@@ -185,24 +181,6 @@ namespace USBDProperty.Controllers
 
         }
 
-
-        //public JsonResult DevProjectProperty(int id)
-        //{
-        //    try
-        //    {
-        //        var propertyData = _context.PropertyDetails
-        //                                   .Include(p => p.Area)
-        //                                   .Include(p => p.ProjectsInfo)
-        //                                   .Include(p => p.PropertyType)
-        //                                   .Where(p => p.ProjectsInfo.Id == id).ToList();
-        //        return Json (new { data = propertyData });
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return Json(new { data = "No record" });
-        //    }
-        //}
-
         public JsonResult BannerProperty()
         {
             try
@@ -213,15 +191,11 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.Area)
                                                 .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType);
-                //.Include(p => p.SocialIcon)
-                //.Include(p => p.propertyFor).ToList();
-                //.Include(p => p.TransactionType)
 
                 return Json(new { data = applicationDbContext });
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
                 return Json(new { data = "No record" });
             }
 
@@ -237,16 +211,10 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.PropertyType)
                                                 .Where(p => p.PropertyInfoId.Equals(Id));
 
-
-                //.Include(p => p.SocialIcon)
-                //.Include(p => p.propertyFor).ToList();
-                //.Include(p => p.TransactionType)
-
                 return Json(new { data = applicationDbContext, joinPropertyInfoDb });
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
                 return Json(new { data = "No record" });
             }
 
@@ -264,7 +232,6 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
                 return Json(new { data = "No record" });
             }
 
@@ -272,23 +239,6 @@ namespace USBDProperty.Controllers
         //[HttpGet("HomePropertyDetails")]
         public async Task<IActionResult> HomePropertyDetails(int? id)
         {
-            //try
-            //{
-            //    var applicationDbContext = await _context.PropertyDetails
-            //                                    .OrderByDescending(o => o.PropertyInfoId)
-            //                                    .Include(p => p.Area)
-            //                                    .Include(p => p.ProjectsInfo)
-            //                                    //.Include(p => p.PropertyType)
-            //                                    //.Include(p => p.SocialIcon)
-            //                                    .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
-            //    //.Include(p => p.TransactionType)
-            //    //.Include(p => p.propertyFor);
-            //    return View(applicationDbContext);
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex.Message);
-            //}
             return View();
         }
 
@@ -304,9 +254,7 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.Area)
                                                 .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType);
-                                                //.Include(p => p.SocialIcon);
-                                                //.Include(p => p.TransactionType)
-                                                //.Include(p => p.propertyFor);
+
                 return View(await applicationDbContext.ToListAsync());
             }
             catch(Exception ex)
@@ -332,9 +280,7 @@ namespace USBDProperty.Controllers
                     .Include(p => p.Area)
                     .Include(p => p.ProjectsInfo)
                     .Include(p => p.PropertyType)
-                   // .Include(p => p.SocialIcon)
-                    //.Include(p => p.TransactionType)
-                    //.Include(p => p.propertyFor)
+   
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
                 if (propertyDetails == null)
                 {
@@ -354,12 +300,6 @@ namespace USBDProperty.Controllers
         {
             try
             {
-               // ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-              // ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner");
-               // ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.OrderBy(a=>a.PropertyTypeName).Where(p=>p.ParentPropertyTypeId==0), "PropertyTypeId", "PropertyTypeName");
-                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon");
-                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName");
-                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor");
                 return View();
             }
             catch(Exception ex)
@@ -368,9 +308,6 @@ namespace USBDProperty.Controllers
             }
         }
 
-        // POST: PropertyDetails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -379,68 +316,87 @@ namespace USBDProperty.Controllers
             try
             {
                 string wwwRootPath = "";
+                string fpath = "";
                 if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
                 }
                 else
                 {
                     wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
                 }
-                //string fileN = Path.GetFileNameWithoutExtension(propertyDetails.Image.FileName);
-                string extention = Path.GetExtension(propertyDetails.Image.FileName);
-                string fileName = propertyDetails.Title + extention;
-                string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
-                using (var fileStrem = new FileStream(path, FileMode.Create))
+                if(propertyDetails.Image != null)
                 {
-                    await propertyDetails.Image.CopyToAsync(fileStrem);
+                    string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
+                    if(extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
+                    {
+                        string fileName = propertyDetails.Title + extention;
+                        string path = Path.Combine(fpath, "Images", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await propertyDetails.Image.CopyToAsync(fileStrem);
+                        }
+                        propertyDetails.ImagePath = "/Content/Images/" + fileName;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide .jpg|.jepg|.png");
+                        return View(propertyDetails);
+                    }
                 }
-
-                var PropertyInfo = new PropertyDetails
+                else
                 {
-                    Title = propertyDetails.Title,
-                    Description = propertyDetails.Description,
-                    //PropertyName = propertyDetails.PropertyName,
-                    ISFeatured = propertyDetails.ISFeatured,
-                    Location = propertyDetails.Location,
-                    ConstructionStatus = propertyDetails.ConstructionStatus,
-                    PropertySize = propertyDetails.PropertySize,
-                    NumberOfBedrooms = propertyDetails.NumberOfBedrooms,
-                    NumberOfBaths = propertyDetails.NumberOfBaths,
-                    NumberOfBalconies = propertyDetails.NumberOfBalconies,
-                    NumberOfGarages = propertyDetails.NumberOfGarages,
-                    TotalFloor = propertyDetails.TotalFloor,
-                    FloorAvailableNo = propertyDetails.FloorAvailableNo,
-                    Furnishing = propertyDetails.Furnishing,
-                    Facing = propertyDetails.Facing,
-                    LandArea = propertyDetails.LandArea,
-                    Price = propertyDetails.Price,
-                    MeasurementID = propertyDetails.MeasurementID,
-                    Comments = propertyDetails.Comments,
-                    HandOverDate = propertyDetails.HandOverDate,
-                    PropertyTypeId = propertyDetails.PropertyTypeId,
-                    PropertyCondition = propertyDetails.PropertyCondition,
-                    ProjectId = propertyDetails.ProjectId,
-                    //IconId = propertyDetails.IconId,
-                    AreaId = propertyDetails.AreaId,
-                    CreatedBy = User.Identity.Name ?? "umme",
-                    CreatedDate = DateTime.Now,
-                    Image = propertyDetails.Image,
-                    Path = "/Content/Images/" + fileName
-                };
-                _context.Add(PropertyInfo);
+                    ModelState.AddModelError("", "Please provide Property Photos");
+                }
+                //var PropertyInfo = new PropertyDetails
+                //{
+                //    Title = propertyDetails.Title,
+                //    Description = propertyDetails.Description,
+                //    //PropertyName = propertyDetails.PropertyName,
+                //    ISFeatured = propertyDetails.ISFeatured,
+                //    Location = propertyDetails.Location,
+                //    ConstructionStatus = propertyDetails.ConstructionStatus,
+                //    PropertySize = propertyDetails.PropertySize,
+                //    NumberOfBedrooms = propertyDetails.NumberOfBedrooms,
+                //    NumberOfBaths = propertyDetails.NumberOfBaths,
+                //    NumberOfBalconies = propertyDetails.NumberOfBalconies,
+                //    NumberOfGarages = propertyDetails.NumberOfGarages,
+                //    TotalFloor = propertyDetails.TotalFloor,
+                //    FloorAvailableNo = propertyDetails.FloorAvailableNo,
+                //    Furnishing = propertyDetails.Furnishing,
+                //    Facing = propertyDetails.Facing,
+                //    LandArea = propertyDetails.LandArea,
+                //    Price = propertyDetails.Price,
+                //    MeasurementID = propertyDetails.MeasurementID,
+                //    PropertyFor = propertyDetails.PropertyFor,
+                //    Comments = propertyDetails.Comments,
+                //    HandOverDate = propertyDetails.HandOverDate,
+                //    PropertyTypeId = propertyDetails.PropertyTypeId,
+                //    PropertyCondition = propertyDetails.PropertyCondition,
+                //    ProjectId = propertyDetails.ProjectId,
+                //    //IconId = propertyDetails.IconId,
+                //    AreaId = propertyDetails.AreaId,
+                //    CreatedBy = User.Identity.Name ?? "umme",
+                //    CreatedDate = DateTime.Now,
+                //    Image = propertyDetails.Image,
+                //    ImagePath = "/Content/Images/" + fileName
+                //};
+                propertyDetails.CreatedBy = User.Identity.Name ?? "umme";
+                propertyDetails.CreatedDate = DateTime.Now;
+                _context.Add(propertyDetails);
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+                //ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                //ViewData["CountryID"] = new SelectList(_context.Countries, "CountryID", "CountryName", Country.CountryName);
-                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
-                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
+
             }
             catch (Exception ex)
             {
@@ -485,46 +441,21 @@ namespace USBDProperty.Controllers
                             
                             } ).FirstOrDefault();
 
-
-
-
-                //var devprojectid = from p in _context.ProjectsInfo
-                //                   join d in _context.DevelopersorAgent on p.AgentID equals d.ID
-                //                   where p.Id == propertyDetails.ProjectId
-                //                   select p;
-
-                //var dp = (from pr in _context.PropertyDetails 
-                //         join  p in _context.ProjectsInfo on pr.ProjectId equals p.Id
-                //         join d in _context.DevelopersorAgent on p.AgentID equals d.ID
-                //         //where p.Id == propertyDetails.ProjectId
-                //         select new
-                //         {
-                //             Id = p.Id,
-                //             AgentID = d.ID
-                //         }).FirstOrDefault();
-
-                //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
-                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", dp.AgentID);
-
                 var project = _context.ProjectsInfo.Where(p => p.Id.Equals(propertyDetails.ProjectId)).FirstOrDefault();
                 var devloper = _context.DevelopersorAgent.Where(d => d.ID.Equals(project.AgentID));
 
                 ViewData["ProjectsId"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName), "Id", "ProjectName", propertyDetails.ProjectId);
                 ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName), "ID", "CompanyName", devloper);
 
-
-                //ViewData["Id"] = new SelectList(_context.ProjectsInfo.OrderBy(p => p.ProjectName).Where(p => p.Id.Equals(propertyDetails.ProjectId)), "Id", "ProjectName", propertyDetails.ProjectId);
-                //ViewData["ID"] = new SelectList(_context.DevelopersorAgent.OrderBy(p => p.CompanyName).Where(p => p.ID.Equals(ProjectsInfo.ID)), "Id", "ProjectName", propertyDetails.ProjectId);
+                var pid = _context.PropertyTypes.Where(t => t.PropertyTypeId.Equals(propertyDetails.PropertyTypeId)).Select(s => s.ParentPropertyTypeId).FirstOrDefault();
                 ViewData["AreaId"] = new SelectList(_context.Areas.OrderBy(a => a.AreaName), "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allid.CityId);
                 ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allid.DivisionId);
                 ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);
                 //ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
-                ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == 0), "PropertyTypeId", "PropertyTypeName",pid.Value );
+                ViewData["PropertychildTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == pid.Value), "PropertyTypeId", "PropertyTypeName",propertyDetails.PropertyTypeId);
                 ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "Id", "Name", propertyDetails.MeasurementID);
-                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
-                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
             }
             catch(Exception ex)
@@ -542,160 +473,102 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var data = _context.PropertyDetails.Where(m => m.PropertyInfoId == propertyDetails.PropertyInfoId).SingleOrDefaultAsync();
+                if (id != propertyDetails.PropertyInfoId)
+                {
+                    return NotFound();
+                }
+
+                var data = await _context.PropertyDetails.FindAsync(id);
                 string fpath = "";
                 string wwwRootPath = "";
-                if (propertyDetails.Path.Length > 0)
+                
+                if (_environment != null)
                 {
-                    if (_environment != null)
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
+                if (propertyDetails.ImagePath != null)
+                {
+                    string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
+                    if(extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
                     {
-                        wwwRootPath = _environment.WebRootPath;
+                        string fileName = propertyDetails.Title + extention;
+                        string path = Path.Combine(fpath, "Images", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await propertyDetails.Image.CopyToAsync(fileStrem);
+                        }
+                        propertyDetails.ImagePath = "/Content/Images/" + fileName;
+                        if (System.IO.File.Exists(fpath))
+                        {
+                            System.IO.File.Delete(fpath);
+                        }
                     }
                     else
                     {
-                        wwwRootPath = Directory.GetCurrentDirectory();
-                    }
-                    string extention = Path.GetExtension(propertyDetails.Image.FileName);
-                    string fileName = propertyDetails.Title + extention;
-                    fpath = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
-                    using (var fileStrem = new FileStream(fpath, FileMode.Create))
-                    {
-                        await propertyDetails.Image.CopyToAsync(fileStrem);
+                        ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
+                        return View(propertyDetails);
                     }
                 }
                 else
                 {
-                    fpath = data.Result.Path;
+                    data.ImagePath = propertyDetails.ImagePath;
                 }
 
-                var propertyInfo = new PropertyDetails
-                {
-                    PropertyInfoId = propertyDetails.PropertyInfoId,
-                    Title = propertyDetails.Title,
-                    Description = propertyDetails.Description,
-                    //PropertyName = propertyDetails.PropertyName,
-                    Location = propertyDetails.Location,
-                    ConstructionStatus = propertyDetails.ConstructionStatus,
-                    PropertySize = propertyDetails.PropertySize,
-                    NumberOfBedrooms = propertyDetails.NumberOfBedrooms,
-                    NumberOfBaths = propertyDetails.NumberOfBaths,
-                    NumberOfBalconies = propertyDetails.NumberOfBalconies,
-                    NumberOfGarages = propertyDetails.NumberOfGarages,
-                    TotalFloor = propertyDetails.TotalFloor,
-                    FloorAvailableNo = propertyDetails.FloorAvailableNo,
-                    Furnishing = propertyDetails.Furnishing,
-                    Facing = propertyDetails.Facing,
-                    Price = propertyDetails.Price,
-                    LandArea = propertyDetails.LandArea,
-                    Comments = propertyDetails.Comments,
-                    MeasurementID = propertyDetails.MeasurementID,
-                    HandOverDate = propertyDetails.HandOverDate,
-                    PropertyTypeId = propertyDetails.PropertyTypeId,
-                    PropertyCondition = propertyDetails.PropertyCondition,
-                    ProjectId = propertyDetails.ProjectId,
-                    AreaId = propertyDetails.AreaId,
-                    UpdateBy = User.Identity.Name ?? "Kulsum",
-                    UpdateDate = DateTime.Now,
-                    Path = fpath
-                };
-                //_context.Entry(propertyDetails).State = EntityState.Modified;
-                _context.Update(propertyDetails);
+                data.PropertyInfoId = propertyDetails.PropertyInfoId;
+                data.Title = propertyDetails.Title;
+                data.Description = propertyDetails.Description;
+                //data.PropertyName = propertyDetails.PropertyName,
+                data.Location = propertyDetails.Location;
+                data.ConstructionStatus = propertyDetails.ConstructionStatus;
+                data.FlatSize = propertyDetails.FlatSize;
+                data.NumberOfBedrooms = propertyDetails.NumberOfBedrooms;
+                data.NumberOfBaths = propertyDetails.NumberOfBaths;
+                data.NumberOfBalconies = propertyDetails.NumberOfBalconies;
+                data.NumberOfGarages = propertyDetails.NumberOfGarages;
+                data.TotalFloor = propertyDetails.TotalFloor;
+                data.FloorAvailableNo = propertyDetails.FloorAvailableNo;
+                data.Furnishing = propertyDetails.Furnishing;
+                data.Facing = propertyDetails.Facing;
+                data.Price = propertyDetails.Price;
+                data.LandArea = propertyDetails.LandArea;
+                data.Comments = propertyDetails.Comments;
+                data.MeasurementID = propertyDetails.MeasurementID;
+                data.HandOverDate = propertyDetails.HandOverDate;
+                data.PropertyTypeId = propertyDetails.PropertyTypeId;
+                data.PropertyCondition = propertyDetails.PropertyCondition;
+                data.ProjectId = propertyDetails.ProjectId;
+                data.AreaId = propertyDetails.AreaId;
+                data.CreatedBy = propertyDetails.CreatedBy;
+                data.CreatedDate = propertyDetails.CreatedDate;
+                data.UpdateBy = User.Identity.Name ?? "Kulsum";
+                data.UpdateDate = DateTime.Now;
+                data.ImagePath = propertyDetails.ImagePath;
+
+                _context.Update(data);
                 if(await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
 
-                //if (id != propertyDetails.PropertyInfoId)
-                //{
-                //    return NotFound();
-                //}
-
-                //if (ModelState.IsValid)
-                //{
-                //    try
-                //    {
-                //        _context.Update(propertyDetails);
-                //        await _context.SaveChangesAsync();
-                //    }
-                //    catch (DbUpdateConcurrencyException)
-                //    {
-                //        if (!PropertyDetailsExists(propertyDetails.PropertyInfoId))
-                //        {
-                //            return NotFound();
-                //        }
-                //        else
-                //        {
-                //            throw;
-                //        }
-                //    }
-                //    return RedirectToAction(nameof(Index));
-                //}
+                
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "MeasurementID", "Name", propertyDetails.MeasurementID);
-                //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
-                //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-                //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
                 return View(propertyDetails);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(propertyDetails);
             }
         }
-
-        // POST: PropertyDetails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, PropertyDetails propertyDetails)
-        //{
-        //    try
-        //    {
-        //        if (id != propertyDetails.PropertyInfoId)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        if (ModelState.IsValid)
-        //        {
-        //            try
-        //            {
-        //                _context.Update(propertyDetails);
-        //                await _context.SaveChangesAsync();
-        //            }
-        //            catch (DbUpdateConcurrencyException)
-        //            {
-        //                if (!PropertyDetailsExists(propertyDetails.PropertyInfoId))
-        //                {
-        //                    return NotFound();
-        //                }
-        //                else
-        //                {
-        //                    throw;
-        //                }
-        //            }
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-        //        ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
-        //        ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-        //        ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "MeasurementID", "Name", propertyDetails.MeasurementID);
-        //        //ViewData["IconId"] = new SelectList(_context.SocialIcons, "IconId", "Icon", propertyDetails.IconId);
-        //        //ViewData["TransactionTypeId"] = new SelectList(_context.TransactionTypes, "TransactionTypeId", "TransactionTypeName", propertyDetails.TransactionTypeId);
-        //        //ViewData["PropertyForId"] = new SelectList(_context.PropertyFors, "PropertyForId", "PropeFor", propertyDetails.PropertyForId);
-        //        return View(propertyDetails);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
         // GET: PropertyDetails/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -710,9 +583,7 @@ namespace USBDProperty.Controllers
                     .Include(p => p.Area)
                     .Include(p => p.ProjectsInfo)
                     .Include(p => p.PropertyType)
-                    //.Include(p => p.SocialIcon)
-                   // .Include(p => p.TransactionType)
-                    //.Include(p => p.propertyFor)
+
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
                 if (propertyDetails == null)
                 {
