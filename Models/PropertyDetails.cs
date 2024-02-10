@@ -50,7 +50,8 @@ namespace USBDProperty.Models
         //{
         //    get
         //    {
-        //        return $" {LandArea} {MeasurementUnit.Name??"NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
+        //        //return $" {LandArea} {MeasurementUnit.Name ?? "NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
+        //        return $" {LandArea} {MeasurementUnit.Name?? "NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
         //    }
         //}
 
@@ -97,12 +98,12 @@ namespace USBDProperty.Models
         public int LandArea { get; set; }
         
         public float? LandPrice { get; set; }
-        //[ValidateNever]
-        //[DisplayName("Total Land Price")]
-        //public double? TotalLandPrice
-        //{
-        //    get { return this.LandArea * LandPrice; }
-        //}
+        [ValidateNever]
+        [DisplayName("Total Land Price")]
+        public double? TotalLandPrice
+        {
+            get { return this.LandArea * LandPrice; }
+        }
         [ValidateNever]
         public string? ImagePath { get; set; }
         [NotMapped]

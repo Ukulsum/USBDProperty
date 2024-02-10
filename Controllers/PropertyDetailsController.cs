@@ -492,7 +492,7 @@ namespace USBDProperty.Controllers
                     wwwRootPath = Directory.GetCurrentDirectory();
                     fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
                 }
-                if (propertyDetails.ImagePath != null)
+                if (propertyDetails.Image != null)
                 {
                     string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
                     if(extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
