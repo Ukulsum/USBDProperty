@@ -8,9 +8,18 @@
 <main id="main">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Property Information</h5>
-            <hr />
+            <h5 class="card-title text-center">Property Details</h5>
+            <hr style="width:100%; " />
             <div class="row">
+                <div class="col-md-12">
+                    <img class="img-responsive mb-2" src="@Url.Content(@Model.ImagePath)" />
+                </div>
+            </div>
+
+            <h5 class="card-title text-center">Property Summary</h5>
+            <hr style="width:100%; " />
+            <div class="row">
+                
                 <div class="col-md-6">
                     <dl class="row">
                         <dt class="col-sm-5">

@@ -294,12 +294,14 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div id="landDiv">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="LandPrice" class="control-label"></label>
                             <input type="text" asp-for="LandPrice" class="form-control" />
                             <span asp-validation-for="LandPrice" class="text-danger"></span>
                         </div>
+                    </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -339,7 +341,7 @@
                 </div>
                 <div class="form-group form-check col-md-6">
                     <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                        <input class="form-check-input" asp-for="IsActive" id="checkActive"/> @Html.DisplayNameFor(model => model.IsActive)
                     </label>
                 </div>
                 <div class="form-group form-check col-md-6">
@@ -351,7 +353,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <input type="submit" value="Update" class="btn btn-primary" />
+                        <input type="submit" value="Update" class="btn btn-primary" id="btnUpdate"/>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -369,12 +371,43 @@
      $(document).ready(function(){
          let isLand = false;
          var isChanged = false;
+         console.log("hi")
+        console.log(   $('#drptypes :selected').val());
+         isLand= $('#drptypes :selected').attr('data-island');;
+           console.log(isLand);
+            if(isLand === 'true') {
+               console.log( "True part")
+               $("#flatDiv").hide();
+               $("#landDiv").show();
+               console.log(isLand)
+            }
+            if(isLand === 'false') {
+               console.log("false part")
+               console.log(isLand)
+
+               $("#flatDiv").show();
+               $("#landDiv").hide();
+            }
          $("#btnChange").show();
          $("#imageInput").hide();
          $("#btnChange").click(function() {
              $("#imageInput").show();
              $("#btnChange").hide();
-         })
+         });
+         //if($("#checkActive").is(':checked'){
+         //    $("#btnUpdate").attr('disabled', 'disabled');
+         //})
+        //$("#btnUpdate").attr('disabled', 'disabled');
+        //$("#btnSave").attr('disabled');
+        $("#checkActive").click(function() {
+            if($(this).is(':checked')){
+                $("#btnUpdate").removeAttr('disabled', 'disabled');
+                //$("#btnSave").attr('disabled', 'disabled');
+            }
+            else{
+                 $("#btnUpdate").attr('disabled', 'disabled');
+            }
+        });
 
        //$("#flatDiv").hide();
       
@@ -398,14 +431,14 @@
 
       $("#parenTypes").change(function () {
           
-          alert("P type")
+          //alert("P type")
           loadChild($(this).val());
           //$("#drptypes").Contains()
 
       })
 
      $("#drpDeveloper").change(function () {
-          alert($(this).val())
+         // alert($(this).val())
           loadPrjbyDeveloper($(this).val())
       })
 
@@ -454,7 +487,7 @@
                 $("#drptypes").empty();
                 $("#drptypes").append($('<option></option>').val("0").html("Select type"));
                 $.each(data, function (i, v) {
-                    $("#drptypes").append($('<option data-island='+v.island+'></option>').val(v.propertytypeid).html(v.propertytypename));
+                    $("#drptypes").append($('<option data-island='+v.isLand+'></option>').val(v.propertyTypeId).html(v.propertyTypeName));
                     //$("#drptypes").append($('<option></option>').val(v.propertyTypeId).html(v.propertyTypeName));
                 })
 
@@ -462,7 +495,8 @@
      }
 
        $("#drptypes").change(function(){
-           isLand= this.Contains[0].getAttribute('data-island');
+
+             isLand=this.selectedOptions[0].getAttribute('data-island');
            console.log(isLand);
             if(isLand === 'true') {
                console.log( "True part")

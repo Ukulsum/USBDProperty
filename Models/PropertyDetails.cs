@@ -88,6 +88,7 @@ namespace USBDProperty.Models
         public int? TotalFloor { get; set; }
         
         [DisplayName("Floor Available No")]
+        //[Compare("TotalFloor", ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
         public int? FloorAvailableNo { get; set; }
         
         public Furnished? Furnishing { get; set; }

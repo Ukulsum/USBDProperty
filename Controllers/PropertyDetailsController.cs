@@ -385,18 +385,28 @@ namespace USBDProperty.Controllers
                 //};
                 propertyDetails.CreatedBy = User.Identity.Name ?? "umme";
                 propertyDetails.CreatedDate = DateTime.Now;
-                _context.Add(propertyDetails);
+                if (propertyDetails.TotalFloor.HasValue &&  propertyDetails.FloorAvailableNo.HasValue)
+                {
+                    if(propertyDetails.FloorAvailableNo.Value> propertyDetails.TotalFloor.Value)
+                    {
+
+                    
+                    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
+                    ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
+                    ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+                   
+                    ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                    ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                    return View();
+                    }
+                }               
+                    _context.Add(propertyDetails);
+
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
-                ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-                ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
-                //ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-
+             
             }
             catch (Exception ex)
             {
@@ -410,6 +420,12 @@ namespace USBDProperty.Controllers
                     ModelState.AddModelError(string.Empty, ex.Message);
                 }
             }
+            ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
+            ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+            //ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+            //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+            ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+            ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
             return View(propertyDetails);
         }
 
@@ -519,6 +535,42 @@ namespace USBDProperty.Controllers
                 {
                     data.ImagePath = propertyDetails.ImagePath;
                 }
+                //if(data.TotalFloor.Value < data.FloorAvailableNo.Value)
+                //{
+                //    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
+                //}
+                //else
+                //{
+                //    data.PropertyInfoId = propertyDetails.PropertyInfoId;
+                //    data.Title = propertyDetails.Title;
+                //    data.Description = propertyDetails.Description;
+                //    //data.PropertyName = propertyDetails.PropertyName,
+                //    data.Location = propertyDetails.Location;
+                //    data.ConstructionStatus = propertyDetails.ConstructionStatus;
+                //    data.FlatSize = propertyDetails.FlatSize;
+                //    data.NumberOfBedrooms = propertyDetails.NumberOfBedrooms;
+                //    data.NumberOfBaths = propertyDetails.NumberOfBaths;
+                //    data.NumberOfBalconies = propertyDetails.NumberOfBalconies;
+                //    data.NumberOfGarages = propertyDetails.NumberOfGarages;
+                //    data.TotalFloor = propertyDetails.TotalFloor;
+                //    data.FloorAvailableNo = propertyDetails.FloorAvailableNo;
+                //    data.Furnishing = propertyDetails.Furnishing;
+                //    data.Facing = propertyDetails.Facing;
+                //    data.Price = propertyDetails.Price;
+                //    data.LandArea = propertyDetails.LandArea;
+                //    data.Comments = propertyDetails.Comments;
+                //    data.MeasurementID = propertyDetails.MeasurementID;
+                //    data.HandOverDate = propertyDetails.HandOverDate;
+                //    data.PropertyTypeId = propertyDetails.PropertyTypeId;
+                //    data.PropertyCondition = propertyDetails.PropertyCondition;
+                //    data.ProjectId = propertyDetails.ProjectId;
+                //    data.AreaId = propertyDetails.AreaId;
+                //    data.CreatedBy = propertyDetails.CreatedBy;
+                //    data.CreatedDate = propertyDetails.CreatedDate;
+                //    data.UpdateBy = User.Identity.Name ?? "Kulsum";
+                //    data.UpdateDate = DateTime.Now;
+                //    data.ImagePath = propertyDetails.ImagePath;
+                //}
 
                 data.PropertyInfoId = propertyDetails.PropertyInfoId;
                 data.Title = propertyDetails.Title;
@@ -549,6 +601,18 @@ namespace USBDProperty.Controllers
                 data.UpdateBy = User.Identity.Name ?? "Kulsum";
                 data.UpdateDate = DateTime.Now;
                 data.ImagePath = propertyDetails.ImagePath;
+
+
+                //if (propertyDetails.TotalFloor.Value < propertyDetails.FloorAvailableNo.Value )
+                //{
+                //    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
+                //}
+                //else
+                //{
+                //    //data.TotalFloor = propertyDetails.TotalFloor;
+                //    //data.FloorAvailableNo = propertyDetails.FloorAvailableNo;
+                //    _context.Update(data);
+                //}
 
                 _context.Update(data);
                 if(await _context.SaveChangesAsync() > 0)
