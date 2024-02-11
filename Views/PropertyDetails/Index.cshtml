@@ -27,9 +27,9 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>*@
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.PropertyName)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.PropertyType)
             </th>
@@ -117,16 +117,15 @@
             @*<td>
                 @Html.Raw(item.Description)
             </td>*@
-            <td>
+           @* <td>
                 @Html.DisplayFor(modelItem => item.PropertyName)
-            </td>
+            </td>*@
              <td>
                 @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
             </td>
-            <td>
-                     
+            <td>                     
                 @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
-                            <img src="@Url.Content(item.ImagePath)" alt="@item.PropertyName" width="250" height="200" class="img-responsive" />
+                   <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />
             </td>
            @* <td>
                 @Html.DisplayFor(modelItem => item.Location)

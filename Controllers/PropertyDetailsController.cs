@@ -148,6 +148,7 @@ namespace USBDProperty.Controllers
                                         .Include(p => p.Area)
                                         .Include(p => p.ProjectsInfo)
                                         .Include(p => p.PropertyType)
+                                        .Include(p => p.MeasurementUnit)
                                         .OrderByDescending(p => p.PropertyInfoId)
                                         .Take(3)
                                         .ToList();
@@ -166,6 +167,7 @@ namespace USBDProperty.Controllers
             try
             {
                 var applicationDbContext = _context.PropertyDetails
+                                                .Include(p=>p.MeasurementUnit)
                                                 .Include(p => p.Area)
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
@@ -190,7 +192,9 @@ namespace USBDProperty.Controllers
                                                 .Take(4)
                                                 .Include(p => p.Area)
                                                 .Include(p => p.ProjectsInfo)
+                                                .Include(p => p.MeasurementUnit)
                                                 .Include(p => p.PropertyType);
+
 
                 return Json(new { data = applicationDbContext });
             }
@@ -205,19 +209,32 @@ namespace USBDProperty.Controllers
             try
             {
                 var joinPropertyInfoDb = from pd in _context.PropertyDetails join p in _context.ProjectsInfo on pd.ProjectId equals p.Id join devInfo in _context.DevelopersorAgent on p.Id equals devInfo.ID select pd;
+
+                var locallid = from a in _context.Areas
+                                join c in _context.Citys on a.CityId equals c.CityId
+                                join d in _context.Divisions on c.DivisionId equals d.DivisionID
+                                join cc in _context.Countries on d.CountryId equals cc.CountryID
+                                where a.AreaId == Id
+                                select new
+                                {
+                                    DivisionId = d.DivisionID,
+                                    CityId = c.CityId,
+                                    CountryId = cc.CountryID
+                                };
+
                 var applicationDbContext = _context.PropertyDetails
                                                 .Include(p => p.Area)
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
+                                                .Include(p => p.MeasurementUnit)
                                                 .Where(p => p.PropertyInfoId.Equals(Id));
 
-                return Json(new { data = applicationDbContext, joinPropertyInfoDb });
+                return Json(new { data = applicationDbContext, joinPropertyInfoDb, locallid });
             }
             catch (Exception ex)
             {
                 return Json(new { data = "No record" });
             }
-
         }
         public JsonResult  PropertybyProjects(int prjId)
         {
@@ -253,6 +270,7 @@ namespace USBDProperty.Controllers
                                                 .OrderByDescending(o=>o.PropertyInfoId)
                                                 .Include(p => p.Area)
                                                 .Include(p => p.ProjectsInfo)
+                                                .Include(p => p.MeasurementUnit)
                                                 .Include(p => p.PropertyType);
 
                 return View(await applicationDbContext.ToListAsync());
@@ -280,6 +298,7 @@ namespace USBDProperty.Controllers
                     .Include(p => p.Area)
                     .Include(p => p.ProjectsInfo)
                     .Include(p => p.PropertyType)
+                    .Include(p => p.MeasurementUnit)
    
                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
                 if (propertyDetails == null)
@@ -426,6 +445,7 @@ namespace USBDProperty.Controllers
             //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
             ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
             ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+            ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "Id", "Name", propertyDetails.MeasurementID);
             return View(propertyDetails);
         }
 
@@ -535,42 +555,14 @@ namespace USBDProperty.Controllers
                 {
                     data.ImagePath = propertyDetails.ImagePath;
                 }
-                //if(data.TotalFloor.Value < data.FloorAvailableNo.Value)
-                //{
-                //    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
-                //}
-                //else
-                //{
-                //    data.PropertyInfoId = propertyDetails.PropertyInfoId;
-                //    data.Title = propertyDetails.Title;
-                //    data.Description = propertyDetails.Description;
-                //    //data.PropertyName = propertyDetails.PropertyName,
-                //    data.Location = propertyDetails.Location;
-                //    data.ConstructionStatus = propertyDetails.ConstructionStatus;
-                //    data.FlatSize = propertyDetails.FlatSize;
-                //    data.NumberOfBedrooms = propertyDetails.NumberOfBedrooms;
-                //    data.NumberOfBaths = propertyDetails.NumberOfBaths;
-                //    data.NumberOfBalconies = propertyDetails.NumberOfBalconies;
-                //    data.NumberOfGarages = propertyDetails.NumberOfGarages;
-                //    data.TotalFloor = propertyDetails.TotalFloor;
-                //    data.FloorAvailableNo = propertyDetails.FloorAvailableNo;
-                //    data.Furnishing = propertyDetails.Furnishing;
-                //    data.Facing = propertyDetails.Facing;
-                //    data.Price = propertyDetails.Price;
-                //    data.LandArea = propertyDetails.LandArea;
-                //    data.Comments = propertyDetails.Comments;
-                //    data.MeasurementID = propertyDetails.MeasurementID;
-                //    data.HandOverDate = propertyDetails.HandOverDate;
-                //    data.PropertyTypeId = propertyDetails.PropertyTypeId;
-                //    data.PropertyCondition = propertyDetails.PropertyCondition;
-                //    data.ProjectId = propertyDetails.ProjectId;
-                //    data.AreaId = propertyDetails.AreaId;
-                //    data.CreatedBy = propertyDetails.CreatedBy;
-                //    data.CreatedDate = propertyDetails.CreatedDate;
-                //    data.UpdateBy = User.Identity.Name ?? "Kulsum";
-                //    data.UpdateDate = DateTime.Now;
-                //    data.ImagePath = propertyDetails.ImagePath;
-                //}
+               //if(propertyDetails.TotalFloor.HasValue && propertyDetails.FloorAvailableNo.HasValue)
+               // {
+               //     if(propertyDetails.FloorAvailableNo.Value > propertyDetails.TotalFloor.Value)
+               //     {
+               //         ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
+               //         return View();
+               //     }
+               // }
 
                 data.PropertyInfoId = propertyDetails.PropertyInfoId;
                 data.Title = propertyDetails.Title;

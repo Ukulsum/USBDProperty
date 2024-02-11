@@ -34,24 +34,36 @@ namespace USBDProperty.Models
        
         [MaxLength]
         public string? Description { get; set; }
-        [ValidateNever]       
+        //[ValidateNever]       
         //[StringLength(150)]
-        [DisplayName("Property Name")]
-        //public string PropertyName { get; set; }
-        public string PropertyName
-        {
-            get
-            {
-                return $" {FlatSize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
-            }
-        }
+        //[DisplayName("Property Name")]
+        //public string? PropertyName { get; set; }
+        //public string? PropertyName
+        //{
+        //    get
+        //    {
+        //        return this.PropertyName;
+        //        //return $" {FlatSize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+        //    }
+        //    set
+        //    {
+        //        if (PropertyType.IsLand)
+        //        {
+        //            value = $" {LandArea} {MeasurementUnit.Name} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
+        //        }
+        //        else
+        //        {
+        //            value = $" {FlatSize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+        //        }
+        //    }
+        //}
 
         //public string LandInfo
         //{
         //    get
         //    {
         //        //return $" {LandArea} {MeasurementUnit.Name ?? "NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
-        //        return $" {LandArea} {MeasurementUnit.Name?? "NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
+        //        return $" {LandArea} {MeasurementUnit.Name} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
         //    }
         //}
 

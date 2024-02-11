@@ -1,2 +1,2 @@
-Notice controller update & delete image
-Property Type controller
+Property details Edit page does not set logic between TotalFloor FloorAvailableNo  
+Property Details Edit page loading show & hide property input 

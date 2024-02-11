@@ -94,44 +94,42 @@
                 <h2>Property's' Information</h2>
                 <hr />
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="Title" class="control-label"></label>
-                            <input type="text" asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="PropertyCondition" class="control-label"></label>
-                            <select asp-for="PropertyCondition" class="form-control"
-                                    asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
-                                <option value="0">Select Property's condition</option>
-                            </select>
-
-                            <span asp-validation-for="PropertyCondition" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label asp-for="ConstructionStatus" class="control-label"></label>
-
-
-                            <select asp-for="ConstructionStatus" class="form-control"
-                                    asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
-                                <option value="0">Select Property's condition</option>
-                            </select>
-
-                            <span asp-validation-for="ConstructionStatus" class="text-danger"></span>
-                        </div>
+                @*<div class="row">*@
+                <div class="col-md-12 row">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input type="text" asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                 </div>
-                @*if(@Model.PropertyType.IsLand == True){*@
+                @*  <div id="flatdiv">*@
                 <div id="flatdiv">
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="PropertyCondition" class="control-label"></label>
+                                <select asp-for="PropertyCondition" class="form-control"
+                                        asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
+                                    <option value="0">Select Property's condition</option>
+                                </select>
+
+                                <span asp-validation-for="PropertyCondition" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="ConstructionStatus" class="control-label"></label>
+
+
+                                <select asp-for="ConstructionStatus" class="form-control"
+                                        asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
+                                    <option value="0">Select Property's condition</option>
+                                </select>
+
+                                <span asp-validation-for="ConstructionStatus" class="text-danger"></span>
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="FlatSize" class="control-label">Flat Size (sqft)</label>
@@ -139,6 +137,19 @@
                                 <span asp-validation-for="FlatSize" class="text-danger"></span>
                             </div>
                         </div>
+                    </div>
+
+                    @*</div>*@
+                    @*if(@Model.PropertyType.IsLand == True){*@
+                    @*<div id="flatdiv">*@
+                    <div class="row">
+                       @* <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="FlatSize" class="control-label">Flat Size (sqft)</label>
+                                <input type="text" asp-for="FlatSize" class="form-control" />
+                                <span asp-validation-for="FlatSize" class="text-danger"></span>
+                            </div>
+                        </div>*@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="Price" class="control-label">Price (per sqft)</label>
@@ -153,15 +164,22 @@
                                 <span asp-validation-for="NumberOfBedrooms" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
+                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="NumberOfBaths" class="control-label"></label>
                                 <input type="number" asp-for="NumberOfBaths" class="form-control" />
                                 <span asp-validation-for="NumberOfBaths" class="text-danger"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                       @* <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="NumberOfBaths" class="control-label"></label>
+                                <input type="number" asp-for="NumberOfBaths" class="form-control" />
+                                <span asp-validation-for="NumberOfBaths" class="text-danger"></span>
+                            </div>
+                        </div>*@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="NumberOfBalconies" class="control-label"></label>
@@ -176,28 +194,56 @@
                                 <span asp-validation-for="NumberOfGarages" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="TotalFloor" class="control-label"></label>
                                 <input type="number" asp-for="TotalFloor" class="form-control" id="totalFloor" />
                                 <span asp-validation-for="TotalFloor" class="text-danger"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="TotalFloor" class="control-label"></label>
+                                <input type="number" asp-for="TotalFloor" class="form-control" id="totalFloor" />
+                                <span asp-validation-for="TotalFloor" class="text-danger"></span>
+                            </div>
+                        </div>*@
                         @*@{
                             if(Model.TotalFloor.Value >= Model.FloorAvailableNo.Value)
                             {*@
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="FloorAvailableNo" class="control-label"></label>
-                                    <input type="text" asp-for="FloorAvailableNo" class="form-control" id="floorAvaiNo" />
-                                    <span asp-validation-for="FloorAvailableNo" class="text-danger"></span>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="FloorAvailableNo" class="control-label"></label>
+                                <input type="text" asp-for="FloorAvailableNo" class="form-control" id="floorAvaiNo" />
+                                <span asp-validation-for="FloorAvailableNo" class="text-danger"></span>
                             </div>
-                         @*   }
-                        }
-*@
+                        </div>
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Furnishing" class="control-label"></label>
+
+                                <select asp-for="Furnishing" class="form-control"
+                                        asp-items="@Html.GetEnumSelectList<Furnished>()">
+                                    <option>Select Property Decoration</option>
+                                </select>
+                                <span asp-validation-for="Furnishing" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Facing" class="control-label"></label>
+                                <select asp-for="Facing" class="form-control"
+                                        asp-items="@Html.GetEnumSelectList<Facing>()">
+                                    <option>Select Property Face</option>
+                                </select>
+                                <span asp-validation-for="Facing" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @*   }
+                            }
+                        *@
                         @* <div class="col-md-4">
                             <div class="form-group">
                             <label asp-for="Furnishing" class="control-label"></label>
@@ -212,8 +258,8 @@
                     </div>
                     @*}*@
 
-                    <div class="row">
-                        <div class="col-md-6">
+                    @*<div class="row">*@
+                       @* <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="Furnishing" class="control-label"></label>
 
@@ -233,7 +279,7 @@
                                 </select>
                                 <span asp-validation-for="Facing" class="text-danger"></span>
                             </div>
-                        </div>
+                        </div>*@
                         @*<div class="col-md-4">
                             <div class="form-group">
                             <label asp-for="LandArea" class="control-label"></label>
@@ -241,7 +287,7 @@
                             <span asp-validation-for="LandArea" class="text-danger"></span>
                             </div>
                             </div>*@
-                    </div>
+                    @*</div>*@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -254,7 +300,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="MeasurementID" class="control-label"></label>
-                            <select id="drpunit" asp-for="MeasurementID" class="form-control">
+                            <select id="drpunit" asp-for="MeasurementID" class="form-control" asp-items="ViewBag.MeasurementID">
                             </select>
                             <span asp-validation-for="MeasurementID" class="text-danger"></span>
                         </div>
