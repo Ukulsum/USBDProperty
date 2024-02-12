@@ -15,6 +15,15 @@ namespace USBDProperty.Models
         [Key]
         [DisplayName("ID")]
         public int ID { get; set; }
+        [ValidateNever]
+        [NotMapped]
+
+        public IFormFile logofile { get; set; }
+        [ValidateNever]
+        [NotMapped]
+
+        public   IFormFile bannerFile { get; set; }
+
         [DisplayName("About Us")]
         public string AboutUs { get; set; }
         [ValidateNever]

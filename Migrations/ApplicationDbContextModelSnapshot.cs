@@ -247,7 +247,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Areas");
+                    b.ToTable("Areas", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.City", b =>
@@ -270,7 +270,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("DivisionId");
 
-                    b.ToTable("Citys");
+                    b.ToTable("Citys", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ClientContact", b =>
@@ -302,7 +302,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("ClientContactId");
 
-                    b.ToTable("ClientContacts");
+                    b.ToTable("ClientContacts", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ClientInterest", b =>
@@ -339,7 +339,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyTypeId");
 
-                    b.ToTable("ClientInterest");
+                    b.ToTable("ClientInterest", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Country", b =>
@@ -357,7 +357,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("CountryID");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.DevelopersorAgent", b =>
@@ -429,7 +429,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("AreaID");
 
-                    b.ToTable("DevelopersorAgent");
+                    b.ToTable("DevelopersorAgent", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Division", b =>
@@ -452,7 +452,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Divisions");
+                    b.ToTable("Divisions", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.FloorPlan", b =>
@@ -479,7 +479,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyInfoID");
 
-                    b.ToTable("FloorPlans");
+                    b.ToTable("FloorPlans", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.MeasurementUnit", b =>
@@ -498,7 +498,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MeasurementUnit");
+                    b.ToTable("MeasurementUnit", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Notice", b =>
@@ -522,15 +522,15 @@ namespace USBDProperty.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -548,7 +548,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("NoticeID");
 
-                    b.ToTable("Notices");
+                    b.ToTable("Notices", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PrivacyPolicy", b =>
@@ -570,7 +570,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("PpId");
 
-                    b.ToTable("PrivacyPolicy");
+                    b.ToTable("PrivacyPolicy", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ProjectImageGallery", b =>
@@ -597,7 +597,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("ProjectID");
 
-                    b.ToTable("ProjectImageGallery");
+                    b.ToTable("ProjectImageGallery", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ProjectsInfo", b =>
@@ -645,7 +645,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("AreaID");
 
-                    b.ToTable("ProjectsInfo");
+                    b.ToTable("ProjectsInfo", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyDetails", b =>
@@ -660,7 +660,6 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -676,13 +675,16 @@ namespace USBDProperty.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Facing")
+                    b.Property<int?>("Facing")
                         .HasColumnType("int");
 
-                    b.Property<int>("FloorAvailableNo")
+                    b.Property<int?>("FlatSize")
                         .HasColumnType("int");
 
-                    b.Property<int>("Furnishing")
+                    b.Property<int?>("FloorAvailableNo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Furnishing")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("HandOverDate")
@@ -691,11 +693,17 @@ namespace USBDProperty.Migrations
                     b.Property<bool>("ISFeatured")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<int>("LandArea")
                         .HasColumnType("int");
+
+                    b.Property<float?>("LandPrice")
+                        .HasColumnType("real");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -705,22 +713,19 @@ namespace USBDProperty.Migrations
                     b.Property<int>("MeasurementID")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBalconies")
+                    b.Property<int?>("NumberOfBalconies")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBaths")
+                    b.Property<int?>("NumberOfBaths")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBedrooms")
+                    b.Property<int?>("NumberOfBedrooms")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfGarages")
+                    b.Property<int?>("NumberOfGarages")
                         .HasColumnType("int");
 
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
+                    b.Property<float?>("Price")
                         .HasColumnType("real");
 
                     b.Property<int>("ProjectId")
@@ -732,9 +737,6 @@ namespace USBDProperty.Migrations
                     b.Property<int>("PropertyFor")
                         .HasColumnType("int");
 
-                    b.Property<int>("PropertySize")
-                        .HasColumnType("int");
-
                     b.Property<int>("PropertyTypeId")
                         .HasColumnType("int");
 
@@ -743,7 +745,7 @@ namespace USBDProperty.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("TotalFloor")
+                    b.Property<int?>("TotalFloor")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdateBy")
@@ -762,7 +764,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyTypeId");
 
-                    b.ToTable("PropertyDetails");
+                    b.ToTable("PropertyDetails", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
@@ -784,7 +786,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("PropertyFeatureId");
 
-                    b.ToTable("PropertyFeatures");
+                    b.ToTable("PropertyFeatures", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
@@ -810,7 +812,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("propertyInfoId");
 
-                    b.ToTable("PropertyImages");
+                    b.ToTable("PropertyImages", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyType", b =>
@@ -820,6 +822,9 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyTypeId"), 1L, 1);
+
+                    b.Property<bool>("IsLand")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("ParentPropertyTypeId")
                         .HasColumnType("int");
@@ -831,7 +836,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("PropertyTypeId");
 
-                    b.ToTable("PropertyTypes");
+                    b.ToTable("PropertyTypes", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyWithFeatures", b =>
@@ -854,7 +859,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("PropertyWithFeatures");
+                    b.ToTable("PropertyWithFeatures", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.SocialIcon", b =>
@@ -879,7 +884,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("IconId");
 
-                    b.ToTable("SocialIcons");
+                    b.ToTable("SocialIcons", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.TermsCondition", b =>
@@ -901,7 +906,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("TermsConditions");
+                    b.ToTable("TermsConditions", (string)null);
                 });
 
             modelBuilder.Entity("USBDProperty.Models.TransactionType", b =>
@@ -919,7 +924,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("TransactionTypeId");
 
-                    b.ToTable("TransactionTypes");
+                    b.ToTable("TransactionTypes", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

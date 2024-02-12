@@ -8,9 +8,18 @@
 <main id="main">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Property Information</h5>
-            <hr />
+            <h5 class="card-title text-center">Property Details</h5>
+            <hr style="width:100%; " />
             <div class="row">
+                <div class="col-md-12">
+                    <img class="img-responsive mb-2" src="@Url.Content(@Model.ImagePath)" />
+                </div>
+            </div>
+
+            <h5 class="card-title text-center">Property Summary</h5>
+            <hr style="width:100%; " />
+            <div class="row">
+                
                 <div class="col-md-6">
                     <dl class="row">
                         <dt class="col-sm-5">
@@ -19,18 +28,24 @@
                         <dd class="col-sm-7">
                             @Html.DisplayFor(model => model.Title)
                         </dd>
-                        <dt class="col-sm-5">
+                        @*<dt class="col-sm-5">
                            <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.PropertyName)
                         </dt>
                         <dd class="col-sm-7">
                             @Html.DisplayFor(model => model.PropertyName)
-                        </dd>
+                        </dd>*@
                         @* <dt class="col-sm-5">
                            <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.propertyFor)
                         </dt>
                         <dd class="col-sm-7">
                             @Html.DisplayFor(model => model.propertyFor.PropeFor)
                         </dd> *@
+                        <dt class="col-md-5">
+                             <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyFor)
+                        </dt>
+                        <dd class="col-md-7">
+                            @Html.DisplayFor(model => model.PropertyFor)
+                        </dd>
                         <dt class="col-sm-5">
                            <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.Location)
                         </dt>
@@ -129,10 +144,10 @@
                             @Html.DisplayFor(model => model.PropertyCondition)
                         </dd>
                         <dt class="col-sm-5">
-                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertySize)
+                            <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.FlatSize)
                         </dt>
                         <dd class="col-sm-7">
-                            @Html.DisplayFor(model => model.PropertySize)
+                            @Html.DisplayFor(model => model.FlatSize)
                         </dd>
                         <dt class="col-sm-5">
                             <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.NumberOfBalconies)
@@ -199,198 +214,3 @@
     </div>
 </main>
 
-
-
-@*<h1>Details</h1>
-
-<div>
-    <h4>PropertyDetails</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertyName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PropertyName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ConstructionStatus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ConstructionStatus)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertySize)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PropertySize)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfBedrooms)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfBedrooms)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfBaths)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfBaths)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfBalconies)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfBalconies)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfGarages)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfGarages)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalFloor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TotalFloor)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FloorAvailableNo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FloorAvailableNo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Furnishing)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Furnishing)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Facing)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Facing)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LandArea)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LandArea)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Measurement)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Measurement)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Comments)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Comments)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.HandOverDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.HandOverDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.propertyFor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.propertyFor.PropeFor)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertyType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PropertyType.PropertyTypeName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TransactionType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TransactionType.TransactionTypeName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertyOwnerInfo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PropertyOwnerInfo.CompanyName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SocialIcon)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SocialIcon.Icon)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Area)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Area.AreaName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UpdateDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UpdateBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-*@

@@ -1,25 +1,4 @@
 
-
-/*------------------------------------------------------------------
-body 
- + WRAP
- + HEADER
- + NAVIGATION
- + BANNER
- + SERVICES
- + OUR FEATURED PROPERTIES
- + WHAT PEOPLE SAY ABOUT US
- + FEEDBACK FROM CLIENTS
- + NEWS FROM BLOG
- + PARTNERS / CLIENTS
- + FOOTER
- + SOCIAL ICONS
- + MEGA MENU
- + 3 MENU LEVEL 
--------------------------------------------------------------------*/
-/*=======================================================
-			THEME STYLING START
-========================================================*/
 * {
 	margin: 0px;
 	padding: 0px;
@@ -594,7 +573,7 @@ ul.dropdown li:hover {
 	padding: 30px;
 	display: inline-block;
 	width: 90%;
-	margin-top: 197px;
+	margin-top: 310px;
 	position: relative;
 	border-radius: 15px;
 }
@@ -1254,6 +1233,16 @@ ul.dropdown li:hover {
 	display: inline-block;
 	width: 37%;
 	height: 100%;
+}
+
+@media (max-width:991px) {
+	.properties .home_in {
+		background: #fff;
+		padding: 44px;
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+	}
 }
 .properties .home-in li {
 	display: inline-block;
@@ -5132,12 +5121,15 @@ footer .tweet li {
 		content: "\f09a";
 		font-family: FontAwesome;
 		padding: 0px;
-		color: #414141;
+		/*color: #414141;*/
+		color: #2B3990;
+		background-color: white;
+		border-radius: 2px;
 		float: left;
 		position: absolute;
 		left: 0px;
 		font-size: 26px;
-		padding: 0px 15px;
+		padding: 2px 15px;
 		font-weight: 100;
 	}
 footer .tweet span {

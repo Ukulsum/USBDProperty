@@ -5,85 +5,184 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Delete</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Are you sure you want to delete this?</h5>
+        <hr style="width:100%; " />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Logo)
+            </dt>
+            <dd class="col-sm-9">
+                @*@Html.DisplayFor(model => model.Logo)*@
+                <img class="img-responsive" src="@Url.Content(@Model.Logo)" />
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Banner)
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
+            </dt>
+            <dd class="col-sm-9">
+                @*@Html.DisplayFor(model => model.Banner)*@
+                <img class="img-responsive" src="@Url.Content(@Model.Banner)" />
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ContactNo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ContactNo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Membership)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Membership)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.AboutUs)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.Raw(Model.AboutUs)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.UpdateDate)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.UpdateBy)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.UpdateBy)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ID" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>
+
+
+
+
+@*<h1>Delete</h1>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
     <h4>DevelopersorAgent</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Logo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Logo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Banner)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Banner)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CompanyName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContactNo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContactNo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-       
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdateDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdateBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Logo)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Logo)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Banner)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Banner)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.CompanyName)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.CompanyName)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.ContactNo)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.ContactNo)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Email)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.CreatedDate)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.CreatedDate)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.CreatedBy)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.CreatedBy)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.UpdateDate)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.UpdateDate)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.UpdateBy)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.UpdateBy)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.IsActive)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.IsActive)
+    </dd>
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+    <input type="hidden" asp-for="ID" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Index">Back to List</a>
     </form>
-</div>
+    </div>*@

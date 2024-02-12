@@ -34,7 +34,7 @@
                     <div class="search-type">
                         <span class="search-type-tab active">
                             @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
-                            Sale
+                            Buy
                         </span>
                         <span class="search-type-tab">
                             @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
@@ -354,7 +354,7 @@
                     <h6>Call us and list your property here</h6>
                 </li>
                 <li class="col-sm-4">
-                    <h1>01712-532107</h1>
+                    <h1> <a href="tel:+88 0188660077"> +88 0188660077</a></h1>
                 </li>
                 <li class="col-sm-2 no-padding">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
@@ -456,12 +456,14 @@
                 console.log(res.data);
                  var NoticeData = "";
                  //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
-                    var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].path + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
+                    var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].imagePath + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
                  //$.each(res.data, function(index, value){
-                 //    noticedata += '<div>'+ value.description +'<div>';
+                 //    NoticeData +=  "<div class='img'><img class='img-responsive' src='" + value.path + "' alt='" + value.title + "'><div class='over-proper'></div><div>" + value.description + "</div> ";
                  //});
                     console.log(res.data[0].title);
                   $("#exampleModalLabel").innerText=res.data[0].title
+                  //$("#exampleModalLabel").innerText=value.title
+                  //$("#exampleModalLabel").modal('show')
                 $("#load_Notification").empty();
                 $("#load_Notification").html(NoticeData);
                 $("#NoticeModal").modal('show')
@@ -492,7 +494,7 @@
                     console.log(value )
                     console.log(value.numberOfBedrooms )
                     propertylist += '<ul class="row">';
-                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.path +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
                 console.log(propertylist);
                 //console.log(PropertySize);

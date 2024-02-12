@@ -36,6 +36,8 @@
     <Folder Include="Data\" />
     <Folder Include="wwwroot\Developer\Logo\" />
     <Folder Include="wwwroot\Developer\Banner\" />
+    <Folder Include="wwwroot\Developer\LocationMap\" />
+    <Folder Include="wwwroot\Developer\Photos\" />
     <Folder Include="wwwroot\Developer\Video\" />
     <Folder Include="wwwroot\NewFolder\" />
     <Folder Include="wwwroot\Projects\Images\" />
