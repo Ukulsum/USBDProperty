@@ -49,7 +49,7 @@ namespace USBDProperty.Models
             get
             {
                 return $" {PropertySize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
-            }
+            } 
         }
         [Required]
         [StringLength(100)]
