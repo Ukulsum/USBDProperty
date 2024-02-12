@@ -171,7 +171,9 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.Area)
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
+                                                
                                                 .Where(p=>p.ISFeatured).ToList();
+                
 
                 return Json(new { data = applicationDbContext });
             }

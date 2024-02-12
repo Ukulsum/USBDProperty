@@ -55,9 +55,7 @@
                         <li class="col-sm-6">
                             <label>Location</label>
                             <select id="propertyInfoId" class="form-control"></select>
-                            @*  <select class="form-control" asp-items="ViewBag.PropertyInfoId" name="PropertyInfoId" id="PropertyInfoId">
-                                <option value="0">Location</option>
-                                </select>*@
+
                         </li>
 
                     </ul>
@@ -186,7 +184,7 @@
             <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            @*<form>*@
+
             <div class="modal-body">
                 <div id="load_Notification">
 
@@ -195,11 +193,10 @@
 
             </div>
             <div class="modal-footer">
-            @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+
 
             </div>
-            @*</form>*@
+
             </div>
 
             </div>
@@ -235,110 +232,10 @@
     <div class="container">
         <!--======= TITTLE =========-->
         <div class="row">
-            @*<a href="/AgentHome/AgentIndex/ID/">*@
+
             @await Component.InvokeAsync("Developer")
-            @*</a>*@
 
-            @*<div class="col-md-6">
-
-                <!--======= TEAM ROW =========-->
-                <ul class="row">
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>David Martin</h6>
-                <p>Founder</p>
-                </div>
-                </div>
-                </li>
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-2.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>Hendrick jack </h6>
-                <p>co-Founder</p>
-                </div>
-                </div>
-                </li>
-                </ul>
-                </div>
-                <div class="col-md-6">
-
-                <!--======= TEAM ROW =========-->
-                <ul class="row">
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-3.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>charles edward </h6>
-                <p>team leader </p>
-                </div>
-                </div>
-                </li>
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-4.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>jessica wevins </h6>
-                <p>team leader</p>
-                </div>
-                </div>
-                </li>
-                </ul>
-                </div> *@
+            
         </div>
     </div>
 </section>
@@ -442,7 +339,8 @@
             //$("#exampleModal").modal('Show');
             loadNotice();
             getProperty()
-            getBannerProperty()
+            //getBannerProperty()
+
         })
 
 
@@ -482,6 +380,7 @@
                })
            })
      }
+      //value.propertyFor 
     function getProperty(){
         //alert("helo")
         $.ajax({
@@ -494,7 +393,7 @@
                     console.log(value )
                     console.log(value.numberOfBedrooms )
                     propertylist += '<ul class="row">';
-                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
                 console.log(propertylist);
                 //console.log(PropertySize);
@@ -505,36 +404,29 @@
         })
     }
 
-     function getBannerProperty(){
-        //alert("helo")
-        $.ajax({
-            url: "/PropertyDetails/BannerProperty",
-            method: "Get",
-            success: function(res){
-                console.log("Banner")
-                console.log(res.data)
-                var bannerProperty = "";
-                $.each(res.data, function(index, value){
-                    console.log(value )
-                    //console.log(value.numberOfBedrooms )
+    // function getBannerProperty(){
+    //    //alert("helo")
+    //    $.ajax({
+    //        url: "/PropertyDetails/BannerProperty",
+    //        method: "Get",
+    //        success: function(res){
+    //            console.log("Banner")
+    //            console.log(res.data)
+    //            var bannerProperty = "";
+    //            $.each(res.data, function(index, value){
+    //                console.log(value )
+    //                //console.log(value.numberOfBedrooms )
 
-                    bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
-                    //<div class="prot-slide">
-                    //bannerProperty += '<div class="row">';
-                    //bannerProperty = '<div class="row">';
-                    //bannerProperty = '<div class="prot-slide"><div class="plots">';
-                    //bannerProperty += '<div class="plots">';
-                    //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
-                });
-                console.log(bannerProperty);
-                //console.log(PropertySize);
-                //bannerProperty += '</div>';
-                //bannerProperty = '</div>';
-                $("#bannerslide").empty();
-                $("#bannerslide").html(bannerProperty);
-            }
-        })
-    }
+    //                bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
+
+    //            });
+    //            console.log(bannerProperty);
+
+    //            $("#bannerslide").empty();
+    //            $("#bannerslide").html(bannerProperty);
+    //        }
+    //    })
+    //}
                 //        $('.owl-carousel').owlCarousel({
                 //    loop:true,
                 //    margin:10,
