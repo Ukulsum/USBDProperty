@@ -1,0 +1,627 @@
+﻿@model USBDProperty.Models.DevelopersorAgent
+@*@model USBDProperty.ViewModels.ClientVM*@
+@*@model USBDProperty.ViewModels.DeveloperPropertyVm *@
+
+@*@{
+    Layout = null;
+}*@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    @*<title> @ViewData["Title"] - USBD Property's - @Model.CompanyName </title>*@
+    <title>USBD Property's - @Model.CompanyName </title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon_io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon_io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon_io//apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon_io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon_io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon_io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon_io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon_io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon_io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+
+
+    @*  <link href="~/AgentAsserts/img/favicon.png" rel="icon">
+        <link href="~/AgentAsserts/img/apple-touch-icon.png" rel="apple-touch-icon">*@
+
+
+    @*<link href="~/Asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css">*@
+    <link href="~/Asserts/css/main.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/responsive.css" rel="stylesheet" type="text/css">
+    <link href="~/Asserts/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/AgentAsserts/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/AgentAsserts/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/AgentAsserts/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/AgentAsserts/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/AgentAsserts/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/AgentAsserts/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/AgentAsserts/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/AgentAsserts/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/AgentAsserts/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+
+
+            @*<h1 class="logo"><a href="index.html">@Url.Content(@item.Logo)</a></h1>*@
+            <h1 class="logo"><a href="index.html"><img src="@Url.Content(@Model.Logo)"></a></h1>
+
+
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    <li><a class="nav-link scrollto" href="#about">Projects</a></li>
+
+                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li><a class="getstarted scrollto" href="/Home/Index">Back Home</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+
+            <img src="@Url.Content(Model.Banner)" />
+
+
+            @*<div class="carousel-inner" role="listbox">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+                <div class="carousel-container">
+                <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Multi</span></h2>
+                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                </div>
+                </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+                <div class="carousel-container">
+                <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                </div>
+                </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
+                <div class="carousel-container">
+                <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                </div>
+                </div>
+                </div>
+
+                </div>
+
+                <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                </a>
+
+                <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                </a>*@
+
+        </div>
+    </section><!-- End Hero -->
+    @*<main id="main">*@
+  @*  <section></section>
+
+       <section>
+        <div class="container">
+            <div class="load_video">
+
+            </div>
+
+        </div>
+    </section>
+*@
+ @*   <section id="cta" class="cta">
+        <div class="container" data-aos="zoom-in">
+            <div class="load_video">
+
+            </div>
+
+        </div>
+    </section>*@
+
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>About</h2>
+                <p>About Us</p>
+            </div>
+
+            <div class="row content">
+                @*<p>@Model.AboutUs </p>*@
+                <p>@Html.Raw(Model.AboutUs)</p>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+
+        @RenderBody()
+
+       @* <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Projects</h2>
+                <p>Check @Model.CompanyName 's Projects</p>
+            </div>
+
+            <div id="load_projects">
+            
+            </div>
+
+        </div>*@
+    </section>
+    <!-- End Services Section -->
+    <!-- ======= PropertySection Section ======= -->
+    @* <section class="properties" id="property">
+
+        <div class="tittle">
+        <img src="~/Asserts/images/head-top.png" alt="">
+        <h3>Featured Properties</h3>
+        </div>
+
+        <div class="load_properties">
+        </div>
+
+        </section> *@
+    <!-- End Property Section -->
+    @* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button> *@
+
+
+    @*<section class="properties">*@
+    @*<div class="container">*@
+  @*  <div class="modal fade " id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <section class="properties">
+                    <div class="container">
+
+                    <!--======= TITTLE =========-->
+                    <div class="tittle">
+                        <img src="~/Asserts/images/head-top.png" alt="">
+                        <h3 id="prjid">  </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!--======= PROPERTIES ROW =========-->
+                     <ul class="row"> 
+                    <div class="load_properties">
+                    </div>
+                     </ul> 
+                    </div>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+                </section>
+
+            </div>
+        </div>
+    </div>*@
+    @*</div>*@
+    @*</section>*@
+
+
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>Contact Us</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="info-box">
+                                <i class="bx bx-map"></i>
+                                <h3>Our Address</h3>
+                                <p>39 Headline Rd, Deer Park, NY 11729</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box mt-4">
+                                <i class="bx bx-envelope"></i>
+                                <h3>Email Us</h3>
+                                <p>ashraf@usbdproperty.com</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box mt-4">
+                                <i class="bx bx-phone-call"></i>
+                                <h3>Call Us</h3>
+                                <p>+88 0188660077</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="col-lg-6">
+                    <form class="php-email-form">
+                        <p class="text-center">Send Message to Property Owner</p>
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="col-md-6 form-group">
+
+                                <input type="text" class="form-control" placeholder="Enter Your Name" id="clientName" />
+                                @*<input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>*@
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" placeholder="Enter Your E-mail" id="email" />
+                                @*<input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>*@
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" placeholder="Enter Your Phone" id="contactNo" />
+                                @*<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>*@
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <textarea type="text" class="form-control" rows="5" placeholder="Please Type Your Message" id="message"></textarea>
+                                @*<textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>*@
+                            </div>
+                            @*<div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                                </div>*@
+                            <div class="text-center">
+                                <input type="button" value="Send Message" class="btn btn-primary" id="btnSave" />
+                                @*<input type="button" value="Send Message" id="btnSave" />*@
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Contact Section -->
+    @*</main>*@
+    <!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer>
+        <div class="container">
+            <ul class="row">
+
+
+                <!--======= HAPPY CLIENTS =========-->
+                <li class="col-sm-6 col-md-4">
+                    <!--======= LINKS =========-->
+                    <h5>latest from Facebook</h5>
+                    <hr>
+                    <ul>
+                        <li>
+                            <p>
+                                US-BDProperty is one of the excellent realestate market place
+                                <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf">Facebook page</a> one of the excellent realestate market place on facebook.
+                            </p>
+                        </li>
+                        <li>
+                            <p>Join our    <a target="_blank" href="https://www.facebook.com/DhorittreewithAshraf">Facebook Group</a> to touch with us. </p>
+
+                        </li>
+                    </ul>
+                </li>
+                <li class="col-sm-6 col-md-4">
+                    <h5>recent properties</h5>
+                    <hr>
+                    <ul class="recent-come">
+                        <div class="load_FooterProperty">
+                        </div>
+                    </ul>
+                </li>
+
+                <!--======= HAPPY CLIENTS =========-->
+                <li class="col-sm-6 col-md-4">
+                    <!--======= LINKS =========-->
+                    <h5>Contact</h5>
+                    <hr>
+                    <div class="loc-info">
+                        <p>
+                            @*<address>*@
+                            <i class="fa fa-map-marker"></i>
+
+                            567,East-Kazipara,Mirpur,Dhaka-1216
+
+                            @*</address>*@
+                        </p>
+                        <p><i class="fa fa-phone"></i> +88 01712532107</p>
+                        <p><i class="fa fa-print"></i> +880 1881-660077 (WhatsApp)</p>
+                        <p><i class="fa fa-envelope-o"></i>	ashraf@usbdproperty.com</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <div class="rights">
+        <div class="container">
+            <p class="font-montserrat">
+                ©Copyright US-BDProperty All Rights Reserved 2023- @DateTime.Now.Year| Design &amp; Developed by <a href="https://www.powersoftit.com/" target="_blank"><strong><span>PowersoftIT</span></strong></a>
+            </p>
+        </div>
+    </div>
+    <!-- End Footer -->
+@*    <button onclick="Getpropertiesbyproject()"></button>
+    <div id="preloader"></div>*@
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/AgentAsserts/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="~/AgentAsserts/vendor/aos/aos.js"></script>
+    <script src="~/AgentAsserts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/AgentAsserts/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/AgentAsserts/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/AgentAsserts/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/AgentAsserts/vendor/php-email-form/validate.js"></script>
+
+
+    <!------- Home LAyout js ---------->
+
+    <script src="~/Asserts/js/jquery-1.11.0.min.js"></script>
+    <script src="~/Asserts/js/wow.min.js"></script>
+    <script src="~/Asserts/js/bootstrap-select.js"></script>
+    <script src="~/Asserts/js/bootstrap-select.js"></script>
+    <script src="~/Asserts/js/bootstrap.min.js"></script>
+    <script src="~/Asserts/js/jquery.stellar.js"></script>
+    <script src="~/Asserts/js/jquery.flexslider-min.js"></script>
+    <script src="~/Asserts/js/owl.carousel.min.js"></script>
+    <script src="~/Asserts/js/jquery.sticky.js"></script>
+    <script src="~/Asserts/js/own-menu.js"></script>
+    <script src="~/Asserts/js/jquery.nouislider.min.js"></script>
+    <script src="~/Asserts/js/main.js"></script>
+
+
+
+
+    <!-- Template Main JS File -->
+    <script src="~/AgentAsserts/js/main.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        $(document).ready(function (){
+            $("#property").hide();
+            $("#btnSave").click(  function () {
+
+                PostClientData();
+            });
+
+               // $("#exampleModalXl").modal('show');
+
+            //getVideo()
+
+            getFooterProperty()
+            //getProperty()
+            //GetHomeProjects()
+
+        });
+
+        function PostClientData(){
+            alert("Hello Client");
+            var client = {
+                ClientContactId:0,
+                ClientName: $("#clientName").val(),
+                Email: $("#email").val(),
+                ContactNo: $("#contactNo").val(),
+                Message: $("#message").val(),
+                ContactDate: Date
+            }
+            console.log(client);
+            $.ajax({
+                url: "/ClientContacts/Save",
+                type: "POST",
+                //data: JSON.stringify(data),
+                data: JSON.stringify(client),
+                dataType: "JSON",
+                contentType: "application/json",
+                success: function(res){
+                    console.log(res);
+                     $("#clientName").val(''),
+                     $("#email").val(''),
+                     $("#contactNo").val(''),
+                     $("#message").val('')
+
+                     //$("#btnSave").val('Save')
+
+
+                }
+            })
+        }
+
+         //type='video/mp4'
+        // function getVideo(){
+        //      //alert("helo")
+        //      $.ajax({
+        //          url: "/ProjectsInfoes/GetProjectsVideo",
+        //          method: "Get",
+        //          success: function(res){
+        //              console.log(res.data)
+        //              var ProjectVideolist = "";
+        //              $.each(res.data, function(index, value){
+        //                  console.log(value.projectVideo)
+        //                  console.log(value.locationMap)
+        //                  if(value.projectVideo != null){
+        //                       ProjectVideolist += "<li><video controls width='100%' height='256'><source src='"+value.projectVideo +"' ></video></li>"
+        //                  }
+        //                  else{
+        //                      ProjectVideolist = "<li><img src='"+value.locationMap +"' class='img-responsive' ></li>"
+        //                  }
+                         
+        //                  //if(res.data.projectVideo != null){
+        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].projectVideo +"' type='video/mp4'></video></li>"
+        //                  //}
+        //                  //else{
+        //                  //    ProjectVideolist = "<li><img src='"+res.data[0].locationMap +"' class='img-responsive' ></li>"
+        //                  //}
+        //                  //else{
+        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].locationMap +"' type='video/mp4'></video></li>"
+        //                  //}
+                          
+        //              });                    
+        //              console.log(ProjectVideolist);
+        //              $(".load_video").empty();
+        //              $(".load_video").html(ProjectVideolist);
+        //          }
+        //      })
+        //}
+
+        function getFooterProperty(){
+              //alert("helo")
+              $.ajax({
+                  url: "/PropertyDetails/HomeFooterProperty",
+                  method: "Get",
+                  success: function(res){
+                      console.log(res.data)
+                      var propertylist = "";
+                      $.each(res.data, function(index, value){
+                          console.log(value )
+                          console.log(value.numberOfBedrooms )
+                          //propertylist += '<ul class="recent-come">';
+                          propertylist += '<li><div class="img-post"> <img src="'+ value.path +'" height="59px" width="59px" alt=""> </div><div class="text-post"> <a href="#.">'+ value.propertyName +'</a> <span>$'+ value.totalPrice +'</span> </div></li>'
+                      });
+                      console.log("Image")
+                      console.log(propertylist);
+                      //console.log(PropertySize);
+                      //propertylist += '</ul>';
+                      $(".load_FooterProperty").empty();
+                      $(".load_FooterProperty").html(propertylist);
+                  }
+              })
+        }
+
+    
+
+
+        //function GetHomeProjects(){
+
+        //   // alert("Home")
+        //    var curloc = $(location).attr('href');
+        //    var url = curloc.split('/');
+        //    console.log("HomeAgentProject");
+        //    console.log(url);
+        //    var id = url[url.length - 1];
+        //    console.log("D :" + id)
+
+        //    //alert("Projects")
+        //   $.ajax({
+        //        url: "/AgentHome/HomeAgentProject/" + id ,
+        //        method: "Get",
+        //        success: function(res){
+        //        console.log(res.data);
+        //        console.log("Projects");
+        //        var projectdata = "";
+        //         projectdata += ' <div class="row">'
+        //        $.each(res.data, function(index, value){
+        //                console.log(value.id)
+        //                $("#prjid").html("All properties under " + value.projectName)
+                       
+        //                projectdata += '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" onclick="Getpropertiesbyproject('+ value.id+')" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
+        //        });
+        //        projectdata += '</div>'
+        //        console.log(projectdata);
+        //        console.log("DataProjects");
+        //        $("#load_projects").empty();
+        //        $("#load_projects").html(projectdata);
+        //     }
+        //   })
+
+        //}
+
+        //function Getpropertiesbyproject(id){
+        //    alert(id)
+        //    $.ajax({
+        //        url: "/PropertyDetails/PropertybyProjects?prjId="+id,
+        //        method: "Get",
+        //        success: function (res) {
+        //            console.log(res.data)
+        //            var propertylist = "";
+        //            propertylist += '<ul class="row">';
+        //            $.each(res.data, function (index, value) {
+        //                console.log(value)
+        //                console.log(value.numberOfBedrooms)
+
+        //                propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><div class="img"><img class="img-responsive" src="' + value.path + '" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatsize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
+        //            });
+        //            console.log(propertylist);
+        //            console.log("Hello");
+        //            //console.log(PropertySize);
+        //            propertylist += '</ul>';
+
+        //            $("#property").show();
+        //            $(".load_properties").empty();
+        //            $(".load_properties").html(propertylist);
+        //            $("#exampleModalXl").modal('show')
+        //        }
+        //    })
+        //}
+    </script>
+</body>
+
+</html>
+
