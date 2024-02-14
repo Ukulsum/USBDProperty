@@ -4,7 +4,7 @@
 
 namespace USBDProperty.Migrations
 {
-    public partial class pd : Migration
+    public partial class m : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,19 +22,24 @@ namespace USBDProperty.Migrations
             migrationBuilder.AddColumn<string>(
                name: "ImagePath",
                table: "PropertyDetails",
-               type: "string",
+               type: "nvarchar(max)",
                nullable: true);
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FlatSize1",
+                name: "FlatSize",
                 table: "PropertyDetails");
 
             migrationBuilder.DropColumn(
-                name: "LandPrice1",
+                name: "LandPrice",
                 table: "PropertyDetails");
+            migrationBuilder.DropColumn(
+               name: "ImagePath",
+               table: "PropertyDetails");
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -172,7 +173,20 @@ namespace USBDProperty.Controllers
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
                                                 
-                                                .Where(p=>p.ISFeatured).ToList();
+                                                .Where(p=>p.ISFeatured).Select(s=> new
+                                                {
+                                                    ContructionStatus= s.ConstructionStatus,
+                                                    PropertyFor= s.PropertyFor.ToString(),
+                                                    ImagePath=s.ImagePath,
+                                                    LandArea=   s.LandArea,
+                                                    Location=  s.Location,
+                                                    NumberOfBaths= s.NumberOfBaths,
+                                                    NumberOfBedrooms= s.NumberOfBedrooms,
+                                                    Title=s.Title,
+                                                    PropertyTypeName=s.PropertyType.PropertyTypeName,
+                                                    TotalPrice=s.TotalPrice,
+                                                    PropertyInfoId=s.PropertyInfoId
+                                                }).ToList();
                 
 
                 return Json(new { data = applicationDbContext });
