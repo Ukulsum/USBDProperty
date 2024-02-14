@@ -247,7 +247,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Areas", (string)null);
+                    b.ToTable("Areas");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.City", b =>
@@ -270,7 +270,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("DivisionId");
 
-                    b.ToTable("Citys", (string)null);
+                    b.ToTable("Citys");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ClientContact", b =>
@@ -297,12 +297,15 @@ namespace USBDProperty.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Interested")
+                        .HasColumnType("int");
+
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ClientContactId");
 
-                    b.ToTable("ClientContacts", (string)null);
+                    b.ToTable("ClientContacts");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ClientInterest", b =>
@@ -339,7 +342,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyTypeId");
 
-                    b.ToTable("ClientInterest", (string)null);
+                    b.ToTable("ClientInterest");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Country", b =>
@@ -357,7 +360,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("CountryID");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.DevelopersorAgent", b =>
@@ -429,7 +432,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("AreaID");
 
-                    b.ToTable("DevelopersorAgent", (string)null);
+                    b.ToTable("DevelopersorAgent");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Division", b =>
@@ -452,7 +455,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Divisions", (string)null);
+                    b.ToTable("Divisions");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.FloorPlan", b =>
@@ -479,7 +482,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyInfoID");
 
-                    b.ToTable("FloorPlans", (string)null);
+                    b.ToTable("FloorPlans");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.MeasurementUnit", b =>
@@ -498,7 +501,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MeasurementUnit", (string)null);
+                    b.ToTable("MeasurementUnit");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.Notice", b =>
@@ -548,7 +551,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("NoticeID");
 
-                    b.ToTable("Notices", (string)null);
+                    b.ToTable("Notices");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PrivacyPolicy", b =>
@@ -570,7 +573,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("PpId");
 
-                    b.ToTable("PrivacyPolicy", (string)null);
+                    b.ToTable("PrivacyPolicy");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ProjectImageGallery", b =>
@@ -597,7 +600,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("ProjectID");
 
-                    b.ToTable("ProjectImageGallery", (string)null);
+                    b.ToTable("ProjectImageGallery");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.ProjectsInfo", b =>
@@ -645,7 +648,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("AreaID");
 
-                    b.ToTable("ProjectsInfo", (string)null);
+                    b.ToTable("ProjectsInfo");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyDetails", b =>
@@ -764,7 +767,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyTypeId");
 
-                    b.ToTable("PropertyDetails", (string)null);
+                    b.ToTable("PropertyDetails");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
@@ -786,7 +789,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("PropertyFeatureId");
 
-                    b.ToTable("PropertyFeatures", (string)null);
+                    b.ToTable("PropertyFeatures");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
@@ -812,7 +815,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("propertyInfoId");
 
-                    b.ToTable("PropertyImages", (string)null);
+                    b.ToTable("PropertyImages");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyType", b =>
@@ -836,7 +839,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("PropertyTypeId");
 
-                    b.ToTable("PropertyTypes", (string)null);
+                    b.ToTable("PropertyTypes");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyWithFeatures", b =>
@@ -859,7 +862,7 @@ namespace USBDProperty.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("PropertyWithFeatures", (string)null);
+                    b.ToTable("PropertyWithFeatures");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.SocialIcon", b =>
@@ -884,7 +887,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("IconId");
 
-                    b.ToTable("SocialIcons", (string)null);
+                    b.ToTable("SocialIcons");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.TermsCondition", b =>
@@ -906,7 +909,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("TermsConditions", (string)null);
+                    b.ToTable("TermsConditions");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.TransactionType", b =>
@@ -924,7 +927,7 @@ namespace USBDProperty.Migrations
 
                     b.HasKey("TransactionTypeId");
 
-                    b.ToTable("TransactionTypes", (string)null);
+                    b.ToTable("TransactionTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -9,8 +9,13 @@
 <!--======= BANNER =========-->
 <div id="banner">
     <div class="flex-banner">
+
         <ul class="slides">
             <!--======= SLIDER =========-->
+
+
+
+            <li> <img src="~/Asserts/Banner/HomeBanner.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </li>
 
             <li> <img src="~/Asserts/Banner/service-img-1.jpg" alt=""> </li>
@@ -19,55 +24,170 @@
             <li> <img src="~/Asserts/Banner/Dharittree banner-4.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-5.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-6.jpg" alt=""> </li>
+
         </ul>
+
+
+
+
+
+        <!-- Modal -->
+        <!--======= FIND PROPERTY =========-->
+        <div class="finder">
+            <div class="zoomBtn">
+                @*<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"> just contact us </button>*@
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Join For Zoom </button>
+
+            </div>
+            <div class="container">
+                @* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>*@
+                <form asp-action="MoreSearch" asp-controller="PropertyDetails" method="get">
+                    @*<h1>Us-Bd Properties Ltd.</h1>*@
+                    <!--======= FORM SECTION =========-->
+                    <div class="find-sec">
+                        <div class="search-type">
+                            <span class="search-type-tab active">
+                                @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
+                                Buy
+                            </span>
+                            <span class="search-type-tab">
+                                @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
+                                Rent
+                            </span>
+                        </div>
+                        <ul class="row">
+
+                            <!--======= FORM =========-->
+                            <li class="col-sm-6">
+                                <label>Choose The City</label>
+                                <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
+                                    <option>Area</option>
+                                </select>
+                            </li>
+
+                            <!--======= FORM =========-->
+                            <li class="col-sm-6">
+                                <label>Location</label>
+                                <select id="propertyInfoId" class="form-control"></select>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="search-btn-container">
+                        <button type="submit" class="search-btn">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 
+</div>
 
- 
-    <!--======= FIND PROPERTY =========-->
-    <div class="finder">
-        <div class="container">
-            <form asp-action="MoreSearch" asp-controller="PropertyDetails" method="get">
-                @*<h1>Us-Bd Properties Ltd.</h1>*@
-                <!--======= FORM SECTION =========-->
-                <div class="find-sec">
-                    <div class="search-type">
-                        <span class="search-type-tab active">
-                            @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
-                            Buy
-                        </span>
-                        <span class="search-type-tab">
-                            @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
-                            Rent
-                        </span>
-                    </div>
-                    <ul class="row">
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+    </button>*@
 
-                        <!--======= FORM =========-->
-                        <li class="col-sm-6">
-                            <label>Choose The City</label>
-                            <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
-                                <option>Area</option>
-                            </select>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Join For Zoom</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_zoom">
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <ul>
+                        <li class="mb-2">
+                            <p class="text-center">Join Zoom Abason Mela</p>
+                            <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
+                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
+                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
+                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
                         </li>
-
-                        <!--======= FORM =========-->
-                        <li class="col-sm-6">
-                            <label>Location</label>
-                            <select id="propertyInfoId" class="form-control"></select>
-
+                        <li class="mb-2">
+                            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </li>
-
+                        <li class="mb-2">
+                            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </li>
                     </ul>
                 </div>
-                <div class="search-btn-container">
-                    <button type="submit" class="search-btn">Search</button>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" asp-items="@ViewData["Interested"]" value="@Interested.ZoomInterested">Save</button>
+
                 </div>
             </form>
         </div>
     </div>
+</div>
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_Sale">
+                <div class="modal-body">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <ul>
+                        <li class="mb-2">
+                            <p class="text-center">Send Message to Property Owner</p>
+                            <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
+                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
+                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
+                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </li>
+                        <li>
+                            @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+                    <button type="submit" value="@Interested.Sale" asp-items="@ViewData["Interested"]" class="btn btn-primary center mb-2">Save</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </form>
+        </div>
+
+    </div>
 </div>
 
 
@@ -171,44 +291,33 @@
 
 
 
-   <!-------- Start Modal Notification -->
-              <div class="modal fade" id="NoticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
+<!-------- Start Modal Notification -->
+<div class="modal fade" id="NoticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-               
-                
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+                <h5 class="modal-title" id="exampleModalLabel">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             <div class="modal-body">
                 <div id="load_Notification">
-
-
                 </div>
 
             </div>
             <div class="modal-footer">
-
-
             </div>
 
-            </div>
+        </div>
 
-            </div>
-            </div>
-
-
-    <!-------- End Modal Notification -->
+    </div>
+</div>
 
 
-
-
-
+<!-------- End Modal Notification -->
 <!--======= PROPERTY =========-->
 <section class="properties">
     <div class="container">
@@ -235,7 +344,7 @@
 
             @await Component.InvokeAsync("Developer")
 
-            
+
         </div>
     </div>
 </section>
@@ -254,7 +363,7 @@
                     <h1> <a href="tel:+88 0188660077"> +88 0188660077</a></h1>
                 </li>
                 <li class="col-sm-2 no-padding">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
                     @*<a href="#." class="btn">just contact us</a> *@
                 </li>
             </ul>
@@ -275,7 +384,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form asp-action="Create" asp-controller="ClientContacts" method="post">
+            <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_sell">
                 <div class="modal-body">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -345,7 +454,7 @@
 
 
     function loadNotice(){
-       
+
         $.ajax({
             url: "/Notices/HomeNotice",
             method: "Get",
@@ -380,7 +489,7 @@
                })
            })
      }
-      //value.propertyFor 
+      //value.propertyFor
     function getProperty(){
         //alert("helo")
         $.ajax({

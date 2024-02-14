@@ -115,6 +115,18 @@ body {
 		}
 
 
+/*=======================================================
+			SLIDER button
+========================================================*/
+.zoomBtn {
+	position: absolute;
+	top: -25%;
+	z-index: 2;
+	width: 100%;
+	left: -386px;
+	text-align: center;
+	color: red;
+}
 
 
 
