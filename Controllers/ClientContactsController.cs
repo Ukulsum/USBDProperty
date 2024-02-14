@@ -26,6 +26,7 @@ namespace USBDProperty.Controllers
         public async Task<IActionResult> Index()
         {
             //var applicationDbContext = _context.ClientContacts.Include(c => c.PropertyType);
+            //ViewData["Interested"] = interested;
             var applicationDbContext = _context.ClientContacts;
             return View(await applicationDbContext.ToListAsync());
         }
@@ -50,9 +51,11 @@ namespace USBDProperty.Controllers
         }
 
         // GET: ClientContacts/Create
+        //public IActionResult Create(Interested interested)
         public IActionResult Create()
         {
             ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
+            //ViewData["Interested"] = interested;
             return View();
         }
 
@@ -62,7 +65,7 @@ namespace USBDProperty.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-             ClientVM clientContact)
+ClientVM clientContact)
         {
             int Id = 0;
             int r = 0;
@@ -70,11 +73,11 @@ namespace USBDProperty.Controllers
             {
                 if(clientContact.PropertyID > 0)
                 {
-                    var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now };
+                    var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now, Interested = Interested.Buy};
                     _context.ClientContacts.Add(client);
                     await _context.SaveChangesAsync();
 
-                    _context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
+                    _context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId,});
 
                     Id = clientContact.PropertyID;
 
@@ -92,7 +95,7 @@ namespace USBDProperty.Controllers
 
                 else
                 {
-                    var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now };
+                    var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now, Interested = Interested.Sale};
                     _context.ClientContacts.Add(client);
                     r = await _context.SaveChangesAsync();
 
@@ -106,45 +109,8 @@ namespace USBDProperty.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-
-
-                //var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, ContactDate = DateTime.Now };
-                //_context.ClientContacts.Add(client);
-                //await _context.SaveChangesAsync();
-
-                //if (clientContact.PropertyID > 0)
-                //{
-                //_context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
-
-                //Id = clientContact.PropertyID;
-                //}
-                //else
-                //{
-                //    _context.ClientContacts.Add(client);
-                //    await _context.SaveChangesAsync();
-                //}
-
-                //_context.ClientInterest.Add(new ClientInterest { ClientID = client.ClientContactId, Message = clientContact.Message, PropertyID = clientContact.PropertyID, PropertyTypeId = clientContact.PropertyTypeId, PropertyForId = clientContact.PropertyForId });
-
-                //Id = clientContact.PropertyID;
-
-
-                //_context.Add(clientContact);
-                //r = await _context.SaveChangesAsync();
-                //if (r > 0)
-                //{
-
-
-                //    _notyf.Success("As soon as possible we will contact with u");
-                //    // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
-
-                //    return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
-                //}
-
-                //  return RedirectToAction(nameof(Index));
             }
-            //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", 
-            //    clientContact.PropertyTypeId);
+            //ViewData["Interested"] = interested;
             ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
             // return View(clientContact);
             return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });

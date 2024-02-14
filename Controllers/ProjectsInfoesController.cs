@@ -26,7 +26,7 @@ namespace USBDProperty.Controllers
         // GET: ProjectsInfoes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ProjectsInfo.Include(p => p.Developers);
+            var applicationDbContext = _context.ProjectsInfo.OrderByDescending(p=>p.Id).Include(p => p.Developers);
             return View(await applicationDbContext.ToListAsync());
         }
         [AllowAnonymous]

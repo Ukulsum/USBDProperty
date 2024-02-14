@@ -105,7 +105,7 @@ namespace USBDProperty.Controllers
                    
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
+            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Title", propertyImages.propertyInfoId);
             return View(propertyImages);
         }
 

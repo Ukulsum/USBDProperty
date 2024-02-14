@@ -195,14 +195,14 @@
                 <p>Check @Model.CompanyName 's Projects</p>
             </div>
 
-            <div class="row">
+           @* <div class="row">*@
 
                 @*<div type="button" data-bs-toggle="modal" data-bs-target="#exampleModalXl" id="btnModal">*@
                 <div id="load_projects">
                 </div>
                 @*</div>*@
 
-            </div>
+            @*</div>*@
 
         </div>
     </section>
@@ -508,7 +508,7 @@
 
                // $("#exampleModalXl").modal('show');
 
-            getVideo()
+            //getVideo()
 
             getFooterProperty()
             getProperty()
@@ -633,6 +633,8 @@
                 }
             })
         }
+
+
         function GetHomeProjects(){
 
            // alert("Home")
@@ -651,11 +653,14 @@
                 console.log(res.data);
                 console.log("Projects");
                 var projectdata = "";
+                 projectdata += ' <div class="row">'
                 $.each(res.data, function(index, value){
                         console.log(value.id)
                         $("#prjid").html("All properties under " + value.projectName)
-                        projectdata += '  <div  onclick="Getpropertiesbyproject('+ value.id+')"  class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
+                       
+                        projectdata += '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" onclick="Getpropertiesbyproject('+ value.id+')" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
                 });
+                projectdata += '</div>'
                 console.log(projectdata);
                 console.log("DataProjects");
                 $("#load_projects").empty();
