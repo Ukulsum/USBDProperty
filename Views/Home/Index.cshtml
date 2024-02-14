@@ -100,36 +100,40 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_zoom">
+           @*  <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_zoom"> *@
+            <form  id="form_zoom">
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <ul>
                         <li class="mb-2">
                             <p class="text-center">Join Zoom Abason Mela</p>
-                            <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
+                            <input type="text"  id="ClientName" class="form-control" placeholder="Enter Your Name" />
                             @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
                                 <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
                                 <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
                             <span asp-validation-for="ClientName" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
-                            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+                            <input type="email" id="Email" class="form-control" placeholder="Enter Your E-mail" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
-                            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                            <input type="text" id="ContactNo" class="form-control" placeholder="Enter Your Phone" />
                             <span asp-validation-for="ContactNo" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
-                            <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                            <textarea type="text" id="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
                             <span asp-validation-for="Message" class="text-danger"></span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="modal-footer">
+                    
+                   
+                  @*   <button type="submit" class="btn btn-primary" asp-items="@ViewData["Interested"]" value="@Interested.ZoomInterested">Save</button> *@
+                    <button type="button" class="btn btn-primary" onclick="PostClientData()">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" asp-items="@ViewData["Interested"]" value="@Interested.ZoomInterested">Save</button>
 
                 </div>
             </form>
@@ -452,7 +456,59 @@
 
         })
 
+        // clientInformation
 
+        // function saveClient() {
+           
+        //     var ClientVM = {
+        //         ClientName: $("#ClientName").val(),
+        //         ContactNo: $("#ContactNo").val(),
+        //         Email: $("#Email").val(),
+        //         Message: $("#Message").val(),
+        //         // ContactDate:null,
+        //         Interested: 1
+        //     }
+        //     console.log(ClientVM)
+        //     $.post("/ClientContacts/SaveContact", JSON.stringify(ClientVM))
+        //         .done(function (data) {
+        //             alert("Data Loaded: " + data);
+        //             console.log(data)
+        //         });
+
+        // }
+
+        function PostClientData() {
+           // alert("Hello Client");
+            var client = {
+                ClientContactId: 0,
+                ClientName: $("#ClientName").val(),
+                Email: $("#Email").val(),
+                ContactNo: $("#ContactNo").val(),
+                Message: $("#Message").val(),
+                ContactDate: Date
+            }
+            console.log(client);
+            $.ajax({
+                url: "/ClientContacts/Save",
+                type: "POST",
+                //data: JSON.stringify(data),
+                data: JSON.stringify(client),
+                dataType: "JSON",
+                contentType: "application/json",
+                success: function (res) {
+                    console.log(res);
+
+                    $("#clientName").val(''),
+                        $("#email").val(''),
+                        $("#contactNo").val(''),
+                        $("#message").val('')
+                    $("#exampleModalCenter").hide('modal')
+                    //$("#btnSave").val('Save')
+
+
+                }
+            })
+        }
     function loadNotice(){
 
         $.ajax({
@@ -489,6 +545,8 @@
                })
            })
      }
+
+    
       //value.propertyFor
     function getProperty(){
         //alert("helo")

@@ -1,4 +1,6 @@
-﻿namespace USBDProperty.ViewModels
+﻿using USBDProperty.Models;
+
+namespace USBDProperty.ViewModels
 {
     //public enum Interested
     //{
@@ -16,6 +18,6 @@
         public int PropertyForId { get; set; }
         public string Message { get; set; }
         public int PropertyTypeId { get; set; }
-        //public Interested Interested { get; set; }
+        public Interested Interested { get; set; }
     }
 }
