@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240212060901_IsLand1")]
+    partial class IsLand1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -681,9 +683,6 @@ namespace USBDProperty.Migrations
                     b.Property<int?>("FlatSize")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FlatSize1")
-                        .HasColumnType("int");
-
                     b.Property<int?>("FloorAvailableNo")
                         .HasColumnType("int");
 
@@ -706,9 +705,6 @@ namespace USBDProperty.Migrations
                         .HasColumnType("int");
 
                     b.Property<float?>("LandPrice")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("LandPrice1")
                         .HasColumnType("real");
 
                     b.Property<string>("Location")
@@ -830,6 +826,9 @@ namespace USBDProperty.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyTypeId"), 1L, 1);
 
                     b.Property<bool>("IsLand")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsLand1")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ParentPropertyTypeId")
