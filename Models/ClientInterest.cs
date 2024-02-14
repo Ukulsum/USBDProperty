@@ -6,9 +6,9 @@ namespace USBDProperty.Models
 {
     //public enum Interested
     //{
-    //    ZoomInterested=1,
-    //    Buy=2,
-    //    Sale=3
+    //    ZoomInterested = 1,
+    //    Buy = 2,
+    //    Sale = 3
     //}
     public class ClientInterest
     {

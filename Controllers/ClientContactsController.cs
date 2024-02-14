@@ -58,14 +58,26 @@ namespace USBDProperty.Controllers
             //ViewData["Interested"] = interested;
             return View();
         }
+        public async Task<JsonResult> SaveContact([FromBody] ClientVM clientContact)
+        {
+
+            var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now, Interested = clientContact.Interested };
+            _context.ClientContacts.Add(client);
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                _notyf.Success("As soon as possible we will contact with u");
+                return Json(new { data = clientContact, Issuccess = true }); ;
+            }
+            return Json(new { data = clientContact, Issuccess = true });
+
+        }
 
         // POST: ClientContacts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-ClientVM clientContact)
+        public async Task<IActionResult> Create(ClientVM clientContact)
         {
             int Id = 0;
             int r = 0;
@@ -73,7 +85,9 @@ ClientVM clientContact)
             {
                 if(clientContact.PropertyID > 0)
                 {
-                    var client = new ClientContact { ClientName = clientContact.ClientName, ContactNo = clientContact.ContactNo, Email = clientContact.Email, Message = clientContact.Message, ContactDate = DateTime.Now, Interested = Interested.Buy};
+                    var client = new ClientContact { ClientName = clientContact.ClientName, 
+                        ContactNo = clientContact.ContactNo, Email = clientContact.Email, 
+                        Message = clientContact.Message, ContactDate = DateTime.Now, Interested = Interested.Buy};
                     _context.ClientContacts.Add(client);
                     await _context.SaveChangesAsync();
 
@@ -122,7 +136,7 @@ ClientVM clientContact)
 
             if (client != null || client.ClientName != null)
             {
-                var clientData = new ClientContact { ClientName = client.ClientName, ContactNo = client.ContactNo, Email = client.Email, Message = client.Message, ContactDate = DateTime.Now };
+                var clientData = new ClientContact { ClientName = client.ClientName, ContactNo = client.ContactNo, Email = client.Email, Message = client.Message, ContactDate = DateTime.Now, Interested= client.Interested };
                 _context.ClientContacts.Add(clientData);
                 r = _context.SaveChanges();
 

@@ -76,6 +76,7 @@ namespace USBDProperty.Models
     
         [DisplayName("Flat Size")]
         public int? FlatSize { get; set; }
+        public int? FlatSize1 { get; set; }
         public float? Price { get; set; }
         [DisplayName("Total Price")]
         [ValidateNever]
@@ -109,7 +110,7 @@ namespace USBDProperty.Models
         
         [DisplayName("Land Area")]
         public int LandArea { get; set; }
-        
+        public float? LandPrice1 { get; set; }
         public float? LandPrice { get; set; }
         [ValidateNever]
         [DisplayName("Total Land Price")]
