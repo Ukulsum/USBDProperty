@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "AgentProperties";
+    Layout = "~/Views/Shared/_HomeAgentLayout.cshtml";
+}
+
+
+   @* <section id="services" class="services">
+
+       <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Projects</h2>
+                <p>Check @Model.CompanyName 's Projects</p>
+            </div>
+
+            <div id="load_projects">
+            
+            </div>
+
+        </div>
+    </section>*@
+    <!-- End Services Section -->
+
+
+    <!-- ======= PropertySection Section ======= -->
+     <section class="properties" id="property">
+
+        <div class="tittle">
+        <img src="~/Asserts/images/head-top.png" alt="">
+        <h3>Featured Properties</h3>
+        </div>
+
+        <div class="load_properties">
+        </div>
+
+        </section> 
+    <!-- End Property Section -->
+
+@section Scripts{
+    <script>
+        $(document).ready(function (){
+           
+            //getProperty()
+
+        });
+
+
+    //function getProperty(){
+    //        //alert("helo")
+    //        $.ajax({
+    //            url: "/PropertyDetails/HomeProperty",
+    //            method: "Get",
+    //            success: function(res){
+    //                console.log(res.data)
+    //                var propertylist = "";
+    //                propertylist += '<ul class="row">';
+    //                $.each(res.data, function(index, value){
+    //                    console.log(value )
+    //                    console.log(value.numberOfBedrooms )
+
+    //                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><div class="img"><img class="img-responsive" src="' + value.path +'" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
+    //                });
+    //                console.log(propertylist);
+    //                console.log("Hello");
+    //                //console.log(PropertySize);
+    //                propertylist += '</ul>';
+    //                $(".load_properties").empty();
+    //                $(".load_properties").html(propertylist);
+    //            }
+    //        })
+    //    }
+
+        function Getpropertiesbyproject(id){
+            alert(id)
+            $.ajax({
+                url: "/PropertyDetails/PropertybyProjects?prjId="+id,
+                method: "Get",
+                success: function (res) {
+                    console.log(res.data)
+                    var propertylist = "";
+                    propertylist += '<ul class="row">';
+                    $.each(res.data, function (index, value) {
+                        console.log(value)
+                        console.log(value.numberOfBedrooms)
+
+                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><div class="img"><img class="img-responsive" src="' + value.path + '" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatsize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
+                    });
+                    console.log(propertylist);
+                    console.log("Hello");
+                    //console.log(PropertySize);
+                    propertylist += '</ul>';
+
+                    $("#property").show();
+                    $(".load_properties").empty();
+                    $(".load_properties").html(propertylist);
+                    $("#exampleModalXl").modal('show')
+                }
+            })
+        }
+    </script>
+ }
+

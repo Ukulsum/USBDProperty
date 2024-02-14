@@ -13,7 +13,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    //[Authorize(Roles = "Admin,Agent")]
+    [Authorize(Roles = "Admin,Agent")]
     public class DevelopersorAgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +26,7 @@ namespace USBDProperty.Controllers
             _environment = environment;
             _userManager = userManager;
         }
-
+        [AllowAnonymous]
         public JsonResult HomeDeveloperOrAgentsbyID(int Id)
         {
             try
@@ -51,6 +51,7 @@ namespace USBDProperty.Controllers
                           View(await _context.DevelopersorAgent.OrderByDescending(p=>p.ID).Where(d=>d.IsActive).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Developer(bool? isActive=true)
         {
 
@@ -391,31 +392,6 @@ namespace USBDProperty.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View(developersorAgent);
             }
-            //if (id != developersorAgent.ID)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        _context.Update(developersorAgent);
-            //        await _context.SaveChangesAsync();
-            //    }
-            //    catch (DbUpdateConcurrencyException)
-            //    {
-            //        if (!DevelopersorAgentExists(developersorAgent.ID))
-            //        {
-            //            return NotFound();
-            //        }
-            //        else
-            //        {
-            //            throw;
-            //        }
-            //    }
-            //    return RedirectToAction(nameof(Index));
-            //}
             return View(developersorAgent);
         }
 

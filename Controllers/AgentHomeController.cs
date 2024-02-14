@@ -29,6 +29,11 @@ namespace USBDProperty.Controllers
             return View(data);
         }
 
+        public IActionResult AgentProperties()
+        {
+            return View();
+        }
+
         public JsonResult HomeAgentProject(int id)
         {
             try
