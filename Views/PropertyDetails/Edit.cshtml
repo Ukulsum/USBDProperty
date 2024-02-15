@@ -357,7 +357,7 @@
                         <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
                             <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview" />
 
-                            <input type="text" class="form-control" name="Image" id="path" hidden />
+                            <input type="text" asp-for="ImagePath" class="form-control" name="Image" id="path" hidden />
                         </div>
                         <button type="button" id="btnChange" class="btn btn-primary mt-2">Change</button>
                     </div>

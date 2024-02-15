@@ -23,11 +23,11 @@ namespace USBDProperty.Controllers
         }
 
         // GET: ClientContacts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
             //var applicationDbContext = _context.ClientContacts.Include(c => c.PropertyType);
             //ViewData["Interested"] = interested;
-            var applicationDbContext = _context.ClientContacts;
+            var applicationDbContext = _context.ClientContacts.Where(c=>((int) c.Interested).Equals(id));
             return View(await applicationDbContext.ToListAsync());
         }
 

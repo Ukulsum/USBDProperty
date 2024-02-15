@@ -420,21 +420,21 @@ namespace USBDProperty.Controllers
                 //};
                 propertyDetails.CreatedBy = User.Identity.Name ?? "umme";
                 propertyDetails.CreatedDate = DateTime.Now;
-                if (propertyDetails.TotalFloor.HasValue &&  propertyDetails.FloorAvailableNo.HasValue)
-                {
-                    if(propertyDetails.FloorAvailableNo.Value> propertyDetails.TotalFloor.Value)
-                    {
+                //if (propertyDetails.TotalFloor.HasValue &&  propertyDetails.FloorAvailableNo.HasValue)
+                //{
+                //    if(propertyDetails.FloorAvailableNo.Value> propertyDetails.TotalFloor.Value)
+                //    {
 
                     
-                    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
-                    ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-                    ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+                //    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
+                //    ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
+                //    ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                    
-                    ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                    ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                    return View();
-                    }
-                }               
+                //    ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                //    ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                //    return View();
+                //    }
+                //}               
                     _context.Add(propertyDetails);
 
                 if (await _context.SaveChangesAsync() > 0)

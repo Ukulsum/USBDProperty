@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using USBDProperty.Custom_Validation;
 using USBDProperty.DTO;
 
 namespace USBDProperty.Models
@@ -102,6 +103,7 @@ namespace USBDProperty.Models
 
         [DisplayName("Floor Available No")]
         //[Compare("TotalFloor", ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
+        [AvailableFloorValidator(ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
         public int? FloorAvailableNo { get; set; } = 0;
         
         public Furnished? Furnishing { get; set; }

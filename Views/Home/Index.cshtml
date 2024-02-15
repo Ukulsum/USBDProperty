@@ -110,7 +110,7 @@
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
-                            <input type="text" id="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                            <input type="text" id="ContactNo" pattern="[0-9]{11}" class="form-control" placeholder="Enter Your Phone" />
                             <span asp-validation-for="ContactNo" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
