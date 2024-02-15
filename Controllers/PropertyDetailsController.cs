@@ -481,7 +481,7 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
-
+                propertyDetails.PropertyType = _context.PropertyTypes.Where(p => p.PropertyTypeId.Equals(propertyDetails.PropertyTypeId)).FirstOrDefault();
                 var allid = (from a in _context.Areas join c in _context.Citys on a.CityId equals c.CityId 
                             join d in _context.Divisions on c.DivisionId equals d.DivisionID 
                             join cc in _context.Countries on d.CountryId equals cc.CountryID 
@@ -610,7 +610,7 @@ namespace USBDProperty.Controllers
                 data.UpdateDate = DateTime.Now;
                 data.ImagePath = propertyDetails.ImagePath;
 
-
+                data.PropertyType = _context.PropertyTypes.Where(s => s.PropertyTypeId.Equals(propertyDetails.PropertyTypeId)).FirstOrDefault();
                 //if (propertyDetails.TotalFloor.Value < propertyDetails.FloorAvailableNo.Value )
                 //{
                 //    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
