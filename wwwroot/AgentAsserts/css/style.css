@@ -976,10 +976,10 @@ section {
   margin-bottom: 0;
 }
 
-.services .icon-box:hover {
+/*.services .icon-box:hover {
   background: #ed502e;
   border-color: #ed502e;
-}
+}*/
 
 .services .icon-box:hover .icon {
   background: #fff;

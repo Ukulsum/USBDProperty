@@ -74,6 +74,9 @@ namespace USBDProperty.Models
 
         [DisplayName("Construction Status")]
         public ConstructionStatus ConstructionStatus { get; set; }
+
+        [NotMapped]
+        public string ConstructionStatusStr { get; set; }
     
         [DisplayName("Flat Size")]
         public int? FlatSize { get; set; } = 0;
@@ -105,10 +108,15 @@ namespace USBDProperty.Models
         //[Compare("TotalFloor", ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
         [AvailableFloorValidator(ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
         public int? FloorAvailableNo { get; set; } = 0;
-        
+
         public Furnished? Furnishing { get; set; }
 
+        [NotMapped]
+        public string FurnishedStr { get; set; }
+
         public Facing? Facing { get; set; } = 0;
+        [NotMapped]
+        public string FacingStr { get; set; }
 
         [DisplayName("Land Area")]
         public int LandArea { get; set; } = 0;
@@ -133,6 +141,9 @@ namespace USBDProperty.Models
         public string? Comments { get; set; }
         [DisplayName("Propety Condition")]
         public PropertyCondition PropertyCondition { get; set; }
+        [NotMapped]
+        public string PropertyConditionStr { get; set; }
+
         [DisplayName("Handover Date")]
         [DataType(DataType.Date)]
         public DateTime? HandOverDate { get; set; }
