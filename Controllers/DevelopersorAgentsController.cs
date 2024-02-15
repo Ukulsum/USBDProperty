@@ -58,10 +58,17 @@ namespace USBDProperty.Controllers
             return View();
         }
         [AllowAnonymous]
-        public  JsonResult  GetDeveloper( )
+        public JsonResult GetDeveloper( )
         {
             var data = _context.DevelopersorAgent.Where(d=>d.IsActive);
             return Json(new { Data = data });
+        }
+
+        [AllowAnonymous]
+        public JsonResult HomeAgent(int id)
+        {
+            var data = _context.DevelopersorAgent.Where(d => d.ID == id);
+            return Json(new { Data = data});
         }
 
         // GET: DevelopersorAgents/Details/5
@@ -125,7 +132,7 @@ namespace USBDProperty.Controllers
                             {
                                 await logo.CopyToAsync(fileStrem);
                             }
-                            developersorAgent.Logo = "~/Developer/Logo/" + fileName;
+                            developersorAgent.Logo = "/Developer/Logo/" + fileName;
                         }
                         else
                         {
@@ -150,7 +157,7 @@ namespace USBDProperty.Controllers
                             {
                                 await banner.CopyToAsync(fileStrem);
                             }
-                            developersorAgent.Banner = "~/Developer/Banner/" + fileName;
+                            developersorAgent.Banner = "/Developer/Banner/" + fileName;
                         }
                         else
                         {
@@ -283,7 +290,7 @@ namespace USBDProperty.Controllers
                         {
                             await developersorAgent.logofile.CopyToAsync(fileStrem);
                         }
-                        developersorAgent.Logo = "~/Developer/Logo/" + fileName;
+                        developersorAgent.Logo = "/Developer/Logo/" + fileName;
                         if (System.IO.File.Exists(rPath))
                         {
                             System.IO.File.Delete(rPath);
@@ -317,7 +324,7 @@ namespace USBDProperty.Controllers
                         {
                             await developersorAgent.bannerFile.CopyToAsync(fileStrem);
                         }
-                        developersorAgent.Banner = "~/Developer/Banner/" + fileName;
+                        developersorAgent.Banner = "/Developer/Banner/" + fileName;
                         if (System.IO.File.Exists(rPath))
                         {
                             System.IO.File.Delete(rPath);

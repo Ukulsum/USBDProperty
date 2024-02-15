@@ -4,7 +4,7 @@
 
 @*@{
     Layout = null;
-}*@
+    }*@
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +12,10 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     @*<title> @ViewData["Title"] - USBD Property's - @Model.CompanyName </title>*@
-    <title>USBD Property's - @Model.CompanyName </title>
+    @*<title>USBD Property's - <span class="load_title"></span> </title>*@
+    @*<title class="load_title">USBD Property's - </title>*@
+    <div class="load_title"></div>
+
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -65,14 +68,18 @@
 </head>
 
 <body>
-
+    @* <img src="@Url.Content(@Model.Logo)"/>*@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center justify-content-between">
 
 
             @*<h1 class="logo"><a href="index.html">@Url.Content(@item.Logo)</a></h1>*@
-            <h1 class="logo"><a href="index.html"><img src="@Url.Content(@Model.Logo)"></a></h1>
+            <h1 class="logo">
+                @*<div class="load_logo">
+
+                    </div>*@
+            </h1>
 
 
             <!-- Uncomment below if you prefer to use an image logo -->
@@ -98,8 +105,9 @@
 
             <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-
-            <img src="@Url.Content(Model.Banner)" />
+            <div class="load_banner">
+            </div>
+            @*<img src="@Url.Content(Model.Banner)" />*@
 
 
             @*<div class="carousel-inner" role="listbox">
@@ -150,25 +158,25 @@
         </div>
     </section><!-- End Hero -->
     @*<main id="main">*@
-  @*  <section></section>
+    @*  <section></section>
 
-       <section>
+        <section>
         <div class="container">
-            <div class="load_video">
-
-            </div>
+        <div class="load_video">
 
         </div>
-    </section>
-*@
- @*   <section id="cta" class="cta">
+
+        </div>
+        </section>
+    *@
+    @*   <section id="cta" class="cta">
         <div class="container" data-aos="zoom-in">
-            <div class="load_video">
-
-            </div>
+        <div class="load_video">
 
         </div>
-    </section>*@
+
+        </div>
+        </section>*@
 
 
     <!-- ======= About Section ======= -->
@@ -182,7 +190,9 @@
 
             <div class="row content">
                 @*<p>@Model.AboutUs </p>*@
-                <p>@Html.Raw(Model.AboutUs)</p>
+                @*<p>@Html.Raw(Model.AboutUs)</p>*@
+                <div class="load_about">
+                </div>
             </div>
 
         </div>
@@ -192,69 +202,20 @@
 
         @RenderBody()
 
-       @* <div class="container" data-aos="fade-up">
+        @* <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Projects</h2>
-                <p>Check @Model.CompanyName 's Projects</p>
+            <h2>Projects</h2>
+            <p>Check @Model.CompanyName 's Projects</p>
             </div>
 
             <div id="load_projects">
-            
+
             </div>
 
-        </div>*@
+            </div>*@
     </section>
     <!-- End Services Section -->
-    <!-- ======= PropertySection Section ======= -->
-    @* <section class="properties" id="property">
-
-        <div class="tittle">
-        <img src="~/Asserts/images/head-top.png" alt="">
-        <h3>Featured Properties</h3>
-        </div>
-
-        <div class="load_properties">
-        </div>
-
-        </section> *@
-    <!-- End Property Section -->
-    @* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra large modal</button> *@
-
-
-    @*<section class="properties">*@
-    @*<div class="container">*@
-  @*  <div class="modal fade " id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel" style="display: block;" aria-modal="true" role="dialog">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-
-                <section class="properties">
-                    <div class="container">
-
-                    <!--======= TITTLE =========-->
-                    <div class="tittle">
-                        <img src="~/Asserts/images/head-top.png" alt="">
-                        <h3 id="prjid">  </h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <!--======= PROPERTIES ROW =========-->
-                     <ul class="row"> 
-                    <div class="load_properties">
-                    </div>
-                     </ul> 
-                    </div>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
-                </section>
-
-            </div>
-        </div>
-    </div>*@
-    @*</div>*@
-    @*</section>*@
-
-
-
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact section-bg">
         <div class="container" data-aos="fade-up">
@@ -407,8 +368,8 @@
         </div>
     </div>
     <!-- End Footer -->
-@*    <button onclick="Getpropertiesbyproject()"></button>
-    <div id="preloader"></div>*@
+    @*    <button onclick="Getpropertiesbyproject()"></button>
+        <div id="preloader"></div>*@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
@@ -457,10 +418,50 @@
             //getVideo()
 
             getFooterProperty()
+            HomeAgent()
             //getProperty()
             //GetHomeProjects()
 
         });
+
+        function HomeAgent(){
+            console.log("DevolopersAgentDisplay");
+            var curloc = $(location).attr('href');
+            var url = curloc.split('/');
+            console.log("HomeAgentDevDisplay");
+            console.log(url);
+            var id = url[url.length - 1];
+            console.log("D :" + id)
+            $.ajax({
+                url: "/DevelopersorAgents/HomeAgent/" + id,
+                method: "Get",
+                success: function(res){
+                    console.log(res.data);
+                    console.log("DevAgents");
+                    var devAgentTitle = "";
+                    var devAgentLogo = "";
+                    var devAgentBanner = "";
+                    var devAgentAbout = "";
+                    $.each(res.data, function(index, value){
+                        console.log(value);
+                        //devAgentTitle += '<div><span>'+ value.companyName +'</span></div>'
+                        devAgentTitle += '<title class="load_title">USBD Property"s - '+ value.companyName+' </title>'
+                        devAgentLogo += '<img src="'+ value.logo+'">'
+                        devAgentBanner += '<img src="'+ value.banner+'">'
+                        devAgentAbout += '<p>'+ value.aboutUs +'</p>'
+                    });
+                    $(".load_title").empty();
+                    $(".load_title").html(devAgentTitle);
+                    $(".logo").empty();
+                    $(".logo").html(devAgentLogo);
+                    $(".load_banner").empty;
+                    $(".load_banner").html(devAgentBanner);
+                    $(".load_about").empty;
+                    $(".load_about").html(devAgentAbout);
+
+                }
+            })
+        }
 
         function PostClientData(){
             alert("Hello Client");
@@ -494,47 +495,17 @@
             })
         }
 
-         //type='video/mp4'
-        // function getVideo(){
-        //      //alert("helo")
-        //      $.ajax({
-        //          url: "/ProjectsInfoes/GetProjectsVideo",
-        //          method: "Get",
-        //          success: function(res){
-        //              console.log(res.data)
-        //              var ProjectVideolist = "";
-        //              $.each(res.data, function(index, value){
-        //                  console.log(value.projectVideo)
-        //                  console.log(value.locationMap)
-        //                  if(value.projectVideo != null){
-        //                       ProjectVideolist += "<li><video controls width='100%' height='256'><source src='"+value.projectVideo +"' ></video></li>"
-        //                  }
-        //                  else{
-        //                      ProjectVideolist = "<li><img src='"+value.locationMap +"' class='img-responsive' ></li>"
-        //                  }
-                         
-        //                  //if(res.data.projectVideo != null){
-        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].projectVideo +"' type='video/mp4'></video></li>"
-        //                  //}
-        //                  //else{
-        //                  //    ProjectVideolist = "<li><img src='"+res.data[0].locationMap +"' class='img-responsive' ></li>"
-        //                  //}
-        //                  //else{
-        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].locationMap +"' type='video/mp4'></video></li>"
-        //                  //}
-                          
-        //              });                    
-        //              console.log(ProjectVideolist);
-        //              $(".load_video").empty();
-        //              $(".load_video").html(ProjectVideolist);
-        //          }
-        //      })
-        //}
-
-        function getFooterProperty(){
+          function getFooterProperty(){
               //alert("helo")
+               console.log("DevolopersAgentDisplay");
+               var curloc = $(location).attr('href');
+               var url = curloc.split('/');
+               console.log("HomeAgentDevDisplay");
+               console.log(url);
+               var id = url[url.length - 1];
+               console.log("D :" + id)
               $.ajax({
-                  url: "/PropertyDetails/HomeFooterProperty",
+                  url: "/PropertyDetails/AgentHomeFooterProperty/" + id,
                   method: "Get",
                   success: function(res){
                       console.log(res.data)
@@ -555,7 +526,68 @@
               })
         }
 
-    
+         //type='video/mp4'
+        // function getVideo(){
+        //      //alert("helo")
+        //      $.ajax({
+        //          url: "/ProjectsInfoes/GetProjectsVideo",
+        //          method: "Get",
+        //          success: function(res){
+        //              console.log(res.data)
+        //              var ProjectVideolist = "";
+        //              $.each(res.data, function(index, value){
+        //                  console.log(value.projectVideo)
+        //                  console.log(value.locationMap)
+        //                  if(value.projectVideo != null){
+        //                       ProjectVideolist += "<li><video controls width='100%' height='256'><source src='"+value.projectVideo +"' ></video></li>"
+        //                  }
+        //                  else{
+        //                      ProjectVideolist = "<li><img src='"+value.locationMap +"' class='img-responsive' ></li>"
+        //                  }
+
+        //                  //if(res.data.projectVideo != null){
+        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].projectVideo +"' type='video/mp4'></video></li>"
+        //                  //}
+        //                  //else{
+        //                  //    ProjectVideolist = "<li><img src='"+res.data[0].locationMap +"' class='img-responsive' ></li>"
+        //                  //}
+        //                  //else{
+        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].locationMap +"' type='video/mp4'></video></li>"
+        //                  //}
+
+        //              });
+        //              console.log(ProjectVideolist);
+        //              $(".load_video").empty();
+        //              $(".load_video").html(ProjectVideolist);
+        //          }
+        //      })
+        //}
+
+        //function getFooterProperty(){
+        //      //alert("helo")
+        //      $.ajax({
+        //          url: "/PropertyDetails/HomeFooterProperty",
+        //          method: "Get",
+        //          success: function(res){
+        //              console.log(res.data)
+        //              var propertylist = "";
+        //              $.each(res.data, function(index, value){
+        //                  console.log(value )
+        //                  console.log(value.numberOfBedrooms )
+        //                  //propertylist += '<ul class="recent-come">';
+        //                  propertylist += '<li><div class="img-post"> <img src="'+ value.path +'" height="59px" width="59px" alt=""> </div><div class="text-post"> <a href="#.">'+ value.propertyName +'</a> <span>$'+ value.totalPrice +'</span> </div></li>'
+        //              });
+        //              console.log("Image")
+        //              console.log(propertylist);
+        //              //console.log(PropertySize);
+        //              //propertylist += '</ul>';
+        //              $(".load_FooterProperty").empty();
+        //              $(".load_FooterProperty").html(propertylist);
+        //          }
+        //      })
+        //}
+
+
 
 
         //function GetHomeProjects(){
@@ -580,7 +612,7 @@
         //        $.each(res.data, function(index, value){
         //                console.log(value.id)
         //                $("#prjid").html("All properties under " + value.projectName)
-                       
+
         //                projectdata += '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" onclick="Getpropertiesbyproject('+ value.id+')" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
         //        });
         //        projectdata += '</div>'

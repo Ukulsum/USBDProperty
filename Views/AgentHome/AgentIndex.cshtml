@@ -74,7 +74,7 @@
                        
                         //projectdata += '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" onclick="Getpropertiesbyproject('+ value.id+')" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
 
-                          projectdata += '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><video controls ><source src="'+ value.projectVideo +'" ></video></div><h4><a href="/AgentHome/AgentProperties/'+ value.id +'">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
+                          projectdata += '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><video controls width="220" height="140"><source src="'+ value.projectVideo +'" ></video><h4><a href="/AgentHome/AgentProperties/'+ value.id +'">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
                 });
                 projectdata += '</div>'
                 console.log(projectdata);

@@ -161,7 +161,29 @@ namespace USBDProperty.Controllers
             }
             
         }
-       
+        public JsonResult AgentHomeFooterProperty(int id)
+        {
+            try
+            {
+                var propertyDbContext = _context.PropertyDetails
+                                        .Include(p => p.Area)
+                                        .Include(p => p.ProjectsInfo)
+                                        .Include(p => p.PropertyType)
+                                        .Include(p => p.MeasurementUnit)
+                                        .OrderByDescending(p => p.PropertyInfoId)
+                                        .Take(3)
+                                        .Where(p => p.PropertyInfoId.Equals(id))
+                                        .ToList();
+
+                return Json(new { data = propertyDbContext });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+
+        }
+
         public JsonResult HomeProperty()
         {
             try
@@ -255,6 +277,25 @@ namespace USBDProperty.Controllers
             }
 
         }
+
+        public JsonResult DevProperty(int id)
+        {
+            try
+            {
+                var applicationDbContext = _context.PropertyDetails
+                                                .Include(p => p.Area)
+                                                 .Include(p => p.ProjectsInfo)
+                                                .Include(p => p.PropertyType)
+                                                .Where(p => p.PropertyInfoId.Equals(id));
+                return Json(new { data = applicationDbContext });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+
+        }
+
         //[HttpGet("HomePropertyDetails")]
         public async Task<IActionResult> HomePropertyDetails(int? id)
         {
