@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -194,7 +195,20 @@ namespace USBDProperty.Controllers
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
                                                 
-                                                .Where(p=>p.ISFeatured).ToList();
+                                                .Where(p=>p.ISFeatured).Select(s=> new
+                                                {
+                                                    ContructionStatus= s.ConstructionStatus,
+                                                    PropertyFor= s.PropertyFor.ToString(),
+                                                    ImagePath=s.ImagePath,
+                                                    LandArea=   s.LandArea,
+                                                    Location=  s.Location,
+                                                    NumberOfBaths= s.NumberOfBaths,
+                                                    NumberOfBedrooms= s.NumberOfBedrooms,
+                                                    Title=s.Title,
+                                                    PropertyTypeName=s.PropertyType.PropertyTypeName,
+                                                    TotalPrice=s.TotalPrice,
+                                                    PropertyInfoId=s.PropertyInfoId
+                                                }).ToList();
                 
 
                 return Json(new { data = applicationDbContext });
@@ -447,21 +461,21 @@ namespace USBDProperty.Controllers
                 //};
                 propertyDetails.CreatedBy = User.Identity.Name ?? "umme";
                 propertyDetails.CreatedDate = DateTime.Now;
-                if (propertyDetails.TotalFloor.HasValue &&  propertyDetails.FloorAvailableNo.HasValue)
-                {
-                    if(propertyDetails.FloorAvailableNo.Value> propertyDetails.TotalFloor.Value)
-                    {
+                //if (propertyDetails.TotalFloor.HasValue &&  propertyDetails.FloorAvailableNo.HasValue)
+                //{
+                //    if(propertyDetails.FloorAvailableNo.Value> propertyDetails.TotalFloor.Value)
+                //    {
 
                     
-                    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
-                    ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
-                    ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+                //    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");
+                //    ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
+                //    ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
                    
-                    ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                    ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-                    return View();
-                    }
-                }               
+                //    ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                //    ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
+                //    return View();
+                //    }
+                //}               
                     _context.Add(propertyDetails);
 
                 if (await _context.SaveChangesAsync() > 0)
@@ -508,7 +522,7 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
-
+                propertyDetails.PropertyType = _context.PropertyTypes.Where(p => p.PropertyTypeId.Equals(propertyDetails.PropertyTypeId)).FirstOrDefault();
                 var allid = (from a in _context.Areas join c in _context.Citys on a.CityId equals c.CityId 
                             join d in _context.Divisions on c.DivisionId equals d.DivisionID 
                             join cc in _context.Countries on d.CountryId equals cc.CountryID 
@@ -637,7 +651,7 @@ namespace USBDProperty.Controllers
                 data.UpdateDate = DateTime.Now;
                 data.ImagePath = propertyDetails.ImagePath;
 
-
+                data.PropertyType = _context.PropertyTypes.Where(s => s.PropertyTypeId.Equals(propertyDetails.PropertyTypeId)).FirstOrDefault();
                 //if (propertyDetails.TotalFloor.Value < propertyDetails.FloorAvailableNo.Value )
                 //{
                 //    ModelState.AddModelError("", "Total Floor must be bigger than Floor Available No. Please fix this error");

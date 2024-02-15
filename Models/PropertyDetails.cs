@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using USBDProperty.Custom_Validation;
 using USBDProperty.DTO;
 
 namespace USBDProperty.Models
@@ -75,9 +76,9 @@ namespace USBDProperty.Models
         public ConstructionStatus ConstructionStatus { get; set; }
     
         [DisplayName("Flat Size")]
-        public int? FlatSize { get; set; }
-        public int? FlatSize1 { get; set; }
-        public float? Price { get; set; }
+        public int? FlatSize { get; set; } = 0;
+
+        public float? Price { get; set; } = 0.0f;
         [DisplayName("Total Price")]
         [ValidateNever]
         public double? TotalPrice
@@ -86,32 +87,33 @@ namespace USBDProperty.Models
         }
 
         [DisplayName("Bedrooms")]
-        public int? NumberOfBedrooms { get; set; }
-        
+        public int? NumberOfBedrooms { get; set; } = 0;
+
         [DisplayName("Baths")]
-        public int? NumberOfBaths { get; set; }
-        
+        public int? NumberOfBaths { get; set; } = 0;
+
         [DisplayName("Balconies")]
-        public int? NumberOfBalconies { get; set; }
-        
+        public int? NumberOfBalconies { get; set; } = 0;
+
         [DisplayName("Garages")]
-        public int? NumberOfGarages { get; set; }
-        
+        public int? NumberOfGarages { get; set; } = 0;
+
         [DisplayName("Total Floor")]
-        public int? TotalFloor { get; set; }
-        
+        public int? TotalFloor { get; set; } = 0;
+
         [DisplayName("Floor Available No")]
         //[Compare("TotalFloor", ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
-        public int? FloorAvailableNo { get; set; }
+        [AvailableFloorValidator(ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
+        public int? FloorAvailableNo { get; set; } = 0;
         
         public Furnished? Furnishing { get; set; }
-        
-        public Facing? Facing { get; set; }
-        
+
+        public Facing? Facing { get; set; } = 0;
+
         [DisplayName("Land Area")]
-        public int LandArea { get; set; }
-        public float? LandPrice1 { get; set; }
-        public float? LandPrice { get; set; }
+        public int LandArea { get; set; } = 0;
+
+        public float? LandPrice { get; set; } = 0.0f;
         [ValidateNever]
         [DisplayName("Total Land Price")]
         public double? TotalLandPrice
@@ -143,6 +145,8 @@ namespace USBDProperty.Models
        
         [ForeignKey("Area")]
         public int AreaId { get; set; }
+        [NotMapped]
+        public string PropertyForstr { get; set; }
 
         [ValidateNever]
         [DisplayName("Property Type")]

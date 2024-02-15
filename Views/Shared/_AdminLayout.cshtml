@@ -455,17 +455,17 @@
                 </a>
                 <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a asp-action="Index" asp-controller="ClientContacts" >
+                        <a asp-action="Index" asp-controller="ClientContacts" asp-route-id="1" >
                             <i class="bi bi-circle"></i><span>Zoom Interested</span>
                         </a>
                     </li>
                     <li>
-                        <a asp-action="Index" asp-controller="ClientContacts" asp-route-id="">
+                        <a asp-action="Index" asp-controller="ClientContacts" asp-route-id="2">
                             <i class="bi bi-circle"></i><span>Buy</span>
                         </a>
                     </li>
                     <li>
-                        <a href="charts-echarts.html">
+                        <a href="/ClientContacts/Index?id=3">
                             <i class="bi bi-circle"></i><span>Sale</span>
                         </a>
                     </li>
