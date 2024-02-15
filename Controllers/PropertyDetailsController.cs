@@ -63,7 +63,7 @@ namespace USBDProperty.Controllers
 
 
         [HttpGet]
-        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, string location = "")
+        public IActionResult MoreSearch( int? forid,int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, string conStatus = "", string location = "")
         {
             try
             {
@@ -84,29 +84,41 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
-                //if (pSize != null || pSize > 0)
-                //{
-                //    data = data.Where(p => p.PropertySize.Equals(pSize)).ToList();
-                //}
+                if (pSize != null || pSize > 0)
+                {
+                    data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
+                }
 
+                if (minsize != null || minsize > 0)
+                {
+                    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
+                }
 
+                if (maxsize != null || maxsize > 0)
+                {
+                    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
+                }
 
-                //if (ptypeid != null || ptypeid > 0)
-                //{
-                //    data = data.Where(p => p.PropertyTypeId.Equals(ptypeid)).ToList();
-                //}
+                if (PropertyTypeId != null || PropertyTypeId > 0)
+                {
+                    data = data.Where(p => p.PropertyType.PropertyTypeId.Equals(PropertyTypeId)).ToList();
+                }
                 if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
                 {
                     data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
                 }
-                //if (pPrice != null || pPrice > 0)
-                //{
-                //    data = data.Where(p => p.Price.Equals(pPrice)).ToList();
-                //}
-                //if (conStatus != null || conStatus > 0)
-                //{
-                //    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
-                //}
+                if (minprice != null || minprice > 0)
+                {
+                    data = data.Where(p => p.Price.Equals(minprice)).ToList();
+                }
+                if (maxprice != null || maxprice > 0)
+                {
+                    data = data.Where(p => p.Price.Equals(maxprice)).ToList();
+                }
+                if (conStatus != null || conStatus.Length > 0)
+                {
+                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                }
                 if (!string.IsNullOrEmpty(location))
                 {
                     data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();

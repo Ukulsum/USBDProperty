@@ -35,7 +35,8 @@
     .properties {
         /*padding: 50px 0;*/
         padding: 0;
-        background: url(../images/property-bg.jpg) repeat;
+        background: url("../images/property-bg.jpg") repeat;
+        display: inline!important;
     }
 
         .properties li .tag {
@@ -353,7 +354,7 @@
                         console.log(value )
                         console.log(value.numberOfBedrooms )
 
-                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><div class="img"><img class="img-responsive" src="' + value.path +'" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
+                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><div class="img"><img class="img-responsive" src="' + value.imagePath + '" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + ' BedRooms</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + ' Baths</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">BDT. ' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
                     });
                     console.log(propertylist);
                     console.log("Hello");

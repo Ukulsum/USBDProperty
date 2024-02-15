@@ -376,7 +376,7 @@
     <!-- Vendor JS Files -->
     <script src="~/AgentAsserts/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/AgentAsserts/vendor/aos/aos.js"></script>
-    <script src="~/AgentAsserts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @* <script src="~/AgentAsserts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/AgentAsserts/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="~/AgentAsserts/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/AgentAsserts/vendor/swiper/swiper-bundle.min.js"></script>
@@ -516,7 +516,7 @@ console.log("Footer")
                           console.log(value )
                           console.log(value.numberOfBedrooms )
                           //propertylist += '<ul class="recent-come">';
-                          propertylist += '<li><div class="img-post"> <img src="'+ value.path +'" height="59px" width="59px" alt=""> </div><div class="text-post"> <a href="#.">'+ value.propertyName +'</a> <span>$'+ value.totalPrice +'</span> </div></li>'
+                        propertylist += '<li><div class="img-post"> <img src="' + value.imagePath + '" height="59px" width="59px" alt=""> </div><div class="text-post"> <a href="#.">' + value.title + '</a> <span>BDT.' + value.totalPrice + ' TK</span> </div></li>'
                       });
                       console.log("Image")
                       console.log(propertylist);
