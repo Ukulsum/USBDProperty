@@ -4,22 +4,32 @@
     Layout = "~/Views/Shared/_HomeAgentLayout.cshtml";
 }
 
+@* <style>
+    .load_properties{
+        z-index:99999;
+       
+    }
 
-   @* <section id="services" class="services">
+    #services {
+        z-index: 99999;
+        height: 500px;
+        margin-top: 200px;
+        border:2px solid red;
+    }
+</style>
+    <section id="services"  >
 
        <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Projects</h2>
-                <p>Check @Model.CompanyName 's Projects</p>
+                <h2>projects</h2>
+                <p>check  projects</p>
             </div>
 
-            <div id="load_projects">
-            
-            </div>
+           
 
         </div>
-    </section>*@
+    </section> *@
     <!-- End Services Section -->
 
 
@@ -32,6 +42,7 @@
         </div>
 
         <div class="load_properties">
+        
         </div>
 
         </section> 
@@ -57,7 +68,7 @@
             var id = url[url.length - 1];
             console.log("D :" + id)
             $.ajax({
-                url: "/PropertyDetails/HomeProperty/" + id,
+                url: "/PropertyDetails/PropertybyProjects/" + id,
                 method: "Get",
                 success: function(res){
                     console.log(res.data)
@@ -75,6 +86,7 @@
                     propertylist += '</ul>';
                     $(".load_properties").empty();
                     $(".load_properties").html(propertylist);
+                 
                 }
             })
         }

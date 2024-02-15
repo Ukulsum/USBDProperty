@@ -13,7 +13,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     @*<title> @ViewData["Title"] - USBD Property's - @Model.CompanyName </title>*@
     @*<title>USBD Property's - <span class="load_title"></span> </title>*@
-    @*<title class="load_title">USBD Property's - </title>*@
+    @* <title>USBD Property's -  </title> *@
     <div class="load_title"></div>
 
     <meta content="" name="description">
@@ -201,6 +201,7 @@
     <section id="services" class="services">
 
         @RenderBody()
+        
 
         @* <div class="container" data-aos="fade-up">
 
@@ -445,7 +446,7 @@
                     $.each(res.data, function(index, value){
                         console.log(value);
                         //devAgentTitle += '<div><span>'+ value.companyName +'</span></div>'
-                        devAgentTitle += '<title class="load_title">USBD Property"s - '+ value.companyName+' </title>'
+                        devAgentTitle += '<title  >USBD Property"s - '+ value.companyName+' </title>'
                         devAgentLogo += '<img src="'+ value.logo+'">'
                         devAgentBanner += '<img src="'+ value.banner+'">'
                         devAgentAbout += '<p>'+ value.aboutUs +'</p>'
@@ -508,6 +509,7 @@
                   url: "/PropertyDetails/AgentHomeFooterProperty/" + id,
                   method: "Get",
                   success: function(res){
+console.log("Footer")
                       console.log(res.data)
                       var propertylist = "";
                       $.each(res.data, function(index, value){

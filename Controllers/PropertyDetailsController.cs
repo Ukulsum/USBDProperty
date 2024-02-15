@@ -173,7 +173,7 @@ namespace USBDProperty.Controllers
                                         .Include(p => p.MeasurementUnit)
                                         .OrderByDescending(p => p.PropertyInfoId)
                                         .Take(3)
-                                        .Where(p => p.PropertyInfoId.Equals(id))
+                                        .Where(p => p.ProjectsInfo.AgentID.Equals(id))
                                         .ToList();
 
                 return Json(new { data = propertyDbContext });
@@ -274,7 +274,7 @@ namespace USBDProperty.Controllers
                 return Json(new { data = "No record" });
             }
         }
-        public JsonResult  PropertybyProjects(int prjId)
+        public JsonResult  PropertybyProjects(int id)
         {
             try
             {
@@ -282,7 +282,7 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.Area)
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
-                                                .Where(p=>p.ProjectId.Equals(prjId));
+                                                .Where(p=>p.ProjectId.Equals(id));
                 return Json(new { data = applicationDbContext});
             }
             catch (Exception ex)
