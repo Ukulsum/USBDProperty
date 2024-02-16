@@ -47,9 +47,14 @@ namespace USBDProperty.Controllers
         }
 
         // GET: PropertyImages/Create
-        public IActionResult Create(int id)
+        //public IActionResult Create(int id)
+        //{
+        //    ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
+        //    return View();
+        //}
+        public IActionResult Create()
         {
-            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p=>p.PropertyInfoId.Equals(id)), "PropertyInfoId", "PropertyName");
+            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Title");
             return View();
         }
 

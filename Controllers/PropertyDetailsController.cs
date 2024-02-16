@@ -84,45 +84,45 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
-                if (pSize != null || pSize > 0)
-                {
-                    data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
-                }
+                //if (pSize != null || pSize > 0)
+                //{
+                //    data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
+                //}
 
-                if (minsize != null || minsize > 0)
-                {
-                    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
-                }
+                //if (minsize != null || minsize > 0)
+                //{
+                //    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
+                //}
 
-                if (maxsize != null || maxsize > 0)
-                {
-                    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
-                }
+                //if (maxsize != null || maxsize > 0)
+                //{
+                //    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
+                //}
 
-                if (PropertyTypeId != null || PropertyTypeId > 0)
-                {
-                    data = data.Where(p => p.PropertyType.PropertyTypeId.Equals(PropertyTypeId)).ToList();
-                }
-                if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
-                {
-                    data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
-                }
-                if (minprice != null || minprice > 0)
-                {
-                    data = data.Where(p => p.Price.Equals(minprice)).ToList();
-                }
-                if (maxprice != null || maxprice > 0)
-                {
-                    data = data.Where(p => p.Price.Equals(maxprice)).ToList();
-                }
-                if (conStatus != null || conStatus.Length > 0)
-                {
-                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
-                }
-                if (!string.IsNullOrEmpty(location))
-                {
-                    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
-                }
+                //if (PropertyTypeId != null || PropertyTypeId > 0)
+                //{
+                //    data = data.Where(p => p.PropertyType.PropertyTypeId.Equals(PropertyTypeId)).ToList();
+                //}
+                //if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
+                //{
+                //    data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
+                //}
+                //if (minprice != null || minprice > 0)
+                //{
+                //    data = data.Where(p => p.Price.Equals(minprice)).ToList();
+                //}
+                //if (maxprice != null || maxprice > 0)
+                //{
+                //    data = data.Where(p => p.Price.Equals(maxprice)).ToList();
+                //}
+                //if (conStatus != null || conStatus.Length > 0)
+                //{
+                //    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                //}
+                //if (!string.IsNullOrEmpty(location))
+                //{
+                //    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
+                //}
                 //if (SearchText != " " || SearchText != null)
                 //{
                 //    data = data.Where(p => p.PropertyName!.Contains(SearchText).ToList());
@@ -219,7 +219,8 @@ namespace USBDProperty.Controllers
                                                     Title = s.Title,
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalPrice = s.TotalPrice,
-                                                    PropertyInfoId = s.PropertyInfoId
+                                                    PropertyInfoId = s.PropertyInfoId,
+                                                    FlatSize = s.FlatSize
                                                 }).ToList();
 
 

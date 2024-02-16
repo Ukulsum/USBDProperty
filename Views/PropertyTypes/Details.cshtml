@@ -5,27 +5,59 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Property Types Details</h5>
+        <hr style="width:100%;" />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.PropertyTypeId)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.PropertyTypeId)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.PropertyTypeName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.PropertyTypeName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ParentPropertyTypeId)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ParentPropertyTypeId)
+            </dd>
+        </dl>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model?.PropertyTypeId">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@*<h1>Details</h1>
 
 <div>
     <h4>PropertyType</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PropertyTypeName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PropertyTypeName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ParentPropertyTypeId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ParentPropertyTypeId)
         </dd>
     </dl>
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.PropertyTypeId">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
