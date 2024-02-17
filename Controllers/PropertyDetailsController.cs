@@ -197,7 +197,7 @@ namespace USBDProperty.Controllers
 
         }
 
-        public JsonResult HomeProperty()
+        public JsonResult HomeFlatProperty()
         {
             try
             {
@@ -207,7 +207,7 @@ namespace USBDProperty.Controllers
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
 
-                                                .Where(p => p.ISFeatured).Select(s => new
+                                                .Where(p => p.ISFeatured && p.PropertyType.IsLand==false).Select(s => new
                                                 {
                                                     ContructionStatus = s.ConstructionStatus,
                                                     PropertyFor = s.PropertyFor.ToString(),
@@ -220,7 +220,8 @@ namespace USBDProperty.Controllers
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalPrice = s.TotalPrice,
                                                     PropertyInfoId = s.PropertyInfoId,
-                                                    FlatSize = s.FlatSize
+                                                    FlatSize = s.FlatSize,
+                                                    //IsLand= s.PropertyType.IsLand
                                                 }).ToList();
 
 
@@ -234,6 +235,44 @@ namespace USBDProperty.Controllers
 
         }
 
+        public JsonResult HomeLandProperty()
+        {
+            try
+            {
+                var applicationDbContext = _context.PropertyDetails
+                                                .Include(p => p.MeasurementUnit)
+                                                .Include(p => p.Area)
+                                                 .Include(p => p.ProjectsInfo)
+                                                .Include(p => p.PropertyType)
+
+                                                .Where(p => p.ISFeatured && p.PropertyType.IsLand).Select(s => new
+                                                {
+                                                    //ContructionStatus = s.ConstructionStatus,
+                                                    PropertyFor = s.PropertyFor.ToString(),
+                                                    ImagePath = s.ImagePath,
+                                                    LandArea = s.LandArea,
+                                                    Location = s.Location,
+                                                    //NumberOfBaths = s.NumberOfBaths,
+                                                    //NumberOfBedrooms = s.NumberOfBedrooms,
+                                                    Title = s.Title,
+                                                    PropertyTypeName = s.PropertyType.PropertyTypeName,
+                                                    TotalLandPrice = s.TotalLandPrice,
+                                                    PropertyInfoId = s.PropertyInfoId,
+                                                    MeasurementUnit = s.MeasurementUnit
+                                                    //FlatSize = s.FlatSize,
+                                                   
+                                                }).ToList();
+
+
+                return Json(new { data = applicationDbContext });
+            }
+            catch (Exception ex)
+            {
+                //return BadRequest(ex.Message);
+                return Json(new { data = "No record" });
+            }
+
+        }
         public JsonResult BannerProperty()
         {
             try
@@ -312,6 +351,69 @@ namespace USBDProperty.Controllers
 
                 return Json(new { data = applicationDbContext, joinPropertyInfoDb, locallid });
         }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+        }
+
+        public JsonResult HomeLandPropertybyID(int Id)
+        {
+            try
+            {
+                var joinPropertyInfoDb = from pd in _context.PropertyDetails join p in _context.ProjectsInfo on pd.ProjectId equals p.Id join devInfo in _context.DevelopersorAgent on p.Id equals devInfo.ID select pd;
+
+                var locallid = from a in _context.Areas
+                               join c in _context.Citys on a.CityId equals c.CityId
+                               join d in _context.Divisions on c.DivisionId equals d.DivisionID
+                               join cc in _context.Countries on d.CountryId equals cc.CountryID
+                               where a.AreaId == Id
+                               select new
+                               {
+                                   DivisionId = d.DivisionID,
+                                   CityId = c.CityId,
+                                   CountryId = cc.CountryID
+                               };
+
+                var applicationDbContext = _context.PropertyDetails
+                                                .Include(p => p.Area)
+                                                 .Include(p => p.ProjectsInfo)
+                                                .Include(p => p.PropertyType)
+                                                .Include(p => p.MeasurementUnit)
+                                                //.Include(p => p.PropertyType.IsLand)
+                                                .Where(p => p.PropertyInfoId.Equals(Id) && p.PropertyType.IsLand)
+                                                .Select(s => new
+                                                 {
+                                                     Title = s.Title,
+                                                     Description = s.Description,
+                                                     //ContructionStatus = s.ConstructionStatus,
+                                                     Comments = s.Comments,
+                                                     //FlatSize = s.FlatSize,
+                                                     ImagePath = s.ImagePath,
+                                                     AreaName = s.Area.AreaName,
+                                                     //facing = s.Facing,
+                                                     //FloorAvailableNo = s.FloorAvailableNo,
+                                                     //Furnishing = s.Furnishing,
+                                                     HandOverDate = s.HandOverDate,
+                                                     LandArea = s.LandArea,
+                                                     LandPrice = s.LandPrice,
+                                                     Location = s.Location,
+                                                     MeasurementUnit = s.MeasurementUnit,
+                                                     //NumberOfBalconies = s.NumberOfBalconies,
+                                                     //NumberOfBaths = s.NumberOfBaths,
+                                                     //NumberOfBedrooms = s.NumberOfBedrooms,
+                                                     //NumberOfGarages = s.NumberOfGarages,
+                                                     ProjectName = s.ProjectsInfo.ProjectName,
+                                                     //PropertyCondition = s.PropertyCondition,
+                                                     PropertyFor = s.PropertyFor.ToString(),
+                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
+                                                     //TotalFloor = s.TotalFloor,
+                                                     //IsLand = s.PropertyType.IsLand,
+                                                     TotalLandPrice = s.TotalLandPrice,
+                                                 }).ToList();
+
+                return Json(new { data = applicationDbContext, joinPropertyInfoDb, locallid });
+            }
             catch (Exception ex)
             {
                 return Json(new { data = "No record" });

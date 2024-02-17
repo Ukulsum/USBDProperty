@@ -46,17 +46,17 @@ namespace USBDProperty.Controllers
             return View(propertyImages);
         }
 
-        // GET: PropertyImages/Create
-        //public IActionResult Create(int id)
-        //{
-        //    ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
-        //    return View();
-        //}
-        public IActionResult Create()
+       // GET: PropertyImages/Create
+        public IActionResult Create(int id)
         {
-            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Title");
+            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
             return View();
         }
+        //public IActionResult Create()
+        //{
+        //    ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Title");
+        //    return View();
+        //}
 
         // POST: PropertyImages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
