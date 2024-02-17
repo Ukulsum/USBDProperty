@@ -318,98 +318,39 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.PropertyType)
                                                 .Include(p => p.MeasurementUnit)
                                                 //.Include(p => p.PropertyType.IsLand)
-                                                .Where(p => p.PropertyInfoId.Equals(Id));                  
-                                                //.Select(s => new
-                                                // {
-                                                //     Title = s.Title,
-                                                //     Description = s.Description,
-                                                //     ContructionStatus = s.ConstructionStatus,
-                                                //     Comments = s.Comments,
-                                                //     FlatSize = s.FlatSize,
-                                                //     ImagePath = s.ImagePath,
-                                                //     AreaName = s.Area.AreaName,
-                                                //     facing = s.Facing,
-                                                //     FloorAvailableNo = s.FloorAvailableNo,
-                                                //     Furnishing = s.Furnishing,
-                                                //     HandOverDate = s.HandOverDate,
-                                                //     LandArea = s.LandArea,
-                                                //     LandPrice = s.LandPrice,
-                                                //     Location = s.Location,
-                                                //     name = s.MeasurementUnit.Name,
-                                                //     NumberOfBalconies = s.NumberOfBalconies,
-                                                //     NumberOfBaths = s.NumberOfBaths,
-                                                //     NumberOfBedrooms = s.NumberOfBedrooms,
-                                                //     NumberOfGarages = s.NumberOfGarages,
-                                                //     ProjectName = s.ProjectsInfo.ProjectName,
-                                                //     PropertyCondition = s.PropertyCondition,
-                                                //     PropertyFor = s.PropertyFor.ToString(),
-                                                //     //PropertyTypeName = s.PropertyType.PropertyTypeName,
-                                                //     TotalFloor = s.TotalFloor,
-                                                //     IsLand = s.PropertyType.IsLand,
-                                                //     TotalLandPrice = s.TotalLandPrice,
-                                                // }).ToList();
-
-                return Json(new { data = applicationDbContext, joinPropertyInfoDb, locallid });
-        }
-            catch (Exception ex)
-            {
-                return Json(new { data = "No record" });
-            }
-        }
-
-        public JsonResult HomeLandPropertybyID(int Id)
-        {
-            try
-            {
-                var joinPropertyInfoDb = from pd in _context.PropertyDetails join p in _context.ProjectsInfo on pd.ProjectId equals p.Id join devInfo in _context.DevelopersorAgent on p.Id equals devInfo.ID select pd;
-
-                var locallid = from a in _context.Areas
-                               join c in _context.Citys on a.CityId equals c.CityId
-                               join d in _context.Divisions on c.DivisionId equals d.DivisionID
-                               join cc in _context.Countries on d.CountryId equals cc.CountryID
-                               where a.AreaId == Id
-                               select new
-                               {
-                                   DivisionId = d.DivisionID,
-                                   CityId = c.CityId,
-                                   CountryId = cc.CountryID
-                               };
-
-                var applicationDbContext = _context.PropertyDetails
-                                                .Include(p => p.Area)
-                                                 .Include(p => p.ProjectsInfo)
-                                                .Include(p => p.PropertyType)
-                                                .Include(p => p.MeasurementUnit)
-                                                //.Include(p => p.PropertyType.IsLand)
-                                                .Where(p => p.PropertyInfoId.Equals(Id) && p.PropertyType.IsLand)
+                                                .Where(p => p.PropertyInfoId.Equals(Id))                  
                                                 .Select(s => new
                                                  {
+
+                                                    //NumberOfGarages = s.PropertyType.IsLand ? "N/A" : s.NumberOfGarages.ToString(),
                                                      Title = s.Title,
                                                      Description = s.Description,
-                                                     //ContructionStatus = s.ConstructionStatus,
+                                                    ConstructionStatus = s.PropertyType.IsLand? "N/A" : s.ConstructionStatus.ToString(),
                                                      Comments = s.Comments,
-                                                     //FlatSize = s.FlatSize,
+                                                     FlatSize = s.PropertyType.IsLand? s.LandArea + " " + s.MeasurementUnit.Name.ToString() : s.FlatSize + " sqft" .ToString(),
                                                      ImagePath = s.ImagePath,
                                                      AreaName = s.Area.AreaName,
-                                                     //facing = s.Facing,
-                                                     //FloorAvailableNo = s.FloorAvailableNo,
-                                                     //Furnishing = s.Furnishing,
+                                                     facing = s.PropertyType.IsLand ? "N/A" : s.Facing.ToString(),
+                                                     FloorAvailableNo = s.PropertyType.IsLand ? "N/A" : s.FloorAvailableNo.ToString(),
+                                                     Furnishing = s.PropertyType.IsLand ? "N/A" : s.Furnishing.ToString(),
                                                      HandOverDate = s.HandOverDate,
                                                      LandArea = s.LandArea,
-                                                     LandPrice = s.LandPrice,
+                                                     //LandPrice = s.PropertyType.IsLand != null : s.LandPrice,
                                                      Location = s.Location,
-                                                     MeasurementUnit = s.MeasurementUnit,
-                                                     //NumberOfBalconies = s.NumberOfBalconies,
-                                                     //NumberOfBaths = s.NumberOfBaths,
-                                                     //NumberOfBedrooms = s.NumberOfBedrooms,
-                                                     //NumberOfGarages = s.NumberOfGarages,
+                                                     name = s.MeasurementUnit.Name,
+                                                     NumberOfBalconies = s.PropertyType.IsLand ? "N/A" : s.NumberOfBalconies.ToString(),
+                                                     NumberOfBaths = s.PropertyType.IsLand ? "N/A" : s.NumberOfBaths.ToString(),
+                                                     NumberOfBedrooms = s.PropertyType.IsLand ? "N/A" : s.NumberOfBedrooms.ToString(),
+                                                     NumberOfGarages = s.PropertyType.IsLand ? "N/A" : s.NumberOfGarages.ToString(),
                                                      ProjectName = s.ProjectsInfo.ProjectName,
-                                                     //PropertyCondition = s.PropertyCondition,
+                                                     PropertyCondition = s.PropertyType.IsLand ? "N/A" : s.PropertyCondition.ToString(),
                                                      PropertyFor = s.PropertyFor.ToString(),
                                                      PropertyTypeName = s.PropertyType.PropertyTypeName,
-                                                     //TotalFloor = s.TotalFloor,
+                                                     TotalFloor = s.PropertyType.IsLand ? "N/A" : s.TotalFloor.ToString(),
+                                                     TotalPrice = s.PropertyType.IsLand ? s.TotalLandPrice : s.TotalPrice
                                                      //IsLand = s.PropertyType.IsLand,
-                                                     TotalLandPrice = s.TotalLandPrice,
+                                                     //TotalLandPrice = s.PropertyType.IsLand ? "N/A" : s.TotalLandPrice.ToString(),
+                                                    //IsLand = s.PropertyType.IsLand
                                                  }).ToList();
 
                 return Json(new { data = applicationDbContext, joinPropertyInfoDb, locallid });
@@ -419,6 +360,8 @@ namespace USBDProperty.Controllers
                 return Json(new { data = "No record" });
             }
         }
+
+        
         public JsonResult PropertybyProjects(int id)
 {
     try
