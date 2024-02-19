@@ -62,7 +62,7 @@ namespace USBDProperty.Controllers
 
 
 
-        [HttpGet]
+        //[HttpGet]
         public IActionResult MoreSearch(int? forid, int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, string conStatus = "", string location = "")
         {
             try
