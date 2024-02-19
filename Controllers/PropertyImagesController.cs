@@ -47,68 +47,51 @@ namespace USBDProperty.Controllers
         }
 
 
-        //public JsonResult HomePropertybyID(int Id)
-        //{
-        //    try
-        //    {
-        //        //var joinPropertyInfoDb = from pd in _context.PropertyDetails join p in _context.ProjectsInfo on pd.ProjectId equals p.Id join devInfo in _context.DevelopersorAgent on p.Id equals devInfo.ID select pd;
+        public JsonResult HomeImagePropertybyID(int Id)
+        {
+            try
+            {
+                var applicationDbContext = _context.PropertyImages
+                                                .Include(p => p.PropertyDetails)
+                                                .Where(p => p.propertyInfoId.Equals(Id))
+                                                .Select(s => new
+                                                {
+                                                    Title = s.PropertyDetails.Title,
+                                                    Description = s.PropertyDetails.Description,
+                                                    FlatSize = s.PropertyDetails.PropertyType.IsLand ? s.PropertyDetails.LandArea + " " + s.PropertyDetails.MeasurementUnit.Name.ToString() : s.PropertyDetails.FlatSize + " sqft".ToString(),
+                                                    ImagePath = s.PropertyDetails.ImagePath,
+                                                    AreaName = s.PropertyDetails.Area.AreaName,
+                                                    Facing = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.Facing.ToString(),
+                                                    Furnishing = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.Furnishing.ToString(),
+                                                    LandArea = s.PropertyDetails.LandArea,
+                                                    //landprice = s.propertytype.island != null : s.landprice,
+                                                    Location = s.PropertyDetails.Location,
+                                                    Name = s.PropertyDetails.MeasurementUnit.Name,
+                                                    NumberOfBaths = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.NumberOfBaths.ToString(),
+                                                    NumberOfBedrooms = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.NumberOfBedrooms.ToString(),
+                                                    PropertyCondition = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.PropertyCondition.ToString(),
+                                                    PropertyFor = s.PropertyDetails.PropertyFor.ToString(),
+                                                    PropertyTypeName = s.PropertyDetails.PropertyType.PropertyTypeName,
+                                                    TotalPrice = s.PropertyDetails.PropertyType.IsLand ? s.PropertyDetails.TotalLandPrice : s.PropertyDetails.TotalPrice,
+                                                    //MultiImagePath =  s.MultiImagePath[s.MultiImagePath.Length - 1],
+                    //                                for(int i=0; i< PropertyImages.MultiImagePath.Count(); i++) {
+                    //MultiImagePath = s.MultiImagePath[i],
+                                                    //}
+                                                    MultiImagePath =  s.MultiImagePath,
+                                                    //island = s.propertytype.island,
+                                                    //totallandprice = s.propertytype.island ? "n/a" : s.totallandprice.tostring(),
+                                                    //island = s.propertytype.island
+                                                }).ToList();
 
-        //        //var locallid = from a in _context.Areas
-        //        //               join c in _context.Citys on a.CityId equals c.CityId
-        //        //               join d in _context.Divisions on c.DivisionId equals d.DivisionID
-        //        //               join cc in _context.Countries on d.CountryId equals cc.CountryID
-        //        //               where a.AreaId == Id
-        //        //               select new
-        //        //               {
-        //        //                   DivisionId = d.DivisionID,
-        //        //                   CityId = c.CityId,
-        //        //                   CountryId = cc.CountryID
-        //        //               };
+                return Json(new { data = applicationDbContext });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+        }
 
-        //        var applicationDbContext = _context.PropertyImages
-        //                                        .Include(p => p.PropertyDetails)
-        //                                        .Where(p => p.propertyInfoId.Equals(Id))
-        //                                        .Select(s => new
-        //                                        {
-
-        //                                            //numberofgarages = s.propertytype.island ? "n/a" : s.numberofgarages.tostring(),
-        //                                            title = s.PropertyDetails.Title,
-        //                                            description = s.description,
-        //                                            flatsize = s.PropertyDetails.propertytype.island ? s.landarea + " " + s.measurementunit.name.tostring() : s.flatsize + " sqft".tostring(),
-        //                                            imagepath = s.imagepath,
-        //                                            areaname = s.area.areaname,
-        //                                            facing = s.propertytype.island ? "n/a" : s.facing.tostring(),
-        //                                            flooravailableno = s.propertytype.island ? "n/a" : s.flooravailableno.tostring(),
-        //                                            furnishing = s.propertytype.island ? "n/a" : s.furnishing.tostring(),
-        //                                            handoverdate = s.handoverdate,
-        //                                            landarea = s.landarea,
-        //                                            //landprice = s.propertytype.island != null : s.landprice,
-        //                                            location = s.location,
-        //                                            name = s.measurementunit.name,
-        //                                            numberofbalconies = s.propertytype.island ? "n/a" : s.numberofbalconies.tostring(),
-        //                                            numberofbaths = s.propertytype.island ? "n/a" : s.numberofbaths.tostring(),
-        //                                            numberofbedrooms = s.propertytype.island ? "n/a" : s.numberofbedrooms.tostring(),
-        //                                            numberofgarages = s.propertytype.island ? "n/a" : s.numberofgarages.tostring(),
-        //                                            projectname = s.projectsinfo.projectname,
-        //                                            propertycondition = s.propertytype.island ? "n/a" : s.propertycondition.tostring(),
-        //                                            propertyfor = s.propertyfor.tostring(),
-        //                                            propertytypename = s.propertytype.propertytypename,
-        //                                            totalfloor = s.propertytype.island ? "n/a" : s.totalfloor.tostring(),
-        //                                            totalprice = s.propertytype.island ? s.totallandprice : s.totalprice
-        //                                            //island = s.propertytype.island,
-        //                                            //totallandprice = s.propertytype.island ? "n/a" : s.totallandprice.tostring(),
-        //                                            //island = s.propertytype.island
-        //                                        }).tolist();
-
-        //        return Json(new { data = applicationDbContext});
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { data = "No record" });
-        //    }
-        //}
-
-        // GET: PropertyImages/Create
+        //GET: PropertyImages/Create
         public IActionResult Create(int id)
         {
             ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");

@@ -1,0 +1,115 @@
+﻿@model USBDProperty.Models.ProjectImageGallery
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    input[type="file"] {
+        display: block;
+    }
+
+    .imageThumb {
+        max-height: 75px;
+        border: 2px solid;
+        padding: 1px;
+        cursor: pointer;
+    }
+
+    .pip {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+    }
+
+    .remove {
+        display: block;
+        /*background: #444;*/
+        /*border: 1px solid black;*/
+        background: red;
+        border-radius: 5%;
+        padding: 2px;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .remove:hover {
+            background: white;
+            color: black;
+        }
+</style>
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Project Multiple Images </h5>
+        <hr style="width:100%; " />
+        <form asp-action="Create" method="post" asp-controller="ProjectImageGalleries" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                     <div class="form-group">
+                        <label asp-for="ProjectID" class="control-label"> Property </label>
+                        <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
+                            <option value="0">Select Property</option>
+                        </select>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input asp-for="ImagePath" class="form-control" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectID" class="control-label"></label>
+                <select asp-for="ProjectID" class ="form-control" asp-items="ViewBag.ProjectID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<h1>Create</h1>
+
+<h4>ProjectImageGallery</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input asp-for="ImagePath" class="form-control" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectID" class="control-label"></label>
+                <select asp-for="ProjectID" class ="form-control" asp-items="ViewBag.ProjectID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
