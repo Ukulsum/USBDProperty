@@ -5,6 +5,33 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Property MultiImages Details</h5>
+        <hr style="width:100%;"/>
+        <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MultiImagePath)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MultiImagePath)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PropertyDetails)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PropertyDetails.Location)
+        </dd>
+    </dl>
+    </div>
+</div>
+
 <h1>Details</h1>
 
 <div>

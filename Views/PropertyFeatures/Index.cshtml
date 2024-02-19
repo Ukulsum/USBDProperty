@@ -5,6 +5,51 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">List Property Features</h5>
+        <hr style="width:100%;" />
+        <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyFeatureId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyFeatureName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeatureDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyFeatureId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyFeatureName)
+                </td>
+                <td>
+                    @Html.Raw(item.FeatureDescription)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PropertyFeatureId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PropertyFeatureId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PropertyFeatureId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+    </div>
+</div>
+
+@*
 <h1>Index</h1>
 
 <p>
@@ -23,20 +68,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyFeatureName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FeatureDescription)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PropertyFeatureId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PropertyFeatureId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PropertyFeatureId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyFeatureName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeatureDescription)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PropertyFeatureId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PropertyFeatureId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PropertyFeatureId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
-</table>
+</table>*@

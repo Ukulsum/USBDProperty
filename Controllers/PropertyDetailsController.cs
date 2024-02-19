@@ -84,45 +84,45 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
-                if (pSize != null || pSize > 0)
-                {
-                    data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
-                }
+                //if (pSize != null || pSize > 0)
+                //{
+                //    data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
+                //}
 
-                if (minsize != null || minsize > 0)
-                {
-                    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
-                }
+                //if (minsize != null || minsize > 0)
+                //{
+                //    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
+                //}
 
-                if (maxsize != null || maxsize > 0)
-                {
-                    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
-                }
+                //if (maxsize != null || maxsize > 0)
+                //{
+                //    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
+                //}
 
-                if (PropertyTypeId != null || PropertyTypeId > 0)
-                {
-                    data = data.Where(p => p.PropertyType.PropertyTypeId.Equals(PropertyTypeId)).ToList();
-                }
-                if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
-                {
-                    data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
-                }
-                if (minprice != null || minprice > 0)
-                {
-                    data = data.Where(p => p.Price.Equals(minprice)).ToList();
-                }
-                if (maxprice != null || maxprice > 0)
-                {
-                    data = data.Where(p => p.Price.Equals(maxprice)).ToList();
-                }
-                if (conStatus != null || conStatus.Length > 0)
-                {
-                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
-                }
-                if (!string.IsNullOrEmpty(location))
-                {
-                    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
-                }
+                //if (PropertyTypeId != null || PropertyTypeId > 0)
+                //{
+                //    data = data.Where(p => p.PropertyType.PropertyTypeId.Equals(PropertyTypeId)).ToList();
+                //}
+                //if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
+                //{
+                //    data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
+                //}
+                //if (minprice != null || minprice > 0)
+                //{
+                //    data = data.Where(p => p.Price.Equals(minprice)).ToList();
+                //}
+                //if (maxprice != null || maxprice > 0)
+                //{
+                //    data = data.Where(p => p.Price.Equals(maxprice)).ToList();
+                //}
+                //if (conStatus != null || conStatus.Length > 0)
+                //{
+                //    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                //}
+                //if (!string.IsNullOrEmpty(location))
+                //{
+                //    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
+                //}
                 //if (SearchText != " " || SearchText != null)
                 //{
                 //    data = data.Where(p => p.PropertyName!.Contains(SearchText).ToList());
@@ -197,7 +197,7 @@ namespace USBDProperty.Controllers
 
         }
 
-        public JsonResult HomeProperty()
+        public JsonResult HomeFlatProperty()
         {
             try
             {
@@ -207,7 +207,7 @@ namespace USBDProperty.Controllers
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
 
-                                                .Where(p => p.ISFeatured).Select(s => new
+                                                .Where(p => p.ISFeatured && p.PropertyType.IsLand==false).Select(s => new
                                                 {
                                                     ContructionStatus = s.ConstructionStatus,
                                                     PropertyFor = s.PropertyFor.ToString(),
@@ -219,7 +219,9 @@ namespace USBDProperty.Controllers
                                                     Title = s.Title,
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalPrice = s.TotalPrice,
-                                                    PropertyInfoId = s.PropertyInfoId
+                                                    PropertyInfoId = s.PropertyInfoId,
+                                                    FlatSize = s.FlatSize,
+                                                    //IsLand= s.PropertyType.IsLand
                                                 }).ToList();
 
 
@@ -233,6 +235,44 @@ namespace USBDProperty.Controllers
 
         }
 
+        public JsonResult HomeLandProperty()
+        {
+            try
+            {
+                var applicationDbContext = _context.PropertyDetails
+                                                .Include(p => p.MeasurementUnit)
+                                                .Include(p => p.Area)
+                                                 .Include(p => p.ProjectsInfo)
+                                                .Include(p => p.PropertyType)
+
+                                                .Where(p => p.ISFeatured && p.PropertyType.IsLand).Select(s => new
+                                                {
+                                                    //ContructionStatus = s.ConstructionStatus,
+                                                    PropertyFor = s.PropertyFor.ToString(),
+                                                    ImagePath = s.ImagePath,
+                                                    LandArea = s.LandArea,
+                                                    Location = s.Location,
+                                                    //NumberOfBaths = s.NumberOfBaths,
+                                                    //NumberOfBedrooms = s.NumberOfBedrooms,
+                                                    Title = s.Title,
+                                                    PropertyTypeName = s.PropertyType.PropertyTypeName,
+                                                    TotalLandPrice = s.TotalLandPrice,
+                                                    PropertyInfoId = s.PropertyInfoId,
+                                                    MeasurementUnit = s.MeasurementUnit
+                                                    //FlatSize = s.FlatSize,
+                                                   
+                                                }).ToList();
+
+
+                return Json(new { data = applicationDbContext });
+            }
+            catch (Exception ex)
+            {
+                //return BadRequest(ex.Message);
+                return Json(new { data = "No record" });
+            }
+
+        }
         public JsonResult BannerProperty()
         {
             try
@@ -278,44 +318,50 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.PropertyType)
                                                 .Include(p => p.MeasurementUnit)
                                                 //.Include(p => p.PropertyType.IsLand)
-                                                .Where(p => p.PropertyInfoId.Equals(Id));                  
-                                                //.Select(s => new
-                                                // {
-                                                //     Title = s.Title,
-                                                //     Description = s.Description,
-                                                //     ContructionStatus = s.ConstructionStatus,
-                                                //     Comments = s.Comments,
-                                                //     FlatSize = s.FlatSize,
-                                                //     ImagePath = s.ImagePath,
-                                                //     AreaName = s.Area.AreaName,
-                                                //     facing = s.Facing,
-                                                //     FloorAvailableNo = s.FloorAvailableNo,
-                                                //     Furnishing = s.Furnishing,
-                                                //     HandOverDate = s.HandOverDate,
-                                                //     LandArea = s.LandArea,
-                                                //     LandPrice = s.LandPrice,
-                                                //     Location = s.Location,
-                                                //     name = s.MeasurementUnit.Name,
-                                                //     NumberOfBalconies = s.NumberOfBalconies,
-                                                //     NumberOfBaths = s.NumberOfBaths,
-                                                //     NumberOfBedrooms = s.NumberOfBedrooms,
-                                                //     NumberOfGarages = s.NumberOfGarages,
-                                                //     ProjectName = s.ProjectsInfo.ProjectName,
-                                                //     PropertyCondition = s.PropertyCondition,
-                                                //     PropertyFor = s.PropertyFor.ToString(),
-                                                //     //PropertyTypeName = s.PropertyType.PropertyTypeName,
-                                                //     TotalFloor = s.TotalFloor,
-                                                //     IsLand = s.PropertyType.IsLand,
-                                                //     TotalLandPrice = s.TotalLandPrice,
-                                                // }).ToList();
+                                                .Where(p => p.PropertyInfoId.Equals(Id))                  
+                                                .Select(s => new
+                                                 {
+
+                                                    //NumberOfGarages = s.PropertyType.IsLand ? "N/A" : s.NumberOfGarages.ToString(),
+                                                     Title = s.Title,
+                                                     Description = s.Description,
+                                                    ConstructionStatus = s.PropertyType.IsLand? "N/A" : s.ConstructionStatus.ToString(),
+                                                     Comments = s.Comments,
+                                                     FlatSize = s.PropertyType.IsLand? s.LandArea + " " + s.MeasurementUnit.Name.ToString() : s.FlatSize + " sqft" .ToString(),
+                                                     ImagePath = s.ImagePath,
+                                                     AreaName = s.Area.AreaName,
+                                                     facing = s.PropertyType.IsLand ? "N/A" : s.Facing.ToString(),
+                                                     FloorAvailableNo = s.PropertyType.IsLand ? "N/A" : s.FloorAvailableNo.ToString(),
+                                                     Furnishing = s.PropertyType.IsLand ? "N/A" : s.Furnishing.ToString(),
+                                                     HandOverDate = s.HandOverDate,
+                                                     LandArea = s.LandArea,
+                                                     //LandPrice = s.PropertyType.IsLand != null : s.LandPrice,
+                                                     Location = s.Location,
+                                                     name = s.MeasurementUnit.Name,
+                                                     NumberOfBalconies = s.PropertyType.IsLand ? "N/A" : s.NumberOfBalconies.ToString(),
+                                                     NumberOfBaths = s.PropertyType.IsLand ? "N/A" : s.NumberOfBaths.ToString(),
+                                                     NumberOfBedrooms = s.PropertyType.IsLand ? "N/A" : s.NumberOfBedrooms.ToString(),
+                                                     NumberOfGarages = s.PropertyType.IsLand ? "N/A" : s.NumberOfGarages.ToString(),
+                                                     ProjectName = s.ProjectsInfo.ProjectName,
+                                                     PropertyCondition = s.PropertyType.IsLand ? "N/A" : s.PropertyCondition.ToString(),
+                                                     PropertyFor = s.PropertyFor.ToString(),
+                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
+                                                     TotalFloor = s.PropertyType.IsLand ? "N/A" : s.TotalFloor.ToString(),
+                                                     TotalPrice = s.PropertyType.IsLand ? s.TotalLandPrice : s.TotalPrice
+                                                     //IsLand = s.PropertyType.IsLand,
+                                                     //TotalLandPrice = s.PropertyType.IsLand ? "N/A" : s.TotalLandPrice.ToString(),
+                                                    //IsLand = s.PropertyType.IsLand
+                                                 }).ToList();
 
                 return Json(new { data = applicationDbContext, joinPropertyInfoDb, locallid });
-        }
+            }
             catch (Exception ex)
             {
                 return Json(new { data = "No record" });
             }
         }
+
+        
         public JsonResult PropertybyProjects(int id)
 {
     try
