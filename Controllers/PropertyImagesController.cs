@@ -52,36 +52,9 @@ namespace USBDProperty.Controllers
             try
             {
                 var applicationDbContext = _context.PropertyImages
-                                                .Include(p => p.PropertyDetails)
-                                                .Where(p => p.propertyInfoId.Equals(Id))
-                                                .Select(s => new
-                                                {
-                                                    Title = s.PropertyDetails.Title,
-                                                    Description = s.PropertyDetails.Description,
-                                                    FlatSize = s.PropertyDetails.PropertyType.IsLand ? s.PropertyDetails.LandArea + " " + s.PropertyDetails.MeasurementUnit.Name.ToString() : s.PropertyDetails.FlatSize + " sqft".ToString(),
-                                                    ImagePath = s.PropertyDetails.ImagePath,
-                                                    AreaName = s.PropertyDetails.Area.AreaName,
-                                                    Facing = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.Facing.ToString(),
-                                                    Furnishing = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.Furnishing.ToString(),
-                                                    LandArea = s.PropertyDetails.LandArea,
-                                                    //landprice = s.propertytype.island != null : s.landprice,
-                                                    Location = s.PropertyDetails.Location,
-                                                    Name = s.PropertyDetails.MeasurementUnit.Name,
-                                                    NumberOfBaths = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.NumberOfBaths.ToString(),
-                                                    NumberOfBedrooms = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.NumberOfBedrooms.ToString(),
-                                                    PropertyCondition = s.PropertyDetails.PropertyType.IsLand ? " " : s.PropertyDetails.PropertyCondition.ToString(),
-                                                    PropertyFor = s.PropertyDetails.PropertyFor.ToString(),
-                                                    PropertyTypeName = s.PropertyDetails.PropertyType.PropertyTypeName,
-                                                    TotalPrice = s.PropertyDetails.PropertyType.IsLand ? s.PropertyDetails.TotalLandPrice : s.PropertyDetails.TotalPrice,
-                                                    //MultiImagePath =  s.MultiImagePath[s.MultiImagePath.Length - 1],
-                    //                                for(int i=0; i< PropertyImages.MultiImagePath.Count(); i++) {
-                    //MultiImagePath = s.MultiImagePath[i],
-                                                    //}
-                                                    MultiImagePath =  s.MultiImagePath,
-                                                    //island = s.propertytype.island,
-                                                    //totallandprice = s.propertytype.island ? "n/a" : s.totallandprice.tostring(),
-                                                    //island = s.propertytype.island
-                                                }).ToList();
+                                              
+                                                .Where(p => p.propertyInfoId.Equals(Id)).ToList();
+                    
 
                 return Json(new { data = applicationDbContext });
             }

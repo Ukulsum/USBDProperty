@@ -347,7 +347,8 @@ namespace USBDProperty.Controllers
                                                      PropertyFor = s.PropertyFor.ToString(),
                                                      PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                      TotalFloor = s.PropertyType.IsLand ? "N/A" : s.TotalFloor.ToString(),
-                                                     TotalPrice = s.PropertyType.IsLand ? s.TotalLandPrice : s.TotalPrice
+                                                     TotalPrice = s.PropertyType.IsLand ? s.TotalLandPrice : s.TotalPrice,
+                                                 
                                                      //IsLand = s.PropertyType.IsLand,
                                                      //TotalLandPrice = s.PropertyType.IsLand ? "N/A" : s.TotalLandPrice.ToString(),
                                                     //IsLand = s.PropertyType.IsLand
