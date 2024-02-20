@@ -228,7 +228,7 @@
     </script>*@
 
 
-<div class="conImage">
+@*<div class="conImage">
     <figure>
         <img id="mainImg" src="~/Asserts/Banner/Dharittree banner-1.jpg">
     </figure>
@@ -245,11 +245,11 @@
 
 
 <div class="conImage_1">
-</div>
+</div>*@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
             $('ul img').on({
@@ -271,7 +271,7 @@
                     }
             });
     });
-</script>
+</script>*@
 
 
 
@@ -352,8 +352,8 @@
    
         $(document).ready(function (){
 
-            //getHomePropertyDetailsById()
-            multipleImageSliderById()
+            getHomePropertyDetailsById()
+            //multipleImageSliderById()
 
 
             $('#slide_img').on({
@@ -441,77 +441,77 @@
 
 
 
-        function multipleImageSliderById(){
-            var curloc = $(location).attr('href');
-            var url = curloc.split('/');
-            console.log("Multiple Image " + url);
-            var id = url[url.length - 1];
-            //var mulImg = res.data.multiImagePath;
-            //console.log(multiImagePath[])
-            //for(i = 0; i < mulImg.length)
-            console.log(id)
-            $.ajax({
-                url: "/PropertyImages/HomeImagePropertybyID/" + id,
-                method:"Get",
-                success: function(res){
-                    var propertyImageSlide = "";
-                    //propertyImageSlide += '<ul><li><section><h5 class="card-title m-2">' + res.data[0].flatSize + " " + res.data[0].propertyTypeName + " for " + res.data[0].propertyFor + " at " + res.data[0].location + " " + res.data[0].constructionStatus + " " + res.data[0].facing + " face " +'</h5><div class="img"><figure><img id="mainImg" class="img-responsive" src="' + res.data[0].imagePath + '" alt="'+ res.data[0].title+'"></figure>'
-                    $.each(res.data, function(index, value){
-                    $("#forid").val(value.propertyFor)
-                        $("#typeID").val(value.propertyTypeId)
-                        $("#prid").val(value.propertyInfoId)
-                        //console.log("Propertyimage")
-                        console.log(value.multiImagePath + "MultiImagePath")
-                        $("#forid").val(value.propertyFor)
-                        $("#typeID").val(value.propertyTypeId)
-                        $("#prid").val(value.propertyInfoId)
-                        
-                        //for(i = 0; i>value.multiImagePath.length; i++){
-
-
-                         //propertyImageSlide += '<ul><li><img id="slide_img" src="'+ value.multiImagePath +'"></li></ul></div><div class="">'
-
-                        propertyImageSlide = '<ul><li><section><h5 class="card-title m-2">' + value.flatSize + " " + value.propertyTypeName + " for " + value.propertyFor + " at " + value.location + " " + value.constructionStatus + " " + value.facing + " face " +'</h5><div class="img"><figure><img id="mainImg" class="img-responsive" src="' + value.imagePath + '" alt="'+ value.title+'"></figure><ul><li><img id="slide_img" src="'+ value.multiImagePath +'"></li></ul></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>'
-                        //}
-                        });
-                        //propertyImageSlide += '</div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + res.data[0].flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + res.data[0].numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + res.data[0].numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + res.data[0].totalPrice + 'Tk</a><span> ' + res.data[0].propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + res.data[0].location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>';
-                        $(".load_HomePropertyMiltiImagesbyId").empty()
-                        $(".load_HomePropertyMiltiImagesbyId").html(propertyImageSlide)
-                }
-            })
-        }
-
-
-
-        //function getHomePropertyDetailsById() {
+        //function multipleImageSliderById(){
         //    var curloc = $(location).attr('href');
         //    var url = curloc.split('/');
-        //    //console.log(url);
+        //    console.log("Multiple Image " + url);
         //    var id = url[url.length - 1];
+        //    //var mulImg = res.data.multiImagePath;
+        //    //console.log(multiImagePath[])
+        //    //for(i = 0; i < mulImg.length)
+        //    console.log(id)
         //    $.ajax({
-        //        url: "/PropertyDetails/HomePropertybyID/" + id,
-        //        method: "Get",
-        //        success: function (res) {
-        //            var propertylist = "";
-        //            $.each(res.data, function (index, value) {
-        //                $("#forid").val(value.propertyFor)
+        //        url: "/PropertyImages/HomeImagePropertybyID/" + id,
+        //        method:"Get",
+        //        success: function(res){
+        //            var propertyImageSlide = "";
+        //            //propertyImageSlide += '<ul><li><section><h5 class="card-title m-2">' + res.data[0].flatSize + " " + res.data[0].propertyTypeName + " for " + res.data[0].propertyFor + " at " + res.data[0].location + " " + res.data[0].constructionStatus + " " + res.data[0].facing + " face " +'</h5><div class="img"><figure><img id="mainImg" class="img-responsive" src="' + res.data[0].imagePath + '" alt="'+ res.data[0].title+'"></figure>'
+        //            $.each(res.data, function(index, value){
+        //            $("#forid").val(value.propertyFor)
         //                $("#typeID").val(value.propertyTypeId)
         //                $("#prid").val(value.propertyInfoId)
         //                //console.log("Propertyimage")
+        //                console.log(value.multiImagePath + "MultiImagePath")
         //                $("#forid").val(value.propertyFor)
         //                $("#typeID").val(value.propertyTypeId)
         //                $("#prid").val(value.propertyInfoId)
+                        
+        //                //for(i = 0; i>value.multiImagePath.length; i++){
 
-        //                propertylist = '<ul  ><li><section><h5 class="card-title m-2">' + value.flatSize + " " + value.propertyTypeName + " for " + value.propertyFor + " at " + value.location + " " + value.constructionStatus + " " + value.facing + " face " +'</h5><div class="img"><img class="img-responsive" src="' + value.imagePath + '" alt="'+ value.title+'"></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>                                                                       <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Summary</h3><hr/><div>    <div class="row"><div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>' + value.title + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>' + " Sale" + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Address : </b>' + value.areaName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>' + value.constructionStatus + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>' + value.propertyCondition + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>' + value.numberOfBaths + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>' + value.totalFloor + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>' + value.facing + '</span></li></ul></div>                                                                                                                        <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>' + value.propertyTypeName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>' + value.location + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Available From : </b>' + (new Date(value.handOverDate).toLocaleDateString('default', {month : 'long'}) + ' , ' + (new Date (value.handOverDate)).getFullYear()) + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>' + value.flatSize + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>' + value.floorAvailableNo + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>' + value.numberOfBalconies + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>' + value.numberOfGarages + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>' + value.furnishing + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>' + value.landArea + " " + value.name + '</span></li></ul></div></div></div></section></li></ul>                                                                    <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div>    <ul><li><span>' + value.description + '</span></li></ul></div></section></li></ul>      </div>'
 
+        //                 //propertyImageSlide += '<ul><li><img id="slide_img" src="'+ value.multiImagePath +'"></li></ul></div><div class="">'
 
-        //            });
-        //            //console.log(propertylist);
-        //            $(".load_HomePropertyDetailsById").empty();
-        //            $(".load_HomePropertyDetailsById").html(propertylist);
+        //                propertyImageSlide = '<ul><li><section><h5 class="card-title m-2">' + value.flatSize + " " + value.propertyTypeName + " for " + value.propertyFor + " at " + value.location + " " + value.constructionStatus + " " + value.facing + " face " +'</h5><div class="img"><figure><img id="mainImg" class="img-responsive" src="' + value.imagePath + '" alt="'+ value.title+'"></figure><ul><li><img id="slide_img" src="'+ value.multiImagePath +'"></li></ul></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>'
+        //                //}
+        //                });
+        //                //propertyImageSlide += '</div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + res.data[0].flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + res.data[0].numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + res.data[0].numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + res.data[0].totalPrice + 'Tk</a><span> ' + res.data[0].propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + res.data[0].location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>';
+        //                $(".load_HomePropertyMiltiImagesbyId").empty()
+        //                $(".load_HomePropertyMiltiImagesbyId").html(propertyImageSlide)
         //        }
         //    })
         //}
+
+
+
+        function getHomePropertyDetailsById() {
+            var curloc = $(location).attr('href');
+            var url = curloc.split('/');
+            //console.log(url);
+            var id = url[url.length - 1];
+            $.ajax({
+                url: "/PropertyDetails/HomePropertybyID/" + id,
+                method: "Get",
+                success: function (res) {
+                    var propertylist = "";
+                    $.each(res.data, function (index, value) {
+                        $("#forid").val(value.propertyFor)
+                        $("#typeID").val(value.propertyTypeId)
+                        $("#prid").val(value.propertyInfoId)
+                        //console.log("Propertyimage")
+                        $("#forid").val(value.propertyFor)
+                        $("#typeID").val(value.propertyTypeId)
+                        $("#prid").val(value.propertyInfoId)
+
+                        propertylist = '<ul  ><li><section><h5 class="card-title m-2">' + value.flatSize + " " + value.propertyTypeName + " for " + value.propertyFor + " at " + value.location + " " + value.constructionStatus + " " + value.facing + " face " +'</h5><div class="img"><img class="img-responsive" src="' + value.imagePath + '" alt="'+ value.title+'"></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>                                                                       <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Summary</h3><hr/><div>    <div class="row"><div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>' + value.title + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>' + " Sale" + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Address : </b>' + value.areaName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>' + value.constructionStatus + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>' + value.propertyCondition + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>' + value.numberOfBaths + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>' + value.totalFloor + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>' + value.facing + '</span></li></ul></div>                                                                                                                        <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>' + value.propertyTypeName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>' + value.location + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Available From : </b>' + (new Date(value.handOverDate).toLocaleDateString('default', {month : 'long'}) + ' , ' + (new Date (value.handOverDate)).getFullYear()) + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>' + value.flatSize + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>' + value.floorAvailableNo + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>' + value.numberOfBalconies + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>' + value.numberOfGarages + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>' + value.furnishing + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>' + value.landArea + " " + value.name + '</span></li></ul></div></div></div></section></li></ul>                                                                    <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div>    <ul><li><span>' + value.description + '</span></li></ul></div></section></li></ul>      </div>'
+
+
+                    });
+                    //console.log(propertylist);
+                    $(".load_HomePropertyDetailsById").empty();
+                    $(".load_HomePropertyDetailsById").html(propertylist);
+                }
+            })
+        }
 
 </script>
 @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
