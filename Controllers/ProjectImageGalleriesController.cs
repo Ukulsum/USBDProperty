@@ -56,56 +56,56 @@ namespace USBDProperty.Controllers
         // POST: ProjectImageGalleries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProjectImageGallery projectImageGallery, List<IFormFile> MultiImagePath)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    string rPath = "";
-                    string wwwRootPath = "";
-                    if(_environment != null)
-                    {
-                        wwwRootPath = _environment.WebRootPath;
-                        rPath = wwwRootPath + "/Content/Images";
-                    }
-                    else
-                    {
-                        wwwRootPath = Directory.GetCurrentDirectory();
-                        rPath = Path.Combine(wwwRootPath, "/wwwroot/Content/Images");
-                    }
-                    for(int i=0; i<MultiImagePath.Count(); i++)
-                    {
-                        string extention = Path.GetExtension(MultiImagePath[i].FileName).ToLower();
-                        if(extention == ".jpg" || extention == ".png" || extention == ".jpeg")
-                        {
-                            string fileName = projectImageGallery.ProjectID + "_" + i + 1 + extention;
-                            string path = Path.Combine(rPath, fileName);
-                            using(var fileStrem = new FileStream(path, FileMode.Create))
-                            {
-                                await MultiImagePath[i].CopyToAsync(fileStrem);
-                            }
-                            projectImageGallery.Id = 0;
-                            projectImageGallery.ImagePath = "/Content/Images/" + fileName;
-                            _context.Add(projectImageGallery);
-                            await _context.SaveChangesAsync();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", ex.Message);
-                    return View();
-                }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(ProjectImageGallery projectImageGallery)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            string rPath = "";
+        //            string wwwRootPath = "";
+        //            if(_environment != null)
+        //            {
+        //                wwwRootPath = _environment.WebRootPath;
+        //                rPath = wwwRootPath + "/Content/Images";
+        //            }
+        //            else
+        //            {
+        //                wwwRootPath = Directory.GetCurrentDirectory();
+        //                rPath = Path.Combine(wwwRootPath, "/wwwroot/Content/Images");
+        //            }
+        //            for(int i=0; i< projectImageGallery.MultipleImage.Count(); i++)
+        //            {
+        //                string extention = Path.GetExtension(MultipleImage[i].FileName).ToLower();
+        //                if(extention == ".jpg" || extention == ".png" || extention == ".jpeg")
+        //                {
+        //                    string fileName = projectImageGallery.ProjectID + "_" + i + 1 + extention;
+        //                    string path = Path.Combine(rPath, fileName);
+        //                    using(var fileStrem = new FileStream(path, FileMode.Create))
+        //                    {
+        //                        await MultiImagePath[i].CopyToAsync(fileStrem);
+        //                    }
+        //                    projectImageGallery.Id = 0;
+        //                    projectImageGallery.ImagePath = "/Content/Images/" + fileName;
+        //                    _context.Add(projectImageGallery);
+        //                    await _context.SaveChangesAsync();
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ModelState.AddModelError("", ex.Message);
+        //            return View();
+        //        }
                
-                return RedirectToAction(nameof(Index));
+        //        return RedirectToAction(nameof(Index));
                 
-            }
-            ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName", projectImageGallery.ProjectID);
-            return View(projectImageGallery);
-        }
+        //    }
+        //    ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName", projectImageGallery.ProjectID);
+        //    return View(projectImageGallery);
+        //}
 
         // GET: ProjectImageGalleries/Edit/5
         public async Task<IActionResult> Edit(int? id)

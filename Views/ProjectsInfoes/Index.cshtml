@@ -67,14 +67,27 @@
                             @if (item.ProjectVideo != null)
                             {
                                 @*<video src="@Url.Content(item.ProjectVideo)"></video>*@
-                                <video controls width='264' height='136'><source src="@Url.Content(item.ProjectVideo)"/></video>
+                                <video controls width='200' height='100'><source src="@Url.Content(item.ProjectVideo)"/></video>
 
                             }
                         </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> |
-                            <a asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+                        <td class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success">Action</button>
+                                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-primary" asp-action="Create" asp-controller="ProjectImageGalleries" asp-route-id="@item.Id"><i class="bi bi-box-arrow-up"></i>Add More Pic</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-primary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i>Details</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-primary" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete</a></li>
+                                    
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 }

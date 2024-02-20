@@ -24,7 +24,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.AreaId)
                         </th>
-                          <th>
+                        <th>
                             @Html.DisplayNameFor(model => model.AreaName)
                         </th>
                         <th>
@@ -44,12 +44,23 @@
                                 @Html.DisplayFor(modelItem => item.AreaName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.City.CityName)
+                                @Html.DisplayFor(model => item.City.CityName)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.AreaId"><i class="bi bi-pencil-square"></i></a> |
-                                <a asp-action="Details" asp-route-id="@item.AreaId"><i class="bi bi-eye-fill"></i></a> |
-                                <a asp-action="Delete" asp-route-id="@item.AreaId"><i class="bi bi-trash"></i></a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success">Action</button>
+                                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.AreaId"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-primary" asp-action="Details" asp-route-id="@item.AreaId"><i class="bi bi-eye-fill"></i>Details</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-primary" asp-action="Delete" asp-route-id="@item.AreaId"><i class="bi bi-trash"></i>Delete</a></li>
+
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     }
@@ -63,37 +74,37 @@
 
 @*<h1>Index</h1>
 
-<p>
+    <p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    </p>
+    <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AreaName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+    <th>
+    @Html.DisplayNameFor(model => model.AreaName)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.City)
+    </th>
+    <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AreaName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City.CityName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AreaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AreaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AreaId">Delete</a>
-            </td>
-        </tr>
-}
+    @foreach (var item in Model) {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.AreaName)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.City.CityName)
+    </td>
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.AreaId">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.AreaId">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.AreaId">Delete</a>
+    </td>
+    </tr>
+    }
     </tbody>
-</table>
+    </table>
 *@

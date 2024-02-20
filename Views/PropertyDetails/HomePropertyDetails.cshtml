@@ -47,185 +47,34 @@
     #NavImg {
                 list-style: none;
                 margin: 0;
-                text-align: center;
+                text-align: left;
+                display: flex;
+                flex-wrap: wrap;
             }
 
     #NavImg li {
                     margin: 0 5px;
                     display: inline-block;
-                    width: 150px;
+                    width: 80px;
                     border: 1px solid #fff;
                     cursor: pointer;
                 }
 
-        #NavImg li img {
+    #NavImg li img {
         display: block;
         opacity: 0.4;
         transition: 0.4s;
-        height: 100px;
+        height: 60px;
+        margin: 4px;
+        background: white;
         box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19)
+    }
+    h2{
+        font-size: 18px !important;
     }
 </style>
 
 
-@*<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-    img {
-    width: 100%;
-    }
-
-    .height {
-    height: 10px;
-    }
-
-    /* Image-container design */
-    .image-container {
-    max-width: 800px;
-    position: relative;
-    margin: auto;
-    }
-
-    .next {
-    right: 0;
-    }
-
-    /* Next and previous icon design */
-    .previous,
-    .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    padding: 10px;
-    margin-top: -25px;
-    }
-
-    /* caption decorate */
-    .captionText {
-    color: #000000;
-    font-size: 14px;
-    position: absolute;
-    padding: 12px 12px;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-    }
-
-    /* Slider image number */
-    .slideNumber {
-    background-color: #5574C5;
-    color: white;
-    border-radius: 25px;
-    right: 0;
-    opacity: .5;
-    margin: 5px;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 24px;
-    position: absolute;
-    }
-
-    .fa {
-    font-size: 32px;
-    }
-
-    .fa:hover {
-    transform: rotate(360deg);
-    transition: 1s;
-    color: white;
-    }
-
-    .footerdot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.5s ease;
-    }
-
-    .active,
-    .footerdot:hover {
-    background-color: black;
-    }
-    </style>
-
-    <!-- Image container of the image slider -->
-    <div class="image-container">
-    <div class="slide">
-    <div class="slideNumber">1</div>
-    <img src="https://www.geeksforgeeks.org/wp-content/uploads/html-768x256.png">
-    </div>
-    <div class="slide">
-    <div class="slideNumber">2</div>
-    <img src="https://www.geeksforgeeks.org/wp-content/uploads/CSS-768x256.png">
-    </div>
-    <div class="slide">
-    <div class="slideNumber">3</div>
-    <img src="https://www.geeksforgeeks.org/wp-content/uploads/jquery-banner.png">
-    </div>
-
-    <!-- Next and Previous icon to change images -->
-    <a class="previous" onclick="moveSlides(-1)">
-    <i class="fa fa-chevron-circle-left"></i>
-    </a>
-    <a class="next" onclick="moveSlides(1)">
-    <i class="fa fa-chevron-circle-right"></i>
-    </a>
-    </div>
-    <br>
-
-    <div style="text-align:center">
-    <span class="footerdot" onclick="activeSlide(1)">
-    </span>
-    <span class="footerdot" onclick="activeSlide(2)">
-    </span>
-    <span class="footerdot" onclick="activeSlide(3)">
-    </span>
-    </div>
-    <script>
-    let slideIndex = 1;
-    displaySlide(slideIndex);
-
-    function moveSlides(n) {
-    displaySlide(slideIndex += n);
-    }
-
-    function activeSlide(n) {
-    displaySlide(slideIndex = n);
-    }
-
-    /* Main function */
-    function displaySlide(n) {
-    let i;
-    let totalslides =
-    document.getElementsByClassName("slide");
-
-    let totaldots =
-    document.getElementsByClassName("footerdot");
-
-    if (n > totalslides.length) {
-    slideIndex = 1;
-    }
-    if (n < 1) {
-    slideIndex = totalslides.length;
-    }
-    for (i = 0; i < totalslides.length; i++) {
-    totalslides[i].style.display = "none";
-    }
-    for (i = 0; i < totaldots.length; i++) {
-    totaldots[i].className =
-    totaldots[i].className.replace(" active", "");
-    }
-    totalslides[slideIndex - 1].style.display = "block";
-    totaldots[slideIndex - 1].className += " active";
-    }
-    </script>*@
 
 
 @*<div class="conImage">
@@ -275,7 +124,7 @@
 
 
 
-
+@*'<ul><li><section><h5 class="card-title m-2">' + value.flatSize + " " + value.propertyTypeName + " for " + value.propertyFor + " at " + value.location + " " + value.constructionStatus + " " + value.facing + " face " +'</h5><div class="img"><img class="img-responsive" src="' + value.imagePath + '" alt="'+ value.title+'"></div><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>    *@
 
 
 
@@ -284,21 +133,37 @@
         <div class="row">
             <div class="card">
                 <div class="card-body row">
-                    <div class="PropertyImages col-md-12">
-                        <h2 id="propertytitle" class="card-title m-2">
-                        </h2>
-                        <div id="mainImgdiv">
+                    <div class="PropertyImages col-md-8">
+                        <ul>
+                            <li>
+                                <section>
+                                    <h2 id="propertytitle" class="card-title m-2"></h2>
+                                    <div class="img">
+                                        <img id="mainImg" class="img-responsive"/>
+                                        <ul id="NavImg">
+
+                                        </ul>
+                                    </div>
+                                    <div class="load_HomePropertyDetailsById">
+
+                                    </div>
+                                </section>
+                            </li>
+                        </ul>
+                        @*<h2 id="propertytitle" class="card-title m-2"> </h2>*@
+                       
+                        @*<div id="mainImgdiv">
                             <img id="mainImg" />
-                        </div>
-                        <div >
+                        </div>*@
+                        @*<div >
                             <ul id="NavImg">
 
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
-                    <div class="load_HomePropertyDetailsById col-md-8">
+                    @*<div class="load_HomePropertyDetailsById col-md-8">
 
-                    </div>
+                    </div>*@
                     <div class="col-md-4">
                         <div>
                             <div class="regi-sec">
@@ -404,7 +269,7 @@
     }
 
         function imageover(e) {
-            alert("over here")
+            //alert("over here")
             $(this).css({
                 'opacity': 1,
                 'background':'red'
@@ -467,7 +332,7 @@
                         $("#propertytitle").html(value.flatSize + " " + value.propertyTypeName + " for " + value.propertyFor + " at " + value.location + " " + value.constructionStatus + " " + value.facing 
                         + " face ")
                         $("#mainImg").attr('src', value.imagePath);
-                        propertylist = '<ul  ><li><section><div class=""></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div></section></li> </ul>                                                                       <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Summary</h3><hr/><div>    <div class="row"><div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>' + value.title + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>' + " Sale" + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Address : </b>' + value.areaName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>' + value.constructionStatus + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>' + value.propertyCondition + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>' + value.numberOfBaths + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>' + value.totalFloor + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>' + value.facing + '</span></li></ul></div>                                                                                                                        <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>' + value.propertyTypeName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>' + value.location + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Available From : </b>' + (new Date(value.handOverDate).toLocaleDateString('default', {month : 'long'}) + ' , ' + (new Date (value.handOverDate)).getFullYear()) + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>' + value.flatSize + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>' + value.floorAvailableNo + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>' + value.numberOfBalconies + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>' + value.numberOfGarages + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>' + value.furnishing + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>' + value.landArea + " " + value.name + '</span></li></ul></div></div></div></section></li></ul>                                                                    <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div>    <ul><li><span>' + value.description + '</span></li></ul></div></section></li></ul>      </div>'
+                        propertylist = '<ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div>                                                                       <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Summary</h3><hr/><div>    <div class="row"><div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>' + value.title + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>' + " Sale" + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Address : </b>' + value.areaName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>' + value.constructionStatus + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>' + value.propertyCondition + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>' + value.numberOfBaths + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>' + value.totalFloor + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>' + value.facing + '</span></li></ul></div>                                                                                                                        <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>' + value.propertyTypeName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>' + value.location + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Available From : </b>' + (new Date(value.handOverDate).toLocaleDateString('default', {month : 'long'}) + ' , ' + (new Date (value.handOverDate)).getFullYear()) + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>' + value.flatSize + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>' + value.floorAvailableNo + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>' + value.numberOfBalconies + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>' + value.numberOfGarages + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>' + value.furnishing + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>' + value.landArea + " " + value.name + '</span></li></ul></div></div></div></section></li></ul>                                                                    <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div>    <ul><li><span>' + value.description + '</span></li></ul></div></section></li></ul>      </div>'
 
 
                     });

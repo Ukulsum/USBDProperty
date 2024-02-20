@@ -33,18 +33,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-                </th>
-                <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-                </th>
-                <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
-                </th>
-                <th>
-                @Html.DisplayNameFor(model => model.UpdateBy)
-                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
@@ -73,25 +61,24 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.UpdateDate)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.UpdateBy)
-                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.NoticeID"><i class="bi bi-pencil-square"></i></a> |
-                    <a asp-action="Details" asp-route-id="@item.NoticeID"><i class="bi bi-eye-fill"></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.NoticeID"><i class="bi bi-trash"></i></a>
+                </td>              
+                <td class="col-md-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success">Action</button>
+                        <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.NoticeID"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-primary" asp-action="Details" asp-route-id="@item.NoticeID"><i class="bi bi-eye-fill"></i>Details</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-primary" asp-action="Delete" asp-route-id="@item.NoticeID"><i class="bi bi-trash"></i>Delete</a></li>
+
+                        </ul>
+                    </div>
                 </td>
             </tr>
         }

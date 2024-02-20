@@ -40,27 +40,9 @@ namespace USBDProperty.Controllers
         }
         // GET: PropertyTypes
         public async Task<IActionResult> Index()
-        {
-            //try
-            //{
-            //    var data = _context.PropertyTypes.ToListAsync();
-            //    var result = await _context.PropertyTypes.Select(s => new PropertyTypeVm
-            //    {
-            //        PropertyTypeId = s.PropertyTypeId,
-            //        PropertyTypeName = s.PropertyTypeName,
-            //        ParentPropertyType = (from c in _context.PropertyTypes
-            //                              join p in _context.PropertyTypes on c.ParentPropertyTypeId equals p.PropertyTypeId
-            //                              where s.PropertyTypeId.Equals(p.PropertyTypeId)
-            //                              select p.PropertyTypeName).FirstOrDefaultAsync(),
-            //                              ParentPropertyTypeId = s.PropertyTypeId
-            //                        });
-            //}
-            //catch(Exception ex)
-            //{
-            //    return Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
-            //}
+        {      
             return _context.PropertyTypes != null ?
-                        View(await _context.PropertyTypes.ToListAsync()) :
+                        View(await _context.PropertyTypes.OrderByDescending(p => p.PropertyTypeId).ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
         }
 
