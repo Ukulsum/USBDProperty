@@ -11,6 +11,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class PropertyDetailsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +23,7 @@ namespace USBDProperty.Controllers
             _environment = environment;
         }
 
+        [AllowAnonymous]
         public JsonResult Getlocation(int aid)
         {
             var record = _context.PropertyDetails.OrderBy(c => c.Location)
@@ -34,7 +36,7 @@ namespace USBDProperty.Controllers
         //    var data = _context.PropertyDetails.Where(p => p.PropertyTypeId.Equals(id));
         //    return View(data);
         //}
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetPropertyByParent(int id)
         {
@@ -63,6 +65,7 @@ namespace USBDProperty.Controllers
 
 
         //[HttpGet]
+        [AllowAnonymous]
         public IActionResult MoreSearch(int? forid, int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, string conStatus = "", string location = "")
         {
             try
@@ -146,13 +149,13 @@ namespace USBDProperty.Controllers
 
         }
 
-
+        [AllowAnonymous]
         public JsonResult Search()
         {
             return Json("Result");
         }
 
-
+        [AllowAnonymous]
         public JsonResult HomeFooterProperty()
         {
             try
@@ -174,6 +177,8 @@ namespace USBDProperty.Controllers
             }
 
         }
+
+        [AllowAnonymous]
         public JsonResult AgentHomeFooterProperty(int id)
         {
             try
@@ -197,6 +202,8 @@ namespace USBDProperty.Controllers
 
         }
 
+
+        [AllowAnonymous]
         public JsonResult HomeFlatProperty()
         {
             try
@@ -235,6 +242,8 @@ namespace USBDProperty.Controllers
 
         }
 
+
+        [AllowAnonymous]
         public JsonResult HomeLandProperty()
         {
             try
@@ -273,6 +282,8 @@ namespace USBDProperty.Controllers
             }
 
         }
+
+        [AllowAnonymous]
         public JsonResult BannerProperty()
         {
             try
@@ -294,6 +305,8 @@ namespace USBDProperty.Controllers
             }
 
         }
+
+        [AllowAnonymous]
         public JsonResult HomePropertybyID(int Id)
         {
             try
@@ -363,6 +376,7 @@ namespace USBDProperty.Controllers
         }
 
         
+        [AllowAnonymous]
         public JsonResult PropertybyProjects(int id)
 {
     try
@@ -381,7 +395,9 @@ namespace USBDProperty.Controllers
 
 }
 
-public JsonResult DevProperty(int id)
+
+        [AllowAnonymous]
+        public JsonResult DevProperty(int id)
 {
     try
     {
@@ -399,16 +415,20 @@ public JsonResult DevProperty(int id)
 
 }
 
-//[HttpGet("HomePropertyDetails")]
-public async Task<IActionResult> HomePropertyDetails(int? id)
+
+        [AllowAnonymous]
+        //[HttpGet("HomePropertyDetails")]
+        public async Task<IActionResult> HomePropertyDetails(int? id)
 {
     return View();
 }
 
 
-// GET: PropertyDetails
-//[Authorize]
-public async Task<IActionResult> Index()
+        [AllowAnonymous]
+
+        // GET: PropertyDetails
+        [Authorize]
+        public async Task<IActionResult> Index()
 {
     try
     {
