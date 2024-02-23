@@ -29,6 +29,7 @@ namespace USBDProperty.Models
         public int PropertyInfoId { get; set; }
         [ValidateNever]
         public bool ISFeatured { get; set; }
+        public bool IsLand { get; set; }
         [StringLength(255)]
         public string Title { get; set; }
        
