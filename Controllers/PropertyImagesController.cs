@@ -46,12 +46,35 @@ namespace USBDProperty.Controllers
             return View(propertyImages);
         }
 
-        // GET: PropertyImages/Create
+
+        public JsonResult HomeImagePropertybyID(int Id)
+        {
+            try
+            {
+                var applicationDbContext = _context.PropertyImages
+                                              
+                                                .Where(p => p.propertyInfoId.Equals(Id)).ToList();
+                    
+
+                return Json(new { data = applicationDbContext });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+        }
+
+        //GET: PropertyImages/Create
         public IActionResult Create(int id)
         {
-            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p=>p.PropertyInfoId.Equals(id)), "PropertyInfoId", "PropertyName");
+            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
             return View();
         }
+        //public IActionResult Create()
+        //{
+        //    ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Title");
+        //    return View();
+        //}
 
         // POST: PropertyImages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -105,7 +128,7 @@ namespace USBDProperty.Controllers
                    
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
+            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Title", propertyImages.propertyInfoId);
             return View(propertyImages);
         }
 

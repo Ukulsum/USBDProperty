@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using USBDProperty.Custom_Validation;
 using USBDProperty.DTO;
 
 namespace USBDProperty.Models
@@ -35,24 +36,36 @@ namespace USBDProperty.Models
        
         [MaxLength]
         public string? Description { get; set; }
-        [ValidateNever]       
+        //[ValidateNever]       
         //[StringLength(150)]
-        [DisplayName("Property Name")]
-        //public string PropertyName { get; set; }
-        public string PropertyName
-        {
-            get
-            {
-                return $" {FlatSize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
-            }
-        }
+        //[DisplayName("Property Name")]
+        //public string? PropertyName { get; set; }
+        //public string? PropertyName
+        //{
+        //    get
+        //    {
+        //        return this.PropertyName;
+        //        //return $" {FlatSize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+        //    }
+        //    set
+        //    {
+        //        if (PropertyType.IsLand)
+        //        {
+        //            value = $" {LandArea} {MeasurementUnit.Name} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
+        //        }
+        //        else
+        //        {
+        //            value = $" {FlatSize} sqft {ConstructionStatus}   {Facing} Face {NumberOfBedrooms}Bedrooms {NumberOfBaths} Bathroom";
+        //        }
+        //    }
+        //}
 
         //public string LandInfo
         //{
         //    get
         //    {
         //        //return $" {LandArea} {MeasurementUnit.Name ?? "NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
-        //        return $" {LandArea} {MeasurementUnit.Name?? "NA"} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
+        //        return $" {LandArea} {MeasurementUnit.Name} {PropertyType.PropertyTypeName} for {PropertyFor} at {Location} ";
         //    }
         //}
 
@@ -62,10 +75,14 @@ namespace USBDProperty.Models
 
         [DisplayName("Construction Status")]
         public ConstructionStatus ConstructionStatus { get; set; }
+
+        [NotMapped]
+        public string ConstructionStatusStr { get; set; }
     
         [DisplayName("Flat Size")]
-        public int? FlatSize { get; set; }
-        public float? Price { get; set; }
+        public int? FlatSize { get; set; } = 0;
+
+        public float? Price { get; set; } = 0.0f;
         [DisplayName("Total Price")]
         [ValidateNever]
         public double? TotalPrice
@@ -74,31 +91,38 @@ namespace USBDProperty.Models
         }
 
         [DisplayName("Bedrooms")]
-        public int? NumberOfBedrooms { get; set; }
-        
+        public int? NumberOfBedrooms { get; set; } = 0;
+
         [DisplayName("Baths")]
-        public int? NumberOfBaths { get; set; }
-        
+        public int? NumberOfBaths { get; set; } = 0;
+
         [DisplayName("Balconies")]
-        public int? NumberOfBalconies { get; set; }
-        
+        public int? NumberOfBalconies { get; set; } = 0;
+
         [DisplayName("Garages")]
-        public int? NumberOfGarages { get; set; }
-        
+        public int? NumberOfGarages { get; set; } = 0;
+
         [DisplayName("Total Floor")]
-        public int? TotalFloor { get; set; }
-        
+        public int? TotalFloor { get; set; } = 0;
+
         [DisplayName("Floor Available No")]
-        public int? FloorAvailableNo { get; set; }
-        
+        //[Compare("TotalFloor", ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
+        [AvailableFloorValidator(ErrorMessage = "The TotalFloor and Available Floor No do not match.")]
+        public int? FloorAvailableNo { get; set; } = 0;
+
         public Furnished? Furnishing { get; set; }
-        
-        public Facing? Facing { get; set; }
-        
+
+        [NotMapped]
+        public string FurnishedStr { get; set; }
+
+        public Facing? Facing { get; set; } = 0;
+        [NotMapped]
+        public string FacingStr { get; set; }
+
         [DisplayName("Land Area")]
-        public int LandArea { get; set; }
-        
-        public float? LandPrice { get; set; }
+        public int LandArea { get; set; } = 0;
+
+        public float? LandPrice { get; set; } = 0.0f;
         [ValidateNever]
         [DisplayName("Total Land Price")]
         public double? TotalLandPrice
@@ -118,6 +142,9 @@ namespace USBDProperty.Models
         public string? Comments { get; set; }
         [DisplayName("Propety Condition")]
         public PropertyCondition PropertyCondition { get; set; }
+        [NotMapped]
+        public string PropertyConditionStr { get; set; }
+
         [DisplayName("Handover Date")]
         [DataType(DataType.Date)]
         public DateTime? HandOverDate { get; set; }
@@ -130,6 +157,8 @@ namespace USBDProperty.Models
        
         [ForeignKey("Area")]
         public int AreaId { get; set; }
+        [NotMapped]
+        public string PropertyForstr { get; set; }
 
         [ValidateNever]
         [DisplayName("Property Type")]

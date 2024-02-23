@@ -20,23 +20,27 @@
                         <div class="form-group col-md-4">
                             <label class="control-label">Logo</label>
                             <input type="file" class="form-control" name="logofile" id="logofile" />
+                            <button type="button" id="logoChange" class="btn btn-primary mt-2">Change</button>
                         </div>
                         <div class="col-md-2">
                             <div style="width:110px; height:110px; border:2px solid #012970; border-radius: 10px; padding:10px;">
                                 <img src="@Url.Content(Model.Logo)" style="width:85px;height:85px;" alt="Image Upload" id="imgPreview" />
                             </div>
+                            @*<button type="button" id="logoChange" class="btn btn-primary mt-2">Change</button>*@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Banner</label>
                             <input type="file" class="form-control" id="bannerFile" name="bannerFile" />
+                            <button type="button" id="bannerChange" class="btn btn-primary mt-2">Change</button>
                         </div>
                         <div class="col-md-2">
                             <div style="width:110px; height:110px; border:2px solid #012970; border-radius: 10px; padding:10px;">
                                 <img src="@Url.Content(Model.Banner)" style="width:85px;height:85px;" alt="Image Upload" id="imgPreviewBanner" />
 
-                                <input type="text" class="form-control" name="logo" id="logo"  asp-for="Logo" hidden/>
-                                <input type="text" class="form-control" name="Banner" id="Banner"  asp-for="Banner" hidden/>
+                                <input type="text" class="form-control" name="logo" id="logo" asp-for="Logo" hidden />
+                                <input type="text" class="form-control" name="Banner" id="Banner" asp-for="Banner" hidden />
                             </div>
+                            @*<button type="button" id="bannerChange" class="btn btn-primary mt-2">Change</button>*@
                         </div>
 
                     </div>
@@ -53,7 +57,7 @@
                             <input asp-for="ContactNo" class="form-control" />
                             <span asp-validation-for="ContactNo" class="text-danger"></span>
                         </div>
-                         <div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                             <label asp-for="Email" class="control-label"></label>
                             <input asp-for="Email" class="form-control" />
                             <span asp-validation-for="Email" class="text-danger"></span>
@@ -106,7 +110,7 @@
                             <div class="form-group">
                                 <label class="control-label">Area</label>
                                 @*<select asp-for="AreaID" id="drpArea" class="form-control"></select>*@
-                                <select asp-items="ViewBag.AreaId" id="drpArea" class="form-control" asp-for="AreaID" ></select>
+                                <select asp-items="ViewBag.AreaId" id="drpArea" class="form-control" asp-for="AreaID"></select>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -126,11 +130,11 @@
 
                     <div class="form-group form-check">
                         <label class="form-check-label">
-                            <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                            <input class="form-check-input" asp-for="IsActive" id="checkActive" /> @Html.DisplayNameFor(model => model.IsActive)
                         </label>
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="submit" value="Update" class="btn btn-primary" />
+                        <input type="submit" value="Update" class="btn btn-primary" id="btnUpdate" />
                     </div>
                     <div class="form-group col-md-6">
                         <a asp-action="Index">Back to List</a>
@@ -145,39 +149,64 @@
 
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-             CKEDITOR.replace('AboutUs', {
-            height: 300,
-            width: '100%',
-         });
-          $("#logo").change(function () {
-                const file = this.files[0];
-                console.log(file);
-                if (file) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        console.log(event.target.result);
-                        $("#imgPreview").attr('src', event.target.result);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-             $("#banner").change(function () {
-                const file = this.files[0];
-                console.log(file);
-                if (file) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        console.log(event.target.result);
-                        $("#imgPreviewBanner").attr('src', event.target.result);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
+<script>
+    $(document).ready(function () {
 
-        })
-    </script>
+        $("#checkActive").click(function() {
+        if($(this).is(':checked')){
+            $("#btnUpdate").removeAttr('disabled', 'disabled');
+            //$("#btnSave").attr('disabled', 'disabled');
+        }
+        else{
+             $("#btnUpdate").attr('disabled', 'disabled');
+        }
+    });
+
+    CKEDITOR.replace('AboutUs', {
+        height: 300,
+        width: '100%',
+     });
+     $("#logoChange").show();
+         $("#logofile").hide();
+         $("#logoChange").click(function() {
+             $("#logofile").show();
+             $("#logoChange").hide();
+         });
+
+          $("#bannerChange").show();
+         $("#bannerFile").hide();
+         $("#bannerChange").click(function() {
+             $("#bannerFile").show();
+             $("#bannerChange").hide();
+         });
+
+     $("#logo").change(function () {
+           const file = this.files[0];
+           console.log(file);
+           if (file) {
+               let reader = new FileReader();
+               reader.onload = function (event) {
+                   console.log(event.target.result);
+                   $("#imgPreview").attr('src', event.target.result);
+               }
+               reader.readAsDataURL(file);
+           }
+      });
+         $("#banner").change(function () {
+            const file = this.files[0];
+            console.log(file);
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    console.log(event.target.result);
+                    $("#imgPreviewBanner").attr('src', event.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+    })
+</script>
 
 
     @{

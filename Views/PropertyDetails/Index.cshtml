@@ -6,207 +6,227 @@
 }
 
 @* <main id="main"> *@
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-9">
-                    <h5 class="card-title">List of Property</h5>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
-                </div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="card-title">List of Property</h5>
             </div>
-
-
-           <table class="table">
-    <thead>
-        <tr>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>*@
-            @*<th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-               
-            </th>
-           @* <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConstructionStatus)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.FlatSize)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.NumberOfBedrooms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfBaths)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfBalconies)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfGarages)
-            </th>*@
-           @* <th>
-                @Html.DisplayNameFor(model => model.TotalFloor)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.FloorAvailableNo)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Furnishing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LandArea)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-           @* <th>
-                @Html.DisplayNameFor(model => model.Measurement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>*@
-            @*<th>
-                @Html.DisplayNameFor(model => model.HandOverDate)
-            </th>*@
-           @* <th>
-                @Html.DisplayNameFor(model => model.propertyFor)
-            </th>*@
-            
-            @*<th>
-                @Html.DisplayNameFor(model => model.TransactionType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertyOwnerInfo)
-            </th>*@
-           @* <th>
-                @Html.DisplayNameFor(model => model.SocialIcon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>*@
-          @*   <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th> *@
-
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>*@
-            @*<td>
-                @Html.Raw(item.Description)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyName)
-            </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
-            </td>
-            <td>
-                     
-                @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
-                            <img src="@Url.Content(item.ImagePath)" alt="@item.PropertyName" width="250" height="200" class="img-responsive" />
-            </td>
-           @* <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConstructionStatus)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.FlatSize)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.NumberOfBedrooms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBaths)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBalconies)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfGarages)
-            </td>*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.TotalFloor)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.FloorAvailableNo)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Furnishing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Facing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LandArea)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Measurement)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.HandOverDate)
-            </td>*@
-            @* <td>
-                @Html.DisplayFor(modelItem => item.propertyFor.PropeFor)
-            </td> *@
-           
-            @*<td>
-                @Html.DisplayFor(modelItem => item.TransactionType.TransactionTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertyOwnerInfo.CompanyName)
-            </td>*@
-           @* <td>
-                @Html.DisplayFor(modelItem => item.SocialIcon.Icon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area.AreaName)
-            </td>*@
-           @*  <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td> *@
-            <td>
-                           @*  @Html.DisplayFor(modelItem => item.PropertyFor) *@
-                <a asp-action="Create" asp-controller="PropertyImages" asp-route-id="@item.PropertyInfoId">Add More Pic</a>
-                <a asp-action="Edit" asp-route-id="@item.PropertyInfoId"><i class="bi bi-pencil-square"></i></a> |
-                <a asp-action="Details" asp-route-id="@item.PropertyInfoId"><i class="bi bi-eye-fill"></i></a> |
-                <a asp-action="Delete" asp-route-id="@item.PropertyInfoId"><i class="bi bi-trash"></i></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <div class="col-md-3">
+                <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+            </div>
         </div>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.Title)
+                        </th>*@
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.Description)
+                        </th>*@
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.PropertyName)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.PropertyType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Image)
+
+                    </th>
+                    @* <th>
+                        @Html.DisplayNameFor(model => model.Location)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.ConstructionStatus)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.FlatSize)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.NumberOfBedrooms)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.NumberOfBaths)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.NumberOfBalconies)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.NumberOfGarages)
+                        </th>*@
+                    @* <th>
+                        @Html.DisplayNameFor(model => model.TotalFloor)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.FloorAvailableNo)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.Furnishing)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.Facing)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.LandArea)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    @* <th>
+                        @Html.DisplayNameFor(model => model.Measurement)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.Comments)
+                        </th>*@
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.HandOverDate)
+                        </th>*@
+                    @* <th>
+                        @Html.DisplayNameFor(model => model.propertyFor)
+                        </th>*@
+
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.TransactionType)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.PropertyOwnerInfo)
+                        </th>*@
+                    @* <th>
+                        @Html.DisplayNameFor(model => model.SocialIcon)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.Area)
+                        </th>*@
+                    @*   <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                        </th> *@
+
+                    <th>Action</th>
+                    @* <th>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown button
+                        </button>
+                        </th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                            </td>*@
+                        @*<td>
+                            @Html.Raw(item.Description)
+                            </td>*@
+                        @* <td>
+                            @Html.DisplayFor(modelItem => item.PropertyName)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
+                        </td>
+                        <td>
+                            @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
+                            <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />
+                        </td>
+                        @* <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.ConstructionStatus)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FlatSize)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.NumberOfBedrooms)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfBaths)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfBalconies)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfGarages)
+                            </td>*@
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.TotalFloor)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FloorAvailableNo)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Furnishing)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.Facing)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.LandArea)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Measurement)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                            </td>*@
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.HandOverDate)
+                            </td>*@
+                        @* <td>
+                            @Html.DisplayFor(modelItem => item.propertyFor.PropeFor)
+                            </td> *@
+
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.TransactionType.TransactionTypeName)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.PropertyOwnerInfo.CompanyName)
+                            </td>*@
+                        @* <td>
+                            @Html.DisplayFor(modelItem => item.SocialIcon.Icon)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.Area.AreaName)
+                            </td>*@
+                        @*  <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                            </td> *@
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success">Action</button>
+                                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-primary" asp-action="Create" asp-controller="PropertyImages" asp-route-id="@item.PropertyInfoId"><i class="bi bi-box-arrow-up"></i>Add More Pic</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-primary" asp-action="" asp-route-id="@item.PropertyInfoId"><i class="bi bi-plus"></i>Add Featured</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.PropertyInfoId"><i class="bi bi-pencil-square"></i>Edit</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-primary" asp-action="Details" asp-route-id="@item.PropertyInfoId"><i class="bi bi-eye-fill"></i>Details</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-primary" asp-action="Delete" asp-route-id="@item.PropertyInfoId"><i class="bi bi-trash"></i>Delete</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
+</div>
 @* </main> *@
+
+
 

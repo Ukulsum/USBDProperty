@@ -39,12 +39,14 @@
                     <div class="col-md-8 form-group">
                         <label class="control-label">Project Overview Video</label>
                         <input type="file" id="videoFile" name="ProjectVideoPath" class="form-control" accept="video/*" />
+
+                         <button type="button" id="videoChange" class="btn btn-primary mt-2">Change</button>
                     </div>
                     <div class="col-md-4">
                         <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
                             <video controls style="width:145px;height:145px;" alt="Image Upload" id="videoPreview"><source src="@Url.Content(Model.ProjectVideo)"/></video>
                             @*<input type="text" class="form-control" name="ProjectVideo" id="video" asp-for="ProjectVideo" accept="video/*" hidden />*@
-                            <input type="text" class="form-control" name="ProjectVideoPath" id="video" asp-for="ProjectVideoPath" accept="video/*" hidden />
+                            <input type="text" class="form-control" name="ProjectVideo" id="video" asp-for="ProjectVideo" accept="video/*" hidden />
                             @*<input type="text" class="form-control" name="ProjectVideoPath" id="video" hidden />*@
                         </div>
                     </div>
@@ -85,11 +87,13 @@
                         <div class="col-md-8 form-group">
                             <label class="control-label">Location Map</label>
                             <input type="file" name="MapPath" class="form-control" id="imgInput" />
+
+                             <button type="button" id="btnChange" class="btn btn-primary mt-2">Change</button>
                         </div>
                         <div class="col-md-4">
                             <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
                                 <img src="@Url.Content(Model.LocationMap)" style="width:145px;height:145px;" alt="@Model.Title" id="imgPreview">
-                                <input type="text" class="form-control" name="mappath" id="locationmap" hidden/>
+                                <input type="text" class="form-control" name="LocationMap" id="locationmap" asp-for="LocationMap" hidden/>
                                 @*<input type="text" class="form-control" name="LocationMap" id="LocationMap"asp-for="LocationMap" hidden/>*@
                                 @*<input type="text" class="form-control" name="LocationMap" id="LocationMap" hidden/>*@
                             </div>
@@ -122,6 +126,21 @@
             height: 300,
             width: '100%',
         });
+
+         $("#videoChange").show();
+         $("#videoFile").hide();
+         $("#videoChange").click(function() {
+             $("#videoFile").show();
+             $("#videoChange").hide();
+         });
+
+          $("#btnChange").show();
+         $("#imgInput").hide();
+         $("#btnChange").click(function() {
+             $("#imgInput").show();
+             $("#btnChange").hide();
+         });
+
         $("#videoFile").change(function(){
             const file = this.files[0];
             console.log(file);

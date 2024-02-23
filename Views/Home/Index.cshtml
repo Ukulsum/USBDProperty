@@ -9,8 +9,10 @@
 <!--======= BANNER =========-->
 <div id="banner">
     <div class="flex-banner">
+
         <ul class="slides">
             <!--======= SLIDER =========-->
+            <li> <img src="~/Asserts/Banner/HomeBanner.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </li>
 
             <li> <img src="~/Asserts/Banner/service-img-1.jpg" alt=""> </li>
@@ -20,56 +22,168 @@
             <li> <img src="~/Asserts/Banner/Dharittree banner-5.jpg" alt=""> </li>
             <li> <img src="~/Asserts/Banner/Dharittree banner-6.jpg" alt=""> </li>
         </ul>
+
+        <!-- Modal -->
+        <!--======= FIND PROPERTY =========-->
+        <div class="finder">
+            <div class="zoomBtn">
+                @*<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"> just contact us </button>*@
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Join For Zoom </button>
+
+            </div>
+            <div class="container">
+                @* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>*@
+                <form asp-action="MoreSearch" asp-controller="PropertyDetails" method="get">
+                    @*<h1>Us-Bd Properties Ltd.</h1>*@
+                    <!--======= FORM SECTION =========-->
+                    <div class="find-sec">
+                        <div class="search-type">
+                            <span class="search-type-tab active">
+                                @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
+                                Buy
+                            </span>
+                            <span class="search-type-tab">
+                                @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
+                                Rent
+                            </span>
+                        </div>
+                        <ul class="row">
+
+                            <!--======= FORM =========-->
+                            <li class="col-sm-6">
+                                <label>Choose The City</label>
+                                <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
+                                    <option>Area</option>
+                                </select>
+                            </li>
+
+                            <!--======= FORM =========-->
+                            <li class="col-sm-6">
+                                <label>Location</label>
+                                <select id="propertyInfoId" class="form-control"></select>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="search-btn-container">
+                        <button type="submit" class="search-btn">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 
+</div>
 
- 
-    <!--======= FIND PROPERTY =========-->
-    <div class="finder">
-        <div class="container">
-            <form asp-action="MoreSearch" asp-controller="PropertyDetails" method="get">
-                @*<h1>Us-Bd Properties Ltd.</h1>*@
-                <!--======= FORM SECTION =========-->
-                <div class="find-sec">
-                    <div class="search-type">
-                        <span class="search-type-tab active">
-                            @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
-                            Buy
-                        </span>
-                        <span class="search-type-tab">
-                            @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
-                            Rent
-                        </span>
-                    </div>
-                    <ul class="row">
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+    </button>*@
 
-                        <!--======= FORM =========-->
-                        <li class="col-sm-6">
-                            <label>Choose The City</label>
-                            <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
-                                <option>Area</option>
-                            </select>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Join For Zoom</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+           @*  <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_zoom"> *@
+            <form  id="form_zoom">
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <ul>
+                        <li class="mb-2">
+                            <p class="text-center">Join Zoom Abason Mela</p>
+                            <input type="text"  id="ClientName" class="form-control" placeholder="Enter Your Name" />
+                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
+                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
+                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
                         </li>
-
-                        <!--======= FORM =========-->
-                        <li class="col-sm-6">
-                            <label>Location</label>
-                            <select id="propertyInfoId" class="form-control"></select>
-                            @*  <select class="form-control" asp-items="ViewBag.PropertyInfoId" name="PropertyInfoId" id="PropertyInfoId">
-                                <option value="0">Location</option>
-                                </select>*@
+                        <li class="mb-2">
+                            <input type="email" id="Email" class="form-control" placeholder="Enter Your E-mail" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </li>
-
+                        <li class="mb-2">
+                            <input type="text" id="ContactNo" pattern="[0-9]{11}" class="form-control" placeholder="Enter Your Phone" />
+                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <textarea type="text" id="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </li>
                     </ul>
                 </div>
-                <div class="search-btn-container">
-                    <button type="submit" class="search-btn">Search</button>
+
+                <div class="modal-footer">
+                    
+                   
+                  @*   <button type="submit" class="btn btn-primary" asp-items="@ViewData["Interested"]" value="@Interested.ZoomInterested">Save</button> *@
+                    <button type="button" class="btn btn-primary" onclick="PostClientData()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                 </div>
             </form>
         </div>
     </div>
+</div>
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contact with Us</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_Sale">
+                <div class="modal-body">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <ul>
+                        <li class="mb-2">
+                            <p class="text-center">Send Message to Property Owner</p>
+                            <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
+                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
+                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
+                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <input type="text" asp-for="ContactNo" class="form-control" placeholder="Enter Your Phone" />
+                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                        </li>
+                        <li class="mb-2">
+                            <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </li>
+                        <li>
+                            @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
+                    <button type="submit" value="@Interested.Sale" asp-items="@ViewData["Interested"]" class="btn btn-primary center mb-2">Save</button>
+                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                </div>
+            </form>
+        </div>
+
+    </div>
 </div>
 
 
@@ -173,45 +287,33 @@
 
 
 
-   <!-------- Start Modal Notification -->
-              <div class="modal fade" id="NoticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
+<!-------- Start Modal Notification -->
+<div class="modal fade" id="NoticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-               
-                
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+                <h5 class="modal-title" id="exampleModalLabel">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            @*<form>*@
+
             <div class="modal-body">
                 <div id="load_Notification">
-
-
                 </div>
 
             </div>
             <div class="modal-footer">
-            @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
-
-            </div>
-            @*</form>*@
             </div>
 
-            </div>
-            </div>
+        </div>
+
+    </div>
+</div>
 
 
-    <!-------- End Modal Notification -->
-
-
-
-
-
+<!-------- End Modal Notification -->
 <!--======= PROPERTY =========-->
 <section class="properties">
     <div class="container">
@@ -230,115 +332,43 @@
     </div>
 </section>
 
+
+<!--======= PROPERTY =========-->
+<section class="properties">
+    <div class="container">
+
+        <!--======= TITTLE =========-->
+        <div class="tittle">
+            <img src="~/Asserts/images/head-top.png" alt="">
+            <h3>Featured Land Properties</h3>
+        </div>
+
+        <!--======= PROPERTIES ROW =========-->
+        @*<ul class="row">*@
+        <div class="load_LandProperty">
+        </div>
+        @*</ul>*@
+
+    @*<button class="btn btn-success">*@
+        <a asp-action="" asp-controller="" class="btn btn-successmkuieu text-center">Views All Property List</a>
+    @*</button>*@
+
+    </div>
+</section>
+
+
+
+
+
 <!--======= TEAM =========-->
 <section id="team">
     <div class="container">
         <!--======= TITTLE =========-->
         <div class="row">
-            @*<a href="/AgentHome/AgentIndex/ID/">*@
+
             @await Component.InvokeAsync("Developer")
-            @*</a>*@
 
-            @*<div class="col-md-6">
 
-                <!--======= TEAM ROW =========-->
-                <ul class="row">
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>David Martin</h6>
-                <p>Founder</p>
-                </div>
-                </div>
-                </li>
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-2.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>Hendrick jack </h6>
-                <p>co-Founder</p>
-                </div>
-                </div>
-                </li>
-                </ul>
-                </div>
-                <div class="col-md-6">
-
-                <!--======= TEAM ROW =========-->
-                <ul class="row">
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-3.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>charles edward </h6>
-                <p>team leader </p>
-                </div>
-                </div>
-                </li>
-
-                <!--======= TEAM =========-->
-                <li class="col-sm-6">
-                <div class="team">
-                <img class="img-responsive" src="~/Asserts/images/agent-4.jpg" alt="">
-                <div class="team-over">
-                <!--======= SOCIAL ICON =========-->
-                <ul class="social_icons animated-6s fadeInUp">
-                <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-                </div>
-
-                <!--======= TEAM DETAILS =========-->
-                <div class="team-detail">
-                <h6>jessica wevins </h6>
-                <p>team leader</p>
-                </div>
-                </div>
-                </li>
-                </ul>
-                </div> *@
         </div>
     </div>
 </section>
@@ -357,7 +387,7 @@
                     <h1> <a href="tel:+88 0188660077"> +88 0188660077</a></h1>
                 </li>
                 <li class="col-sm-2 no-padding">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
                     @*<a href="#." class="btn">just contact us</a> *@
                 </li>
             </ul>
@@ -378,7 +408,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form asp-action="Create" asp-controller="ClientContacts" method="post">
+            <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_sell">
                 <div class="modal-body">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -441,13 +471,68 @@
             })
             //$("#exampleModal").modal('Show');
             loadNotice();
-            getProperty()
-            getBannerProperty()
+            getFlatProperty()
+            //getBannerProperty()
+            getLandProperty()
+
         })
 
+        // clientInformation
 
+        // function saveClient() {
+           
+        //     var ClientVM = {
+        //         ClientName: $("#ClientName").val(),
+        //         ContactNo: $("#ContactNo").val(),
+        //         Email: $("#Email").val(),
+        //         Message: $("#Message").val(),
+        //         // ContactDate:null,
+        //         Interested: 1
+        //     }
+        //     console.log(ClientVM)
+        //     $.post("/ClientContacts/SaveContact", JSON.stringify(ClientVM))
+        //         .done(function (data) {
+        //             alert("Data Loaded: " + data);
+        //             console.log(data)
+        //         });
+
+        // }
+
+        function PostClientData() {
+           // alert("Hello Client");
+            var client = {
+                ClientContactId: 0,
+                ClientName: $("#ClientName").val(),
+                Email: $("#Email").val(),
+                ContactNo: $("#ContactNo").val(),
+                Message: $("#Message").val(),
+                ContactDate: Date,
+                    Interested:1
+            }
+            console.log(client);
+            $.ajax({
+                url: "/ClientContacts/Save",
+                type: "POST",
+                //data: JSON.stringify(data),
+                data: JSON.stringify(client),
+                dataType: "JSON",
+                contentType: "application/json",
+                success: function (res) {
+                    console.log(res);
+
+                    $("#clientName").val(''),
+                        $("#email").val(''),
+                        $("#contactNo").val(''),
+                        $("#message").val('')
+                    $("#exampleModalCenter").modal('hide')
+                    //$("#btnSave").val('Save')
+
+
+                }
+            })
+        }
     function loadNotice(){
-       
+
         $.ajax({
             url: "/Notices/HomeNotice",
             method: "Get",
@@ -482,19 +567,26 @@
                })
            })
      }
-    function getProperty(){
+    function getFlatProperty(){
         //alert("helo")
+        console.log("HomeProperty")
         $.ajax({
-            url: "/PropertyDetails/HomeProperty",
+            url: "/PropertyDetails/HomeFlatProperty",
             method: "Get",
             success: function(res){
                 console.log(res.data)
                 var propertylist = "";
                 $.each(res.data, function(index, value){
                     console.log(value )
+                    //console.log("island: "+value.isLand )
                     console.log(value.numberOfBedrooms )
                     propertylist += '<ul class="row">';
-                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.propertySize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                   //if(value.propertyType.isLand == true){
+                   //    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.landArea + " " + value.measurementUnit.shortName + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                   //}
+                   //else{ 
+                    propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                    //}
                 });
                 console.log(propertylist);
                 //console.log(PropertySize);
@@ -505,51 +597,61 @@
         })
     }
 
-     function getBannerProperty(){
+
+
+    function getLandProperty(){
         //alert("helo")
+        console.log("HomeProperty")
         $.ajax({
-            url: "/PropertyDetails/BannerProperty",
+            url: "/PropertyDetails/HomeLandProperty",
             method: "Get",
             success: function(res){
-                console.log("Banner")
                 console.log(res.data)
-                var bannerProperty = "";
+                var landPropertylist = "";
+                landPropertylist += '<ul class="row">';
                 $.each(res.data, function(index, value){
                     console.log(value )
-                    //console.log(value.numberOfBedrooms )
-
-                    bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
-                    //<div class="prot-slide">
-                    //bannerProperty += '<div class="row">';
-                    //bannerProperty = '<div class="row">';
-                    //bannerProperty = '<div class="prot-slide"><div class="plots">';
-                    //bannerProperty += '<div class="plots">';
-                    //bannerProperty += '<div class="plots"><div class="row"><div class="col-xs-4"> <a href="#."> <img class="img-responsive" src="/Asserts/Banner/Dharittree banner-1.jpg" alt=""> </a> </div><div class="col-xs-8"><div class="pri-info"><span class="sale">For '+ value.propertyFor +'</span> <a class="f-mont" href="#.">$ '+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> '+ value.location +' </p><div class="auther"> <img src="~/Asserts/images/auther-1.jpg" alt=""><h6>'+ value.agentID +'</h6></div></div></div></div></div></div>'
+                    console.log("island: "+value.propertyTypeName )
+                    console.log("Land Area: " + value.measurementUnit.shortName)
+                    console.log("Land Properties")
+                    
+                   landPropertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.landArea + " " + value.measurementUnit.name + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + '/Plot</p> <span class="price font-montserrat">BDT.' + value.totalLandPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                   
+                   
                 });
-                console.log(bannerProperty);
+                console.log(landPropertylist);
                 //console.log(PropertySize);
-                //bannerProperty += '</div>';
-                //bannerProperty = '</div>';
-                $("#bannerslide").empty();
-                $("#bannerslide").html(bannerProperty);
+                landPropertylist += '</ul>';
+                $(".load_LandProperty").empty();
+                $(".load_LandProperty").html(landPropertylist);
             }
         })
     }
-                //        $('.owl-carousel').owlCarousel({
-                //    loop:true,
-                //    margin:10,
-                //    nav:true,
-                //    responsive:{
-                //        0:{
-                //            items:1
-                //        },
-                //        600:{
-                //            items:3
-                //        },
-                //        1000:{
-                //            items:5
-                //        }
-                //    }
-                //})
+
+
+    // function getBannerProperty(){
+    //    //alert("helo")
+    //    $.ajax({
+    //        url: "/PropertyDetails/BannerProperty",
+    //        method: "Get",
+    //        success: function(res){
+    //            console.log("Banner")
+    //            console.log(res.data)
+    //            var bannerProperty = "";
+    //            $.each(res.data, function(index, value){
+    //                console.log(value )
+    //                //console.log(value.numberOfBedrooms )
+
+    //                bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
+
+    //            });
+    //            console.log(bannerProperty);
+
+    //            $("#bannerslide").empty();
+    //            $("#bannerslide").html(bannerProperty);
+    //        }
+    //    })
+    //}
+               
 </script>
 }

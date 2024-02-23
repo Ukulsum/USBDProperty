@@ -13,7 +13,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    //[Authorize(Roles = "Admin,Agent")]
+    [Authorize(Roles = "Admin,Agent")]
     public class DevelopersorAgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +26,7 @@ namespace USBDProperty.Controllers
             _environment = environment;
             _userManager = userManager;
         }
-
+        [AllowAnonymous]
         public JsonResult HomeDeveloperOrAgentsbyID(int Id)
         {
             try
@@ -51,16 +51,24 @@ namespace USBDProperty.Controllers
                           View(await _context.DevelopersorAgent.OrderByDescending(p=>p.ID).Where(d=>d.IsActive).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Developer(bool? isActive=true)
         {
 
             return View();
         }
         [AllowAnonymous]
-        public  JsonResult  GetDeveloper( )
+        public JsonResult GetDeveloper( )
         {
             var data = _context.DevelopersorAgent.Where(d=>d.IsActive);
             return Json(new { Data = data });
+        }
+
+        [AllowAnonymous]
+        public JsonResult HomeAgent(int id)
+        {
+            var data = _context.DevelopersorAgent.Where(d => d.ID == id);
+            return Json(new { Data = data});
         }
 
         // GET: DevelopersorAgents/Details/5
@@ -124,7 +132,7 @@ namespace USBDProperty.Controllers
                             {
                                 await logo.CopyToAsync(fileStrem);
                             }
-                            developersorAgent.Logo = "~/Developer/Logo/" + fileName;
+                            developersorAgent.Logo = "/Developer/Logo/" + fileName;
                         }
                         else
                         {
@@ -149,7 +157,7 @@ namespace USBDProperty.Controllers
                             {
                                 await banner.CopyToAsync(fileStrem);
                             }
-                            developersorAgent.Banner = "~/Developer/Banner/" + fileName;
+                            developersorAgent.Banner = "/Developer/Banner/" + fileName;
                         }
                         else
                         {
@@ -282,7 +290,7 @@ namespace USBDProperty.Controllers
                         {
                             await developersorAgent.logofile.CopyToAsync(fileStrem);
                         }
-                        developersorAgent.Logo = "~/Developer/Logo/" + fileName;
+                        developersorAgent.Logo = "/Developer/Logo/" + fileName;
                         if (System.IO.File.Exists(rPath))
                         {
                             System.IO.File.Delete(rPath);
@@ -316,7 +324,7 @@ namespace USBDProperty.Controllers
                         {
                             await developersorAgent.bannerFile.CopyToAsync(fileStrem);
                         }
-                        developersorAgent.Banner = "~/Developer/Banner/" + fileName;
+                        developersorAgent.Banner = "/Developer/Banner/" + fileName;
                         if (System.IO.File.Exists(rPath))
                         {
                             System.IO.File.Delete(rPath);
@@ -391,31 +399,6 @@ namespace USBDProperty.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View(developersorAgent);
             }
-            //if (id != developersorAgent.ID)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        _context.Update(developersorAgent);
-            //        await _context.SaveChangesAsync();
-            //    }
-            //    catch (DbUpdateConcurrencyException)
-            //    {
-            //        if (!DevelopersorAgentExists(developersorAgent.ID))
-            //        {
-            //            return NotFound();
-            //        }
-            //        else
-            //        {
-            //            throw;
-            //        }
-            //    }
-            //    return RedirectToAction(nameof(Index));
-            //}
             return View(developersorAgent);
         }
 

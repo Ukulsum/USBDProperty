@@ -16,6 +16,7 @@ namespace USBDProperty.Models
         public int? ParentPropertyTypeId { get; set; } = 0;
         [ValidateNever]
         public bool IsLand { get; set; }
+       
     }
 
     public class PropertyTypeVm

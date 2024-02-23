@@ -5,40 +5,148 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
+<style>
+    input[type="file"] {
+        display: block;
+    }
 
-<h4>PropertyImages</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    .imageThumb {
+        max-height: 75px;
+        border: 2px solid;
+        padding: 1px;
+        cursor: pointer;
+    }
+
+    .pip {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+    }
+
+    .remove {
+        display: block;
+        /*background: #444;*/
+        /*border: 1px solid black;*/
+        background: red;
+        border-radius: 5%;
+        padding: 2px;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .remove:hover {
+            background: white;
+            color: black;
+        }
+</style>
+
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Property Multiple Images</h5>
+        <hr style="width:100%; " />
         <form asp-action="Create" method="post" asp-controller="PropertyImages" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="propertyInfoId" class="control-label"></label>
-                <select asp-for="propertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId"></select>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="propertyInfoId" class="control-label"> Property </label>
+                        <select asp-for="propertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId">
+                            @*<option value="0">Select Property</option>*@
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="MultiImagePath" class="control-label"> Image Upload</label>
+                <input type="file" id="files" name="MultiImagePath" asp-for="MultiImagePath" class="form-control" accept="image/*" multiple />
+
             </div>
-            <div class="form-group">
-                <label asp-for="MultiImagePath" class="control-label"></label>
-                <input type="file" name="MultiImagePath" asp-for="MultiImagePath" class="form-control" accept="image/*" multiple />
-                
-            </div>
-           
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" id="btnSave" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div><a asp-action="Index">Back to List</a></div>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@*style=\"width:155px;height:155px;\" *@
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts{
+<script>
+    $(document).ready(function () {
+         //if(window.File && window.FileList && window.FileReader) {
+         //   $("#files").on("change",function(e) {
+         //       var files = e.target.files ,
+         //       filesLength = files.length ;
+         //       for (var i = 0; i < filesLength ; i++) {
+         //           var f = files[i]
+         //           var fileReader = new FileReader();
+         //           fileReader.onload = (function(e) {
+         //               var file = e.target;
+         //               $("<img></img>",{
+         //                   class : "imageThumb",
+         //                   src : e.target.result,
+         //                   title : file.name
+         //               }).insertAfter("#files");
+         //          });
+         //          fileReader.readAsDataURL(f);
+         //      }
+         // });
+         //}
+         //else
+         //{ alert("Your browser doesn't support to File API") }
+         if (window.File && window.FileList && window.FileReader) {
+            $("#files").on("change", function(e) {
+              var files = e.target.files,
+                filesLength = files.length;
+              for (var i = 0; i < filesLength; i++) {
+                var f = files[i]
+                var fileReader = new FileReader();
+                fileReader.onload = (function(e) {
+                  var file = e.target;
+                  $("<span class=\"pip\">" +
+                    "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                    "<br/><span class=\"remove\">Remove image</span>" +
+                    "</span>").insertAfter("#files");
+                  $(".remove").click(function(){
+                    $(this).parent(".pip").remove();
+                  });
+
+                  // Old code here
+                  /*$("<img></img>", {
+                    class: "imageThumb",
+                    src: e.target.result,
+                    title: file.name + " | Click to remove"
+                  }).insertAfter("#files").click(function(){$(this).remove();});*/
+
+                });
+                fileReader.readAsDataURL(f);
+              }
+            });
+          }
+          else {
+            alert("Your browser doesn't support to File API")
+          }
+    })
+</script>
 }
+

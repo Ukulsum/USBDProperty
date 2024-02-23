@@ -22,7 +22,7 @@ namespace USBDProperty.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.PropertyFeatures != null ? 
-                          View(await _context.PropertyFeatures.ToListAsync()) :
+                          View(await _context.PropertyFeatures.OrderByDescending(pf => pf.PropertyFeatureId).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.PropertyFeatures'  is null.");
         }
 

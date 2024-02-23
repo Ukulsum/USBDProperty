@@ -4,6 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace USBDProperty.Models
 {
+    public enum Interested
+    {
+        ZoomInterested = 1,
+        Buy = 2,
+        Sale = 3
+    }
     public class ClientContact
     {
         [Key]
@@ -28,6 +34,7 @@ namespace USBDProperty.Models
         //[Required]
         [MaxLength]
         public string? Message { get; set; }
+        public Interested Interested { get; set; }
 
 
         //public PropertyFor PropertyFor { get; set; }

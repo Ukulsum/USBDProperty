@@ -57,7 +57,7 @@
 
                 <li class="nav-item d-block d-lg-none">
                     <a asp-action="Index" asp-controller="Countries" class="nav-link nav-icon search-bar-toggle">
-                        <i class="bi bi-search">c</i>
+                        <i class="bi bi-search">Countries</i>
                     </a>
                 </li><!-- End Search Icon-->
                 <li class="nav-item dropdown">
@@ -270,12 +270,19 @@
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
+
+            <!-- End Dashboard Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-building"></i><span>Profile</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">                 
+                    <li>
+                        <a asp-action="Index" asp-controller="Countries">
+                            <i class="bi bi-circle"></i><span>Countries</span>
+                        </a>
+                    </li>
                     <li>
                         <a asp-action="Index" asp-controller="PropertyFeatures">
                             <i class="bi bi-circle"></i><span>Agent Information</span>
@@ -308,7 +315,7 @@
                         <a asp-action="Index" asp-controller="PropertyDetails">
                             <i class="bi bi-circle"></i><span>Project Information</span>
                         </a>
-                       
+
                     </li>
                     <li>
                         <a asp-action="Index" asp-controller="MultipleImageUploads">
@@ -318,7 +325,7 @@
                 </ul>
             </li><!-- End Project -->
 
-          
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#property" data-bs-toggle="collapse" href="#">
@@ -342,7 +349,7 @@
             </li><!-- End Property Nav -->
 
 
-           
+
 
         </ul>
 
@@ -355,90 +362,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <!--======= FOOTER =========-->
-    @*  <footer>
-        <div class="container">
-
-        <!--======= NEWSLETTER =========-->
-        <div class="subcribe">
-        <div class="col-sm-5 no-padding">
-        <h4>Subscribe to our newsletter</h4>
-        </div>
-        <div class="col-sm-7 no-padding">
-        <form>
-        <input class="font-montserrat" type="email" placeholder="E-mail Address" value="" required>
-        <button type="submit" class="btn"> Subscribe</button>
-        </form>
-        </div>
-        </div>
-        <ul class="row">
-
-        <!--======= HAPPY CLIENTS =========-->
-        <li class="col-sm-3">
-        <h5>About us</h5>
-        <hr>
-        <p>You wanna be where you can see our troubles are all the same. You wanna be where everybody knows Your name. Here's the story of a their tropic island nest.</p>
-
-        <!--======= SOCIAL ICONS =========-->
-
-        <ul class="social_icons">
-        <li class="facebook"> <a href="#."><i class="fa fa-facebook"></i> </a></li>
-        <li class="twitter"> <a href="#."><i class="fa fa-twitter"></i> </a></li>
-        <li class="linkedin"> <a href="#."><i class="fa fa-linkedin"></i> </a></li>
-        <li class="tumblr"> <a href="#."><i class="fa fa-tumblr"></i> </a></li>
-        </ul>
-        </li>
-
-        <!--======= HAPPY CLIENTS =========-->
-        <li class="col-sm-3">
-        <!--======= LINKS =========-->
-        <h5>latest tweets</h5>
-        <hr>
-        <ul class="tweet">
-        <li>
-        <p>Realtor is one of the excellent realestatetheme <a href="#.">http://realtorrealestae</a> one of the excellent realestatetheme </p>
-        <span>1 hours ago</span> </li>
-        <li>
-        <p>Realtor is one of the excellent realestatetheme <a href="#.">http://realtorrealestae</a> one of the excellent realestatetheme </p>
-        <span>1 hours ago</span> </li>
-        </ul>
-        </li>
-        <li class="col-sm-3">
-        <h5>recent properties</h5>
-        <hr>
-        <ul class="recent-come">
-        <li>
-        <div class="img-post"> <img src="~/Asserts/images/recent-img.jpg" alt=""> </div>
-        <div class="text-post"> <a href="#.">On your mark get set and go now</a> <span>$956,205</span> </div>
-        </li>
-        <li>
-        <div class="img-post"> <img src="~/Asserts/images/recent-img-1.jpg" alt=""> </div>
-        <div class="text-post"> <a href="#.">On your mark get set and go now</a> <span>$956,205</span> </div>
-        </li>
-        <li>
-        <div class="img-post"> <img src="~/Asserts/images/recent-img-2.jpg" alt=""> </div>
-        <div class="text-post"> <a href="#.">On your mark get set and go now</a> <span>$956,205</span> </div>
-        </li>
-        </ul>
-        </li>
-
-        <!--======= HAPPY CLIENTS =========-->
-        <li class="col-sm-3">
-        <!--======= LINKS =========-->
-        <h5>Contact</h5>
-        <hr>
-        <div class="loc-info">
-        <p><i class="fa fa-map-marker"></i> 09 Design Street,Downtown,
-        Sydney, Australia</p>
-        <p><i class="fa fa-phone"></i> +01 123 456 78</p>
-        <p><i class="fa fa-print"></i> +01 123 456 78</p>
-        <p><i class="fa fa-envelope-o"></i> Info@realtor.com</p>
-        </div>
-        </li>
-        </ul>
-        </div>
-        </footer>*@
 
     <!--======= RIGHTS =========-->
     <div class="rights">

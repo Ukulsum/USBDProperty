@@ -26,7 +26,7 @@ namespace USBDProperty.Controllers
         // GET: ProjectsInfoes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ProjectsInfo.Include(p => p.Developers);
+            var applicationDbContext = _context.ProjectsInfo.OrderByDescending(p=>p.Id).Include(p => p.Developers);
             return View(await applicationDbContext.ToListAsync());
         }
         [AllowAnonymous]
@@ -126,7 +126,7 @@ namespace USBDProperty.Controllers
                     {
                         await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
                     }
-                    projectsInfo.ProjectVideo = "~/Developer/Video/" + fileName;
+                    projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
                     //projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
                 }
                 else
@@ -225,7 +225,7 @@ namespace USBDProperty.Controllers
                         {
                             await projectsInfo.MapPath.CopyToAsync(fileStrem);
                         }
-                        projectsInfo.LocationMap = "~/Developer/LocationMap/" + fileName;
+                        projectsInfo.LocationMap = "/Developer/LocationMap/" + fileName;
                         if (System.IO.File.Exists(rPath))
                         {
                             System.IO.File.Delete(rPath);
@@ -252,7 +252,7 @@ namespace USBDProperty.Controllers
                         {
                             await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
                         }
-                        projectsInfo.ProjectVideo = "~/Developer/Video/" + fileName;
+                        projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
                         if (System.IO.File.Exists(rPath))
                         {
                             System.IO.File.Delete(rPath);

@@ -17,7 +17,7 @@ namespace USBDProperty.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.24")
+                .HasAnnotation("ProductVersion", "6.0.27")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -296,6 +296,9 @@ namespace USBDProperty.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Interested")
+                        .HasColumnType("int");
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");

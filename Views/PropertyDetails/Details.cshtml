@@ -8,9 +8,18 @@
 <main id="main">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Property Information</h5>
-            <hr />
+            <h5 class="card-title text-center">Property Details</h5>
+            <hr style="width:100%; " />
             <div class="row">
+                <div class="col-md-12">
+                    <img class="img-responsive mb-2" src="@Url.Content(@Model.ImagePath)" />
+                </div>
+            </div>
+
+            <h5 class="card-title text-center">Property Summary</h5>
+            <hr style="width:100%; " />
+            <div class="row">
+                
                 <div class="col-md-6">
                     <dl class="row">
                         <dt class="col-sm-5">
@@ -19,18 +28,24 @@
                         <dd class="col-sm-7">
                             @Html.DisplayFor(model => model.Title)
                         </dd>
-                        <dt class="col-sm-5">
+                        @*<dt class="col-sm-5">
                            <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.PropertyName)
                         </dt>
                         <dd class="col-sm-7">
                             @Html.DisplayFor(model => model.PropertyName)
-                        </dd>
+                        </dd>*@
                         @* <dt class="col-sm-5">
                            <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.propertyFor)
                         </dt>
                         <dd class="col-sm-7">
                             @Html.DisplayFor(model => model.propertyFor.PropeFor)
                         </dd> *@
+                        <dt class="col-md-5">
+                             <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyFor)
+                        </dt>
+                        <dd class="col-md-7">
+                            @Html.DisplayFor(model => model.PropertyFor)
+                        </dd>
                         <dt class="col-sm-5">
                            <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.Location)
                         </dt>

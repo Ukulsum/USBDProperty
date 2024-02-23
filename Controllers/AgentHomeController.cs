@@ -28,6 +28,13 @@ namespace USBDProperty.Controllers
             
             return View(data);
         }
+        //public IActionResult AgentProperties(int id)
+        public IActionResult AgentProperties()
+        
+        {
+            //var data = _context.DevelopersorAgent.Where(p => p.ID == id).OrderByDescending(p => p.ID).FirstOrDefault();
+            return View();
+        }
 
         public JsonResult HomeAgentProject(int id)
         {
