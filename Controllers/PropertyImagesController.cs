@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class PropertyImagesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,30 +25,44 @@ namespace USBDProperty.Controllers
         // GET: PropertyImages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PropertyImages.Include(p => p.PropertyDetails);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var applicationDbContext = _context.PropertyImages.Include(p => p.PropertyDetails);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PropertyImages/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.PropertyImages == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyImages == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyImages = await _context.PropertyImages
-                .Include(p => p.PropertyDetails)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (propertyImages == null)
+                var propertyImages = await _context.PropertyImages
+                    .Include(p => p.PropertyDetails)
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (propertyImages == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyImages);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyImages);
         }
 
-
+        [AllowAnonymous]
         public JsonResult HomeImagePropertybyID(int Id)
         {
             try
@@ -135,18 +151,25 @@ namespace USBDProperty.Controllers
         // GET: PropertyImages/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PropertyImages == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyImages == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyImages = await _context.PropertyImages.FindAsync(id);
-            if (propertyImages == null)
-            {
-                return NotFound();
+                var propertyImages = await _context.PropertyImages.FindAsync(id);
+                if (propertyImages == null)
+                {
+                    return NotFound();
+                }
+                ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
+                return View(propertyImages);
             }
-            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
-            return View(propertyImages);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: PropertyImages/Edit/5
@@ -188,20 +211,27 @@ namespace USBDProperty.Controllers
         // GET: PropertyImages/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.PropertyImages == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyImages == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyImages = await _context.PropertyImages
-                .Include(p => p.PropertyDetails)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (propertyImages == null)
+                var propertyImages = await _context.PropertyImages
+                    .Include(p => p.PropertyDetails)
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (propertyImages == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyImages);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyImages);
         }
 
         // POST: PropertyImages/Delete/5
@@ -209,18 +239,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PropertyImages == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.PropertyImages'  is null.");
+                if (_context.PropertyImages == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.PropertyImages'  is null.");
+                }
+                var propertyImages = await _context.PropertyImages.FindAsync(id);
+                if (propertyImages != null)
+                {
+                    _context.PropertyImages.Remove(propertyImages);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var propertyImages = await _context.PropertyImages.FindAsync(id);
-            if (propertyImages != null)
+            catch(Exception ex)
             {
-                _context.PropertyImages.Remove(propertyImages);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool PropertyImagesExists(int id)

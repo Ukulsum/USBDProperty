@@ -10,7 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    //[Authorize(Roles = "Admin,Agent")]
+    [Authorize(Roles = "Admin,Agent")]
     public class AreasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,18 +19,27 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
+        
         public JsonResult GetArea(int cid)
         {
-            var record = _context.Areas.OrderBy(c => c.AreaName)
-                                            .Where(d => d.CityId.Equals(cid)).ToList();
-            return Json(record);
+            try
+            {
+                var record = _context.Areas.OrderBy(c => c.AreaName)
+                                           .Where(d => d.CityId.Equals(cid)).ToList();
+                return Json(record);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No Record" });
+            }
+           
         }
         // GET: Areas
         public async Task<IActionResult> Index()
         {
             try
             {
-                var applicationDbContext = _context.Areas.Include(a => a.City);
+                var applicationDbContext = _context.Areas.OrderByDescending(a => a.AreaId).Include(a => a.City);
                 return View(await applicationDbContext.ToListAsync());
             }
             catch(Exception ex)

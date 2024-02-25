@@ -46,10 +46,16 @@ namespace USBDProperty.Controllers
         // GET: DevelopersorAgents
         public async Task<IActionResult> Index(bool?isActive)
         {
-
-              return _context.DevelopersorAgent != null ? 
-                          View(await _context.DevelopersorAgent.OrderByDescending(p=>p.ID).Where(d=>d.IsActive).ToListAsync()) :
+            try
+            {
+                return _context.DevelopersorAgent != null ?
+                          View(await _context.DevelopersorAgent.OrderByDescending(p => p.ID).Where(d => d.IsActive).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [AllowAnonymous]
         public async Task<IActionResult> Developer(bool? isActive=true)
@@ -60,33 +66,54 @@ namespace USBDProperty.Controllers
         [AllowAnonymous]
         public JsonResult GetDeveloper( )
         {
-            var data = _context.DevelopersorAgent.Where(d=>d.IsActive);
-            return Json(new { Data = data });
+            try
+            {
+                var data = _context.DevelopersorAgent.Where(d => d.IsActive);
+                return Json(new { Data = data });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No Record" });
+            }
         }
 
         [AllowAnonymous]
         public JsonResult HomeAgent(int id)
         {
-            var data = _context.DevelopersorAgent.Where(d => d.ID == id);
-            return Json(new { Data = data});
+            try
+            {
+                var data = _context.DevelopersorAgent.Where(d => d.ID == id);
+                return Json(new { Data = data });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { data = "No Record" });
+            }
         }
 
         // GET: DevelopersorAgents/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.DevelopersorAgent == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.DevelopersorAgent == null)
+                {
+                    return NotFound();
+                }
 
-            var developersorAgent = await _context.DevelopersorAgent
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (developersorAgent == null)
+                var developersorAgent = await _context.DevelopersorAgent
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (developersorAgent == null)
+                {
+                    return NotFound();
+                }
+
+                return View(developersorAgent);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(developersorAgent);
         }
         [HttpGet]
         // GET: DevelopersorAgents/Create
@@ -405,19 +432,26 @@ namespace USBDProperty.Controllers
         // GET: DevelopersorAgents/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.DevelopersorAgent == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.DevelopersorAgent == null)
+                {
+                    return NotFound();
+                }
 
-            var developersorAgent = await _context.DevelopersorAgent
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (developersorAgent == null)
+                var developersorAgent = await _context.DevelopersorAgent
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (developersorAgent == null)
+                {
+                    return NotFound();
+                }
+
+                return View(developersorAgent);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(developersorAgent);
         }
 
         // POST: DevelopersorAgents/Delete/5
@@ -425,18 +459,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.DevelopersorAgent == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
+                if (_context.DevelopersorAgent == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
+                }
+                var developersorAgent = await _context.DevelopersorAgent.FindAsync(id);
+                if (developersorAgent != null)
+                {
+                    _context.DevelopersorAgent.Remove(developersorAgent);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var developersorAgent = await _context.DevelopersorAgent.FindAsync(id);
-            if (developersorAgent != null)
+            catch(Exception ex)
             {
-                _context.DevelopersorAgent.Remove(developersorAgent);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool DevelopersorAgentExists(int id)

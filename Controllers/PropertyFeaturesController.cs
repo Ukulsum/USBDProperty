@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class PropertyFeaturesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,27 +23,41 @@ namespace USBDProperty.Controllers
         // GET: PropertyFeatures
         public async Task<IActionResult> Index()
         {
-              return _context.PropertyFeatures != null ? 
+            try
+            {
+                return _context.PropertyFeatures != null ?
                           View(await _context.PropertyFeatures.OrderByDescending(pf => pf.PropertyFeatureId).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.PropertyFeatures'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PropertyFeatures/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.PropertyFeatures == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyFeatures == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyFeatures = await _context.PropertyFeatures
-                .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
-            if (propertyFeatures == null)
+                var propertyFeatures = await _context.PropertyFeatures
+                    .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
+                if (propertyFeatures == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyFeatures);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyFeatures);
         }
 
         // GET: PropertyFeatures/Create
@@ -57,29 +73,42 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PropertyFeatureId,PropertyFeatureName,FeatureDescription")] PropertyFeatures propertyFeatures)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(propertyFeatures);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(propertyFeatures);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(propertyFeatures);
             }
-            return View(propertyFeatures);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PropertyFeatures/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PropertyFeatures == null)
-            {
-                return NotFound();
-            }
+            try {
+                if (id == null || _context.PropertyFeatures == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
-            if (propertyFeatures == null)
-            {
-                return NotFound();
+                var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
+                if (propertyFeatures == null)
+                {
+                    return NotFound();
+                }
+                return View(propertyFeatures);
             }
-            return View(propertyFeatures);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: PropertyFeatures/Edit/5
@@ -120,19 +149,26 @@ namespace USBDProperty.Controllers
         // GET: PropertyFeatures/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.PropertyFeatures == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyFeatures == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyFeatures = await _context.PropertyFeatures
-                .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
-            if (propertyFeatures == null)
+                var propertyFeatures = await _context.PropertyFeatures
+                    .FirstOrDefaultAsync(m => m.PropertyFeatureId == id);
+                if (propertyFeatures == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyFeatures);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyFeatures);
         }
 
         // POST: PropertyFeatures/Delete/5
@@ -140,18 +176,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PropertyFeatures == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.PropertyFeatures'  is null.");
+                if (_context.PropertyFeatures == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.PropertyFeatures'  is null.");
+                }
+                var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
+                if (propertyFeatures != null)
+                {
+                    _context.PropertyFeatures.Remove(propertyFeatures);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var propertyFeatures = await _context.PropertyFeatures.FindAsync(id);
-            if (propertyFeatures != null)
+            catch (Exception ex)
             {
-                _context.PropertyFeatures.Remove(propertyFeatures);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool PropertyFeaturesExists(int id)

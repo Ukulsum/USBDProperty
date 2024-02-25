@@ -15,7 +15,14 @@ namespace USBDProperty.Controllers
         }
         public IActionResult Index()
         {
-            return View("Dashboard");
+            try
+            {
+                return View("Dashboard");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         //public IActionResult About(DeveloperPropertyVm developerPropertyVm)
         //{
@@ -24,9 +31,15 @@ namespace USBDProperty.Controllers
 
         public IActionResult AgentIndex(int id)
         {
-            var data = _context.DevelopersorAgent.Where(p => p.ID == id).OrderByDescending(p=>p.ID).FirstOrDefault();
-            
-            return View(data);
+            try
+            {
+                var data = _context.DevelopersorAgent.Where(p => p.ID == id).OrderByDescending(p => p.ID).FirstOrDefault();
+                return View(data);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }             
         }
         //public IActionResult AgentProperties(int id)
         public IActionResult AgentProperties()

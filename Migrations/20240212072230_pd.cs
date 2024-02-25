@@ -22,7 +22,7 @@ namespace USBDProperty.Migrations
             migrationBuilder.AddColumn<string>(
                name: "ImagePath",
                table: "PropertyDetails",
-               type: "string",
+               type: "nvarchar(max)",
                nullable: true);
         }
 

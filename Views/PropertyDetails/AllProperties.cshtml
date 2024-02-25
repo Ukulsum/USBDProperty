@@ -1,0 +1,59 @@
+﻿@*@Model IEnumerable<USBDProperty.Models.PropertyDetails>*@
+@model IEnumerable<USBDProperty.Models.PropertyDetails>
+@{
+    ViewData["Title"] = "AllProperties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--======= PROPERTY =========-->
+<section class="properties">
+    <div class="container">
+
+        <!--======= TITTLE =========-->
+        <div class="tittle">
+            <img src="~/Asserts/images/head-top.png" alt="">
+            <h3>All Featured Properties</h3>
+        </div>
+        <ul class="row">
+        <!--======= PROPERTIES ROW =========-->
+        @foreach(var item in Model)
+        {
+            
+                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="/PropertyDetails/HomePropertyDetails/@item.PropertyInfoId"></a>
+                    <span class="tag font-montserrat sale"> For @item.PropertyFor </span>
+                    <section>
+                        <div class="img">
+                            <img class="img-responsive" src="@Url.Content(@item.ImagePath)" alt="">
+                            <div class="over-proper">
+                                 <p class="btn font-montserrat"> More details </p>
+                            </div>
+                        </div>
+                        <ul class="home-in">
+                            <li>
+                                <span><i class="fa fa-home"></i>@item.FlatSize sqft </span>
+                            </li>
+                            <li>
+                               <span><i class="fa fa-bed"></i>@item.NumberOfBedrooms Bedrooms</span>
+                            </li>
+                            <li>
+                               <span><i class="fa fa-tty"></i> @item.NumberOfBaths Bathrooms</span>
+                            </li>
+                        </ul>
+                         <div class="detail-sec">
+                             <h5 class="fw-bold">@item.Title</h5>
+                             <p class="text-success">@item.PropertyType.PropertyTypeName /Flat </p>
+                             <span class="price font-montserrat">@item.TotalPrice TK</span>
+                             <span class="locate"><i class="fa fa-map-marker"></i>@item.Location </span>
+                             <div class="share-p"> 
+                                 <span class="btn_more"> More Details</span> 
+                             </div>
+                         </div>
+                    </section>
+                </li>
+             }
+        </ul>
+        
+    </div>
+</section>
+

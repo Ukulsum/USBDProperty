@@ -10,7 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Agent")]
     public class NoticesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,36 +24,58 @@ namespace USBDProperty.Controllers
         [AllowAnonymous]
         public JsonResult HomeNotice()
         {
-            var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
-                                             .Where(p => p.IsActive   && p.IsFeatured).ToList();
+            try
+            {
+                var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
 
-            return Json(new { data = noticeData});
+                                             .Where(p => p.IsActive ? p.IsActive : false && p.IsFeatured ? p.IsFeatured : false).ToList();
+
+                return Json(new { data = noticeData });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { data = ex.Message });
+            }
         }
 
         // GET: Notices
         public async Task<IActionResult> Index()
         {
-              return _context.Notices != null ? 
-                          View(await _context.Notices.ToListAsync()) :
+            try
+            {
+                return _context.Notices != null ?
+                          View(await _context.Notices.OrderByDescending(p => p.NoticeID).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: Notices/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Notices == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Notices == null)
+                {
+                    return NotFound();
+                }
 
-            var notice = await _context.Notices
-                .FirstOrDefaultAsync(m => m.NoticeID == id);
-            if (notice == null)
+                var notice = await _context.Notices
+                    .FirstOrDefaultAsync(m => m.NoticeID == id);
+                if (notice == null)
+                {
+                    return NotFound();
+                }
+
+                return View(notice);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(notice);
         }
 
         // GET: Notices/Create
@@ -105,30 +127,8 @@ namespace USBDProperty.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Please provide Photo ");
-                }
-               // string fileName = Path.GetFileNameWithoutExtension(notice.Images.FileName);
-                //string extension = Path.GetExtension(notice.Images.FileName);
-                //string fileName =  notice.Title + extension;
-                //string path = Path.Combine(wwwRootPath + "/wwwroot/Content/Images", fileName);
-                //using (var fileStrem = new FileStream(path, FileMode.Create))
-                //{
-                //    await notice.Images.CopyToAsync(fileStrem);
-                //}
-                
-                //var noticeToInsert = new Notice
-                //{
-                //    Title = notice.Title,
-                //    Description = notice.Description,
-                //    StartDate = notice.StartDate,
-                //    EndDate = notice.EndDate,
-                //    CreatedBy = "Umme",
-                //    CreatedDate = DateTime.Now,
-                //    ImagePath = "/Content/Images/"+fileName
-                //    };
-                    //string UniqueFileName = UploadImage(notice);
-                    
-                    //notice.Path = UniqueFileName;
-                    _context.Add(notice);
+                }      
+                _context.Add(notice);
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
@@ -147,17 +147,24 @@ namespace USBDProperty.Controllers
         // GET: Notices/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Notices == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Notices == null)
+                {
+                    return NotFound();
+                }
 
-            var notice = await _context.Notices.FindAsync(id);
-            if (notice == null)
-            {
-                return NotFound();
+                var notice = await _context.Notices.FindAsync(id);
+                if (notice == null)
+                {
+                    return NotFound();
+                }
+                return View(notice);
             }
-            return View(notice);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 
@@ -244,19 +251,26 @@ namespace USBDProperty.Controllers
         // GET: Notices/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Notices == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.Notices == null)
+                {
+                    return NotFound();
+                }
 
-            var notice = await _context.Notices
-                .FirstOrDefaultAsync(m => m.NoticeID == id);
-            if (notice == null)
+                var notice = await _context.Notices
+                    .FirstOrDefaultAsync(m => m.NoticeID == id);
+                if (notice == null)
+                {
+                    return NotFound();
+                }
+
+                return View(notice);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(notice);
         }
 
         // POST: Notices/Delete/5
@@ -264,18 +278,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Notices == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
+                if (_context.Notices == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
+                }
+                var notice = await _context.Notices.FindAsync(id);
+                if (notice != null)
+                {
+                    _context.Notices.Remove(notice);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var notice = await _context.Notices.FindAsync(id);
-            if (notice != null)
+            catch(Exception ex)
             {
-                _context.Notices.Remove(notice);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool NoticeExists(int id)

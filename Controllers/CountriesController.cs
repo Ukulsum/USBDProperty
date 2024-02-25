@@ -10,6 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class CountriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,10 +19,19 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
+        [AllowAnonymous]
         public JsonResult GetCountry()
         {
-            var record = _context.Countries.OrderBy(c => c.CountryName).ToList();
-            return Json(record);
+            try
+            {
+                var record = _context.Countries.OrderBy(c => c.CountryName).ToList();
+                return Json(record);
+            }
+            catch (Exception ex)
+            {
+                return Json(new {data = "No Record"});
+            }
+            
         }
         // GET: Countries
         public async Task<IActionResult> Index()

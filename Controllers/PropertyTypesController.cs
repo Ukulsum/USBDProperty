@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class PropertyTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -17,6 +19,7 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
+        [AllowAnonymous]
         public JsonResult GetChildType(int? pid=0)
         {
             try
@@ -40,28 +43,42 @@ namespace USBDProperty.Controllers
         }
         // GET: PropertyTypes
         public async Task<IActionResult> Index()
-        {      
-            return _context.PropertyTypes != null ?
-                        View(await _context.PropertyTypes.OrderByDescending(p => p.PropertyTypeId).ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
+        {
+            try
+            {
+                return _context.PropertyTypes != null ?
+                       View(await _context.PropertyTypes.OrderByDescending(p => p.PropertyTypeId).ToListAsync()) :
+                       Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PropertyTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.PropertyTypes == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyTypes == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyType = await _context.PropertyTypes
-                .FirstOrDefaultAsync(m => m.PropertyTypeId == id);
-            if (propertyType == null)
+                var propertyType = await _context.PropertyTypes
+                    .FirstOrDefaultAsync(m => m.PropertyTypeId == id);
+                if (propertyType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyType);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyType);
         }
 
         // GET: PropertyTypes/Create
@@ -79,30 +96,44 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PropertyTypeId,PropertyTypeName,ParentPropertyTypeId")] PropertyType propertyType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(propertyType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(propertyType);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(propertyType);
             }
-            return View(propertyType);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: PropertyTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.PropertyTypes == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyTypes == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyType = await _context.PropertyTypes.FindAsync(id);
-            if (propertyType == null)
-            {
-                return NotFound();
+                var propertyType = await _context.PropertyTypes.FindAsync(id);
+                if (propertyType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyType);
             }
-            
-            return View(propertyType);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: PropertyTypes/Edit/5
@@ -143,19 +174,26 @@ namespace USBDProperty.Controllers
         // GET: PropertyTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.PropertyTypes == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.PropertyTypes == null)
+                {
+                    return NotFound();
+                }
 
-            var propertyType = await _context.PropertyTypes
-                .FirstOrDefaultAsync(m => m.PropertyTypeId == id);
-            if (propertyType == null)
+                var propertyType = await _context.PropertyTypes
+                    .FirstOrDefaultAsync(m => m.PropertyTypeId == id);
+                if (propertyType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(propertyType);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(propertyType);
         }
 
         // POST: PropertyTypes/Delete/5
@@ -163,18 +201,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PropertyTypes == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
+                if (_context.PropertyTypes == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.PropertyTypes'  is null.");
+                }
+                var propertyType = await _context.PropertyTypes.FindAsync(id);
+                if (propertyType != null)
+                {
+                    _context.PropertyTypes.Remove(propertyType);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var propertyType = await _context.PropertyTypes.FindAsync(id);
-            if (propertyType != null)
+            catch(Exception ex)
             {
-                _context.PropertyTypes.Remove(propertyType);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool PropertyTypeExists(int id)

@@ -63,16 +63,7 @@ namespace USBDProperty.Controllers
             {
                 email = "";
             }
-            //if (email != null)
-            //{
-            //    pageNo = 1;
-            //}
-            //else
-            //{
-            //    email = currentFilter;
 
-            //}
-            //ViewBag.CurrentFilter = email;
             if (roleName != string.Empty)
             {
                 usersWithRoles = usersWithRoles.Where(u => u.Role.Contains(roleName)).ToList();

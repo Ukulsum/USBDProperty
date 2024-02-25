@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class ProjectImageGalleriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,27 +25,41 @@ namespace USBDProperty.Controllers
         // GET: ProjectImageGalleries
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: ProjectImageGalleries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ProjectImageGallery == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.ProjectImageGallery == null)
+                {
+                    return NotFound();
+                }
 
-            var projectImageGallery = await _context.ProjectImageGallery
-                .Include(p => p.ProjectsInfo)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (projectImageGallery == null)
+                var projectImageGallery = await _context.ProjectImageGallery
+                    .Include(p => p.ProjectsInfo)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (projectImageGallery == null)
+                {
+                    return NotFound();
+                }
+
+                return View(projectImageGallery);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(projectImageGallery);
         }
 
         // GET: ProjectImageGalleries/Create
@@ -110,18 +126,25 @@ namespace USBDProperty.Controllers
         // GET: ProjectImageGalleries/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.ProjectImageGallery == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.ProjectImageGallery == null)
+                {
+                    return NotFound();
+                }
 
-            var projectImageGallery = await _context.ProjectImageGallery.FindAsync(id);
-            if (projectImageGallery == null)
-            {
-                return NotFound();
+                var projectImageGallery = await _context.ProjectImageGallery.FindAsync(id);
+                if (projectImageGallery == null)
+                {
+                    return NotFound();
+                }
+                ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "Location", projectImageGallery.ProjectID);
+                return View(projectImageGallery);
             }
-            ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "Location", projectImageGallery.ProjectID);
-            return View(projectImageGallery);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST: ProjectImageGalleries/Edit/5
@@ -163,20 +186,27 @@ namespace USBDProperty.Controllers
         // GET: ProjectImageGalleries/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ProjectImageGallery == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.ProjectImageGallery == null)
+                {
+                    return NotFound();
+                }
 
-            var projectImageGallery = await _context.ProjectImageGallery
-                .Include(p => p.ProjectsInfo)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (projectImageGallery == null)
+                var projectImageGallery = await _context.ProjectImageGallery
+                    .Include(p => p.ProjectsInfo)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (projectImageGallery == null)
+                {
+                    return NotFound();
+                }
+
+                return View(projectImageGallery);
+            }
+            catch(Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(projectImageGallery);
         }
 
         // POST: ProjectImageGalleries/Delete/5
@@ -184,18 +214,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ProjectImageGallery == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.ProjectImageGallery'  is null.");
+                if (_context.ProjectImageGallery == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.ProjectImageGallery'  is null.");
+                }
+                var projectImageGallery = await _context.ProjectImageGallery.FindAsync(id);
+                if (projectImageGallery != null)
+                {
+                    _context.ProjectImageGallery.Remove(projectImageGallery);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var projectImageGallery = await _context.ProjectImageGallery.FindAsync(id);
-            if (projectImageGallery != null)
+            catch(Exception ex)
             {
-                _context.ProjectImageGallery.Remove(projectImageGallery);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool ProjectImageGalleryExists(int id)

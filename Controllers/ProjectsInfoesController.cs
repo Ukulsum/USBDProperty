@@ -26,38 +26,66 @@ namespace USBDProperty.Controllers
         // GET: ProjectsInfoes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ProjectsInfo.OrderByDescending(p=>p.Id).Include(p => p.Developers);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var applicationDbContext = _context.ProjectsInfo.OrderByDescending(p => p.Id).Include(p => p.Developers);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [AllowAnonymous]
         public JsonResult GetProjects(int id)
         {
-            var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id));
-            return Json(new { Data = data });
+            try
+            {
+                var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id));
+                return Json(new { Data = data });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { Data = ex.Message });
+            }
         }
         [AllowAnonymous]
         public JsonResult GetProjectsVideo()
         {
-            var data = _context.ProjectsInfo.OrderByDescending(p => p.Id).ToList();
-            return Json(new { Data = data });
+            try
+            {
+                var data = _context.ProjectsInfo.OrderByDescending(p => p.Id).ToList();
+                return Json(new { Data = data });
+            }
+            catch(Exception ex)
+            {
+                return Json(new {data = ex.Message});
+            }
         }
         // GET: ProjectsInfoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ProjectsInfo == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.ProjectsInfo == null)
+                {
+                    return NotFound();
+                }
 
-            var projectsInfo = await _context.ProjectsInfo
-                .Include(p => p.Developers)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (projectsInfo == null)
+                var projectsInfo = await _context.ProjectsInfo
+                    .Include(p => p.Developers)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (projectsInfo == null)
+                {
+                    return NotFound();
+                }
+
+                return View(projectsInfo);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+               return BadRequest(ex.Message);
             }
-
-            return View(projectsInfo);
         }
 
         // GET: ProjectsInfoes/Create
@@ -75,8 +103,8 @@ namespace USBDProperty.Controllers
          
         public async Task<IActionResult> Create(ProjectsInfo projectsInfo)
         {
-            //if (ModelState.IsValid)
-            //{
+            try
+            {
                 string wwwRootPath = "";
                 string rpath = "";
                 if (_environment != null)
@@ -112,38 +140,43 @@ namespace USBDProperty.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Please provide location map ");
-                   // return View(projectsInfo);
+                    // return View(projectsInfo);
                 }
-            if (projectsInfo.ProjectVideoPath != null)
-            {
-                string extension = Path.GetExtension(projectsInfo.ProjectVideoPath.FileName).ToLower();
-                if (extension == ".mp4" || extension == ".gif" || extension == ".vlc")
+                if (projectsInfo.ProjectVideoPath != null)
                 {
-                    //string fileName = developersorAgent.CompanyName + extension;
-                    string fileName = $" {projectsInfo.Title} _video {extension}";
-                    string path = Path.Combine(rpath, "Video", fileName);
-                    using (var fileStrem = new FileStream(path, FileMode.Create))
+                    string extension = Path.GetExtension(projectsInfo.ProjectVideoPath.FileName).ToLower();
+                    if (extension == ".mp4" || extension == ".gif" || extension == ".vlc")
                     {
-                        await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
+                        //string fileName = developersorAgent.CompanyName + extension;
+                        string fileName = $" {projectsInfo.Title} _video {extension}";
+                        string path = Path.Combine(rpath, "Video", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
+                        }
+                        projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
+                        //projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
                     }
-                    projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
-                    //projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide mp4|.vlc|gif");
+                        //return View(projectsInfo);
+                    }
                 }
-                else
+                _context.Add(projectsInfo);
+                if (await _context.SaveChangesAsync() > 0)
                 {
-                    ModelState.AddModelError("", "Please provide mp4|.vlc|gif");
-                    //return View(projectsInfo);
+                    return RedirectToAction(nameof(Index));
                 }
+                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
+                return View(projectsInfo);
             }
-            _context.Add(projectsInfo);
-               if( await _context.SaveChangesAsync()>0)
+            catch(Exception ex)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest(ex.Message);
             }
-               
-            //}
-            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
-            return View(projectsInfo);
+            //ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
+            //return View(projectsInfo);
         }
 
         // GET: ProjectsInfoes/Edit/5
@@ -298,20 +331,27 @@ namespace USBDProperty.Controllers
         // GET: ProjectsInfoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.ProjectsInfo == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null || _context.ProjectsInfo == null)
+                {
+                    return NotFound();
+                }
 
-            var projectsInfo = await _context.ProjectsInfo
-                .Include(p => p.Developers)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (projectsInfo == null)
+                var projectsInfo = await _context.ProjectsInfo
+                    .Include(p => p.Developers)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (projectsInfo == null)
+                {
+                    return NotFound();
+                }
+
+                return View(projectsInfo);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
-
-            return View(projectsInfo);
         }
 
         // POST: ProjectsInfoes/Delete/5
@@ -319,18 +359,25 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ProjectsInfo == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.ProjectsInfo'  is null.");
+                if (_context.ProjectsInfo == null)
+                {
+                    return Problem("Entity set 'ApplicationDbContext.ProjectsInfo'  is null.");
+                }
+                var projectsInfo = await _context.ProjectsInfo.FindAsync(id);
+                if (projectsInfo != null)
+                {
+                    _context.ProjectsInfo.Remove(projectsInfo);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var projectsInfo = await _context.ProjectsInfo.FindAsync(id);
-            if (projectsInfo != null)
+            catch(Exception ex)
             {
-                _context.ProjectsInfo.Remove(projectsInfo);
+                return BadRequest(ex.Message);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool ProjectsInfoExists(int id)

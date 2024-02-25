@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class DivisionsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -17,11 +19,19 @@ namespace USBDProperty.Controllers
         {
             _context = context;
         }
+        [AllowAnonymous]
         public JsonResult GetDivision(int cid)
         {
-            var record = _context.Divisions.OrderBy(c => c.DivisionName)
-                                            .Where(d=>d.CountryId.Equals(cid)).ToList();
-            return Json(record);
+            try
+            {
+                var record = _context.Divisions.OrderBy(c => c.DivisionName)
+                                           .Where(d => d.CountryId.Equals(cid)).ToList();
+                return Json(record);
+            }
+            catch(Exception ex)
+            {
+                return Json(new { data = "No Record" });
+            }
         }
         // GET: Divisions
         public async Task<IActionResult> Index()
