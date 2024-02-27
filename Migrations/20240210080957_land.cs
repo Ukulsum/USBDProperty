@@ -12,8 +12,8 @@ namespace USBDProperty.Migrations
                 name: "IsLand",
                 table: "PropertyDetails",
                 type: "bit",
-                nullable: false,
-                defaultValue: false);
+                nullable: true,
+                defaultValue: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

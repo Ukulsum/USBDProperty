@@ -12,14 +12,14 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240212060901_IsLand1")]
-    partial class IsLand1
+    [Migration("20240227125906_sdd")]
+    partial class sdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.24")
+                .HasAnnotation("ProductVersion", "6.0.27")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -298,6 +298,9 @@ namespace USBDProperty.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Interested")
+                        .HasColumnType("int");
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
@@ -701,6 +704,9 @@ namespace USBDProperty.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsLand")
+                        .HasColumnType("bit");
+
                     b.Property<int>("LandArea")
                         .HasColumnType("int");
 
@@ -786,7 +792,12 @@ namespace USBDProperty.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<int>("PropertyInfoId")
+                        .HasColumnType("int");
+
                     b.HasKey("PropertyFeatureId");
+
+                    b.HasIndex("PropertyInfoId");
 
                     b.ToTable("PropertyFeatures");
                 });
@@ -826,9 +837,6 @@ namespace USBDProperty.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyTypeId"), 1L, 1);
 
                     b.Property<bool>("IsLand")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsLand1")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ParentPropertyTypeId")
@@ -1128,6 +1136,17 @@ namespace USBDProperty.Migrations
                     b.Navigation("ProjectsInfo");
 
                     b.Navigation("PropertyType");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
+                {
+                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
+                        .WithMany()
+                        .HasForeignKey("PropertyInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PropertyDetails");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>

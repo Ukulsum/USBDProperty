@@ -117,7 +117,7 @@ namespace USBDProperty.Controllers
                     }
                     //string fileN = Path.GetFileNameWithoutExtension(propertyDetails.Image.FileName);
                     //foreach(var item in MultiImagePath)
-            for(int i=0;i<MultiImagePath.Count(); i++)
+                    for(int i=0;i<MultiImagePath.Count(); i++)
                     {
                         string extention = Path.GetExtension(MultiImagePath[i].FileName).ToLower();
                         if (extention == ".jpg" || extention == ".png" || extention == ".jpeg")
@@ -177,6 +177,86 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, PropertyImages propertyImages, List<IFormFile> MultiImagePath)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (id != propertyImages.ID)
+        //        {
+        //            return NotFound();
+        //        }
+        //        try
+        //        {
+        //            var data = await _context.PropertyImages.FindAsync(id);
+        //            string rpath = "";
+        //            string wwwRootPath = "";
+        //            if(_environment != null)
+        //            {
+        //                wwwRootPath = _environment.WebRootPath;
+        //                rpath = wwwRootPath + "/Content/Images";
+        //            }
+        //            else
+        //            {
+        //                wwwRootPath = Directory.GetCurrentDirectory();
+        //                rpath = Path.Combine(wwwRootPath, "/wwwroot/Content/Images");
+        //            }
+        //            if(propertyImages.MultiImagePath != null) { 
+        //            for(int i = 0; i<MultiImagePath.Count(); i++)
+        //            {
+        //                string extension = Path.GetExtension(MultiImagePath[i].FileName).ToLower();
+        //                if(extension == ".jpg" || extension == "png" || extension == ".jpeg")
+        //                {
+        //                    string fileName = propertyImages.propertyInfoId + "_" + i + 1 + extension;
+        //                    string path = Path.Combine(rpath, fileName);
+        //                    using (var fileStream = new FileStream(path, FileMode.Create))
+        //                    {
+        //                        await MultiImagePath[i].CopyToAsync(fileStream);
+        //                    }
+        //                    propertyImages.ID = 0;
+        //                    propertyImages.MultiImagePath = "/Content/Images/" + fileName;
+        //                    if (System.IO.File.Exists(rpath))
+        //                    {
+        //                        System.IO.File.Delete(rpath);
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    ModelState.AddModelError("", "Please provide .jpg | .jpeg | .png");
+        //                    return View(propertyImages);
+        //                }
+        //            }
+        //            }
+        //            else
+        //            {
+        //                data.MultiImagePath = propertyImages.MultiImagePath;
+        //            }
+        //            data.ID = propertyImages.ID;
+        //            data.propertyInfoId = propertyImages.propertyInfoId;
+        //            data.Title = propertyImages.Title;
+        //            data.MultiImagePath = propertyImages.MultiImagePath;
+
+        //            _context.Update(propertyImages);
+        //            if(await _context.SaveChangesAsync() > 0)
+        //            {
+        //                return RedirectToAction(nameof(Index));
+        //            }
+
+        //            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
+        //            return View(propertyImages);
+        //        }
+        //        catch(Exception ex)
+        //        {
+        //            ModelState.AddModelError("", ex.Message);
+        //            return View(propertyImages);
+        //        }
+        //    }
+
+
+        //    //ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
+        //    //return View(propertyImages);
+        //}
+
+
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,MultiImagePath,propertyInfoId")] PropertyImages propertyImages)
         {
             if (id != propertyImages.ID)

@@ -571,39 +571,7 @@ namespace USBDProperty.Controllers
                 {
                     ModelState.AddModelError("", "Please provide Property Photos");
                 }
-                //var PropertyInfo = new PropertyDetails
-                //{
-                //    Title = propertyDetails.Title,
-                //    Description = propertyDetails.Description,
-                //    //PropertyName = propertyDetails.PropertyName,
-                //    ISFeatured = propertyDetails.ISFeatured,
-                //    Location = propertyDetails.Location,
-                //    ConstructionStatus = propertyDetails.ConstructionStatus,
-                //    PropertySize = propertyDetails.PropertySize,
-                //    NumberOfBedrooms = propertyDetails.NumberOfBedrooms,
-                //    NumberOfBaths = propertyDetails.NumberOfBaths,
-                //    NumberOfBalconies = propertyDetails.NumberOfBalconies,
-                //    NumberOfGarages = propertyDetails.NumberOfGarages,
-                //    TotalFloor = propertyDetails.TotalFloor,
-                //    FloorAvailableNo = propertyDetails.FloorAvailableNo,
-                //    Furnishing = propertyDetails.Furnishing,
-                //    Facing = propertyDetails.Facing,
-                //    LandArea = propertyDetails.LandArea,
-                //    Price = propertyDetails.Price,
-                //    MeasurementID = propertyDetails.MeasurementID,
-                //    PropertyFor = propertyDetails.PropertyFor,
-                //    Comments = propertyDetails.Comments,
-                //    HandOverDate = propertyDetails.HandOverDate,
-                //    PropertyTypeId = propertyDetails.PropertyTypeId,
-                //    PropertyCondition = propertyDetails.PropertyCondition,
-                //    ProjectId = propertyDetails.ProjectId,
-                //    //IconId = propertyDetails.IconId,
-                //    AreaId = propertyDetails.AreaId,
-                //    CreatedBy = User.Identity.Name ?? "umme",
-                //    CreatedDate = DateTime.Now,
-                //    Image = propertyDetails.Image,
-                //    ImagePath = "/Content/Images/" + fileName
-                //};
+                
                 propertyDetails.CreatedBy = User.Identity.Name ?? "umme";
                 propertyDetails.CreatedDate = DateTime.Now;
                 //if (propertyDetails.TotalFloor.HasValue &&  propertyDetails.FloorAvailableNo.HasValue)

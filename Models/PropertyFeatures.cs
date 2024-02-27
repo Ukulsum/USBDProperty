@@ -17,9 +17,11 @@ namespace USBDProperty.Models
         public string PropertyFeatureName { get; set; }
         [DisplayName("Feature Description ")]
         public string  FeatureDescription{ get; set; }
-        //[ForeignKey("PropertyDetails")]
-        //public int PropertyInfoId { get; set; }
-        //[ValidateNever]
-        //public PropertyDetails PropertyDetails { get; set; }
+        [ForeignKey("PropertyDetails")]
+        public int PropertyInfoId { get; set; }
+
+
+        [ValidateNever]
+        public PropertyDetails PropertyDetails { get; set; }
     }
 }

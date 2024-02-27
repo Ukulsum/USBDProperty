@@ -34,6 +34,31 @@ namespace USBDProperty.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        //GET
+        public async Task<IActionResult> AllFeatureProperty()
+        {
+            try
+            {
+                var data = await _context.PropertyFeatures.ToListAsync();
+                return View(data);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        //public async Task<IActionResult> AllFeatureProperty()
+        //{
+        //    try
+        //    {
+        //        var data = await _context.PropertyFeatures.ToListAsync();
+        //        return View(data);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         // GET: PropertyFeatures/Details/5
         public async Task<IActionResult> Details(int? id)

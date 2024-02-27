@@ -790,7 +790,12 @@ namespace USBDProperty.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<int>("PropertyInfoId")
+                        .HasColumnType("int");
+
                     b.HasKey("PropertyFeatureId");
+
+                    b.HasIndex("PropertyInfoId");
 
                     b.ToTable("PropertyFeatures");
                 });
@@ -1129,6 +1134,17 @@ namespace USBDProperty.Migrations
                     b.Navigation("ProjectsInfo");
 
                     b.Navigation("PropertyType");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
+                {
+                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
+                        .WithMany()
+                        .HasForeignKey("PropertyInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PropertyDetails");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
