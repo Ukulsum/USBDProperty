@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using USBDProperty.Models;
+using USBDProperty.ViewModels;
 
 namespace USBDProperty.Controllers
 {
@@ -460,7 +461,54 @@ namespace USBDProperty.Controllers
         }
 
 
-        [AllowAnonymous]
+        private void AssignedPropertyFeature(PropertyDetails propertyDetails)
+        {
+            var allFeatures = _context.PropertyFeatures;
+            var propertyFeatureList = new HashSet<int>(propertyDetails.propertyFeatures.Select(p => p.PropertyFeatureId));
+            var vm = new List<AssignPropertyFeatures>();
+            foreach (var feature in allFeatures)
+            {
+                vm.Add(new AssignPropertyFeatures
+                {
+                    PropertyFeaturedId = feature.PropertyFeatureId,
+                    PropertyName = feature.PropertyFeatureName,
+                    Assigned = propertyFeatureList.Contains(feature.PropertyFeatureId)
+                });
+                ViewBag.propertyFeatures = vm;
+            }
+        }
+        //Feature Property Create
+        public async Task<IActionResult> CreatePropertyFeatures()
+        {
+            var propertyDetails = new PropertyDetails();
+            propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+            AssignedPropertyFeature(propertyDetails);
+            return View();
+        }
+
+        //POST: FeaturedProperty/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePropertyFeatures(PropertyDetails propertyDetails, string[] selectedFeatures)
+        {
+            if (selectedFeatures != null)
+            {
+                propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+                foreach (var feature in selectedFeatures)
+                {
+                    var featureToAdd = _context.PropertyFeatures.FindAsync(feature);
+                    propertyDetails.propertyFeatures.Add(await featureToAdd);
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                _context.PropertyDetails.Add(propertyDetails);
+                _context.SaveChanges();
+                return RedirectToAction("AllFeatured");
+            }
+            AssignedPropertyFeature(propertyDetails);
+            return View(propertyDetails);
+        }
 
         // GET: PropertyDetails
         //[Authorize]

@@ -4,7 +4,7 @@
 
 namespace USBDProperty.Migrations
 {
-    public partial class sdd : Migration
+    public partial class sdk : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,0 +1,47 @@
+﻿@model USBDProperty.Models.PropertyFeatures
+
+@{
+    ViewData["Title"] = "CreatePropertyFeatures";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Property Feature Listing</h5>
+        <hr style="width:100%;"/>
+
+    </div>
+</div>
+
+
+
+
+<h1>CreatePropertyFeatures</h1>
+
+<h4>PropertyFeatures</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreatePropertyFeatures">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PropertyFeatureName" class="control-label"></label>
+                <input asp-for="PropertyFeatureName" class="form-control" />
+                <span asp-validation-for="PropertyFeatureName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeatureDescription" class="control-label"></label>
+                <input asp-for="FeatureDescription" class="form-control" />
+                <span asp-validation-for="FeatureDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -35,14 +35,17 @@ namespace USBDProperty.Controllers
             }
         }
         //GET
-        public async Task<IActionResult> AllFeatureProperty()
+        public async Task<IActionResult> AllFeatureProperty(int id)
         {
             try
             {
                 var data = await _context.PropertyFeatures.ToListAsync();
+               
+
+                ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
                 return View(data);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -51,7 +54,8 @@ namespace USBDProperty.Controllers
         //{
         //    try
         //    {
-        //        var data = await _context.PropertyFeatures.ToListAsync();
+        //        var data = await _context.PropertyFeatures
+        //                                .Select(p => new CheckBoxItem { }).ToListAsync();
         //        return View(data);
         //    }
         //    catch (Exception ex)

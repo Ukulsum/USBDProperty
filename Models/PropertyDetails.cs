@@ -157,6 +157,9 @@ namespace USBDProperty.Models
        
         [ForeignKey("Area")]
         public int AreaId { get; set; }
+
+        //[ForeignKey("propertyFeatures")]
+        //public int PropertyFeaturedId { get; set; }
         [NotMapped]
         public string PropertyForstr { get; set; }
 
@@ -171,6 +174,22 @@ namespace USBDProperty.Models
         public PropertyFor PropertyFor { get; set; }
         [ValidateNever]
         public MeasurementUnit MeasurementUnit { get; set; }
+
+
+        private ICollection<PropertyFeatures> _propertyFeatures;
+
+        [ValidateNever]
+        public virtual ICollection<PropertyFeatures> propertyFeatures
+        {
+            get
+            {
+                return _propertyFeatures ?? (_propertyFeatures = new List<PropertyFeatures>());
+            }
+            set
+            {
+                _propertyFeatures = value;
+            }
+        }
     }
     public enum PropertyFor
     {

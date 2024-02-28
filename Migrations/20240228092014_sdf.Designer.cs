@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240228092014_sdf")]
+    partial class sdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -740,9 +742,6 @@ namespace USBDProperty.Migrations
                     b.Property<int>("PropertyCondition")
                         .HasColumnType("int");
 
-                    b.Property<int>("PropertyFeaturedId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PropertyFor")
                         .HasColumnType("int");
 
@@ -770,8 +769,6 @@ namespace USBDProperty.Migrations
                     b.HasIndex("MeasurementID");
 
                     b.HasIndex("ProjectId");
-
-                    b.HasIndex("PropertyFeaturedId");
 
                     b.HasIndex("PropertyTypeId");
 
@@ -1121,12 +1118,6 @@ namespace USBDProperty.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("USBDProperty.Models.PropertyFeatures", "propertyFeatures")
-                        .WithMany()
-                        .HasForeignKey("PropertyFeaturedId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("USBDProperty.Models.PropertyType", "PropertyType")
                         .WithMany()
                         .HasForeignKey("PropertyTypeId")
@@ -1140,8 +1131,6 @@ namespace USBDProperty.Migrations
                     b.Navigation("ProjectsInfo");
 
                     b.Navigation("PropertyType");
-
-                    b.Navigation("propertyFeatures");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
