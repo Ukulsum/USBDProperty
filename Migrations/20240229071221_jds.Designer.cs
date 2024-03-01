@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240229071221_jds")]
+    partial class jds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -586,7 +588,8 @@ namespace USBDProperty.Migrations
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -784,17 +787,17 @@ namespace USBDProperty.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PropertyDetailsPropertyInfoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PropertyFeatureName")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("PropertyInfoId")
-                        .HasColumnType("int");
-
                     b.HasKey("PropertyFeatureId");
 
-                    b.HasIndex("PropertyInfoId");
+                    b.HasIndex("PropertyDetailsPropertyInfoId");
 
                     b.ToTable("PropertyFeatures");
                 });
@@ -1137,13 +1140,9 @@ namespace USBDProperty.Migrations
 
             modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
                 {
-                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
+                    b.HasOne("USBDProperty.Models.PropertyDetails", null)
                         .WithMany("propertyFeatures")
-                        .HasForeignKey("PropertyInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PropertyDetails");
+                        .HasForeignKey("PropertyDetailsPropertyInfoId");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>

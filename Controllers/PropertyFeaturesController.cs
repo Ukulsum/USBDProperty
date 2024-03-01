@@ -39,11 +39,12 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var data = await _context.PropertyFeatures.ToListAsync();
-               
+                var model = new List<PropertyFeatures>();
+                //var data = await _context.PropertyFeatures.ToListAsync();
+
 
                 ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
-                return View(data);
+                return View(model);
             }
             catch (Exception ex)
             {

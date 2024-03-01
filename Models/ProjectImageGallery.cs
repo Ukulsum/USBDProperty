@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace USBDProperty.Models
@@ -7,9 +8,11 @@ namespace USBDProperty.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [StringLength(100)]
+        //[StringLength(100)]
+        [ValidateNever]
         public string ImagePath { get; set; }
         [NotMapped]
+        [ValidateNever]
         public IFormFile ImageFile { get; set; }
         [ForeignKey("ProjectsInfo")]
         public int ProjectID { get; set; }

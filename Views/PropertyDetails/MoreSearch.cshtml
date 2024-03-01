@@ -22,13 +22,13 @@
                                         </div>
                                         <div class="col-sm-12 col-md-12">
                                             @*<label>Property Purposes</label>*@
-                                            <input type="radio" asp-items="PropertyFor" name="Buy" value=1 />
+                                            <input type="radio" asp-items="PropertyFor" name="Buy" value=1 id="buy"/>
                                             <label for="">Buy</label>
 
-                                            <input type="radio" asp-items="PropertyFor" name="Sale" value="2" />
+                                            <input type="radio" asp-items="PropertyFor" name="Sale" value="2" id="sale" />
                                             <label for="">Sale</label>
 
-                                            <input type="radio" asp-items="PropertyFor" name="Rent" value="3" />
+                                            <input type="radio" asp-items="PropertyFor" name="Rent" value="3" id="rent" />
                                             <label for="">Rent</label>
                                         </div>
                                         <div class="col-sm-12 col-md-12">
@@ -36,6 +36,10 @@
                                             <select class="form-control" name="PropertyTypeId" id="PropertyTypeId">
                                                 <option>All Property Type</option>
                                             </select>
+                                              @*  <select class="form-control" asp-items="ViewBag.propertyTypeId" name="propertyTypeId">
+                                    <option>Property Type</option>
+                                </select>*@
+                                           @* @Html.DropDownList("PropertyTypeName", ViewBag.propertyTypes as IEnumerable<SelectListItem>, "Select Property Type" )*@
                                         </div>
                                         <div class="col-sm-12 col-md-12">
                                             <label>size (sqft)</label>

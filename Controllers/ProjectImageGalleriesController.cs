@@ -76,8 +76,8 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProjectImageGallery projectImageGallery, List<IFormFile> MultipleImagePath)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     string rPath = "";
@@ -113,12 +113,12 @@ namespace USBDProperty.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
-                    return View();
+                    return View(projectImageGallery);
                 }
 
                 return RedirectToAction(nameof(Index));
 
-            }
+            //}
             ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName", projectImageGallery.ProjectID);
             return View(projectImageGallery);
         }

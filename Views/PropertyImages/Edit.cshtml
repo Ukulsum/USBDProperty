@@ -5,6 +5,32 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Multiple Property Images Update Listing</h5>
+        <hr style="width:100%;"/>
+         <form asp-action="Edit" method="post" asp-controller="PropertyImages" enctype="multipart/form-data">
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <input type="hidden" asp-for="ID" />
+             <div class="row">
+                 <div class="col-sm-12 col-md-6">
+                     <div class="form-group">
+                         <label asp-for="propertyInfoId" class="control-label"> Property </label>
+                        <select asp-for="propertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId">
+                            @*<option value="0">Select Property</option>*@
+                        </select>
+                     </div>
+                 </div>
+                 <div class="col-sm-12 col-md-6">
+
+                 </div>
+             </div>
+         </form>
+    </div>
+</div>
+
+
+
 <h1>Edit</h1>
 
 <h4>PropertyImages</h4>
