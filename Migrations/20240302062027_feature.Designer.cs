@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240302062027_feature")]
+    partial class feature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -784,12 +786,17 @@ namespace USBDProperty.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PropertyDetailsPropertyInfoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PropertyFeatureName")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.HasKey("PropertyFeatureId");
+
+                    b.HasIndex("PropertyDetailsPropertyInfoId");
 
                     b.ToTable("PropertyFeatures");
                 });
@@ -1130,6 +1137,13 @@ namespace USBDProperty.Migrations
                     b.Navigation("PropertyType");
                 });
 
+            modelBuilder.Entity("USBDProperty.Models.PropertyFeatures", b =>
+                {
+                    b.HasOne("USBDProperty.Models.PropertyDetails", null)
+                        .WithMany("propertyFeatures")
+                        .HasForeignKey("PropertyDetailsPropertyInfoId");
+                });
+
             modelBuilder.Entity("USBDProperty.Models.PropertyImages", b =>
                 {
                     b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
@@ -1163,6 +1177,11 @@ namespace USBDProperty.Migrations
             modelBuilder.Entity("USBDProperty.Models.DevelopersorAgent", b =>
                 {
                     b.Navigation("projectsInfos");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.PropertyDetails", b =>
+                {
+                    b.Navigation("propertyFeatures");
                 });
 #pragma warning restore 612, 618
         }
