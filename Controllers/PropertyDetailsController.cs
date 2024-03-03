@@ -99,8 +99,6 @@ namespace USBDProperty.Controllers
             }
         }
 
-
-
         //[HttpGet]
         [AllowAnonymous]
         public IActionResult MoreSearch(int? forid, int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, int? conStatus, string location = "")
@@ -497,7 +495,6 @@ namespace USBDProperty.Controllers
         {
             try
             {
-
                 var propertyDetails = new PropertyDetails();
                 //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
                 AssignedPropertyFeature(propertyDetails);
@@ -516,34 +513,211 @@ namespace USBDProperty.Controllers
         //POST: FeaturedProperty/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePropertyFeatures(int id, PropertyDetails propertyDetails, string[] selectedFeatures)
-        {
-            try
-            {
-                if (selectedFeatures != null)
-                {
-                    //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
-                    //foreach (var feature in selectedFeatures)
-                    //{
-                    //    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
-                    //    propertyDetails.propertyFeatures.Add(await featureToAdd);
-                    //}
-                }
-                if (ModelState.IsValid)
-                {
-                    _context.PropertyDetails.Add(propertyDetails);
-                    _context.SaveChanges();
-                    return RedirectToAction("AllFeatured");
-                }
-                AssignedPropertyFeature(propertyDetails);
-                ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
-                return View(propertyDetails);
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //public async Task<IActionResult> CreatePropertyFeatures(int id, PropertyDetails propertyDetails, string[] selectedFeatures)
+        //{
+        //    try
+        //    {
+        //        if (selectedFeatures != null)
+        //        {
+        //            //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+        //            //foreach (var feature in selectedFeatures)
+        //            //{
+        //            //    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
+        //            //    propertyDetails.propertyFeatures.Add(await featureToAdd);
+        //            //}
+        //        }
+        //        if (ModelState.IsValid)
+        //        {
+        //            _context.PropertyDetails.Add(propertyDetails);
+        //            _context.SaveChanges();
+        //            return RedirectToAction("AllFeatured");
+        //        }
+        //        AssignedPropertyFeature(propertyDetails);
+        //        ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
+        //        return View(propertyDetails);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+
+
+        //public async Task<IActionResult> CreatePropertyFeatures(int id, AssignPropertyFeatures assignPropertyFeatures)
+        //{
+        //    try
+        //    {
+        //        //int Id = 0;
+        //        if (ModelState.IsValid)
+        //        {
+        //            if(assignPropertyFeatures.Assigned)
+        //            {
+        //                var propertyFeature = new PropertyWithFeatures
+        //                {
+        //                    PropertyId = assignPropertyFeatures.propertyInfoId,
+        //                    FeatureId = assignPropertyFeatures.PropertyFeaturedId
+        //                };
+        //                _context.PropertyWithFeatures.Add(propertyFeature);
+        //                await _context.SaveChangesAsync();
+        //                //Id = 
+        //            }
+        //            return RedirectToAction("Index", "PropertyDetails");
+        //        }
+
+        //        //if(assignPropertyFeatures.propertyInfoId > 0)
+        //        //{
+        //        //    var features = new PropertyWithFeatures()
+        //        //    {
+        //        //        PropertyId = assignPropertyFeatures.propertyInfoId,
+        //        //        FeatureId = assignPropertyFeatures.PropertyFeaturedId,
+        //        //        //PropertyFeatures = assignPropertyFeatures.
+
+
+        //        //    };
+        //        //    if (assignPropertyFeatures.Assigned)
+        //        //    {
+
+        //        //    }
+
+        //        //}
+
+
+
+        //        //if (ModelState.IsValid)
+        //        //{
+        //        //    //_context.PropertyDetails.Add(propertyDetails);
+        //        //    _context.SaveChanges();
+        //        //    return RedirectToAction("AllFeatured");
+        //        //}
+        //        //AssignedPropertyFeature(propertyDetails);
+        //        ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
+        //        //return View(propertyDetails);
+        //        return View();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        //public async Task<IActionResult> CreatePropertyFeatures(int id, AssignPropertyFeatures assignPropertyFeatures, string[] selectedFeature)
+        //{
+        //    try
+        //    {
+        //        if(selectedFeature != null)
+        //        {
+        //            var feature = new PropertyWithFeatures
+        //            {
+
+        //            };
+        //        }
+        //        return View();
+        //        ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+
+        //public async Task<IActionResult> CreatePropertyFeatures(int id, AssignPropertyFeatures assignPropertyFeatures)
+        //{
+        //    try
+        //    {
+        //        //var features = new PropertyWithFeatures();
+        //        //var selectedFeatured = assignPropertyFeatures.Where(x => x.Assigned == true)
+        //        ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+
+        //public async Task<IActionResult> CreatePropertyFeatures(int id, PropertyDetails propertyDetails, string[] selectedFeatures)
+        //{
+        //    try
+        //    {
+        //        if (selectedFeatures != null)
+        //        {
+        //            //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+        //            //foreach (var feature in selectedFeatures)
+        //            //{
+        //            //    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
+        //            //    propertyDetails.propertyFeatures.Add(await featureToAdd);
+        //            //}
+
+        //            var features = new List<PropertyFeatures>();
+        //            if(propertyDetails.PropertyInfoId > 0)
+        //            {
+        //                foreach (var feature in selectedFeatures)
+        //                {
+        //                    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
+        //                    //await _context.PropertyWithFeatures.Add(featureToAdd);
+
+        //                    if (propertyDetails.PropertyInfoId > 0)
+        //                    {
+        //                        var propertyFeatures = new PropertyWithFeatures()
+        //                        {
+        //                            PropertyId = propertyDetails.PropertyInfoId,
+
+        //                        };
+        //                    }
+        //                }
+        //            }
+
+        //        }
+        //        if (ModelState.IsValid)
+        //        {
+        //            _context.PropertyDetails.Add(propertyDetails);
+        //            _context.SaveChanges();
+        //            return RedirectToAction("AllFeatured");
+        //        }
+        //        AssignedPropertyFeature(propertyDetails);
+        //        ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
+        //        return View(propertyDetails);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+
+        //public async Task<IActionResult> CreatePropertyFeatures(int id, AssignPropertyFeatures assignPropertyFeatures)
+        //{
+        //    try
+        //    {
+        //        int Id = 0;
+        //        if (ModelState.IsValid)
+        //        {
+        //            if (assignPropertyFeatures.propertyInfoId > 0)
+        //            {
+        //                var features = new PropertyFeatures
+        //                {
+        //                    PropertyFeatureName = assignPropertyFeatures.PropertyName,
+        //                    assign = assignPropertyFeatures.PropertyFeaturedId
+        //                };
+        //                _context.PropertyWithFeatures.Add(features);
+        //                await _context.SaveChangesAsync();
+
+        //                Id = assignPropertyFeatures.propertyInfoId
+
+        //            }
+        //            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.ErrorMessage = ex.Message;
+        //    }
+        //    return View();
+        //}
+
+
 
         // GET: PropertyDetails
         //[Authorize]

@@ -27,6 +27,7 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                //var image = ICollection<ProjectImageGallery.Mul>
                 var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo);
                 return View(await applicationDbContext.ToListAsync());
             }
