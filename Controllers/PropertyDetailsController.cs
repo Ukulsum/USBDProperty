@@ -162,10 +162,10 @@ namespace USBDProperty.Controllers
                 //{
                 //    data = data.Where(p => p.ConstructionStatus.ToLower().Equals(conStatus.ToLower())).ToList();
                 //}
-                if (conStatus != null || conStatus > 0)
-                {
-                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
-                }
+                //if (conStatus != null || conStatus > 0)
+                //{
+                //    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                //}
                 //if (!string.IsNullOrEmpty(location))
                 //{
                 //    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
