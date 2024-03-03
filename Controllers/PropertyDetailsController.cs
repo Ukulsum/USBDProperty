@@ -473,7 +473,7 @@ namespace USBDProperty.Controllers
             try
             {
                 var allFeatures = _context.PropertyFeatures.ToList();
-                var propertyFeatureList = new HashSet<int>(propertyDetails.propertyFeatures.Select(p => p.PropertyFeatureId));
+                //var propertyFeatureList = new HashSet<int>(propertyDetails.propertyFeatures.Select(p => p.PropertyFeatureId));
                 var vm = new List<AssignPropertyFeatures>();
                 foreach (var feature in allFeatures)
                 {
@@ -481,7 +481,7 @@ namespace USBDProperty.Controllers
                     {
                         PropertyFeaturedId = feature.PropertyFeatureId,
                         PropertyName = feature.PropertyFeatureName,
-                        Assigned = propertyFeatureList.Contains(feature.PropertyFeatureId)
+                       // Assigned = propertyFeatureList.Contains(feature.PropertyFeatureId)
                     });
                     ViewBag.propertyFeatures = vm;
                 }
@@ -499,7 +499,7 @@ namespace USBDProperty.Controllers
             {
 
                 var propertyDetails = new PropertyDetails();
-                propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+                //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
                 AssignedPropertyFeature(propertyDetails);
                 //var data = await _context.PropertyFeatures.ToListAsync();
                 ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
@@ -522,12 +522,12 @@ namespace USBDProperty.Controllers
             {
                 if (selectedFeatures != null)
                 {
-                    propertyDetails.propertyFeatures = new List<PropertyFeatures>();
-                    foreach (var feature in selectedFeatures)
-                    {
-                        var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
-                        propertyDetails.propertyFeatures.Add(await featureToAdd);
-                    }
+                    //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+                    //foreach (var feature in selectedFeatures)
+                    //{
+                    //    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
+                    //    propertyDetails.propertyFeatures.Add(await featureToAdd);
+                    //}
                 }
                 if (ModelState.IsValid)
                 {
@@ -562,7 +562,9 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                ViewBag.error = ex.Message;
+                return View( new List<PropertyDetails>());
             }
 
         }

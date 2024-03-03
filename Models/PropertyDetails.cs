@@ -176,20 +176,20 @@ namespace USBDProperty.Models
         public MeasurementUnit MeasurementUnit { get; set; }
 
 
-        private ICollection<PropertyFeatures> _propertyFeatures;
+        //private ICollection<PropertyFeatures> _propertyFeatures;
 
-        [ValidateNever]
-        public virtual ICollection<PropertyFeatures> propertyFeatures
-        {
-            get
-            {
-                return _propertyFeatures ?? (_propertyFeatures = new List<PropertyFeatures>());
-            }
-            set
-            {
-                _propertyFeatures = value;
-            }
-        }
+        //[ValidateNever]
+        //public virtual ICollection<PropertyFeatures> propertyFeatures
+        //{
+        //    get
+        //    {
+        //        return _propertyFeatures ?? (_propertyFeatures = new List<PropertyFeatures>());
+        //    }
+        //    set
+        //    {
+        //        _propertyFeatures = value;
+        //    }
+        //}
     }
     public enum PropertyFor
     {
