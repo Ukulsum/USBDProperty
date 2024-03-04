@@ -38,16 +38,15 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                   @if(item.MultiImagePath != null)
+                    <img src="@Url.Content(item.MultiImagePath)" alt="@item.PropertyDetails.Title" height="180" width="220"/>
+                  @* @if(item.MultiImagePath != null)
                    {
                        @for(int i=0; i<item.MultiImagePath.Count(); i++)
-                        @*@foreach(var image in item.MultiImagePath)*@
+                       
                         {
                             <img src="@Url.Content(item.MultiImagePath)" alt="@item.PropertyDetails.Title" height="180" width="220"/>
-                            @*<img src="@item.MultiImagePath[i]" alt="@item.PropertyDetails.Title" height="180" width="220"/>*@
-                           @* <img src="@Url.Content(item.MultiImagePath[i])" alt="@item.PropertyDetails.Title" height="180" width="220"/>*@
                         }
-                    }
+                    }*@
                    
                 </td>
                 <td>
