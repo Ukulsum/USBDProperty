@@ -28,8 +28,21 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var applicationDbContext = _context.ProjectsInfo.OrderByDescending(p => p.Id).Include(p => p.Developers);
-                return View(await applicationDbContext.ToListAsync());
+                if (User.IsInRole("Admin"))
+                { 
+                    var applicationDbContext = _context.ProjectsInfo.OrderByDescending(p => p.Id).Include(p => p.Developers);
+                    return View(await applicationDbContext.ToListAsync());
+
+                }
+                else if (User.IsInRole("Agent"))
+                {
+                    var agentId = _context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)).Select(s => s.ID);
+                   
+                    var applicationDbContext = _context.ProjectsInfo.Where(p => p.Id.Equals(agentId)).OrderByDescending(p => p.Id);
+                    return View(await applicationDbContext.ToListAsync());
+                }
+
+                return View();
             }
             catch (Exception ex)
             {
