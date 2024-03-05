@@ -43,6 +43,20 @@ namespace USBDProperty.Controllers
 
         }
 
+        [AllowAnonymous]
+        public JsonResult GetAgent()
+        {
+            try
+            {
+                var data = _context.DevelopersorAgent.OrderByDescending(d => d.Name).ToList();
+                return Json(new { Data = data });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { Data = ex.Message });
+            }
+        }
+
         // GET: DevelopersorAgents
         public async Task<IActionResult> Index(bool?isActive)
         {

@@ -49,6 +49,23 @@ namespace USBDProperty.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [AllowAnonymous]
+        public JsonResult GetDrpProject(int devid)
+        {
+            try
+            {                
+                var project = _context.ProjectsInfo.OrderByDescending(p => p.Id)
+                                                   .Where(d => d.AgentID.Equals(devid)).ToList();
+                return Json(new { Data = project });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Data = ex.Message });
+            }
+        }
+
         [AllowAnonymous]
         public JsonResult GetProjects(int id)
         {

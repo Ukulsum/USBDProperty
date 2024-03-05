@@ -23,13 +23,22 @@ namespace USBDProperty.Controllers
         }
 
         // GET: ProjectImageGalleries
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? agentId, int? projectId)
         {
             try
             {
+
                 //var image = ICollection<ProjectImageGallery.Mul>
                 var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo);
                 return View(await applicationDbContext.ToListAsync());
+
+                //if (projectId != null || projectId > 0)
+                //{
+                //    applicationDbContext = applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
+                //}
+
+                //ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName");
+                ViewData["AgentId"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
             }
             catch (Exception ex)
             {
