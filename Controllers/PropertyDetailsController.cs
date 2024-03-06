@@ -53,6 +53,21 @@ namespace USBDProperty.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public JsonResult GetDrpProperty(int pid)
+        {
+            try
+            {
+                var property = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
+                                                  .Where(d => d.ProjectId.Equals(pid)).ToList();
+                return Json(new { Data = property });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { Data = ex.Message });
+            }
+        }
+
 
         [AllowAnonymous]
         public JsonResult Getlocation(int aid)

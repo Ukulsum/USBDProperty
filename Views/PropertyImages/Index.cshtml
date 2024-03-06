@@ -113,8 +113,12 @@
         $(document).ready(function () {
             loadAgent();
             loadProject();
+            loadProperty();
             $("#agent").change(function () {
                 loadProject($(this).val());
+            })
+            $("#projects").change(function () {
+                loadProperty($(this).val());
             })
         })
         function loadAgent(){
@@ -136,6 +140,17 @@
                 $("#projects").append($('<option></option>').val("0").html("Select Project"));
                 $.each(data.data, function(i, v){
                     $("#projects").append($('<option></option>').val(v.id).html(v.projectName));
+                })
+            })
+        }
+
+        function loadProperty(prid){
+            $.get("/PropertyDetails/GetDrpProperty?pid=" +prid, function(data, status){
+                console.log(data.data)
+                $("#propertyId").empty();
+                $("#propertyId").append($('<option></option>').val("0").html("Select Project"));
+                $.each(data.data, function(i, v){
+                    $("#propertyId").append($('<option></option>').val(v.propertyInfoId).html(v.title));
                 })
             })
         }
