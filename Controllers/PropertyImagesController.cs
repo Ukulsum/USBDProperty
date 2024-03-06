@@ -177,118 +177,76 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, PropertyImages propertyImages, List<IFormFile> MultiImagePath)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (id != propertyImages.ID)
-        //        {
-        //            return NotFound();
-        //        }
-        //        try
-        //        {
-        //            var data = await _context.PropertyImages.FindAsync(id);
-        //            string rpath = "";
-        //            string wwwRootPath = "";
-        //            if(_environment != null)
-        //            {
-        //                wwwRootPath = _environment.WebRootPath;
-        //                rpath = wwwRootPath + "/Content/Images";
-        //            }
-        //            else
-        //            {
-        //                wwwRootPath = Directory.GetCurrentDirectory();
-        //                rpath = Path.Combine(wwwRootPath, "/wwwroot/Content/Images");
-        //            }
-        //            if(propertyImages.MultiImagePath != null) { 
-        //            for(int i = 0; i<MultiImagePath.Count(); i++)
-        //            {
-        //                string extension = Path.GetExtension(MultiImagePath[i].FileName).ToLower();
-        //                if(extension == ".jpg" || extension == "png" || extension == ".jpeg")
-        //                {
-        //                    string fileName = propertyImages.propertyInfoId + "_" + i + 1 + extension;
-        //                    string path = Path.Combine(rpath, fileName);
-        //                    using (var fileStream = new FileStream(path, FileMode.Create))
-        //                    {
-        //                        await MultiImagePath[i].CopyToAsync(fileStream);
-        //                    }
-        //                    propertyImages.ID = 0;
-        //                    propertyImages.MultiImagePath = "/Content/Images/" + fileName;
-        //                    if (System.IO.File.Exists(rpath))
-        //                    {
-        //                        System.IO.File.Delete(rpath);
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    ModelState.AddModelError("", "Please provide .jpg | .jpeg | .png");
-        //                    return View(propertyImages);
-        //                }
-        //            }
-        //            }
-        //            else
-        //            {
-        //                data.MultiImagePath = propertyImages.MultiImagePath;
-        //            }
-        //            data.ID = propertyImages.ID;
-        //            data.propertyInfoId = propertyImages.propertyInfoId;
-        //            data.Title = propertyImages.Title;
-        //            data.MultiImagePath = propertyImages.MultiImagePath;
-
-        //            _context.Update(propertyImages);
-        //            if(await _context.SaveChangesAsync() > 0)
-        //            {
-        //                return RedirectToAction(nameof(Index));
-        //            }
-
-        //            ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
-        //            return View(propertyImages);
-        //        }
-        //        catch(Exception ex)
-        //        {
-        //            ModelState.AddModelError("", ex.Message);
-        //            return View(propertyImages);
-        //        }
-        //    }
-
-
-        //    //ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
-        //    //return View(propertyImages);
-        //}
-
-
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,MultiImagePath,propertyInfoId")] PropertyImages propertyImages)
+        public async Task<IActionResult> Edit(int id, PropertyImages propertyImages)
         {
-            if (id != propertyImages.ID)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (id != propertyImages.ID)
                 {
-                    _context.Update(propertyImages);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                var data = await _context.PropertyImages.FindAsync(id);
+                string fpath = "";
+                string wwwRootPath = "";
+                if(_environment != null)
                 {
-                    if (!PropertyImagesExists(propertyImages.ID))
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
+                if(propertyImages.MultipleImage != null)
+                {
+                    string extension = Path.GetExtension(propertyImages.MultipleImage.FileName).ToLower();
+                    if(extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                     {
-                        return NotFound();
+                        string fileName = propertyImages.Title + extension;
+                        string path = Path.Combine(fpath, "Images", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await propertyImages.MultipleImage.CopyToAsync(fileStrem);
+                        }
+                        propertyImages.MultiImagePath = "/Content/Images/" + fileName;
+                        if (System.IO.File.Exists(fpath))
+                        {
+                            System.IO.File.Delete(fpath);
+                        }
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
+                        return View(propertyImages);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    data.MultiImagePath = propertyImages.MultiImagePath;
+                }
+                //data.propertyInfoId = propertyImages.propertyInfoId;
+                data.Title = propertyImages.Title;
+                data.ID = propertyImages.ID;
+                data.MultiImagePath = propertyImages.MultiImagePath;
+
+                _context.Update(data);
+                if(await _context.SaveChangesAsync() > 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(propertyImages);
             }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(propertyImages);
+            }
+            
             ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
             return View(propertyImages);
         }
-
-        // GET: PropertyImages/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             try

@@ -162,32 +162,70 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImagePath,ProjectID")] ProjectImageGallery projectImageGallery)
+        public async Task<IActionResult> Edit(int id, ProjectImageGallery projectImageGallery)
         {
-            if (id != projectImageGallery.Id)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (id != projectImageGallery.Id)
                 {
-                    _context.Update(projectImageGallery);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                var data = await _context.ProjectImageGallery.FindAsync(id);
+                string fpath = "";
+                string wwwRootPath = "";
+                if(_environment != null)
                 {
-                    if (!ProjectImageGalleryExists(projectImageGallery.Id))
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
+                if(projectImageGallery.ImageFile != null)
+                {
+                    string extension = Path.GetExtension(projectImageGallery.ImageFile.FileName).ToLower();
+                    if(extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                     {
-                        return NotFound();
+                        string fileName = projectImageGallery.Name + extension;
+                        string path = Path.Combine(fpath, "Images", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        {
+                            await projectImageGallery.ImageFile.CopyToAsync(fileStrem);
+                        }
+                        projectImageGallery.ImagePath = "/Content/Images/" + fileName;
+                        if (System.IO.File.Exists(fpath))
+                        {
+                            System.IO.File.Delete(fpath);
+                        }
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
+                        return View(projectImageGallery);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    data.ImagePath = projectImageGallery.ImagePath;
+                }
+                data.Name = projectImageGallery.Name;
+                data.ProjectID = projectImageGallery.ProjectID;
+                data.ImagePath = projectImageGallery.ImagePath;
+                data.Id = projectImageGallery.Id;
+
+                _context.Update(data);
+                if(await _context.SaveChangesAsync() > 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(projectImageGallery);
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
             ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "Location", projectImageGallery.ProjectID);
             return View(projectImageGallery);
