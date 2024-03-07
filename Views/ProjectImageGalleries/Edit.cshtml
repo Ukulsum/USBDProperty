@@ -5,6 +5,106 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Property Images Update Listing</h5>
+        <hr style="width:100%;" />
+        <form asp-action="Edit" method="post" asp-controller="ProjectImageGalleries" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ProjectID" class="control-label"></label>
+                        <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
+                        <span asp-validation-for="ProjectID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="ImageFile" class="control-label"> Image Upload</label>
+                        <input type="file" id="files" name="ImageFile" class="form-control" accept="image/*" multiple />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                        <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Name" id="imgPreview" />
+
+                        <input type="text" asp-for="ImagePath" class="form-control" name="Image" id="path" hidden />
+                    </div>
+                    <button type="button" id="btnChange" class="btn btn-primary mt-2">Change</button>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" id="btnSave" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div><a asp-action="Index">Back to List</a></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+<script>
+    $(document).ready(function (){
+        var isChanged = false;
+        $("#btnChange").show();
+        $("#files").hide();
+        $("#btnChange").click(function () {
+             $("#files").show();
+             $("#btnChange").hide();
+        });
+
+
+
+         $("#files").change(function () {
+         const file = this.files[0];
+         console.log(file);
+         if (file) {
+             let reader = new FileReader();
+             reader.onload = function (event) {
+                 console.log(event.target.result);
+                 $("#imgPreview").attr('src', event.target.result);
+             }
+             reader.readAsDataURL(file);
+         }
+     });
+
+    })
+</script>
+}
+
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Project Images Update Listing</h5>
+        <hr style="width:100%;" />
+    </div>
+</div>
+
+
+
 <h1>Edit</h1>
 
 <h4>ProjectImageGallery</h4>

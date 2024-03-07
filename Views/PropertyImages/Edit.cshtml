@@ -7,65 +7,90 @@
 
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title text-center">Multiple Property Images Update Listing</h5>
-        <hr style="width:100%;"/>
-         <form asp-action="Edit" method="post" asp-controller="PropertyImages" enctype="multipart/form-data">
-             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-             <input type="hidden" asp-for="ID" />
-             <div class="row">
-                 <div class="col-sm-12 col-md-6">
-                     <div class="form-group">
-                         <label asp-for="propertyInfoId" class="control-label"> Property </label>
+        <h5 class="card-title text-center">Property Images Update Listing</h5>
+        <hr style="width:100%;" />
+        <form asp-action="Edit" method="post" asp-controller="PropertyImages" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="propertyInfoId" class="control-label"> Property </label>
                         <select asp-for="propertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId">
                             @*<option value="0">Select Property</option>*@
                         </select>
-                     </div>
-                 </div>
-                 <div class="col-sm-12 col-md-6">
-
-                 </div>
-             </div>
-         </form>
-    </div>
-</div>
-
-
-
-<h1>Edit</h1>
-
-<h4>PropertyImages</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="MultiImagePath" class="control-label"></label>
-                <input asp-for="MultiImagePath" class="form-control" />
-                <span asp-validation-for="MultiImagePath" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="MultipleImage" class="control-label"> Image Upload</label>
+                        <input type="file" id="files" name="MultipleImage" class="form-control" accept="image/*" multiple />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                        <img src="@Url.Content(Model.MultiImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview" />
+
+                        <input type="text" asp-for="MultiImagePath" class="form-control" name="Image" id="path" hidden />
+                    </div>
+                    <button type="button" id="btnChange" class="btn btn-primary mt-2">Change</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="propertyInfoId" class="control-label"></label>
-                <select asp-for="propertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId"></select>
-                <span asp-validation-for="propertyInfoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+          
+          
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" id="btnSave" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div><a asp-action="Index">Back to List</a></div>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(document).ready(function (){
+        var isChanged = false;
+        $("#btnChange").show();
+        $("#files").hide();
+        $("#btnChange").click(function () {
+             $("#files").show();
+             $("#btnChange").hide();
+        });
+
+
+
+         $("#files").change(function () {
+         const file = this.files[0];
+         console.log(file);
+         if (file) {
+             let reader = new FileReader();
+             reader.onload = function (event) {
+                 console.log(event.target.result);
+                 $("#imgPreview").attr('src', event.target.result);
+             }
+             reader.readAsDataURL(file);
+         }
+     });
+
+    })
+</script>
 }
