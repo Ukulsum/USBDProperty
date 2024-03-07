@@ -29,16 +29,17 @@ namespace USBDProperty.Controllers
             {
 
                 //var image = ICollection<ProjectImageGallery.Mul>
-                var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo);
-                return View(await applicationDbContext.ToListAsync());
+                var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
+              
 
-                //if (projectId != null || projectId > 0)
-                //{
-                //    applicationDbContext = applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
-                //}
+                if (projectId != null || projectId > 0)
+                {
+                    applicationDbContext =  applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
+                }
 
                 //ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName");
                 ViewData["AgentId"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
+                return View(applicationDbContext.ToList());
             }
             catch (Exception ex)
             {
