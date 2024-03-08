@@ -46,7 +46,8 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
