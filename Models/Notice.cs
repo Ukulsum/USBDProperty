@@ -20,6 +20,7 @@ namespace USBDProperty.Models
         public string Description { get; set; }
         [ValidateNever]
         public string ImagePath { get; set; }
+        
         [NotMapped]
         [ValidateNever]
         [DisplayName("Photos")]

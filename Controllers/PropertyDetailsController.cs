@@ -487,17 +487,22 @@ namespace USBDProperty.Controllers
             try
             {
                 var allFeatures = _context.PropertyFeatures.ToList();
-                //var propertyFeatureList = new HashSet<int>(propertyDetails.propertyFeatures.Select(p => p.PropertyFeatureId));
-                var vm = new List<AssignPropertyFeatures>();
+                HashSet<int> propertyFeatureList = new HashSet<int>();
+                    var vm = new List<AssignPropertyFeatures>();
+                if(propertyDetails.PropertyWithFeatures != null)
+                {
+                     propertyFeatureList = new HashSet<int>(propertyDetails.PropertyWithFeatures.Select(p => p.FeatureId));
+
+                }
                 foreach (var feature in allFeatures)
                 {
                     vm.Add(new AssignPropertyFeatures
                     {
                         PropertyFeaturedId = feature.PropertyFeatureId,
                         PropertyName = feature.PropertyFeatureName,
-                       // Assigned = propertyFeatureList.Contains(feature.PropertyFeatureId)
+                        Assigned = propertyFeatureList.Contains(feature.PropertyFeatureId)
                     });
-                    ViewBag.propertyFeatures = vm;
+                   ViewBag.propertyFeatures = vm;
                 }
             }
             catch(Exception ex)
@@ -511,7 +516,7 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var propertyDetails = new PropertyDetails();
+                var propertyDetails = _context.PropertyDetails.Find(id);
                 //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
                 AssignedPropertyFeature(propertyDetails);
                 //var data = await _context.PropertyFeatures.ToListAsync();
@@ -529,37 +534,107 @@ namespace USBDProperty.Controllers
         }
 
         //POST: FeaturedProperty/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CreatePropertyFeatures( PropertyWithFeatures propertyWithFeatures, string[] selectedFeatures)
+        //{
+        //    try
+        //    {
+        //        if (selectedFeatures != null)
+        //        {
+        //            //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+        //            //foreach (var feature in selectedFeatures)
+        //            //{
+        //            //    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
+        //            //    propertyDetails.propertyFeatures.Add(await featureToAdd);
+        //            //}
+        //        }
+        //        if (ModelState.IsValid)
+        //        {
+        //            _context.PropertyWithFeatures.Add(propertyWithFeatures);
+        //            _context.SaveChanges();
+        //            return RedirectToAction("AllFeatured");
+        //        }
+        //        AssignedPropertyFeature(propertyWithFeatures);
+        //        ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(propertyWithFeatures.PropertyId)), "PropertyInfoId", "Title");
+        //        return View(propertyWithFeatures);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePropertyFeatures(int id, PropertyDetails propertyDetails, string[] selectedFeatures)
+        public async Task<IActionResult> CreatePropertyFeatures(int? id, string[] selectedFeatures)
         {
-            try
+            if (id == null)
             {
-                if (selectedFeatures != null)
-                {
-                    //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
-                    //foreach (var feature in selectedFeatures)
-                    //{
-                    //    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
-                    //    propertyDetails.propertyFeatures.Add(await featureToAdd);
-                    //}
-                }
-                if (ModelState.IsValid)
-                {
-                    _context.PropertyDetails.Add(propertyDetails);
-                    _context.SaveChanges();
-                    return RedirectToAction("AllFeatured");
-                }
-                AssignedPropertyFeature(propertyDetails);
-                ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
-                return View(propertyDetails);
+                return NotFound();
             }
-            catch (Exception ex)
+
+            var propertyToUpdate = await _context.PropertyDetails
+                
+                .Include(i => i.PropertyWithFeatures)
+                    .ThenInclude(i => i.PropertyFeatures)
+                .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
+
+            if (await TryUpdateModelAsync<PropertyDetails>(propertyToUpdate,   ""))
             {
-                return BadRequest(ex.Message);
+                
+                UpdatePropertyFeature(selectedFeatures, propertyToUpdate);
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException /* ex */)
+                {
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                }
+                return RedirectToAction(nameof(Index));
             }
+            //UpdateInstructorCourses(selectedCourses, instructorToUpdate);
+            //PopulateAssignedCourseData(instructorToUpdate);
+            return View(propertyToUpdate);
         }
 
+        private void UpdatePropertyFeature(string[] selectedFeatures, PropertyDetails propertyToUpdate)
+        {
+            if (selectedFeatures == null)
+            {
+                propertyToUpdate.PropertyWithFeatures = new List<PropertyWithFeatures>();
+                return;
+            }
+
+            var selectedFeaturesHS = new HashSet<string>(selectedFeatures);
+            var propertyFeatures = new HashSet<int>
+                (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
+            foreach (var feature in _context.PropertyFeatures)
+            {
+                if (selectedFeaturesHS.Contains(feature.PropertyFeatureId.ToString()))
+                {
+                    if (!propertyFeatures.Contains(feature.PropertyFeatureId))
+                    {
+                        propertyToUpdate.PropertyWithFeatures.Add(new PropertyWithFeatures { PropertyId = propertyToUpdate.PropertyInfoId, FeatureId = feature.PropertyFeatureId });
+                    }
+                }
+                else
+                {
+
+                    if (propertyFeatures.Contains(feature.PropertyFeatureId))
+                    {
+                        PropertyWithFeatures featureToRemove = propertyToUpdate.PropertyWithFeatures.FirstOrDefault(i => i.FeatureId == feature.PropertyFeatureId);
+                        _context.Remove(featureToRemove);
+                    }
+                }
+            }
+        }
 
         // GET: PropertyDetails
         //[Authorize]

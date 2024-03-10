@@ -45,6 +45,7 @@
                        <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview">
                        @*<input type="text" class="form-control" name="ImagePath" id="ImagePath" asp-for="ImagePath" hidden />*@
                        <input type="text" class="form-control" name="Images" id="photos" hidden />
+                        <input type="hidden" asp-for="ImagePath" />
                     </div>
                 </div>
             </div>
