@@ -27,23 +27,44 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                if (User.IsInRole("Admin"))
+                {
+                    var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
+
+
+                    if (projectId != null || projectId > 0)
+                    {
+                        applicationDbContext = applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
+                    }
+                    return View(applicationDbContext.ToList());
+                }
+                else if (User.IsInRole("Agent"))
+                {
+                    var devID = _context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name) && a.ID.Equals(agentId)).Select(s => s.ID);
+
+                    var appDbData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).Where(d => d.Id.Equals(devID)).OrderByDescending(p => p.Id);
+
+                    return View( await appDbData.ToListAsync());
+                }
 
                 //var image = ICollection<ProjectImageGallery.Mul>
-                var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
+                //var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
               
 
-                if (projectId != null || projectId > 0)
-                {
-                    applicationDbContext =  applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
-                }
+                //if (projectId != null || projectId > 0)
+                //{
+                //    applicationDbContext =  applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
+                //}
 
                 //ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName");
                 ViewData["AgentId"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
-                return View(applicationDbContext.ToList());
+                //return View(applicationDbContext.ToList());
+                return View();
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
@@ -69,7 +90,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
@@ -154,7 +176,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
@@ -254,7 +277,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
@@ -280,7 +304,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 

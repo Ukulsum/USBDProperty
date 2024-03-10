@@ -27,8 +27,7 @@ namespace USBDProperty.Controllers
             try
             {
                 var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
-
-                                             .Where(p => p.IsActive ? p.IsActive : false && p.IsFeatured ? p.IsFeatured : false).ToList();
+                                                 .Where(p => p.IsActive ? p.IsActive : false && p.IsFeatured ? p.IsFeatured : false && p.EndDate >= DateTime.Today).Take(1).ToList();
 
                 return Json(new { data = noticeData });
             }

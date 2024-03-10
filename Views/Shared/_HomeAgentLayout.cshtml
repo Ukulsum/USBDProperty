@@ -65,12 +65,14 @@
     <!-- Template Main CSS File -->
     <link href="~/AgentAsserts/css/style.css" rel="stylesheet">
 
+
+
 </head>
 
 <body>
     @* <img src="@Url.Content(@Model.Logo)"/>*@
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
+    <header id="header" class="fixed-top" >
         <div class="container d-flex align-items-center justify-content-between">
 
 
@@ -448,7 +450,7 @@
                         //devAgentTitle += '<div><span>'+ value.companyName +'</span></div>'
                         devAgentTitle += '<title  >USBD Property"s - '+ value.companyName+' </title>'
                         devAgentLogo += '<img src="'+ value.logo+'">'
-                        devAgentBanner += '<img src="'+ value.banner+'">'
+                        devAgentBanner += '<img src="'+ value.banner+'" style="width:100%">'
                         devAgentAbout += '<p>'+ value.aboutUs +'</p>'
                     });
                     $(".load_title").empty();

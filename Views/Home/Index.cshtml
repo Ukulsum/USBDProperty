@@ -537,12 +537,13 @@
                 console.log(res.data);
                  var NoticeData = "";
                  //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
-                    var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].imagePath + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
-                 //$.each(res.data, function(index, value){
-                 //    NoticeData +=  "<div class='img'><img class='img-responsive' src='" + value.path + "' alt='" + value.title + "'><div class='over-proper'></div><div>" + value.description + "</div> ";
-                 //});
-                    console.log(res.data[0].title);
-                  $("#exampleModalLabel").innerText=res.data[0].title
+                    //var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].imagePath + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
+                 $.each(res.data, function(index, value){
+                     NoticeData +=  "<div class='img'><img class='img-responsive' src='" + value.imagePath + "' alt='" + value.title + "'><div class='over-proper'></div><div>" + value.description + "</div> ";
+                      $("#exampleModalLabel").innerText=value.title
+                 });
+                  //  console.log(res.data[0].title);
+                  //$("#exampleModalLabel").innerText=res.data[0].title
                   //$("#exampleModalLabel").innerText=value.title
                   //$("#exampleModalLabel").modal('show')
                 $("#load_Notification").empty();
