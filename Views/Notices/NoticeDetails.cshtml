@@ -1,0 +1,131 @@
+﻿@model IEnumerable<USBDProperty.Models.Notice>
+@{
+    ViewData["Title"] = "NoticeDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<section class="properties">
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-md-12">
+                        <div class="load_HomePropertyDetailsById">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--======= SIGN UP =========-->
+    </div>
+</section>*@
+
+<section class="properties">
+    <div class="container">
+
+        <!--======= TITTLE =========-->
+        <div class="tittle">
+            <img src="~/Asserts/images/head-top.png" alt="">
+            <h3>All Notification</h3>
+        </div>
+        <ul class="row">
+        <!--======= PROPERTIES ROW =========-->
+       <div class="load_HomePropertyDetailsById">
+
+       </div>
+        </ul>
+    </div>
+</section>
+
+
+
+
+
+
+@section Scripts{
+
+<script>
+
+         $(document).ready(function (){
+
+             getHomePropertyDetailsById()
+             //multipleImageSliderById()
+         })
+   
+
+
+         function getHomePropertyDetailsById() {
+             var curloc = $(location).attr('href');
+             var url = curloc.split('/');
+             //console.log(url);
+             var id = url[url.length - 1];
+             $.ajax({
+                 url: "/Notices/NoticeDetailsByID/" + id,
+                 method: "Get",
+                 success: function (res) {
+                     console.log(res.data);
+                     var propertylist = "";
+                     $.each(res.data, function (index, value) {     
+                         console.log(value)
+                         propertylist = '<li class="col-xs-12 col-sm-6 col-md-12 col-lg-3"><a href="/Notices/NoticeDetails/"><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"><i class="bi bi-calendar-date"></i> Published: ' + (new Date (value.endDate).getDate() + "-" + (new Date ( value.endDate).toLocaleDateString ("default", {month : "short",}))) + "-" + (new Date (value.endDate).getFullYear()) + '</p><span class="locate">' + value.description + '</span></div></a></section></li>'
+                     });
+
+                     $(".load_HomePropertyDetailsById").empty();
+                     $(".load_HomePropertyDetailsById").html(propertylist);
+                 }
+             })
+         }
+
+</script>
+
+}
+
+
+
+
+<!--======= PROPERTY =========-->
+@*<section class="properties">
+    <div class="container">
+
+        <!--======= TITTLE =========-->
+        <div class="tittle">
+            <img src="~/Asserts/images/head-top.png" alt="">
+            <h3>All Notification</h3>
+        </div>
+        <ul class="row">
+        <!--======= PROPERTIES ROW =========-->
+        @foreach(var item in Model)
+        {
+            
+               <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/PropertyDetails/HomePropertyDetails/">
+                   
+                    <section>
+                        <div class="img">
+                            <img class="img-responsive" src="@Url.Content(item.ImagePath)" alt="">
+                                <div class="over-proper">
+                                    <p class="btn font-montserrat">more details</p>
+                                </div>
+                        </div>
+                        <div class="detail-sec">
+                            <h5 class="fw-bold">@item.Title</h5>
+                            <i class="bi bi-calendar mt-2"></i>
+                            <p class="text-success"> Published @item.StartDate</p> 
+                            <a asp-action="NoticeDetails" asp-controller="Notices" asp-route-id="@item.NoticeID">
+                                <span class="price font-montserrat">Read More</span>
+                            </a>
+                         <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span>
+                            <div class="share-p">
+                                <span class="btn_more">' + " Read More" + '</span>
+                            </div>
+                       </div>
+</a>
+</section>
+           </li>
+        
+        }
+        </ul>
+    </div>
+</section>*@

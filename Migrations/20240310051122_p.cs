@@ -14,7 +14,7 @@ namespace USBDProperty.Migrations
             //    type: "nvarchar(max)",
             //    nullable: false,
             //    defaultValue: "");
-            migrationBuilder.DropColumn("Path", "Notices");
+            //migrationBuilder.DropColumn("Path", "Notices");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -22,12 +22,12 @@ namespace USBDProperty.Migrations
             //migrationBuilder.DropColumn(
             //    name: "ImagePath1",
             //    table: "Notices");
-            migrationBuilder.AddColumn<string>(
-                name: "Path",
-                table: "Notices",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+            //migrationBuilder.AddColumn<string>(
+            //    name: "Path",
+            //    table: "Notices",
+            //    type: "nvarchar(max)",
+            //    nullable: false,
+            //    defaultValue: "");
         }
     }
 }

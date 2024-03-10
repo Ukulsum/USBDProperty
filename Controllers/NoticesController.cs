@@ -39,6 +39,53 @@ namespace USBDProperty.Controllers
             }
         }
 
+
+        [AllowAnonymous]
+        public async Task<IActionResult> NoticeDetails(int? id)
+        {
+            return View();
+        //    try
+        //    {
+        //        return View();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        ModelState.AddModelError("", ex.Message);
+        //        return View();
+        //    }
+        }
+
+
+        [AllowAnonymous]
+        public JsonResult NoticeDetailsByID(int Id)
+        {
+            try
+            {
+                var nData = _context.Notices.OrderByDescending(n => n.NoticeID).ToList();
+                return Json(new { data = nData });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+        }
+
+
+        //[AllowAnonymous]
+        //public async Task<IActionResult> NoticeDetails()
+        //{
+        //    try
+        //    {
+        //        var nData = _context.Notices.OrderByDescending(n => n.NoticeID).ToList();
+        //        return View(nData);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        ModelState.AddModelError("", ex.Message);
+        //        return View();
+        //    }
+        //}
+
         // GET: Notices
         public async Task<IActionResult> Index()
         {
@@ -50,7 +97,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
@@ -75,7 +123,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
