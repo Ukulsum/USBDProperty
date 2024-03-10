@@ -62,13 +62,34 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                return _context.DevelopersorAgent != null ?
-                          View(await _context.DevelopersorAgent.OrderByDescending(p => p.ID).Where(d => d.IsActive).ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
+                if (User.IsInRole("Admin"))
+                {
+                    //return _context.DevelopersorAgent != null ?
+                    //View(await _context.DevelopersorAgent.OrderByDescending(d => d.ID)
+                    //                                     .Where(a => a.IsActive).ToListAsync()) :
+                    //Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
+                    var devdata = _context.DevelopersorAgent.OrderByDescending(d => d.ID)
+                                                            .Where(a => a.IsActive);
+                    return View(await devdata.ToListAsync());
+
+                }
+                else if (User.IsInRole("Agent"))
+                {
+                    var agent = _context.DevelopersorAgent
+                                          .Where(d => d.Email.Equals(User.Identity.Name) && d.IsActive)
+                                          .OrderByDescending(a => a.ID);
+                    return View(await agent.ToListAsync());
+
+                }
+                //return _context.DevelopersorAgent != null ?
+                //          View(await _context.DevelopersorAgent.OrderByDescending(p => p.ID).Where(d => d.IsActive).ToListAsync()) :
+                //Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
+                return View();
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
         [AllowAnonymous]
@@ -126,7 +147,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(id);
             }
         }
         [HttpGet]
@@ -283,7 +305,8 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(id);
             }
         }
 
@@ -464,7 +487,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(id);
             }
         }
 
@@ -490,7 +514,8 @@ namespace USBDProperty.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View(id);
             }
         }
 

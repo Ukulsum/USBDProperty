@@ -272,19 +272,48 @@
                 </a>
             </li>
 
+             <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-geo-alt-fill"></i><span>Locations</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-action="Index" asp-controller="Countries">
+                            <i class="bi bi-circle"></i><span>Country</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Divisions">
+                            <i class="bi bi-circle"></i><span>Division</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Cities">
+                            <i class="bi bi-circle"></i><span>City</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Areas">
+                            <i class="bi bi-circle"></i><span>Area</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- End Location Nav -->
+
             <!-- End Dashboard Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-building"></i><span>Profile</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">                 
-                    <li>
+                   @* <li>
                         <a asp-action="Index" asp-controller="Countries">
                             <i class="bi bi-circle"></i><span>Countries</span>
                         </a>
-                    </li>
+                    </li>*@
                     <li>
-                        <a asp-action="Index" asp-controller="PropertyFeatures">
+                        <a asp-action="Index" asp-controller="DevelopersorAgents">
                             <i class="bi bi-circle"></i><span>Agent Information</span>
                         </a>
                     </li>
