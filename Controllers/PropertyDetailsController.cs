@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,11 +18,12 @@ namespace USBDProperty.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _environment;
-
-        public PropertyDetailsController(ApplicationDbContext context, IWebHostEnvironment environment)
+        private readonly INotyfService _notyf;
+        public PropertyDetailsController(ApplicationDbContext context, IWebHostEnvironment environment, INotyfService srv)
         {
             _context = context;
             _environment = environment;
+            _notyf = srv;
         }
 
 
@@ -520,7 +522,9 @@ namespace USBDProperty.Controllers
             try
             {
                 var propertyDetails = _context.PropertyDetails.Find(id);
-                //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
+
+                //propertyDetails.PropertyWithFeatures = new List<PropertyFeatures>();
+                propertyDetails.PropertyWithFeatures = _context.PropertyWithFeatures.Where(r=>r.PropertyId.Equals(id)).ToList();
                 AssignedPropertyFeature(propertyDetails);
                 //var data = await _context.PropertyFeatures.ToListAsync();
                 ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
@@ -578,33 +582,42 @@ namespace USBDProperty.Controllers
             {
                 return NotFound();
             }
-
             var propertyToUpdate = await _context.PropertyDetails
-                
-                .Include(i => i.PropertyWithFeatures)
-                    .ThenInclude(i => i.PropertyFeatures)
-                .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
+                                                .Include(i=>i.PropertyWithFeatures)
+                                                .ThenInclude(i=>i.PropertyFeatures)
+                                                .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
 
-            if (await TryUpdateModelAsync<PropertyDetails>(propertyToUpdate,   ""))
-            {
+            //if (await TryUpdateModelAsync<PropertyDetails>(propertyToUpdate,   ""))
+            //{
                 
                 UpdatePropertyFeature(selectedFeatures, propertyToUpdate);
                 try
                 {
-                    await _context.SaveChangesAsync();
+                //foreach(var i in propertyToUpdate.PropertyWithFeatures)
+                //{
+                //    _context.PropertyWithFeatures.Add(i);
+                //}
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException /* ex */)
+                }
+                catch (DbUpdateException ex )
                 {
                     //Log the error (uncomment ex variable name and write a log.)
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
-                }
-                return RedirectToAction(nameof(Index));
+                _notyf.Error(ex.Message);
+                AssignedPropertyFeature(propertyToUpdate);
+
+              
             }
+
+            //}
             //UpdateInstructorCourses(selectedCourses, instructorToUpdate);
             //PopulateAssignedCourseData(instructorToUpdate);
-            return View(propertyToUpdate);
+            return View();
         }
 
         private void UpdatePropertyFeature(string[] selectedFeatures, PropertyDetails propertyToUpdate)
@@ -616,29 +629,49 @@ namespace USBDProperty.Controllers
             }
 
             var selectedFeaturesHS = new HashSet<string>(selectedFeatures);
-            var propertyFeatures = new HashSet<int>
+            if (propertyToUpdate.PropertyWithFeatures != null)
+            {
+                var propertyFeatures = new HashSet<int>
                 (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
+                foreach (var feature in _context.PropertyFeatures)
+                {
+                    if (selectedFeaturesHS.Contains(feature.PropertyFeatureId.ToString()))
+                    {
+                        if (!propertyFeatures.Contains(feature.PropertyFeatureId))
+                        {
+                            propertyToUpdate.PropertyWithFeatures.Add(new PropertyWithFeatures { PropertyId = propertyToUpdate.PropertyInfoId, FeatureId = feature.PropertyFeatureId });
+                        }
+                    }
+                    else
+                    {
+
+                        if (propertyFeatures.Contains(feature.PropertyFeatureId))
+                        {
+                            PropertyWithFeatures featureToRemove = propertyToUpdate.PropertyWithFeatures.FirstOrDefault(i => i.FeatureId == feature.PropertyFeatureId);
+                            _context.Remove(featureToRemove);
+                        }
+                    }
+                }
+
+            }
+            //var propertyFeatures = new HashSet<int>
+            //    (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
+
+            else
+            { 
+            propertyToUpdate.PropertyWithFeatures = new List< PropertyWithFeatures>();
             foreach (var feature in _context.PropertyFeatures)
             {
                 if (selectedFeaturesHS.Contains(feature.PropertyFeatureId.ToString()))
                 {
-                    if (!propertyFeatures.Contains(feature.PropertyFeatureId))
-                    {
-                        propertyToUpdate.PropertyWithFeatures.Add(new PropertyWithFeatures { PropertyId = propertyToUpdate.PropertyInfoId, FeatureId = feature.PropertyFeatureId });
-                    }
-                }
-                else
-                {
 
-                    if (propertyFeatures.Contains(feature.PropertyFeatureId))
-                    {
-                        PropertyWithFeatures featureToRemove = propertyToUpdate.PropertyWithFeatures.FirstOrDefault(i => i.FeatureId == feature.PropertyFeatureId);
-                        _context.Remove(featureToRemove);
-                    }
+                    propertyToUpdate.PropertyWithFeatures.Add(new PropertyWithFeatures { PropertyId = propertyToUpdate.PropertyInfoId, FeatureId = feature.PropertyFeatureId });
+
                 }
+
             }
         }
-
+        }
         // GET: PropertyDetails
         //[Authorize]
         public async Task<IActionResult> Index()

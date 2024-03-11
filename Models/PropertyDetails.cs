@@ -176,7 +176,7 @@ namespace USBDProperty.Models
         public MeasurementUnit MeasurementUnit { get; set; }
 
 
-        public ICollection<PropertyWithFeatures> PropertyWithFeatures;
+        public ICollection<PropertyWithFeatures> PropertyWithFeatures { get; set; }
 
         //[ValidateNever]
         //public virtual ICollection<PropertyFeatures> propertyFeatures
