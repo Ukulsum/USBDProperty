@@ -44,12 +44,14 @@
                     <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
                        <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview">
                        @*<input type="text" class="form-control" name="ImagePath" id="ImagePath" asp-for="ImagePath" hidden />*@
-                       <input type="text" class="form-control" name="Images" id="photos" hidden />
+                       @*<input type="text" class="form-control" name="Images" id="photos" hidden />*@
                         <input type="hidden" asp-for="ImagePath" />
+                       
                     </div>
+                     <button type="button" id="btnChange" class="btn btn-primary mt-3">Change</button>
                 </div>
             </div>
-           <div class="row">
+           <div class="row m-2">
                 <div class="form-group form-check col-md-6">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
@@ -78,6 +80,14 @@
     <script>
         var isChanged= false;
         $(document).ready(function (){
+             var isChanged = false;
+             $("#btnChange").show();
+             $("#imageInput").hide();
+             $("#btnChange").click(function () {
+                 $("#imageInput").show();
+                 $("#btnChange").hide();
+             })
+
              CKEDITOR.replace('Description', {
                 height: 300,
                 width: '100%',
