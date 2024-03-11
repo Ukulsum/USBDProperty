@@ -11,7 +11,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    [Authorize(Roles ="Admin,Agent")]
+    [Authorize(Roles = "Admin,Super Admin,Agent")]
     public class ProjectsInfoesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,19 +28,20 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                if (User.IsInRole("Admin"))
-                { 
+                if (User.IsInRole("Agent"))
+                {
+                    var data = await _context.ProjectsInfo.Include(a => a.Developers)
+                                                    .OrderByDescending(p => p.Id)
+                                                    .Where(d => d.Developers.Email.Equals(User.Identity.Name))
+                                                    .ToListAsync();
+                    return View(data);
+                }
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
                     var applicationDbContext = _context.ProjectsInfo.OrderByDescending(p => p.Id).Include(p => p.Developers);
                     return View(await applicationDbContext.ToListAsync());
+                }
 
-                }
-                else if (User.IsInRole("Agent"))
-                {
-                    var agentId = _context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)).Select(s => s.ID);
-                   
-                    var applicationDbContext = _context.ProjectsInfo.Where(p => p.Id.Equals(agentId)).OrderByDescending(p => p.Id);
-                    return View(await applicationDbContext.ToListAsync());
-                }
 
                 return View();
             }
@@ -123,8 +124,16 @@ namespace USBDProperty.Controllers
         // GET: ProjectsInfoes/Create
         public IActionResult Create()
         {
-            ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
-            return View();
+            if (User.IsInRole("Agent"))
+            {
+                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)), "ID", "CompanyName");
+                return View();
+            }
+            else
+            {
+                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
+                return View();
+            }
         }
 
         // POST: ProjectsInfoes/Create
@@ -200,15 +209,20 @@ namespace USBDProperty.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
-                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
+                if (User.IsInRole("Agent"))
+                {
+                    ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)), "ID", "CompanyName", projectsInfo.AgentID);
+                }
+                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
+                }
                 return View(projectsInfo);
             }
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            //ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
-            //return View(projectsInfo);
         }
 
         // GET: ProjectsInfoes/Edit/5
@@ -241,7 +255,14 @@ namespace USBDProperty.Controllers
                 ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allprojectId.CityId);
                 ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allprojectId.DivitionId);
                 ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allprojectId.CountryId);
-                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
+                if (User.IsInRole("Agent"))
+                {
+                    ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)).OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
+                }
+                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
+                }
                 return View(projectsInfo);
             }
             catch (Exception ex)
@@ -256,7 +277,6 @@ namespace USBDProperty.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ProjectsInfo projectsInfo)
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ProjectName,Location,LocationMap,AgentID")] ProjectsInfo projectsInfo)
         {
             try
             {
@@ -347,9 +367,14 @@ namespace USBDProperty.Controllers
                     return RedirectToAction(nameof(Index));
                 }
 
-
-              
-                ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
+                if (User.IsInRole("Agent"))
+                {
+                    ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)).OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
+                }
+                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
+                }
                 return View(projectsInfo);
             }
             catch(Exception ex)

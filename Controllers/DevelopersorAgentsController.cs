@@ -13,7 +13,7 @@ using USBDProperty.Models;
 
 namespace USBDProperty.Controllers
 {
-    [Authorize(Roles = "Admin,Agent")]
+    [Authorize(Roles = "Admin,Agent,Super Admin")]
     public class DevelopersorAgentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -63,7 +63,6 @@ namespace USBDProperty.Controllers
             {
                 if (User.IsInRole("Agent"))
                 {
-
                     var data = _context.DevelopersorAgent.OrderByDescending(d => d.Name).Where(a => a.Email.Equals(User.Identity.Name)).ToList();
                     return Json(new { Data = data });
                 }
@@ -87,7 +86,7 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                if (User.IsInRole("Admin"))
+                if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
                     //return _context.DevelopersorAgent != null ?
                     //View(await _context.DevelopersorAgent.OrderByDescending(d => d.ID)

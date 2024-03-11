@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using USBDProperty.Models;
 using USBDProperty.ViewModels;
 
 namespace USBDProperty.Controllers
 {
+   [Authorize(Roles = "Agent")]
     public class AgentHomeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,12 +26,9 @@ namespace USBDProperty.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        //public IActionResult About(DeveloperPropertyVm developerPropertyVm)
-        //{
-        //    return View();
-        //}
-
-        public IActionResult AgentIndex(int id)
+       
+        [AllowAnonymous]
+        public IActionResult AgentIndex(int id) ///All Developer show for Annonimous User
         {
             try
             {
@@ -41,7 +40,9 @@ namespace USBDProperty.Controllers
                 return BadRequest(ex.Message);
             }             
         }
-        //public IActionResult AgentProperties(int id)
+      
+
+        [AllowAnonymous]
         public IActionResult AgentProperties()
         
         {
@@ -49,7 +50,8 @@ namespace USBDProperty.Controllers
             return View();
         }
 
-        public JsonResult HomeAgentProject(int id)
+        [AllowAnonymous]
+        public JsonResult HomeAgentProject(int id) //Project list show annonymous user
         {
             try
             {
@@ -67,9 +69,5 @@ namespace USBDProperty.Controllers
             }
         }
 
-        //public JsonResult Save(DeveloperPropertyVm developerPropertyVm)
-        //{
-        //    return Json()
-        //}
     }
 }

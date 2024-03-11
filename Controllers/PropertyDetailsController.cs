@@ -13,7 +13,7 @@ using USBDProperty.ViewModels;
 
 namespace USBDProperty.Controllers
 {
-    [Authorize(Roles = "Admin,Agent")]
+    [Authorize(Roles = "Admin,Super Admin,Agent")]
     public class PropertyDetailsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -678,6 +678,29 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                //if (User.IsInRole("Agent"))
+                //{
+                //    var applicationDbContext = _context.PropertyDetails
+                //                                .OrderByDescending(o => o.PropertyInfoId)
+                //                                .Include(p => p.Area)
+                //                                .Include(p => p.ProjectsInfo)
+                //                                .Include(p => p.MeasurementUnit)
+                //                                .Include(p => p.PropertyType)
+                //                                .Where(p => p.ProjectsInfo.Developers.Email.Equals(User.Identity.Name));
+
+                //    return View(await applicationDbContext.ToListAsync());
+                //}
+                //else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                //{
+                //    var applicationDbContext = _context.PropertyDetails
+                //                                .OrderByDescending(o => o.PropertyInfoId)
+                //                                .Include(p => p.Area)
+                //                                .Include(p => p.ProjectsInfo)
+                //                                .Include(p => p.MeasurementUnit)
+                //                                .Include(p => p.PropertyType);
+
+                //    return View(await applicationDbContext.ToListAsync());
+                //}
                 var applicationDbContext = _context.PropertyDetails
                                                 .OrderByDescending(o => o.PropertyInfoId)
                                                 .Include(p => p.Area)
@@ -686,6 +709,7 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.PropertyType);
 
                 return View(await applicationDbContext.ToListAsync());
+                //return View();
             }
             catch (Exception ex)
             {

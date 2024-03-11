@@ -244,14 +244,18 @@
                         </li>
                         <li>
                             <hr class="dropdown-divider">
-                        </li>
-
+                        </li><li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+@*
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
-                        </li>
+                        </li>*@
 
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
@@ -317,7 +321,7 @@
                             <i class="bi bi-circle"></i><span>Agent Information</span>
                         </a>
                     </li>
-                    <li>
+                   @* <li>
                         <a asp-action="Index" asp-controller="PropertyDetails">
                             <i class="bi bi-circle"></i><span>Agent Logo</span>
                         </a>
@@ -327,7 +331,7 @@
                         <a asp-action="Index" asp-controller="MultipleImageUploads">
                             <i class="bi bi-circle"></i><span>Agent Banner</span>
                         </a>
-                    </li>
+                    </li>*@
                 </ul>
             </li><!-- End Project -->
             <li class="nav-item">
@@ -335,13 +339,13 @@
                     <i class="bi bi-building"></i><span>Projects Information</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="project" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
+                   @* <li>
                         <a asp-action="Index" asp-controller="PropertyFeatures">
                             <i class="bi bi-circle"></i><span>Project Features</span>
                         </a>
-                    </li>
+                    </li>*@
                     <li>
-                        <a asp-action="Index" asp-controller="PropertyDetails">
+                        <a asp-action="Index" asp-controller="ProjectsInfoes">
                             <i class="bi bi-circle"></i><span>Project Information</span>
                         </a>
 
@@ -361,11 +365,11 @@
                     <i class="bi bi-building"></i><span>Properties</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="property" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
+                    @*<li>
                         <a asp-action="Index" asp-controller="PropertyFeatures">
                             <i class="bi bi-circle"></i><span>Property Features</span>
                         </a>
-                    </li>
+                    </li>*@
                     <li>
                         <a asp-action="Index" asp-controller="PropertyDetails">
                             <i class="bi bi-circle"></i><span>Property Information</span>
