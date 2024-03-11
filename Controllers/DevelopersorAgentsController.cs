@@ -56,6 +56,31 @@ namespace USBDProperty.Controllers
                 return Json(new { Data = ex.Message });
             }
         }
+        [Authorize]
+        public JsonResult GetAuthenticateAgent()
+        {
+            try
+            {
+                if (User.IsInRole("Agent"))
+                {
+
+                    var data = _context.DevelopersorAgent.OrderByDescending(d => d.Name).Where(a => a.Email.Equals(User.Identity.Name)).ToList();
+                    return Json(new { Data = data });
+                }
+               else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+
+                    var data = _context.DevelopersorAgent.OrderByDescending(d => d.Name).ToList();
+                    return Json(new { Data = data });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Data = ex.Message });
+            }
+            return Json(new { IsSuccess = false });
+        }
+
 
         // GET: DevelopersorAgents
         public async Task<IActionResult> Index(bool?isActive)

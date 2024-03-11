@@ -23,12 +23,16 @@ namespace USBDProperty.Controllers
         }
 
         // GET: PropertyImages
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int propertyId=0)
         {
             try
             {
-                var applicationDbContext = _context.PropertyImages.Include(p => p.PropertyDetails);
-                return View(await applicationDbContext.ToListAsync());
+                var applicationDbContext = _context.PropertyImages.Include(i=>i.PropertyDetails).ToList();
+                if(propertyId>0)
+                {
+                    applicationDbContext = applicationDbContext.Where(p => p.propertyInfoId.Equals(propertyId)).ToList();
+                }
+                return View( applicationDbContext);
             }
             catch(Exception ex)
             {

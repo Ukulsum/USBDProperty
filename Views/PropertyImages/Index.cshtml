@@ -8,7 +8,7 @@
 <div class="card">
     <div class="card-body">
          <div class="row">
-
+             <form asp-action="Index" asp-controller="PropertyImages" >
             <div class="col-md-3">
                 <div class="form-group card-title">
                     <label class="control-label"> Agent </label>
@@ -28,7 +28,7 @@
             <div class="col-md-3">
                 <div class="form-group card-title">
                     <label class="control-label"> Property </label>
-                    <select class="form-control" id="propertyId">
+                        <select class="form-control" id="propertyId" name="propertyId">
                         @*<option value="0">Select Property</option>*@
                     </select>
                 </div>
@@ -37,6 +37,7 @@
                  <div class="form-group card-title">
                       @*<input type="submit" value="Search"/>*@
                       <button type="submit" class="search-bar">Search</button>
+                    
                  </div>           
             </div>
             
@@ -46,7 +47,9 @@
                 <div class="col-md-3">
                 <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
                 </div>*@
-        </div>
+       
+            </form>
+            </div>
         <table class="table">
     <thead>
         <tr>
