@@ -357,7 +357,7 @@
                         <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
                             <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview" />
 
-                            <input type="text" asp-for="ImagePath" class="form-control" name="Image" id="path" hidden />
+                            <input type="text" asp-for="ImagePath" hidden />
                         </div>
                         <button type="button" id="btnChange" class="btn btn-primary mt-2">Change</button>
                     </div>
@@ -367,10 +367,12 @@
                     <textarea type="text" asp-for="Description" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                <div class="form-group form-check col-md-6">
+                <div class="row m-2">
+                    <div class="form-group form-check col-md-6">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="IsActive" id="checkActive" /> @Html.DisplayNameFor(model => model.IsActive)
                     </label>
+                    </div>
                 </div>
                 <div class="form-group form-check col-md-6">
                     <label class="form-check-label">

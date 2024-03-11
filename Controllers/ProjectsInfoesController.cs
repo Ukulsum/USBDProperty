@@ -72,7 +72,8 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id));
+                var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id))
+                                                .Select(p => new {p.ProjectName}).Distinct();
                 return Json(new { Data = data });
             }
             catch(Exception ex)

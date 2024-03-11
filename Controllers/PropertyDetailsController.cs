@@ -75,7 +75,9 @@ namespace USBDProperty.Controllers
             try
             {
                 var record = _context.PropertyDetails.OrderBy(c => c.Location)
-                                         .Where(d => d.Area.AreaId.Equals(aid)).ToList();
+                                         .Where(d => d.Area.AreaId.Equals(aid))
+                                         .Select(l => new {l.Location}).Distinct()
+                                         .ToList();
                 return Json(record);
             }
             catch (Exception ex)
@@ -127,12 +129,13 @@ namespace USBDProperty.Controllers
                 //ViewBag.propertyTypes = new SelectList(_context.PropertyTypes.OrderBy(t => t.PropertyTypeName), "PropertyTypeId", "PropertyTypeName");
                 //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
                 //ViewData["NumberOfBedrooms"] = (_context.PropertyDetails, "PropertyInfoId", "NumberOfBedrooms");
-                var data = _context.PropertyDetails.Where(p => p.IsActive)
+                var data = _context.PropertyDetails.Where(p => p.IsActive)                                           
                                                    .Include(p => p.Area)
                                                    //.Include(p => p.ProjectsInfo)
                                                    .Include(p => p.PropertyType)
                                                    .Include(p => p.MeasurementUnit)
-                                                    .ToList();
+                                                   //.Select(n => n.Location).Distinct()
+                                                   .ToList();
                 if (forid != null || forid > 0)
                 {
                     data = data.Where(p => p.PropertyFor.Equals(forid)).ToList();
@@ -701,8 +704,9 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
-                //ModelState.AddModelError("", ex.Message);
+               
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
