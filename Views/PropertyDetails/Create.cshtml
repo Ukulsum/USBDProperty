@@ -543,7 +543,7 @@
             })
         }
         function loadDeveloper() {
-            $.get("/DevelopersorAgents/GetDeveloper", function (data, status) {
+            $.get("/DevelopersorAgents/GetDeveloperProperty", function (data, status) {
                 console.log(data.data)
                 $("#drpDeveloper").empty();
                 $("#drpDeveloper").append($('<option></option>').val("0").html("Select Developer or agent"));
@@ -561,7 +561,9 @@
                 $("#drpprj").append($('<option></option>').val("0").html("Select Project"));
                 $.each(data.data, function (i, v) {
 
-                    $("#drpprj").append($('<option></option>').val(v.id).html(v.projectName));
+
+                    //$("#drpprj").append($(`<option value=${v.id}>${v.projectName}</option>').val(v.id).html(v.projectName))`;
+                     $("#drpprj").append(`<option value=${v.id}>${v.projectName}</option>`) ;
                 })
 
             })

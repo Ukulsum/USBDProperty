@@ -136,6 +136,33 @@ namespace USBDProperty.Controllers
             }
         }
 
+
+        public JsonResult GetDeveloperProperty()
+        {
+            try
+            {
+                if (User.IsInRole("Agent"))
+                {
+                    var data = _context.DevelopersorAgent.Where(d => d.Email.Equals(User.Identity.Name) && d.IsActive)
+                                                         .OrderByDescending(d => d.ID).ToList();
+                    return Json(new { Data = data });
+                }
+                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    var data = _context.DevelopersorAgent.Where(d => d.IsActive);
+                    return Json(new { Data = data });
+                }
+                return Json(new { data = "Record" });
+                //var data = _context.DevelopersorAgent.Where(d => d.IsActive);
+                //return Json(new { Data = data });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No Record" });
+            }
+        }
+
+
         [AllowAnonymous]
         public JsonResult HomeAgent(int id)
         {

@@ -2,14 +2,21 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    if(User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
 }
 
 <main id="main">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Areas</h5>>
-            <hr style="width:100%; "/>
+            <h5 class="card-title text-center">Areas</h5>
+            <hr style="width:100%"/>
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="AreaId" />

@@ -27,12 +27,27 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var applicationDbContext = _context.PropertyImages.Include(i=>i.PropertyDetails).ToList();
-                if(propertyId>0)
+                if (User.IsInRole("Agent"))
                 {
-                    applicationDbContext = applicationDbContext.Where(p => p.propertyInfoId.Equals(propertyId)).ToList();
+                    var appData = _context.PropertyImages.Include(i => i.PropertyDetails).ToList();
                 }
-                return View( applicationDbContext);
+                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    var applicationDbContext = _context.PropertyImages.Include(i => i.PropertyDetails).ToList();
+                    if (propertyId > 0)
+                    {
+                        applicationDbContext = applicationDbContext.Where(p => p.propertyInfoId.Equals(propertyId)).ToList();
+                    }
+                    return View(applicationDbContext);
+                }
+
+                //var applicationDbContext = _context.PropertyImages.Include(i=>i.PropertyDetails).ToList();
+                //if(propertyId>0)
+                //{
+                //    applicationDbContext = applicationDbContext.Where(p => p.propertyInfoId.Equals(propertyId)).ToList();
+                //}
+                //return View( applicationDbContext);
+                return View();
             }
             catch(Exception ex)
             {

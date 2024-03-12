@@ -1,9 +1,22 @@
 ﻿@model IEnumerable<USBDProperty.Models.PropertyDetails>
 
-@{
+@*@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}*@
+@{
+    ViewData["Title"] = "All Properties";
+    if(User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+
 }
+@User.IsInRole("Agent")
 @if (Model!=null || @Model.Count() > 0){
     
 
@@ -212,7 +225,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item text-primary" asp-action="Create" asp-controller="PropertyImages" asp-route-id="@item.PropertyInfoId"><i class="bi bi-box-arrow-up"></i>Add More Pic</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-primary" asp-action="CreatePropertyFeatures" asp-controller="PropertyDetails" asp-route-id="@item.PropertyInfoId"><i class="bi bi-plus"></i>Add Featured</a></li>
+                                        <li><a class="dropdown-item text-primary" asp-action="CreatePropertyFeatures" asp-controller="PropertyDetails" asp-route-id="@item.PropertyInfoId"><i class="bi bi-plus"></i>Add/Edit Featured</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-primary" asp-action="Edit" asp-route-id="@item.PropertyInfoId"><i class="bi bi-pencil-square"></i>Edit</a></li>
                                     <li><hr class="dropdown-divider"></li>

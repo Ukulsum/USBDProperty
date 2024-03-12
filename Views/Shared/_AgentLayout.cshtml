@@ -321,7 +321,7 @@
                             <i class="bi bi-circle"></i><span>Agent Information</span>
                         </a>
                     </li>
-                   @* <li>
+                    <li>
                         <a asp-action="Index" asp-controller="PropertyDetails">
                             <i class="bi bi-circle"></i><span>Agent Logo</span>
                         </a>
@@ -331,7 +331,7 @@
                         <a asp-action="Index" asp-controller="MultipleImageUploads">
                             <i class="bi bi-circle"></i><span>Agent Banner</span>
                         </a>
-                    </li>*@
+                    </li>
                 </ul>
             </li><!-- End Project -->
             <li class="nav-item">
@@ -351,7 +351,7 @@
 
                     </li>
                     <li>
-                        <a asp-action="Index" asp-controller="MultipleImageUploads">
+                        <a asp-action="Index" asp-controller="ProjectImageGalleries">
                             <i class="bi bi-circle"></i><span>Project Images</span>
                         </a>
                     </li>
@@ -373,13 +373,52 @@
                     <li>
                         <a asp-action="Index" asp-controller="PropertyDetails">
                             <i class="bi bi-circle"></i><span>Property Information</span>
-                        </a>
-                        <a asp-action="Index" asp-controller="MultipleImageUploads">
+                        </a>                         
+                        <a asp-action="Index" asp-controller="PropertyImages">
                             <i class="bi bi-circle"></i><span>Property Images</span>
                         </a>
                     </li>
                 </ul>
             </li><!-- End Property Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="ri-settings-4-fill"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                    @*<li>
+                        <a asp-action="Index" asp-controller="Notices">
+                            <i class="bi bi-circle"></i><span>Notifications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="PropertyFeatures">
+                            <i class="bi bi-circle"></i><span>Property Features</span>
+                        </a>
+                    </li>*@
+                    <li>
+                        <a asp-action="Index" asp-controller="MeasurementUnits">
+                            <i class="bi bi-circle"></i><span>Measutement Unit</span>
+                        </a>
+                    </li>
+                    @*<li>
+                        <a asp-action="Index" asp-controller="TermsConditions">
+                            <i class="bi bi-circle"></i><span>Terms & Conditions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="PrivacyPolicies">
+                            <i class="bi bi-circle"></i><span>Privacy Policy</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="ClientContacts">
+                            <i class="bi bi-circle"></i><span>Client Contact</span>
+                        </a>
+                    </li>*@
+                </ul>
+            </li><!-- End Settngs Nav -->
 
 
 
