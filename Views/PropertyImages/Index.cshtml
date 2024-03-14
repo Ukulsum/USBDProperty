@@ -98,7 +98,7 @@
                    
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PropertyDetails.Title)
+                    @Html.DisplayFor(modelItem => item.PropertyDetails.ProjectId)
                 </td>              
                 <td class="col-md-2">
                     <div class="btn-group">
@@ -143,7 +143,7 @@
                 $("#agent").empty();
                 $("#agent").append($('<option></option>').val("0").html("Select Agent"));
                 $.each(data.data, function(i, v){
-                    $("#agent").append($('<option></option>').val(v.id).html(v.name));
+                    $("#agent").append($('<option></option>').val(v.id).html(v.companyName));
                 })
             })
         }

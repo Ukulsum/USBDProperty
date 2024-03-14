@@ -60,9 +60,24 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var property = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
-                                                  .Where(d => d.ProjectId.Equals(pid)).ToList();
-                return Json(new { Data = property });
+                //var property = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
+                //                                  .Where(d => d.ProjectId.Equals(pid)).ToList();
+                //return Json(new { Data = property });
+                if (User.IsInRole("Agent"))
+                {
+                    var property = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
+                                                           .Include("ProjectsInfo")
+                                                           .Where(d => d.ProjectsInfo.Developers.Email.Equals(User.Identity.Name) && d.ProjectId.Equals(pid)).ToList();
+                    return Json(new { Data = property });
+                }
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    var property = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
+                                                           .Include("ProjectsInfo")
+                                                           .Where(d => d.ProjectId.Equals(pid)).ToList();
+                    return Json(new { Data = property });
+                }
+                return Json(new { IsSuccess = false });
             }
             catch(Exception ex)
             {

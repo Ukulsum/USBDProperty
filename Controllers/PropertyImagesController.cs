@@ -29,7 +29,14 @@ namespace USBDProperty.Controllers
             {
                 if (User.IsInRole("Agent"))
                 {
-                    var appData = _context.PropertyImages.Include(i => i.PropertyDetails).ToList();
+                    var appDbData = _context.PropertyImages.Include(i=>i.PropertyDetails.ProjectsInfo.Developers).Where(d=>d.PropertyDetails.ProjectsInfo.Developers.Email.Equals(User.Identity.Name)).ToList();
+                    if(propertyId > 0)
+                    {
+                        appDbData = appDbData.Where(d => d.propertyInfoId.Equals(propertyId)).ToList();
+                    }
+                    return View(appDbData);
+                    //var appData = _context.PropertyImages.Include(i => i.PropertyDetails)                                          
+                                                         //.Where(d => d.PropertyDetails.ProjectsInfo.Developers.Email.Equals(User.Identity.Name) && d.propertyInfoId.Equals(propertyId)).ToList();
                 }
                 else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {

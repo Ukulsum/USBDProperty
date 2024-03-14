@@ -57,10 +57,26 @@ namespace USBDProperty.Controllers
         public JsonResult GetDrpProject(int devid)
         {
             try
-            {                
-                var project = _context.ProjectsInfo.OrderByDescending(p => p.Id)
-                                                   .Where(d => d.AgentID.Equals(devid)).ToList();
-                return Json(new { Data = project });
+            {
+                //var project = _context.ProjectsInfo.OrderByDescending(p => p.Id)
+                //                                   .Where(d => d.AgentID.Equals(devid)).ToList();
+                //return Json(new { Data = project });
+                if (User.IsInRole("Agent"))
+                {
+                    var data = _context.ProjectsInfo.OrderBy(p => p.ProjectName)
+                                                    .Include("Developers")
+                                                    .Where(d => d.Developers.Email.Equals(User.Identity.Name) && d.AgentID.Equals(devid)).ToList();
+
+                    return Json(new { Data = data });
+                }
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    var data = _context.ProjectsInfo.OrderBy(p => p.ProjectName)
+                                                    .Include("Developers")
+                                                    .Where(d => d.AgentID.Equals(devid)).ToList();
+                    return Json(new { Data = data });
+                }
+                return Json(new { IsSuccess = false });
             }
             catch (Exception ex)
             {

@@ -23,29 +23,51 @@ namespace USBDProperty.Controllers
         }
 
         // GET: ProjectImageGalleries
-        public async Task<IActionResult> Index(int? agentId, int? projectId)
+        public async Task<IActionResult> Index(int projectId=0)
         {
             try
             {
-                if (User.IsInRole("Admin"))
+
+            
+                if (User.IsInRole("Agent"))
                 {
-                    var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
-
-
-                    if (projectId != null || projectId > 0)
+                    var projectData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo.Developers)
+                                                                  .Where(d => d.ProjectsInfo.Developers.Email.Equals    (User.Identity.Name)).ToList();
+                    if (projectId > 0)
                     {
-                        applicationDbContext = applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
+                        projectData = projectData.Where(d => d.ProjectsInfo.Equals(projectId)).ToList();
                     }
-                    return View(applicationDbContext.ToList());
+                    return View(projectData);
                 }
-                else if (User.IsInRole("Agent"))
+                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
-                    var devID = _context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name) && a.ID.Equals(agentId)).Select(s => s.ID);
-
-                    var appDbData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).Where(d => d.Id.Equals(devID)).OrderByDescending(p => p.Id);
-
-                    return View( await appDbData.ToListAsync());
+                    var projectData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo.Developers).ToList();
+                    if (projectId > 0)
+                    {
+                        projectData = projectData.Where(d => d.ProjectsInfo.Equals(projectId)).ToList();
+                    }
+                    return View(projectData);
                 }
+            //{
+            //    if (User.IsInRole("Admin"))
+            //    {
+            //        var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
+
+
+            //        if (projectId != null || projectId > 0)
+            //        {
+            //            applicationDbContext = applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
+            //        }
+            //        return View(applicationDbContext.ToList());
+            //    }
+            //    else if (User.IsInRole("Agent"))
+            //    {
+            //        var devID = _context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name) && a.ID.Equals(agentId)).Select(s => s.ID);
+
+            //        var appDbData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).Where(d => d.Id.Equals(devID)).OrderByDescending(p => p.Id);
+
+            //        return View( await appDbData.ToListAsync());
+             //}
 
                 //var image = ICollection<ProjectImageGallery.Mul>
                 //var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();

@@ -48,8 +48,23 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var data = _context.DevelopersorAgent.OrderByDescending(d => d.Name).ToList();
-                return Json(new { Data = data });
+                //var data = _context.DevelopersorAgent.OrderBy(d => d.Name)
+                //                                     //.Select(a => new { a.Name }).Distinct()
+                //                                     .ToList();
+                //return Json(new { Data = data });
+                if (User.IsInRole("Agent"))
+                {
+                    var data = _context.DevelopersorAgent.OrderBy(d => d.CompanyName)
+                                                         .Where(a => a.Email.Equals(User.Identity.Name)).ToList();
+                    return Json(new { Data = data });
+                }
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                {
+                    var data = _context.DevelopersorAgent.OrderBy(d => d.CompanyName).ToList();
+                    return Json(new { Data = data });
+                }
+
+                return Json(new { IsSuccess = false });
             }
             catch(Exception ex)
             {
