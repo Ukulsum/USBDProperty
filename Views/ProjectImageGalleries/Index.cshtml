@@ -85,7 +85,7 @@
                         </td>
                         <td>
 
-                            @Html.DisplayFor(modelItem => item.ProjectsInfo.Developers.CompanyName)
+                            @Html.DisplayFor(modelItem => item.ProjectsInfo.AgentID)
                         </td>
                         <td class="col-md-2">
                             <div class="btn-group">
@@ -121,7 +121,7 @@
             })
         })
         function loadAgent(){
-            $.get("/DevelopersorAgents/GetAgent", function (data, status){
+            $.get("/DevelopersorAgents/GetAuthenticateAgent", function (data, status){
                 console.log(data);
                 $("#agent").empty();
                 $("#agent").append($('<option></option>').val("0").html("Select Agent"));

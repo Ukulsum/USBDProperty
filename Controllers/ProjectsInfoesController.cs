@@ -58,25 +58,25 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                //var project = _context.ProjectsInfo.OrderByDescending(p => p.Id)
-                //                                   .Where(d => d.AgentID.Equals(devid)).ToList();
-                //return Json(new { Data = project });
-                if (User.IsInRole("Agent"))
-                {
-                    var data = _context.ProjectsInfo.OrderBy(p => p.ProjectName)
-                                                    .Include("Developers")
-                                                    .Where(d => d.Developers.Email.Equals(User.Identity.Name) && d.AgentID.Equals(devid)).ToList();
+                var project = _context.ProjectsInfo.OrderByDescending(p => p.Id)
+                                                   .Where(d => d.AgentID.Equals(devid)).ToList();
+                return Json(new { Data = project });
+                //if (User.IsInRole("Agent"))
+                //{
+                //    var data = _context.ProjectsInfo.OrderBy(p => p.ProjectName)
+                //                                    .Include("Developers")
+                //                                    .Where(d => d.Developers.Email.Equals(User.Identity.Name) && d.AgentID.Equals(devid)).ToList();
 
-                    return Json(new { Data = data });
-                }
-                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
-                {
-                    var data = _context.ProjectsInfo.OrderBy(p => p.ProjectName)
-                                                    .Include("Developers")
-                                                    .Where(d => d.AgentID.Equals(devid)).ToList();
-                    return Json(new { Data = data });
-                }
-                return Json(new { IsSuccess = false });
+                //    return Json(new { Data = data });
+                //}
+                //else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                //{
+                //    var data = _context.ProjectsInfo.OrderBy(p => p.ProjectName)
+                //                                    .Include("Developers")
+                //                                    .Where(d => d.AgentID.Equals(devid)).ToList();
+                //    return Json(new { Data = data });
+                //}
+                //return Json(new { IsSuccess = false });
             }
             catch (Exception ex)
             {

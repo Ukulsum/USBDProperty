@@ -27,60 +27,26 @@ namespace USBDProperty.Controllers
         {
             try
             {
-
-            
                 if (User.IsInRole("Agent"))
                 {
                     var projectData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo.Developers)
-                                                                  .Where(d => d.ProjectsInfo.Developers.Email.Equals    (User.Identity.Name)).ToList();
+                                                                  .Where(d => d.ProjectsInfo.Developers.Email.Equals(User.Identity.Name)).ToList();
                     if (projectId > 0)
                     {
-                        projectData = projectData.Where(d => d.ProjectsInfo.Equals(projectId)).ToList();
+                        projectData = projectData.Where(d => d.ProjectID.Equals(projectId)).ToList();
                     }
                     return View(projectData);
                 }
-                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
-                    var projectData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo.Developers).ToList();
+                    var projectData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
                     if (projectId > 0)
                     {
-                        projectData = projectData.Where(d => d.ProjectsInfo.Equals(projectId)).ToList();
+                        projectData = projectData.Where(d => d.ProjectID.Equals(projectId)).ToList();
                     }
                     return View(projectData);
-                }
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
-            //        var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
-
-
-            //        if (projectId != null || projectId > 0)
-            //        {
-            //            applicationDbContext = applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
-            //        }
-            //        return View(applicationDbContext.ToList());
-            //    }
-            //    else if (User.IsInRole("Agent"))
-            //    {
-            //        var devID = _context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name) && a.ID.Equals(agentId)).Select(s => s.ID);
-
-            //        var appDbData = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).Where(d => d.Id.Equals(devID)).OrderByDescending(p => p.Id);
-
-            //        return View( await appDbData.ToListAsync());
-             //}
-
-                //var image = ICollection<ProjectImageGallery.Mul>
-                //var applicationDbContext = _context.ProjectImageGallery.Include(p => p.ProjectsInfo).ToList();
-              
-
-                //if (projectId != null || projectId > 0)
-                //{
-                //    applicationDbContext =  applicationDbContext.Where(p => p.ProjectID.Equals(projectId)).ToList();
-                //}
-
-                //ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName");
-                ViewData["AgentId"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
-                //return View(applicationDbContext.ToList());
+                }        
+                //ViewData["AgentId"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
                 return View();
             }
             catch (Exception ex)
@@ -120,7 +86,7 @@ namespace USBDProperty.Controllers
         // GET: ProjectImageGalleries/Create
         public IActionResult Create(int id)
         {
-            ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo.Where(p => p.Id.Equals(id)), "Id", "Location");
+            ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo.Where(p => p.Id.Equals(id)), "Id", "ProjectName");
             return View();
         }
 

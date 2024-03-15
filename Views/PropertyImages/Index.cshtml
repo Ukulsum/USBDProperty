@@ -138,7 +138,7 @@
             })
         })
         function loadAgent(){
-            $.get("/DevelopersorAgents/GetAgent", function (data, status){
+            $.get("/DevelopersorAgents/GetAuthenticateAgent", function (data, status){
                 console.log(data);
                 $("#agent").empty();
                 $("#agent").append($('<option></option>').val("0").html("Select Agent"));
