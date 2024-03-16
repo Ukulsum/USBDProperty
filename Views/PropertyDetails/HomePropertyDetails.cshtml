@@ -66,6 +66,8 @@
                                     </div>
                                     <div class="load_HomePropertyDetailsById">
                                     </div>
+                                    <div class="load_HomePropertyFeatureById">
+                                    </div>
                                 </section>
                             </li>
                         </ul>
@@ -221,6 +223,22 @@
 
                      $(".load_HomePropertyDetailsById").empty();
                      $(".load_HomePropertyDetailsById").html(propertylist);
+                 }
+             })
+
+
+             $.ajax({
+                 url: "/PropertyDetails/PropertyWithFeature/" + id,
+                 method: "Get",
+                 success: function (res){
+                     console.log(res.data)
+                     var featurelist = "";
+                     $.each(res.data, function(index, value.data){
+                         featurelist += '  <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div>    <ul><li><span>' + value.propertyFeatures + '</span></li></ul></div></section></li></ul> '
+                     })
+                     console.log(featurelist)
+                     $("#load_HomePropertyFeatureById").empty();
+                     $("#load_HomePropertyFeatureById").html(featurelist);
                  }
              })
          }

@@ -384,6 +384,28 @@ namespace USBDProperty.Controllers
 
         }
 
+
+        [AllowAnonymous]
+        //[HttpGet("HomePropertyDetails")]
+        public async Task<IActionResult> HomePropertyDetails(int? id)
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public JsonResult PropertyWithFeature(int Id) //property Details Show with feature
+        {
+            try
+            {
+                var featureData = _context.PropertyWithFeatures.Include(p => p.PropertyFeatures)
+                                                               .Include(p => p.PropertyDetails).ToList();
+                return Json(new { Data = featureData });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = "No record" });
+            }
+        }
+
         [AllowAnonymous]
         public JsonResult HomePropertybyID(int Id)
         {
@@ -494,12 +516,7 @@ namespace USBDProperty.Controllers
         }
 
 
-        [AllowAnonymous]
-        //[HttpGet("HomePropertyDetails")]
-        public async Task<IActionResult> HomePropertyDetails(int? id)
-        {
-            return View();
-        }
+      
 
 
         private void AssignedPropertyFeature(PropertyDetails propertyDetails)
