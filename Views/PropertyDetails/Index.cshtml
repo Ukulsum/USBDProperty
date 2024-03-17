@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<USBDProperty.Models.PropertyDetails>
+<link href="~/AdminAsserts/vendor/simple-datatables/style.css rel="stylesheet" />
 
 @*@{
     ViewData["Title"] = "Index";
@@ -34,188 +35,47 @@
         </div>
 
 
-        <table class="table">
+        <table class="table dataTable">
             <thead>
-                <tr>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.Title)
-                        </th>*@
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.Description)
-                        </th>*@
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.PropertyName)
-                        </th>*@
+                <tr>                   
                     <th>
                         @Html.DisplayNameFor(model => model.PropertyType)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Image)
-
-                    </th>
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.Location)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.ConstructionStatus)
-                        </th>*@
+                    </th>                   
                     <th>
                         @Html.DisplayNameFor(model => model.FlatSize)
-                    </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.NumberOfBedrooms)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.NumberOfBaths)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.NumberOfBalconies)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.NumberOfGarages)
-                        </th>*@
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.TotalFloor)
-                        </th>*@
+                    </th>                  
                     <th>
                         @Html.DisplayNameFor(model => model.FloorAvailableNo)
-                    </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.Furnishing)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.Facing)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.LandArea)
-                        </th>*@
+                    </th>                  
                     <th>
                         @Html.DisplayNameFor(model => model.Price)
-                    </th>
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.Measurement)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.Comments)
-                        </th>*@
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.HandOverDate)
-                        </th>*@
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.propertyFor)
-                        </th>*@
-
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.TransactionType)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.PropertyOwnerInfo)
-                        </th>*@
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.SocialIcon)
-                        </th>
-                        <th>
-                        @Html.DisplayNameFor(model => model.Area)
-                        </th>*@
-                    @*   <th>
-                        @Html.DisplayNameFor(model => model.IsActive)
-                        </th> *@
-
+                    </th>                   
                     <th>Action</th>
-                    @* <th>
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown button
-                        </button>
-                        </th>*@
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                            </td>*@
-                        @*<td>
-                            @Html.Raw(item.Description)
-                            </td>*@
-                        @* <td>
-                            @Html.DisplayFor(modelItem => item.PropertyName)
-                            </td>*@
+                    <tr>                        
                         <td>
                             @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
                         </td>
                         <td>
                             @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
                             <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />
-                        </td>
-                        @* <td>
-                            @Html.DisplayFor(modelItem => item.Location)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.ConstructionStatus)
-                            </td>*@
+                        </td>                     
                         <td>
                             @Html.DisplayFor(modelItem => item.FlatSize)
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.NumberOfBedrooms)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.NumberOfBaths)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.NumberOfBalconies)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.NumberOfGarages)
-                            </td>*@
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.TotalFloor)
-                            </td>*@
+                        </td>                      
                         <td>
                             @Html.DisplayFor(modelItem => item.FloorAvailableNo)
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Furnishing)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.Facing)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.LandArea)
-                            </td>*@
+                        </td>                     
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Measurement)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.Comments)
-                            </td>*@
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.HandOverDate)
-                            </td>*@
-                        @* <td>
-                            @Html.DisplayFor(modelItem => item.propertyFor.PropeFor)
-                            </td> *@
-
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.TransactionType.TransactionTypeName)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.PropertyOwnerInfo.CompanyName)
-                            </td>*@
-                        @* <td>
-                            @Html.DisplayFor(modelItem => item.SocialIcon.Icon)
-                            </td>
-                            <td>
-                            @Html.DisplayFor(modelItem => item.Area.AreaName)
-                            </td>*@
-                        @*  <td>
-                            @Html.DisplayFor(modelItem => item.IsActive)
-                            </td> *@
+                        </td>                      
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success">Action</button>

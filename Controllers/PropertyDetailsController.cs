@@ -397,7 +397,9 @@ namespace USBDProperty.Controllers
             try
             {
                 var featureData = _context.PropertyWithFeatures.Include(p => p.PropertyFeatures)
-                                                               .Include(p => p.PropertyDetails).ToList();
+                                                               .Include(p => p.PropertyDetails)
+                                                               .Where(p => p.PropertyId.Equals(Id)).ToList();
+                                                              
                 return Json(new { Data = featureData });
             }
             catch (Exception ex)

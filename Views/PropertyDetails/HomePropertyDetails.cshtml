@@ -66,8 +66,8 @@
                                     </div>
                                     <div class="load_HomePropertyDetailsById">
                                     </div>
-                                    <div class="load_HomePropertyFeatureById">
-                                    </div>
+                                   @* <div class="load_HomePropertyFeatureById">
+                                    </div>*@
                                 </section>
                             </li>
                         </ul>
@@ -129,6 +129,10 @@
 </section>
 
 
+ <div class="load_HomePropertyFeatureById">
+                                    </div>
+
+
 
 
 
@@ -141,6 +145,7 @@
 
              getHomePropertyDetailsById()
              multipleImageSliderById()
+             getHomeFeatureById()
          })
      function imageslide(e) {
         var imageURL = $(e).attr('src');
@@ -227,15 +232,36 @@
              })
 
 
+             //$.ajax({
+             //    url: "/PropertyDetails/PropertyWithFeature/" + id,
+             //    method: "Get",
+             //    success: function (res){
+             //        console.log(res.data)
+             //        var featurelist = "";
+             //        $.each(res.data, function(index, value){
+             //            featurelist += '  <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div>    <ul><li><span>' + value.propertyFeatures + '</span></li></ul></div></section></li></ul> '
+             //        })
+             //        console.log(featurelist)
+             //        $("#load_HomePropertyFeatureById").empty();
+             //        $("#load_HomePropertyFeatureById").html(featurelist);
+             //    }
+             //})
+         }
+
+         function getHomeFeatureById(){
+             var curloc = $(location).attr('href');
+             var url = curloc.split('/');
+             id = url[url.length - 1];
              $.ajax({
                  url: "/PropertyDetails/PropertyWithFeature/" + id,
                  method: "Get",
                  success: function (res){
                      console.log(res.data)
                      var featurelist = "";
-                     $.each(res.data, function(index, value.data){
-                         featurelist += '  <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div>    <ul><li><span>' + value.propertyFeatures + '</span></li></ul></div></section></li></ul> '
+                     $.each(res.data, function(index, value){
+                         featurelist += '  <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Feature </h3><hr/><div>    <ul><li><span>' + value.propertyFeatures + '</span></li></ul></div></section></li></ul> '
                      })
+                     console.log("Feature")
                      console.log(featurelist)
                      $("#load_HomePropertyFeatureById").empty();
                      $("#load_HomePropertyFeatureById").html(featurelist);

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<USBDProperty.Models.PropertyImages>
+@*<link href="~/AdminAsserts/vendor/simple-datatables/style.css" rel="stylesheet"/>*@
 
 @{
     ViewData["Title"] = "Index";
@@ -57,7 +58,7 @@
        
             </form>
             </div>
-        <table class="table">
+        <table class="table dataTable">
     <thead>
         <tr>
             <th>
@@ -127,6 +128,7 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
+            //$(".table").dataTable();
             loadAgent();
             loadProject();
             loadProperty();

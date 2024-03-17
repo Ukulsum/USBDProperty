@@ -3,7 +3,14 @@
 
 @{
     ViewData["Title"] = "CreatePropertyFeatures";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    if(User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
 }
 <form asp-action="CreatePropertyFeatures" asp-controller="PropertyDetails" method="post">
 <div class="card">
@@ -63,7 +70,10 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div><a asp-action="Index">Back to List</a></div>
+                    <div>
+                        <a asp-action="Index">Back to List</a>
+                        <a asp-action="Create" asp-controller="PropertyFeatures" class="btn btn-success">Add Feature</a>
+                    </div>
                 </div>
             </div>
         
