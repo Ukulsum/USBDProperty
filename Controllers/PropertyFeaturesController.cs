@@ -91,8 +91,10 @@ namespace USBDProperty.Controllers
         }
 
         // GET: PropertyFeatures/Create
-        public IActionResult Create()
+        public IActionResult Create(int?id)
         {
+            TempData["Pid"]=id;
+
             return View();
         }
 
@@ -108,8 +110,17 @@ namespace USBDProperty.Controllers
                 if (ModelState.IsValid)
                 {
                     _context.Add(propertyFeatures);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    if(await _context.SaveChangesAsync()>0)
+                    {
+                    if (TempData["Pid"]!=null) 
+                    {
+                        return RedirectToAction("CreatePropertyFeatures","PropertyDetails", new {id= TempData["Pid"] });
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    }
                 }
                 return View(propertyFeatures);
             }

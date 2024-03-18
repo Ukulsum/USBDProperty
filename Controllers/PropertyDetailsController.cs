@@ -562,7 +562,7 @@ namespace USBDProperty.Controllers
                 AssignedPropertyFeature(propertyDetails);
                 //var data = await _context.PropertyFeatures.ToListAsync();
                 ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
-
+                ViewData["pid"] = id;
                 //return View(data);
                 return View();
             }
