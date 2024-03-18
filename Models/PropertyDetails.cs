@@ -31,6 +31,8 @@ namespace USBDProperty.Models
         [ValidateNever]
         public bool ISFeatured { get; set; }
         public bool IsLand { get; set; }
+        public bool IsSold { get; set; }
+
         [StringLength(255)]
         public string Title { get; set; }
        
