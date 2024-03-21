@@ -37,7 +37,10 @@
 
         <table class="table" id="datatable">
             <thead>
-                <tr>                   
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.PropertyType)
                     </th>
@@ -59,7 +62,10 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>                        
+                    <tr> 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
                         </td>

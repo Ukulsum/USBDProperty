@@ -17,7 +17,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-9">
-                <h5 class="card-title">All Projects</h5>
+                <h5 class="card-title text-center">All Projects</h5>
             </div>
             <div class="col-md-3">
                 <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
@@ -29,9 +29,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.Description)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.ProjectName)
                     </th>
@@ -54,9 +54,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.Raw(item.Description)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.ProjectName)
                         </td>

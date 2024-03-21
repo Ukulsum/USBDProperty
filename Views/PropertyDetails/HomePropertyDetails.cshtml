@@ -66,11 +66,27 @@
                                     </div>
                                     <div class="load_HomePropertyDetailsById">
                                     </div>
-                                   @* <div class="load_HomePropertyFeatureById">
+                                    <ul>
+                                        <li>
+                                            <section style="padding: 13px 4px 13px 29px">
+                                                <h3 class="m-2"> Property Feature </h3><hr/>
+                                                <div>
+                                                    <ul class="row">
+                                                         <div id="load_HomePropertyFeatureById">
+
+                                                         </div>
+                                                    </ul>
+                                                </div>
+                                               
+                                            </section>
+                                        </li>
+                                    </ul>
+                                    @*<div id="load_HomePropertyFeatureById">
                                     </div>*@
                                 </section>
                             </li>
                         </ul>
+
                     </div>
                     <div class="col-md-4">
                         <div>
@@ -129,9 +145,6 @@
 </section>
 
 
- <div class="load_HomePropertyFeatureById">
-                                    </div>
-
 
 
 
@@ -184,11 +197,11 @@
 
                     $.each(res.data, function(index, value){
                         $("#forid").val(value.propertyFor)
-                         $("#typeID").val(value.propertyTypeId)
-                         $("#prid").val(value.propertyInfoId)
-                         $("#forid").val(value.propertyFor)
-                         $("#typeID").val(value.propertyTypeId)
-                         $("#prid").val(value.propertyInfoId)
+                        $("#typeID").val(value.propertyTypeId)
+                        $("#prid").val(value.propertyInfoId)
+                        $("#forid").val(value.propertyFor)
+                        $("#typeID").val(value.propertyTypeId)
+                        $("#prid").val(value.propertyInfoId)
 
                          propertyImageSlide += '<li><img onclick="imageslide(this)" width="90%" onmouseover="imageover(this)" onmouseout="imageOut(this)" id="slide_img" src="' + value.multiImagePath + '" ></li>'
                         });
@@ -197,8 +210,6 @@
                 }
             })
          }
-
-
 
          function getHomePropertyDetailsById() {
              var curloc = $(location).attr('href');
@@ -225,7 +236,8 @@
 
 
                      });
-
+                     console.log(propertylist);
+                     console.log("Property List");
                      $(".load_HomePropertyDetailsById").empty();
                      $(".load_HomePropertyDetailsById").html(propertylist);
                  }
@@ -256,10 +268,19 @@
                  url: "/PropertyDetails/PropertyWithFeature/" + id,
                  method: "Get",
                  success: function (res){
+                     console.log("Feature List");
                      console.log(res.data)
                      var featurelist = "";
                      $.each(res.data, function(index, value){
-                         featurelist += '  <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Feature </h3><hr/><div>    <ul><li><span>' + value.propertyFeatures + '</span></li></ul></div></section></li></ul> '
+                         console.log(value);
+                         //$("#forid").val(value.propertyFor)
+                         //$("#typeID").val(value.propertyTypeId)
+                         //$("#prid").val(value.propertyInfoId)
+                         //$("#forid").val(value.propertyFor)
+                         //$("#typeID").val(value.propertyTypeId)
+                         //$("#prid").val(value.propertyInfoId)
+                         //featurelist = '<ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Feature </h3><hr/><div>    <ul><li><span><i class="fa fa-chevron-right"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li></ul></div></section></li></ul> '
+                         featurelist += '<li class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="fa fa-check-circle-o"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li>'
                      })
                      console.log("Feature")
                      console.log(featurelist)

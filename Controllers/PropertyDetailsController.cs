@@ -398,7 +398,8 @@ namespace USBDProperty.Controllers
             {
                 var featureData = _context.PropertyWithFeatures.Include(p => p.PropertyFeatures)
                                                                .Include(p => p.PropertyDetails)
-                                                               .Where(p => p.PropertyId.Equals(Id)).ToList();
+                                                               .Where(p => p.PropertyId.Equals(Id))
+                                                               .ToList();
                                                               
                 return Json(new { Data = featureData });
             }
@@ -612,40 +613,46 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePropertyFeatures(int? id, string[] selectedFeatures)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
-            var propertyToUpdate = await _context.PropertyDetails
-                                                .Include(i=>i.PropertyWithFeatures)
-                                                .ThenInclude(i=>i.PropertyFeatures)
-                                                .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var propertyToUpdate = await _context.PropertyDetails
+                                                    .Include(i => i.PropertyWithFeatures)
+                                                    .ThenInclude(i => i.PropertyFeatures)
+                                                    .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
 
-            //if (await TryUpdateModelAsync<PropertyDetails>(propertyToUpdate,   ""))
-            //{
-                
+                //if (await TryUpdateModelAsync<PropertyDetails>(propertyToUpdate,   ""))
+                //{
+
                 UpdatePropertyFeature(selectedFeatures, propertyToUpdate);
                 try
                 {
-                //foreach(var i in propertyToUpdate.PropertyWithFeatures)
-                //{
-                //    _context.PropertyWithFeatures.Add(i);
-                //}
-                if (await _context.SaveChangesAsync() > 0)
-                {
-                    return RedirectToAction(nameof(Index));
+                    //foreach(var i in propertyToUpdate.PropertyWithFeatures)
+                    //{
+                    //    _context.PropertyWithFeatures.Add(i);
+                    //}
+                    if (await _context.SaveChangesAsync() > 0)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
-                }
-                catch (DbUpdateException ex )
+                catch (DbUpdateException ex)
                 {
                     //Log the error (uncomment ex variable name and write a log.)
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
-                _notyf.Error(ex.Message);
-                AssignedPropertyFeature(propertyToUpdate);
-
-              
+                    _notyf.Error(ex.Message);
+                    AssignedPropertyFeature(propertyToUpdate);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
 
             //}
@@ -656,55 +663,62 @@ namespace USBDProperty.Controllers
 
         private void UpdatePropertyFeature(string[] selectedFeatures, PropertyDetails propertyToUpdate)
         {
-            if (selectedFeatures == null)
+            try
             {
-                propertyToUpdate.PropertyWithFeatures = new List<PropertyWithFeatures>();
-                return;
-            }
-
-            var selectedFeaturesHS = new HashSet<string>(selectedFeatures);
-            if (propertyToUpdate.PropertyWithFeatures != null)
-            {
-                var propertyFeatures = new HashSet<int>
-                (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
-                foreach (var feature in _context.PropertyFeatures)
+                if (selectedFeatures == null)
                 {
-                    if (selectedFeaturesHS.Contains(feature.PropertyFeatureId.ToString()))
+                    propertyToUpdate.PropertyWithFeatures = new List<PropertyWithFeatures>();
+                    return;
+                }
+
+                var selectedFeaturesHS = new HashSet<string>(selectedFeatures);
+                if (propertyToUpdate.PropertyWithFeatures != null)
+                {
+                    var propertyFeatures = new HashSet<int>
+                    (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
+                    foreach (var feature in _context.PropertyFeatures)
                     {
-                        if (!propertyFeatures.Contains(feature.PropertyFeatureId))
+                        if (selectedFeaturesHS.Contains(feature.PropertyFeatureId.ToString()))
                         {
+                            if (!propertyFeatures.Contains(feature.PropertyFeatureId))
+                            {
+                                propertyToUpdate.PropertyWithFeatures.Add(new PropertyWithFeatures { PropertyId = propertyToUpdate.PropertyInfoId, FeatureId = feature.PropertyFeatureId });
+                            }
+                        }
+                        else
+                        {
+
+                            if (propertyFeatures.Contains(feature.PropertyFeatureId))
+                            {
+                                PropertyWithFeatures featureToRemove = propertyToUpdate.PropertyWithFeatures.FirstOrDefault(i => i.FeatureId == feature.PropertyFeatureId);
+                                _context.Remove(featureToRemove);
+                            }
+                        }
+                    }
+
+                }
+                //var propertyFeatures = new HashSet<int>
+                //    (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
+
+                else
+                {
+                    propertyToUpdate.PropertyWithFeatures = new List<PropertyWithFeatures>();
+                    foreach (var feature in _context.PropertyFeatures)
+                    {
+                        if (selectedFeaturesHS.Contains(feature.PropertyFeatureId.ToString()))
+                        {
+
                             propertyToUpdate.PropertyWithFeatures.Add(new PropertyWithFeatures { PropertyId = propertyToUpdate.PropertyInfoId, FeatureId = feature.PropertyFeatureId });
-                        }
-                    }
-                    else
-                    {
 
-                        if (propertyFeatures.Contains(feature.PropertyFeatureId))
-                        {
-                            PropertyWithFeatures featureToRemove = propertyToUpdate.PropertyWithFeatures.FirstOrDefault(i => i.FeatureId == feature.PropertyFeatureId);
-                            _context.Remove(featureToRemove);
                         }
+
                     }
                 }
-
             }
-            //var propertyFeatures = new HashSet<int>
-            //    (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
-
-            else
-            { 
-            propertyToUpdate.PropertyWithFeatures = new List< PropertyWithFeatures>();
-            foreach (var feature in _context.PropertyFeatures)
+            catch(Exception ex)
             {
-                if (selectedFeaturesHS.Contains(feature.PropertyFeatureId.ToString()))
-                {
-
-                    propertyToUpdate.PropertyWithFeatures.Add(new PropertyWithFeatures { PropertyId = propertyToUpdate.PropertyInfoId, FeatureId = feature.PropertyFeatureId });
-
-                }
-
+                ModelState.AddModelError("", ex.Message);            
             }
-        }
         }
         // GET: PropertyDetails
         //[Authorize]
@@ -782,7 +796,8 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
@@ -1095,7 +1110,8 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
@@ -1121,7 +1137,8 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
         }
 
