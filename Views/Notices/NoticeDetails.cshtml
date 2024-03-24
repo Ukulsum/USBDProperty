@@ -57,12 +57,12 @@
 
 
          function getHomePropertyDetailsById() {
-             //var curloc = $(location).attr('href');
-             //var url = curloc.split('/');
-             ////console.log(url);
-             //var id = url[url.length - 1];
+             var curloc = $(location).attr('href');
+             var url = curloc.split('/');
+             //console.log(url);
+             var id = url[url.length - 1];
              $.ajax({
-                 url: "/Notices/NoticeDetailsByID/",
+                 url: "/Notices/NoticeDetailsByID/" + id,
                  method: "Get",
                  success: function (res) {
                      console.log(res.data);
