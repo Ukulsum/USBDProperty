@@ -627,7 +627,6 @@ namespace USBDProperty.Controllers
                 UpdatePropertyFeature(selectedFeatures, propertyToUpdate);
                 try
                 {
-                //foreach(var i in propertyToUpdate.PropertyWithFeatures)
                 //{
                 //    _context.PropertyWithFeatures.Add(i);
                 //}
