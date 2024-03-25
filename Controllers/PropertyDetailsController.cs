@@ -141,11 +141,7 @@ namespace USBDProperty.Controllers
             try
             {
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-                //ViewData["propertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
-            
-                //ViewBag.propertyTypes = new SelectList(_context.PropertyTypes.OrderBy(t => t.PropertyTypeName), "PropertyTypeId", "PropertyTypeName");
-                //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
-                //ViewData["NumberOfBedrooms"] = (_context.PropertyDetails, "PropertyInfoId", "NumberOfBedrooms");
+                
                 var data = _context.PropertyDetails.Where(p => p.IsActive)                                           
                                                    .Include(p => p.Area)
                                                    //.Include(p => p.ProjectsInfo)
@@ -161,59 +157,52 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.AreaId.Equals(AreaId)).ToList();
                 }
-                //if (pSize != null || pSize > 0)
-                //{
-                //    data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
-                //}
-
-                //if (minsize != null || minsize > 0)
-                //{
-                //    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
-                //}
-
-                //if (maxsize != null || maxsize > 0)
-                //{
-                //    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
-                //}
-
-                if (PropertyTypeId != null || PropertyTypeId > 0)
+                if (pSize != null || pSize > 0)
                 {
-                    data = data.Where(p => p.PropertyType.PropertyTypeId.Equals(PropertyTypeId)).ToList();
+                    data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
                 }
-                //if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
-                //{
-                //    data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
-                //}
-                //if (minprice != null || minprice > 0)
-                //{
-                //    data = data.Where(p => p.Price.Equals(minprice)).ToList();
-                //}
-                //if (maxprice != null || maxprice > 0)
-                //{
-                //    data = data.Where(p => p.Price.Equals(maxprice)).ToList();
-                //}
-                //if (!string.IsNullOrEmpty(conStatus))
-                //{
-                //    data = data.Where(p => p.ConstructionStatus.ToLower().Equals(conStatus.ToLower())).ToList();
-                //}
-                //if (conStatus != null || conStatus > 0)
-                //{
-                //    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
-                //}
-                //if (!string.IsNullOrEmpty(location))
-                //{
-                //    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
-                //}
+
+                if (minsize != null || minsize > 0)
+                {
+                    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
+                }
+
+                if (maxsize != null || maxsize > 0)
+                {
+                    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
+                }
+
+                if ( PropertyTypeId > 0)//PropertyTypeId != null ||
+                {
+                    data = data.Where(p =>  p.PropertyType.ParentPropertyTypeId.Equals(PropertyTypeId)).ToList();
+                }
+                if (NumberOfBedrooms != null || NumberOfBedrooms > 0)
+                {
+                    data = data.Where(p => p.NumberOfBedrooms.Equals(NumberOfBedrooms)).ToList();
+                }
+                if ( minprice > 0)
+                {
+                    data = data.Where(p => p.Price>=minprice).ToList();
+                }
+                if ( maxprice > 0)
+                {
+                    data = data.Where(p => p.Price<=maxprice).ToList();
+                }
+               
+                if ( conStatus > 0)
+                {
+                    data = data.Where(p => p.ConstructionStatus.Equals(conStatus)).ToList();
+                }
+                if (!string.IsNullOrEmpty(location))
+                {
+                    data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
+                }
                 //if (SearchText != " " || SearchText != null)
                 //{
                 //    data = data.Where(p => p.PropertyName!.Contains(SearchText).ToList());
                 //}
 
 
-
-                //var data=  _context.PropertyDetails.Where(p=>p.AreaId.Equals(AreaId) || p.PropertyFor.Equals(forid) || p.Location.Contains(location));
-
-                //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "PropertyFor");
 
 
                 return View(data);
