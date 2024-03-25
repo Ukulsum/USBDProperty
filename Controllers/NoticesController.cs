@@ -44,15 +44,6 @@ namespace USBDProperty.Controllers
         public async Task<IActionResult> NoticeDetails(int? id)
         {
             return View();
-        //    try
-        //    {
-        //        return View();
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View();
-        //    }
         }
 
 
@@ -61,7 +52,8 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                var nData = _context.Notices.OrderByDescending(n => n.NoticeID).ToList();
+                var nData = _context.Notices.OrderByDescending(n => n.NoticeID)
+                                            .Where(n => n.NoticeID.Equals(Id)).ToList();
                 return Json(new { data = nData });
             }
             catch (Exception ex)

@@ -35,21 +35,24 @@
         </div>
 
 
-        <table class="table datatable">
+        <table class="table table-borderless" id="datatable">
             <thead>
-                <tr>                   
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.PropertyType)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Image)
                     </th>                   
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.FlatSize)
-                    </th>                  
+                    </th>                 
                     <th>
                         @Html.DisplayNameFor(model => model.FloorAvailableNo)
-                    </th>                  
+                    </th> *@                  
                     <th>
                         @Html.DisplayNameFor(model => model.Price)
                     </th>                   
@@ -59,7 +62,10 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>                        
+                    <tr> 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
                         </td>
@@ -67,12 +73,12 @@
                             @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
                             <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />
                         </td>                     
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.FlatSize)
                         </td>                      
                         <td>
                             @Html.DisplayFor(modelItem => item.FloorAvailableNo)
-                        </td>                     
+                        </td>  *@                   
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>                      
@@ -103,6 +109,57 @@
     </div>
 </div>
 
+}
 
-
+@section Scripts{
+<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+<script>
+     $(document).ready(function (){
+         
+         $('#datatable').DataTable({
+          
+              
+    //dom: 'Bfrtip',
+   // dom: 'flit',
+    //dom:'lBfrtip',
+    dom:'Blfrtip ',
+    pageLength: 10,
+       lengthMenu: [
+            [5, 10, 25, 50, -1 ],
+            [ '5 rows','10 rows', '25 rows', '50 rows', 'Show all' ]
+        ],
+        //buttons: ['csv', 'excel', 'pdf',],
+        //buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+        //responsive: true
+    buttons: [{
+      extend: 'pdf',
+      title: 'all properties',
+      filename: 'property_pdf_file_name'
+    },
+    {
+      extend: 'excel',
+      title: 'all property excel sheets',
+      filename: 'property_excel_file_name'
+    }, 
+    {
+      extend: 'csv',
+      filename: 'property_csv_file_name'
+    }]
+    //{
+    //    extend: 'rint',
+    //    title: 'All property print',
+    //    filename: 'property_print_file_name'
+    //}]
+  });
+             
+   })
+</script>   
 }

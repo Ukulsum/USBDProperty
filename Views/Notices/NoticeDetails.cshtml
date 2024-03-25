@@ -69,7 +69,7 @@
                      var propertylist = "";
                      $.each(res.data, function (index, value) {     
                          console.log(value)
-                         propertylist = '<li class="col-xs-12 col-sm-6 col-md-12 col-lg-12"><a href="/Notices/NoticeDetails/"><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""></div><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"><i class="bi bi-calendar-date"></i> Published: ' + (new Date (value.endDate).getDate() + "-" + (new Date ( value.endDate).toLocaleDateString ("default", {month : "short",}))) + "-" + (new Date (value.endDate).getFullYear()) + '</p><span class="locate">' + value.description + '</span></div></a></section></li>'
+                         propertylist = '<li class="col-xs-12 col-sm-6 col-md-12 col-lg-12"><a href="/Notices/NoticeDetails/"><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""></div><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"><i class="bi bi-calendar-date"></i> Published: ' + (new Date (value.endDate).getDate() + "-" + (new Date ( value.endDate).toLocaleDateString ("default", {month : "short",}))) + "-" + (new Date (value.endDate).getFullYear()) + '</p><span class="locate">' + value.description + '</span><p>'+ value.noticeID +'</p></div></a></section></li>'
                      });
 
                      $(".load_HomePropertyDetailsById").empty();
