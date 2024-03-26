@@ -216,7 +216,7 @@
             </div>
 
             <div class="img">
-                <img id="mainImg" class="img-responsive" />
+                <img src="@Url.Content(@Model.ImagePath)" id="mainImg" class="img-responsive"/>
                 <div id="NavImg">
                 </div>
             </div>
@@ -261,6 +261,7 @@
                $("#propertyInfo").show();
            })
            $("#proImage").click(function(){
+               $("#propertyInfo").hide();
                DetailspropertyImages()
            })
            $("#featurePro").click(function(){
@@ -366,11 +367,8 @@
                      featurelist = '<h2>Property Features</h2><hr />';
                      $.each(res.data, function(index, value){
                          console.log(value);
-                         //featurelist += '<li class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="fa fa-check-circle-o"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li>'
-                         featurelist += '<dt class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="bi bi-check2-circle"></i>' + value.propertyFeatures.propertyFeatureName + '</span></dt>'
-                          //<dt class="col-md-5">
-                          //      <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyFor)
-                          //  </dt>
+                         
+                         featurelist += '<dt class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="bi bi-check2-circle"></i>' + value.propertyFeatures.propertyFeatureName + '</span></dt>'                         
                      })
                      console.log("Feature")
                      console.log(featurelist)
