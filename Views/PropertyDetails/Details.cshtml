@@ -36,12 +36,14 @@
                     <button class="btn btn-primary" id="proImage">Property Images</button>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary">Property Features</button>
+                    <button class="btn btn-primary" id="featurePro">Property Features</button>
                 </div>
             </div>
-            <hr style="width:100%;"/>
+            <hr style="width:100%;" />
             <div id="propertyInfo">
                 <div class="row">
+                  @*<h2>Property Features</h2>
+                    <hr />*@
                     <div class="col-md-12">
                         <img class="img-responsive mb-2" src="@Url.Content(@Model.ImagePath)" />
                     </div>
@@ -207,11 +209,12 @@
                         </dl>
                     </div>
                 </div>
-                <div>
+                @* <div>
                     <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
                     <a asp-action="Index">Back to List</a>
-                </div>
+                    </div>*@
             </div>
+
             <div class="img">
                 <img id="mainImg" class="img-responsive" />
                 <div id="NavImg">
@@ -221,14 +224,20 @@
                 <div id="load_HomePropertyFeatureById">
 
                 </div>
-            </dl>*@
+                </dl>*@
 
             <ul class="row">
+               
                 <div id="load_HomePropertyFeatureById">
 
                 </div>
             </ul>
-     
+
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+
 
         </div>
     </div>
@@ -247,15 +256,19 @@
 <script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
 <script>
        $(document).ready(function (){
-           $("#propertyInfo").hide();
+           $("#propertyInfo").show();
            $("#proInfo").click(function(){
                $("#propertyInfo").show();
            })
            $("#proImage").click(function(){
                DetailspropertyImages()
            })
+           $("#featurePro").click(function(){
+               $("#propertyInfo").hide();
+               getHomeFeatureById()
+           })
            //DetailspropertyImages()
-           getHomeFeatureById()
+           
 
            $('#datatable').DataTable({
 
@@ -350,6 +363,7 @@
                      console.log("Feature List");
                      console.log(res.data)
                      var featurelist = "";
+                     featurelist = '<h2>Property Features</h2><hr />';
                      $.each(res.data, function(index, value){
                          console.log(value);
                          //featurelist += '<li class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="fa fa-check-circle-o"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li>'
