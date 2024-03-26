@@ -162,14 +162,14 @@ namespace USBDProperty.Controllers
                     data = data.Where(p => p.FlatSize.Equals(pSize)).ToList();
                 }
 
-                if (minsize != null || minsize > 0)
+                if (minsize > 0)
                 {
-                    data = data.Where(p => p.FlatSize.Equals(minsize)).ToList();
+                    data = data.Where(p => p.FlatSize >= minsize).ToList();
                 }
 
-                if (maxsize != null || maxsize > 0)
+                if (maxsize > 0)
                 {
-                    data = data.Where(p => p.FlatSize.Equals(maxsize)).ToList();
+                    data = data.Where(p => p.FlatSize <= maxsize).ToList();
                 }
 
                 if ( PropertyTypeId > 0)//PropertyTypeId != null ||

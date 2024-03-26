@@ -16,7 +16,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center">Property Details</h5>
-            <hr style="width:100%; " />
+            <hr style="width:100%;" />
             <div id="datatable"></div>
             <div class="row">
                 <div class="col-md-4">
@@ -39,6 +39,7 @@
                     <button class="btn btn-primary">Property Features</button>
                 </div>
             </div>
+            <hr style="width:100%;"/>
             <div id="propertyInfo">
                 <div class="row">
                     <div class="col-md-12">
@@ -216,6 +217,12 @@
                 <div id="NavImg">
                 </div>
             </div>
+            @*<dl class="row">
+                <div id="load_HomePropertyFeatureById">
+
+                </div>
+            </dl>*@
+
             <ul class="row">
                 <div id="load_HomePropertyFeatureById">
 
@@ -345,7 +352,11 @@
                      var featurelist = "";
                      $.each(res.data, function(index, value){
                          console.log(value);
-                         featurelist += '<li class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="fa fa-check-circle-o"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li>'
+                         //featurelist += '<li class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="fa fa-check-circle-o"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li>'
+                         featurelist += '<dt class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="bi bi-check2-circle"></i>' + value.propertyFeatures.propertyFeatureName + '</span></dt>'
+                          //<dt class="col-md-5">
+                          //      <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyFor)
+                          //  </dt>
                      })
                      console.log("Feature")
                      console.log(featurelist)

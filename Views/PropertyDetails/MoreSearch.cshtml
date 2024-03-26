@@ -105,7 +105,7 @@
                                             <p class="font-montserrat">@(pinfo.FlatSize + " " + pinfo.MeasurementUnit.ShortName + ", " + pinfo.NumberOfBedrooms + " Beds " + pinfo.ConstructionStatus + " " + pinfo.PropertyType.PropertyTypeName + " for " + pinfo.PropertyFor + " at " + pinfo.Location)</p>
                                             <p class="ptype">@pinfo.PropertyType.PropertyTypeName </p>
                                             <span class="locate m-0"><i class="fa fa-map-marker"></i> @(pinfo.Location + " " + pinfo.Area.AreaName)</span>
-
+                                            <span>TK. @(pinfo.Price)</span>
                                             <ul>
                                                 <li><span><i class="fa fa-home"></i> @(pinfo.FlatSize + " " + @pinfo.MeasurementUnit.ShortName)</span></li>
                                                 <li><span><i class="fa fa-bed"></i> @(pinfo.NumberOfBedrooms + " Beds")</span></li>
