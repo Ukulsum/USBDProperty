@@ -539,9 +539,12 @@
                  //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
                     //var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].imagePath + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
                  $.each(res.data, function(index, value){
-                     NoticeData +=  "<a href='/Notices/NoticeDetails/"+ value.noticeID +"'><div class='img'><img class='img-responsive' src='" + value.imagePath + "' alt='" + value.title + "'><div class='over-proper'></div><p>" + value.description + "</p><p>"+ value.noticeID+"</p> </a>";
+                     NoticeData +=  "<a href='/Notices/NoticeDetails/"+ value.noticeID +"'><div class='img'><img class='img-responsive' src='" + value.imagePath + "' alt='" + value.title + "'> </a>";
                       $("#exampleModalLabel").innerText=value.title
                  });
+                 /*
+                    <div class='over-proper'></div><p>" + value.description + "</p><p>"+ value.noticeID+"</p>
+                 */
                   //  console.log(res.data[0].title);
                   //$("#exampleModalLabel").innerText=res.data[0].title
                   //$("#exampleModalLabel").innerText=value.title
