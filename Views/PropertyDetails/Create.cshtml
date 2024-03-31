@@ -497,7 +497,7 @@
         $("#parenTypes").change(function () {
 
 
-                console.log($(this).val())
+                console.log("pid "+ $(this).val())
                 $.get("/PropertyTypes/GetChildType?pid=" + $(this).val(), function (data, status) {
                 console.log(data)
                     $("#drptypes").empty();
