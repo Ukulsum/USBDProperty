@@ -179,7 +179,6 @@ namespace USBDProperty.Controllers
                     string extension = Path.GetExtension(projectsInfo.MapPath.FileName).ToLower();
                     if (extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
                     {
-                        //string fileName = developersorAgent.CompanyName + extension;
                         string fileName = $" {projectsInfo.Title} _map {extension}";
                         string path = Path.Combine(rpath, "LocationMap", fileName);
                         using (var fileStrem = new FileStream(path, FileMode.Create))
@@ -197,14 +196,12 @@ namespace USBDProperty.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Please provide location map ");
-                    // return View(projectsInfo);
                 }
                 if (projectsInfo.ProjectVideoPath != null)
                 {
                     string extension = Path.GetExtension(projectsInfo.ProjectVideoPath.FileName).ToLower();
                     if (extension == ".mp4" || extension == ".gif" || extension == ".vlc")
                     {
-                        //string fileName = developersorAgent.CompanyName + extension;
                         string fileName = $" {projectsInfo.Title} _video {extension}";
                         string path = Path.Combine(rpath, "Video", fileName);
                         using (var fileStrem = new FileStream(path, FileMode.Create))
@@ -212,12 +209,10 @@ namespace USBDProperty.Controllers
                             await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
                         }
                         projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
-                        //projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
                     }
                     else
                     {
                         ModelState.AddModelError("", "Please provide mp4|.vlc|gif");
-                        //return View(projectsInfo);
                     }
                 }
                 _context.Add(projectsInfo);

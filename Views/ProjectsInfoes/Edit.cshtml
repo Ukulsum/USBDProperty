@@ -32,7 +32,6 @@
                 <div class="form-group col-md-12">
                     <label asp-for="Description" class="control-label"></label>
                     <textarea asp-for="Description" class="form-control" id="Description"></textarea>
-                    @*<textarea type="text" asp-for="Description" class="form-control"></textarea>*@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="row">
@@ -45,9 +44,7 @@
                     <div class="col-md-4">
                         <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
                             <video controls style="width:145px;height:145px;" alt="Image Upload" id="videoPreview"><source src="@Url.Content(Model.ProjectVideo)"/></video>
-                            @*<input type="text" class="form-control" name="ProjectVideo" id="video" asp-for="ProjectVideo" accept="video/*" hidden />*@
                             <input type="text" class="form-control" name="ProjectVideo" id="video" asp-for="ProjectVideo" accept="video/*" hidden />
-                            @*<input type="text" class="form-control" name="ProjectVideoPath" id="video" hidden />*@
                         </div>
                     </div>
                 </div>
@@ -94,8 +91,6 @@
                             <div style="width:170px;height:170px; border:2px solid #012970; border-radius:10px; padding:10px;">
                                 <img src="@Url.Content(Model.LocationMap)" style="width:145px;height:145px;" alt="@Model.Title" id="imgPreview">
                                 <input type="text" class="form-control" name="LocationMap" id="locationmap" asp-for="LocationMap" hidden/>
-                                @*<input type="text" class="form-control" name="LocationMap" id="LocationMap"asp-for="LocationMap" hidden/>*@
-                                @*<input type="text" class="form-control" name="LocationMap" id="LocationMap" hidden/>*@
                             </div>
                         </div>
                     </div>
@@ -106,8 +101,6 @@
                 <div class="form-group col-md-6">
                     <a asp-action="Index">Back to List</a>
                 </div>
-
-
             </div>
         </form>
 

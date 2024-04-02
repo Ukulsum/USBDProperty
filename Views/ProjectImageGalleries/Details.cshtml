@@ -5,33 +5,36 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Project Images</h5>
+        <hr style="width:100%;" />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
+            <dd class="col-sm-9">
+                <img class="img-responsive" src="@Url.Content(@Model.ImagePath)" height="180" width="220" />
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ProjectsInfo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ProjectsInfo.Location)
+            </dd>
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </dl>
+    </div>
+</div>
 
-<div>
-    <h4>ProjectImageGallery</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjectsInfo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProjectsInfo.Location)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+

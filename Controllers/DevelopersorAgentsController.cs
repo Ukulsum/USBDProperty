@@ -37,8 +37,7 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
-                return Json(new { data = "No record" });
+                return Json(new { data = ex.Message });
             }
 
         }
@@ -52,19 +51,6 @@ namespace USBDProperty.Controllers
                                                      //.Select(a => new { a.Name }).Distinct()
                                                      .ToList();
                 return Json(new { Data = data });
-            //    if (User.IsInRole("Agent"))
-            //    {
-            //        var data = _context.DevelopersorAgent.OrderBy(d => d.CompanyName)
-            //                                             .Where(a => a.Email.Equals(User.Identity.Name)).ToList();
-            //        return Json(new { Data = data });
-            //    }
-            //    else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
-            //    {
-            //        var data = _context.DevelopersorAgent.OrderBy(d => d.CompanyName).ToList();
-            //        return Json(new { Data = data });
-            //    }
-
-                //    return Json(new { IsSuccess = false });
             }
             catch (Exception ex)
             {
@@ -105,10 +91,6 @@ namespace USBDProperty.Controllers
             {
                 if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
-                    //return _context.DevelopersorAgent != null ?
-                    //View(await _context.DevelopersorAgent.OrderByDescending(d => d.ID)
-                    //                                     .Where(a => a.IsActive).ToListAsync()) :
-                    //Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
                     var devdata = _context.DevelopersorAgent.OrderByDescending(d => d.ID)
                                                             .Where(a => a.IsActive);
                     return View(await devdata.ToListAsync());
@@ -122,9 +104,6 @@ namespace USBDProperty.Controllers
                     return View(await agent.ToListAsync());
 
                 }
-                //return _context.DevelopersorAgent != null ?
-                //          View(await _context.DevelopersorAgent.OrderByDescending(p => p.ID).Where(d => d.IsActive).ToListAsync()) :
-                //Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
                 return View();
             }
             catch(Exception ex)
@@ -170,12 +149,10 @@ namespace USBDProperty.Controllers
                     return Json(new { Data = data });
                 }
                 return Json(new { data = "Record" });
-                //var data = _context.DevelopersorAgent.Where(d => d.IsActive);
-                //return Json(new { Data = data });
             }
             catch (Exception ex)
             {
-                return Json(new { data = "No Record" });
+                return Json(new { data = ex.Message });
             }
         }
 
@@ -439,8 +416,6 @@ namespace USBDProperty.Controllers
                 }
                 else
                 {
-                    //ModelState.AddModelError("", "Please Provide logo");
-                    //return View(developersorAgent);
                     data.Logo = developersorAgent.Logo;
                 }
 
@@ -460,8 +435,7 @@ namespace USBDProperty.Controllers
                         if (System.IO.File.Exists(rPath))
                         {
                             System.IO.File.Delete(rPath);
-                        }
-                        //data.Banner = "~/Developer/Banner/" + fileName;
+                        }                      
                     }
                     else
                     {
@@ -471,9 +445,6 @@ namespace USBDProperty.Controllers
                 }
                 else
                 {
-                    //ModelState.AddModelError("", "Please provide Banner");
-                    ////return View(developersorAgent);
-                    ///
                     data.Banner = developersorAgent.Banner;
                 }
 

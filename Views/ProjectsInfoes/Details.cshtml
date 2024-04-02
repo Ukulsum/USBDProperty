@@ -17,19 +17,10 @@
             </div>
         </div>
         <div class="row">
-            @*<div class="col-sm-12 col-md-6">
-                @if (Model.LocationMap != null)
-                {
-                <img src="@Url.Content(Model.LocationMap)" class="img-responsive" />
-                }
-                <p>@Model.ProjectName</p>
-                <p>@Model.Location</p>
-                <address><p>@Model.Location</p></address>
-                </div>*@
             <div class="col-sm-12 col-md-12">
                 <dl class="row">
                     <dt class="col-sm-4">
-                       @*<i class="fa fa-chevron-right"></i>*@ @Html.DisplayNameFor(model => model.Title)
+                       @Html.DisplayNameFor(model => model.Title)
                     </dt>
                     <dd class="col-sm-8">
                         @Html.DisplayFor(model => model.Title)
@@ -52,12 +43,6 @@
                     <dd class="col-sm-8">
                         @Html.DisplayFor(model => model.Location)
                     </dd>
-                    @* <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.LocationMap)
-                        </dt>
-                        <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.LocationMap)
-                        </dd>*@
                     <dt class="col-sm-4">
                         @Html.DisplayNameFor(model => model.Developers.Logo)
                     </dt>
@@ -69,7 +54,6 @@
                     </dt>
                    <dd class="col-sm-8">
                         @Html.DisplayFor(model => model.Developers.CompanyName)
-                        @*<img src="@Url.Content(Model.Developers.Banner)" class="img-responsive" />*@
                     </dd>
                     
                     <dt class="col-sm-4">
@@ -93,52 +77,5 @@
 
 
 
-@*
-<h1>Details</h1>
 
-<div>
-    <h4>ProjectsInfo</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjectName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProjectName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LocationMap)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LocationMap)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Developers)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Developers.Banner)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
+

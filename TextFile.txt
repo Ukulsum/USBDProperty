@@ -1,2 +1,3 @@
-Property details Edit page does not set logic between TotalFloor FloorAvailableNo  
-Property Details Edit page loading show & hide property input 
+Notification Complete 
+Property Feature Complete
+Measurement Unit Complete

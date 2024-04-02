@@ -46,7 +46,6 @@ namespace USBDProperty.Controllers
                     }
                     return View(projectData);
                 }        
-                //ViewData["AgentId"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName");
                 return View();
             }
             catch (Exception ex)
@@ -97,8 +96,6 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProjectImageGallery projectImageGallery, List<IFormFile> MultipleImagePath)
         {
-            //if (ModelState.IsValid)
-            //{
                 try
                 {
                     string rPath = "";
