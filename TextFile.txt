@@ -1,3 +1,6 @@
 Notification Complete 
 Property Feature Complete
 Measurement Unit Complete
+Tearms & conditions Complete
+
+

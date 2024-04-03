@@ -19,7 +19,7 @@ namespace USBDProperty.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _environment;
         private readonly UserManager<ApplicationUser> _userManager;
-        public DevelopersorAgentsController(ApplicationDbContext context, 
+        public DevelopersorAgentsController(ApplicationDbContext context,
             IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -69,7 +69,7 @@ namespace USBDProperty.Controllers
                     var data = _context.DevelopersorAgent.OrderByDescending(d => d.Name).Where(a => a.Email.Equals(User.Identity.Name)).ToList();
                     return Json(new { Data = data });
                 }
-               else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
 
                     var data = _context.DevelopersorAgent.OrderByDescending(d => d.Name).ToList();
@@ -85,7 +85,7 @@ namespace USBDProperty.Controllers
 
 
         // GET: DevelopersorAgents
-        public async Task<IActionResult> Index(bool?isActive)
+        public async Task<IActionResult> Index(bool? isActive)
         {
             try
             {
@@ -106,20 +106,20 @@ namespace USBDProperty.Controllers
                 }
                 return View();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View();
             }
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Developer(bool? isActive=true)
+        public async Task<IActionResult> Developer(bool? isActive = true)
         {
 
             return View();
         }
         [AllowAnonymous]
-        public JsonResult GetDeveloper( )
+        public JsonResult GetDeveloper()
         {
             try
             {
@@ -143,7 +143,7 @@ namespace USBDProperty.Controllers
                                                          .OrderByDescending(d => d.ID).ToList();
                     return Json(new { Data = data });
                 }
-                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
                     var data = _context.DevelopersorAgent.Where(d => d.IsActive);
                     return Json(new { Data = data });
@@ -165,7 +165,7 @@ namespace USBDProperty.Controllers
                 var data = _context.DevelopersorAgent.Where(d => d.ID == id);
                 return Json(new { Data = data });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { data = "No Record" });
             }
@@ -190,7 +190,7 @@ namespace USBDProperty.Controllers
 
                 return View(developersorAgent);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(id);
@@ -208,109 +208,109 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( DevelopersorAgent developersorAgent,IFormFile logo,IFormFile banner)
+        public async Task<IActionResult> Create(DevelopersorAgent developersorAgent, IFormFile logo, IFormFile banner)
         {
             //if (ModelState.IsValid)
             //{
-                ////https://www.milanjovanovic.tech/blog/working-with-transactions-in-ef-core
-                using var transaction = _context.Database.BeginTransaction();
-                try
+            ////https://www.milanjovanovic.tech/blog/working-with-transactions-in-ef-core
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                string wwwRootPath = "";
+                string rpath = "";
+                if (_environment != null)
                 {
-                    string wwwRootPath = "";
-                    string rpath = "";
-                    if (_environment != null)
+                    wwwRootPath = _environment.WebRootPath;
+                    rpath = wwwRootPath + "/Developer";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
+                }
+                if (logo.FileName != null)
+                {
+                    string extension = Path.GetExtension(logo.FileName).ToLower();
+                    if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                     {
-                        wwwRootPath = _environment.WebRootPath;
-                        rpath = wwwRootPath + "/Developer";
-                    }
-                    else
-                    {
-                        wwwRootPath = Directory.GetCurrentDirectory();
-                        rpath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
-                    }
-                    if (logo.FileName != null)
-                    {
-                        string extension = Path.GetExtension(logo.FileName).ToLower();
-                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
-                        {
-                            //string fileName = developersorAgent.CompanyName + extension;
+                        //string fileName = developersorAgent.CompanyName + extension;
                         string fileName = $" {developersorAgent.CompanyName} logo {extension}";
-                        string path = Path.Combine(rpath,"Logo", fileName);
-                            using (var fileStrem = new FileStream(path, FileMode.Create))
-                            {
-                                await logo.CopyToAsync(fileStrem);
-                            }
-                            developersorAgent.Logo = "/Developer/Logo/" + fileName;
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Please provide jpg|.jpeg|png");
-                            return View(developersorAgent);
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide logo ");
-                        return View(developersorAgent);
-                    }
-                    if (banner.FileName != null)
-                    {
-                        string extension = Path.GetExtension(banner.FileName).ToLower();
-                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
-                        {
-                            string fileName =$" {developersorAgent.CompanyName} _banner {extension}";
-                        //string path = Path.Combine(wwwRootPath + "/wwwroot/Developer/Banner", fileName);
-                        string path = Path.Combine(rpath,"Banner", fileName);
+                        string path = Path.Combine(rpath, "Logo", fileName);
                         using (var fileStrem = new FileStream(path, FileMode.Create))
-                            {
-                                await banner.CopyToAsync(fileStrem);
-                            }
-                            developersorAgent.Banner = "/Developer/Banner/" + fileName;
-                        }
-                        else
                         {
-                            ModelState.AddModelError("", "Please provide jpg|jpeg|png");
-                            return View(developersorAgent);
+                            await logo.CopyToAsync(fileStrem);
                         }
+                        developersorAgent.Logo = "/Developer/Logo/" + fileName;
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Please provide logo ");
+                        ModelState.AddModelError("", "Please provide jpg|.jpeg|png");
                         return View(developersorAgent);
                     }
-                    developersorAgent.CreatedBy = User.Identity.Name ?? "";
-                    developersorAgent.CreatedDate = DateTime.Now.Date;
-                    _context.Add(developersorAgent);
-                    if (await _context.SaveChangesAsync() > 0)
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Please provide logo ");
+                    return View(developersorAgent);
+                }
+                if (banner.FileName != null)
+                {
+                    string extension = Path.GetExtension(banner.FileName).ToLower();
+                    if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                     {
-                        var result = await _userManager.CreateAsync(new ApplicationUser { UserName = developersorAgent.Email, Email = developersorAgent.Email, PhoneNumber = developersorAgent.ContactNo }, password: "@Test123");
-                        if (result.Succeeded)
+                        string fileName = $" {developersorAgent.CompanyName} _banner {extension}";
+                        //string path = Path.Combine(wwwRootPath + "/wwwroot/Developer/Banner", fileName);
+                        string path = Path.Combine(rpath, "Banner", fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
                         {
-                            transaction.Commit();
-                            return RedirectToAction(nameof(Index));
+                            await banner.CopyToAsync(fileStrem);
                         }
-                        else
-                        {
-                            string errormsg = "";
-                            if (result.Errors.Count() > 0)
-                            {
-                                foreach (var item in result.Errors)
-                                {
-                                    errormsg += item.Description;
-                                }
-                            }
-                            transaction.Rollback();
-                            ModelState.AddModelError("", errormsg);
-                            return View(developersorAgent);
-                        }
+                        developersorAgent.Banner = "/Developer/Banner/" + fileName;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please provide jpg|jpeg|png");
+                        return View(developersorAgent);
                     }
                 }
-                catch(Exception ex)
+                else
                 {
-                    transaction.Rollback();
-                    ModelState.AddModelError("", ex.Message);
-                return View(developersorAgent);
+                    ModelState.AddModelError("", "Please provide logo ");
+                    return View(developersorAgent);
                 }
+                developersorAgent.CreatedBy = User.Identity.Name ?? "";
+                developersorAgent.CreatedDate = DateTime.Now.Date;
+                _context.Add(developersorAgent);
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    var result = await _userManager.CreateAsync(new ApplicationUser { UserName = developersorAgent.Email, Email = developersorAgent.Email, PhoneNumber = developersorAgent.ContactNo }, password: "@Test123");
+                    if (result.Succeeded)
+                    {
+                        transaction.Commit();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        string errormsg = "";
+                        if (result.Errors.Count() > 0)
+                        {
+                            foreach (var item in result.Errors)
+                            {
+                                errormsg += item.Description;
+                            }
+                        }
+                        transaction.Rollback();
+                        ModelState.AddModelError("", errormsg);
+                        return View(developersorAgent);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                ModelState.AddModelError("", ex.Message);
+                return View(developersorAgent);
+            }
             //}
             return View(developersorAgent);
         }
@@ -331,7 +331,8 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
-                var alllocid = (from a in _context.Areas join c in _context.Citys on a.CityId equals c.CityId
+                var alllocid = (from a in _context.Areas
+                                join c in _context.Citys on a.CityId equals c.CityId
                                 join d in _context.Divisions on c.DivisionId equals d.DivisionID
                                 join cc in _context.Countries on d.CountryId equals cc.CountryID
                                 where a.AreaId == developersorAgent.AreaID
@@ -370,10 +371,10 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
-                var data =await  _context.DevelopersorAgent.FindAsync( id);
+                var data = await _context.DevelopersorAgent.FindAsync(id);
                 var wwwRootPath = "";
                 var rPath = "";
-                if(_environment != null)
+                if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
                     rPath = wwwRootPath + "/Developer";
@@ -385,32 +386,37 @@ namespace USBDProperty.Controllers
                 }
                 if (developersorAgent.logofile != null)
                 {
+                    if (data != null)
+                    {
+                        string npath = data.Logo.Replace("~/", "");
+                        string rootPath = wwwRootPath + npath;
+                        if (System.IO.File.Exists(rootPath))
+                        {
+                            System.IO.File.Delete(npath);
+                        }
 
-                ////}
-                ////if (developersorAgent.logofile.FileName.Length > 0)
-                //    //if (logofile.FileName != null && logofile.FileName.Length > 0)
-                //{
-                    string extension = Path.GetExtension(developersorAgent.logofile.FileName).ToLower();
-                    if(extension == ".jpg" || extension == ".png" || extension == ".jepg")
-                    {
-                        string fileName = $" {developersorAgent.CompanyName} logo {extension}";
-                        string path = Path.Combine(rPath, "Logo", fileName);
-                        using (var fileStrem = new FileStream (path, FileMode.Create))
+                        string extension = Path.GetExtension(developersorAgent.logofile.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jepg")
                         {
-                            await developersorAgent.logofile.CopyToAsync(fileStrem);
+                            string fileName = $" {developersorAgent.CompanyName} logo {extension}";
+                            string path = Path.Combine(rPath, "Logo", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await developersorAgent.logofile.CopyToAsync(fileStrem);
+                            }
+                            developersorAgent.Logo = "/Developer/Logo/" + fileName;
+                            //if (System.IO.File.Exists(rPath))
+                            //{
+                            //    System.IO.File.Delete(rPath);
+                            //}
+
                         }
-                        developersorAgent.Logo = "/Developer/Logo/" + fileName;
-                        if (System.IO.File.Exists(rPath))
+
+                        else
                         {
-                            System.IO.File.Delete(rPath);
+                            ModelState.AddModelError("", "Please provide .jpg|.jpeg|png");
+                            return View(developersorAgent);
                         }
-                         
-                    }
-                   
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide .jpg|.jpeg|png");
-                        return View(developersorAgent);
                     }
 
                 }
@@ -420,27 +426,37 @@ namespace USBDProperty.Controllers
                 }
 
 
-                if(developersorAgent.bannerFile != null)
+                if (developersorAgent.bannerFile != null)
                 {
-                    string extension = Path.GetExtension(developersorAgent.bannerFile.FileName).ToLower();
-                    if(extension == ".jpg" || extension == ".png" || extension == ".jepg")
+                    if (data != null)
                     {
-                        string fileName = $" {developersorAgent.CompanyName} banner {extension}";
-                        string path = Path.Combine(rPath, "Banner", fileName);
-                        using(var fileStrem = new FileStream (path, FileMode.Create))
+                        string nbannar = data.Banner.Replace("~/", "");
+                        string rootBannar = wwwRootPath + nbannar;
+                        if (System.IO.File.Exists(rootBannar))
                         {
-                            await developersorAgent.bannerFile.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(rootBannar);
                         }
-                        developersorAgent.Banner = "/Developer/Banner/" + fileName;
-                        if (System.IO.File.Exists(rPath))
+
+                        string extension = Path.GetExtension(developersorAgent.bannerFile.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jepg")
                         {
-                            System.IO.File.Delete(rPath);
-                        }                      
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide .jpg| .png| .jpeg");
-                        return View(developersorAgent);
+                            string fileName = $" {developersorAgent.CompanyName} banner {extension}";
+                            string path = Path.Combine(rPath, "Banner", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await developersorAgent.bannerFile.CopyToAsync(fileStrem);
+                            }
+                            developersorAgent.Banner = "/Developer/Banner/" + fileName;
+                            //if (System.IO.File.Exists(rPath))
+                            //{
+                            //    System.IO.File.Delete(rPath);
+                            //}
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide .jpg| .png| .jpeg");
+                            return View(developersorAgent);
+                        }
                     }
                 }
                 else
@@ -450,7 +466,7 @@ namespace USBDProperty.Controllers
 
                 data.UpdateBy = User.Identity.Name ?? "";
                 data.UpdateDate = DateTime.Now.Date;
-                data.Banner=developersorAgent.Banner;
+                data.Banner = developersorAgent.Banner;
                 data.Logo = developersorAgent.Logo;
                 data.Email = developersorAgent.Email;
                 data.AreaID = developersorAgent.AreaID;
@@ -461,15 +477,15 @@ namespace USBDProperty.Controllers
                 data.IsActive = developersorAgent.IsActive;
                 data.Membership = developersorAgent.Membership;
                 data.CreatedDate = developersorAgent.CreatedDate;
-                data.CreatedBy =  developersorAgent.CreatedBy;  
-                
-                
+                data.CreatedBy = developersorAgent.CreatedBy;
+
+
                 _context.Update(data);
-                if(await _context.SaveChangesAsync() > 0)
+                if (await _context.SaveChangesAsync() > 0)
                 {
-                   
-                 var isExist=   await _userManager.FindByEmailAsync(data.Email);
-                    if (isExist ==null)
+
+                    var isExist = await _userManager.FindByEmailAsync(data.Email);
+                    if (isExist == null)
                     {
                         var result = await _userManager.CreateAsync(new ApplicationUser { UserName = developersorAgent.Email, Email = developersorAgent.Email, PhoneNumber = developersorAgent.ContactNo }, password: "@Test123");
                         if (result.Succeeded)
@@ -496,7 +512,7 @@ namespace USBDProperty.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 transaction.Rollback();
                 ModelState.AddModelError("", ex.Message);
@@ -524,7 +540,7 @@ namespace USBDProperty.Controllers
 
                 return View(developersorAgent);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(id);
@@ -538,6 +554,18 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                string fpath = "";
+                string wwwRootPath = "";
+                if (_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (_context.DevelopersorAgent == null)
                 {
                     return Problem("Entity set 'ApplicationDbContext.DevelopersorAgent'  is null.");
@@ -545,13 +573,31 @@ namespace USBDProperty.Controllers
                 var developersorAgent = await _context.DevelopersorAgent.FindAsync(id);
                 if (developersorAgent != null)
                 {
+                    string path = developersorAgent.Logo.Replace("~", "");
+                    if(await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootLogo = wwwRootPath + path;
+                        if (System.IO.File.Exists(rootLogo))
+                        {
+                            System.IO.File.Delete(rootLogo);
+                        }
+                    }
+                    string bpath = developersorAgent.Banner.Replace("~", "");
+                    if (await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootBannar = wwwRootPath + path;
+                        if (System.IO.File.Exists(rootBannar))
+                        {
+                            System.IO.File.Delete(rootBannar);
+                        }
+                    }
                     _context.DevelopersorAgent.Remove(developersorAgent);
                 }
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(id);
@@ -560,7 +606,7 @@ namespace USBDProperty.Controllers
 
         private bool DevelopersorAgentExists(int id)
         {
-          return (_context.DevelopersorAgent?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.DevelopersorAgent?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

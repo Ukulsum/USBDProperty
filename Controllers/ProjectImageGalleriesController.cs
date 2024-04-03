@@ -23,7 +23,7 @@ namespace USBDProperty.Controllers
         }
 
         // GET: ProjectImageGalleries
-        public async Task<IActionResult> Index(int projectId=0)
+        public async Task<IActionResult> Index(int projectId = 0)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace USBDProperty.Controllers
                         projectData = projectData.Where(d => d.ProjectID.Equals(projectId)).ToList();
                     }
                     return View(projectData);
-                }        
+                }
                 return View();
             }
             catch (Exception ex)
@@ -75,7 +75,7 @@ namespace USBDProperty.Controllers
 
                 return View(projectImageGallery);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View();
@@ -96,45 +96,45 @@ namespace USBDProperty.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProjectImageGallery projectImageGallery, List<IFormFile> MultipleImagePath)
         {
-                try
+            try
+            {
+                string rPath = "";
+                string wwwRootPath = "";
+                if (_environment != null)
                 {
-                    string rPath = "";
-                    string wwwRootPath = "";
-                    if (_environment != null)
+                    wwwRootPath = _environment.WebRootPath;
+                    rPath = wwwRootPath + "/Content/Images";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    rPath = Path.Combine(wwwRootPath, "/wwwroot/Content/Images");
+                }
+                for (int i = 0; i < MultipleImagePath.Count(); i++)
+                {
+                    string extention = Path.GetExtension(MultipleImagePath[i].FileName).ToLower();
+                    if (extention == ".jpg" || extention == ".png" || extention == ".jpeg")
                     {
-                        wwwRootPath = _environment.WebRootPath;
-                        rPath = wwwRootPath + "/Content/Images";
-                    }
-                    else
-                    {
-                        wwwRootPath = Directory.GetCurrentDirectory();
-                        rPath = Path.Combine(wwwRootPath, "/wwwroot/Content/Images");
-                    }
-                    for (int i = 0; i <MultipleImagePath.Count(); i++)
-                    {
-                        string extention = Path.GetExtension(MultipleImagePath[i].FileName).ToLower();
-                        if (extention == ".jpg" || extention == ".png" || extention == ".jpeg")
+                        string fileName = projectImageGallery.ProjectID + "_" + i + 1 + extention;
+                        string path = Path.Combine(rPath, fileName);
+                        using (var fileStrem = new FileStream(path, FileMode.Create))
                         {
-                            string fileName = projectImageGallery.ProjectID + "_" + i + 1 + extention;
-                            string path = Path.Combine(rPath, fileName);
-                            using (var fileStrem = new FileStream(path, FileMode.Create))
-                            {
-                                await MultipleImagePath[i].CopyToAsync(fileStrem);
-                            }
-                            projectImageGallery.Id = 0;
-                            projectImageGallery.ImagePath = "/Content/Images/" + fileName;
-                            _context.Add(projectImageGallery);
-                            await _context.SaveChangesAsync();
+                            await MultipleImagePath[i].CopyToAsync(fileStrem);
                         }
+                        projectImageGallery.Id = 0;
+                        projectImageGallery.ImagePath = "/Content/Images/" + fileName;
+                        _context.Add(projectImageGallery);
+                        await _context.SaveChangesAsync();
                     }
                 }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", ex.Message);
-                    return View(projectImageGallery);
-                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(projectImageGallery);
+            }
 
-                return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
 
             //}
             ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "ProjectName", projectImageGallery.ProjectID);
@@ -159,7 +159,7 @@ namespace USBDProperty.Controllers
                 ViewData["ProjectID"] = new SelectList(_context.ProjectsInfo, "Id", "Location", projectImageGallery.ProjectID);
                 return View(projectImageGallery);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View();
@@ -182,7 +182,7 @@ namespace USBDProperty.Controllers
                 var data = await _context.ProjectImageGallery.FindAsync(id);
                 string fpath = "";
                 string wwwRootPath = "";
-                if(_environment != null)
+                if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
                     fpath = wwwRootPath + "/Content";
@@ -192,27 +192,37 @@ namespace USBDProperty.Controllers
                     wwwRootPath = Directory.GetCurrentDirectory();
                     fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
                 }
-                if(projectImageGallery.ImageFile != null)
+                if (projectImageGallery.ImageFile != null)
                 {
-                    string extension = Path.GetExtension(projectImageGallery.ImageFile.FileName).ToLower();
-                    if(extension == ".jpg" || extension == ".png" || extension == ".jpeg")
+                    if (data != null)
                     {
-                        string fileName = projectImageGallery.Name + extension;
-                        string path = Path.Combine(fpath, "Images", fileName);
-                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        string npath = data.ImagePath.Replace("~/", "");
+                        string rootpath = wwwRootPath + npath;
+                        if (System.IO.File.Exists(rootpath))
                         {
-                            await projectImageGallery.ImageFile.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(rootpath);
                         }
-                        projectImageGallery.ImagePath = "/Content/Images/" + fileName;
-                        if (System.IO.File.Exists(fpath))
+
+                        string extension = Path.GetExtension(projectImageGallery.ImageFile.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                         {
-                            System.IO.File.Delete(fpath);
+                            string fileName = projectImageGallery.Name + extension;
+                            string path = Path.Combine(fpath, "Images", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await projectImageGallery.ImageFile.CopyToAsync(fileStrem);
+                            }
+                            projectImageGallery.ImagePath = "/Content/Images/" + fileName;
+                            //if (System.IO.File.Exists(fpath))
+                            //{
+                            //    System.IO.File.Delete(fpath);
+                            //}
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
-                        return View(projectImageGallery);
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
+                            return View(projectImageGallery);
+                        }
                     }
                 }
                 else
@@ -225,13 +235,13 @@ namespace USBDProperty.Controllers
                 data.Id = projectImageGallery.Id;
 
                 _context.Update(data);
-                if(await _context.SaveChangesAsync() > 0)
+                if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
                 return View(projectImageGallery);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View();
@@ -260,7 +270,7 @@ namespace USBDProperty.Controllers
 
                 return View(projectImageGallery);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View();
@@ -274,6 +284,18 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                string fpath = "";
+                string wwwRootPath = "";
+                if (_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (_context.ProjectImageGallery == null)
                 {
                     return Problem("Entity set 'ApplicationDbContext.ProjectImageGallery'  is null.");
@@ -281,13 +303,22 @@ namespace USBDProperty.Controllers
                 var projectImageGallery = await _context.ProjectImageGallery.FindAsync(id);
                 if (projectImageGallery != null)
                 {
+                    string path = projectImageGallery.ImagePath.Replace("~", "");
                     _context.ProjectImageGallery.Remove(projectImageGallery);
+                    if(await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootpath = wwwRootPath + path;
+                        if (System.IO.File.Exists(rootpath))
+                        {
+                            System.IO.File.Delete(rootpath);
+                        }
+                    }
                 }
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View();
@@ -296,7 +327,7 @@ namespace USBDProperty.Controllers
 
         private bool ProjectImageGalleryExists(int id)
         {
-          return (_context.ProjectImageGallery?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ProjectImageGallery?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

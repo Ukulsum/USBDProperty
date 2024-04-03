@@ -988,25 +988,35 @@ namespace USBDProperty.Controllers
                 }
                 if (propertyDetails.Image != null)
                 {
-                    string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
-                    if (extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
+                    if (data != null)
                     {
-                        string fileName = propertyDetails.Title + extention;
-                        string path = Path.Combine(fpath, "Images", fileName);
-                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        string npath = data.ImagePath.Replace("/", "");
+                        string rootpath = wwwRootPath + npath;
+                        if (System.IO.File.Exists(rootpath))
                         {
-                            await propertyDetails.Image.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(rootpath);
                         }
-                        propertyDetails.ImagePath = "/Content/Images/" + fileName;
-                        if (System.IO.File.Exists(fpath))
+
+                        string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
+                        if (extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
                         {
-                            System.IO.File.Delete(fpath);
+                            string fileName = propertyDetails.Title + extention;
+                            string path = Path.Combine(fpath, "Images", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await propertyDetails.Image.CopyToAsync(fileStrem);
+                            }
+                            propertyDetails.ImagePath = "/Content/Images/" + fileName;
+                            //if (System.IO.File.Exists(fpath))
+                            //{
+                            //    System.IO.File.Delete(fpath);
+                            //}
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
-                        return View(propertyDetails);
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
+                            return View(propertyDetails);
+                        }
                     }
                 }
                 else
@@ -1119,6 +1129,18 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                string fpath = "";
+                string wwwRootPath = "";
+                if(_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (_context.PropertyDetails == null)
                 {
                     return Problem("Entity set 'ApplicationDbContext.PropertyDetails'  is null.");
@@ -1126,10 +1148,19 @@ namespace USBDProperty.Controllers
                 var propertyDetails = await _context.PropertyDetails.FindAsync(id);
                 if (propertyDetails != null)
                 {
+                    string path = propertyDetails.ImagePath.Replace("~", "");
                     _context.PropertyDetails.Remove(propertyDetails);
+                    if(await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootPath = wwwRootPath + path;
+                        if (System.IO.File.Exists(rootPath))
+                        {
+                            System.IO.File.Delete(rootPath);
+                        }
+                    }
                 }
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

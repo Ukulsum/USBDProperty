@@ -21,16 +21,6 @@
             <div class="row">
                 <div class="col-md-4">
                     <button class="btn btn-primary" id="proInfo">Property Information</button>
-                    @*<div class="form-group">
-                        <label class="control-label"> Select Items </label>
-                        <select class="form-control">
-                        <option value="">Select Property</option>
-                        <option>Select Item</option>
-                        <option>Property Information</option>
-                        <option>Property Images</option>
-                        <option>Property Features</option>
-                        </select>
-                        </div>*@
                 </div>
                 <div class="col-md-4">
                     <button class="btn btn-primary" id="proImage">Property Images</button>
@@ -233,7 +223,7 @@
                 </div>
             </ul>
 
-            <div>
+            <div class="card-footer">
                 <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
                 <a asp-action="Index">Back to List</a>
             </div>

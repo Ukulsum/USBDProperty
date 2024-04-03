@@ -207,9 +207,7 @@ namespace USBDProperty.Controllers
                 }
                 var data = await _context.Notices.FindAsync(id);
                 string fpath = "";
-                string wwwRootPath = "";
-                //if (notice.Images != null)
-                //{
+                string wwwRootPath = "";         
                 if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
@@ -226,10 +224,6 @@ namespace USBDProperty.Controllers
                     if (data != null)
                     {
                         string npath = data.ImagePath.Replace("~/", "");
-
-                        //_context.Notices.Update(data);
-                        //if (_context.SaveChanges() > 0)
-                        //{
                         string rootpath =  wwwRootPath+  npath;
                         if (System.IO.File.Exists(rootpath))
                         {

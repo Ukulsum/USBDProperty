@@ -16,7 +16,7 @@ namespace USBDProperty.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _environment;
-        public ProjectsInfoesController(ApplicationDbContext context, 
+        public ProjectsInfoesController(ApplicationDbContext context,
             IWebHostEnvironment environment)
         {
             _context = context;
@@ -90,10 +90,10 @@ namespace USBDProperty.Controllers
             try
             {
                 var data = _context.ProjectsInfo.Where(d => d.AgentID.Equals(id))
-                                                .Select(p => new {p.ProjectName, p.Id}).Distinct();
+                                                .Select(p => new { p.ProjectName, p.Id }).Distinct();
                 return Json(new { Data = data });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { Data = ex.Message });
             }
@@ -106,9 +106,9 @@ namespace USBDProperty.Controllers
                 var data = _context.ProjectsInfo.OrderByDescending(p => p.Id).ToList();
                 return Json(new { Data = data });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return Json(new {data = ex.Message});
+                return Json(new { data = ex.Message });
             }
         }
         // GET: ProjectsInfoes/Details/5
@@ -133,7 +133,7 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-               return BadRequest(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -157,7 +157,7 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-         
+
         public async Task<IActionResult> Create(ProjectsInfo projectsInfo)
         {
             try
@@ -224,13 +224,13 @@ namespace USBDProperty.Controllers
                 {
                     ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)), "ID", "CompanyName", projectsInfo.AgentID);
                 }
-                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
                     ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent, "ID", "CompanyName", projectsInfo.AgentID);
                 }
                 return View(projectsInfo);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -270,7 +270,7 @@ namespace USBDProperty.Controllers
                 {
                     ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)).OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
                 }
-                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
                     ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
                 }
@@ -310,53 +310,75 @@ namespace USBDProperty.Controllers
                     wwwRootPath = Directory.GetCurrentDirectory();
                     rPath = Path.Combine(wwwRootPath, "/wwwroot/Developer");
                 }
-                if(projectsInfo.MapPath != null)
+                if (projectsInfo.MapPath != null)
                 {
-                    string extension = Path.GetExtension(projectsInfo.MapPath.FileName).ToLower();
-                    if(extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
+                    if (data != null)
                     {
-                        string fileName = $" {projectsInfo.Title} _map {extension}";
-                        string path = Path.Combine(rPath, "LocationMap", fileName);
-                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        string npath = data.LocationMap.Replace("~/", "");
+                        string rootpath = wwwRootPath + npath;
+                        if (System.IO.File.Exists(rootpath))
                         {
-                            await projectsInfo.MapPath.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(rootpath);
                         }
-                        projectsInfo.LocationMap = "/Developer/LocationMap/" + fileName;
-                        if (System.IO.File.Exists(rPath))
+
+                        string extension = Path.GetExtension(projectsInfo.MapPath.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
                         {
-                            System.IO.File.Delete(rPath);
+                            string fileName = $" {projectsInfo.Title} _map {extension}";
+                            string path = Path.Combine(rPath, "LocationMap", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await projectsInfo.MapPath.CopyToAsync(fileStrem);
+                            }
+                            projectsInfo.LocationMap = "/Developer/LocationMap/" + fileName;
+                            //if (System.IO.File.Exists(rPath))
+                            //{
+                            //    System.IO.File.Delete(rPath);
+                            //}
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide .jpg|.jpeg|.png");
-                        return View(projectsInfo);
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide .jpg|.jpeg|.png");
+                            return View(projectsInfo);
+                        }
                     }
                 }
                 else
                 {
                     data.LocationMap = projectsInfo.LocationMap;
                 }
-                if(projectsInfo.ProjectVideoPath != null)
+                if (projectsInfo.ProjectVideoPath != null)
                 {
-                    string extension = Path.GetExtension(projectsInfo.ProjectVideoPath.FileName).ToLower();
-                    if(extension == ".mp4" || extension == ".gif" || extension == ".vlc")
+                    if (data != null)
                     {
-                        string fileName = $" {projectsInfo.Title} _video {extension}";
-                        string path = Path.Combine(rPath, "Video", fileName);
-                        using(var fileStrem = new FileStream(path, FileMode.Create))
+                        string vpath = data.ProjectVideo.Replace("~/", "");
+                        string vrootpath = wwwRootPath + vpath;
+                        if (System.IO.File.Exists(vrootpath))
                         {
-                            await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(vpath);
                         }
-                        projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
-                        if (System.IO.File.Exists(rPath))
+
+                        string extension = Path.GetExtension(projectsInfo.ProjectVideoPath.FileName).ToLower();
+                        if (extension == ".mp4" || extension == ".gif" || extension == ".vlc")
                         {
-                            System.IO.File.Delete(rPath);
+                            string fileName = $" {projectsInfo.Title} _video {extension}";
+                            string path = Path.Combine(rPath, "Video", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await projectsInfo.ProjectVideoPath.CopyToAsync(fileStrem);
+                            }
+                            projectsInfo.ProjectVideo = "/Developer/Video/" + fileName;
+                            //if (System.IO.File.Exists(rPath))
+                            //{
+                            //    System.IO.File.Delete(rPath);
+                            //}
                         }
-                    }
-                    else{
-                        ModelState.AddModelError("", "Please provide .jpg| .png | .jepg");
-                        return View(projectsInfo);
+
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide .jpg| .png | .jepg");
+                            return View(projectsInfo);
+                        }
                     }
                 }
                 else
@@ -373,7 +395,7 @@ namespace USBDProperty.Controllers
                 data.Location = projectsInfo.Location;
 
                 _context.Update(data);
-                if(await _context.SaveChangesAsync() > 0)
+                if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -382,18 +404,18 @@ namespace USBDProperty.Controllers
                 {
                     ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.Where(a => a.Email.Equals(User.Identity.Name)).OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
                 }
-                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
                     ViewData["AgentID"] = new SelectList(_context.DevelopersorAgent.OrderBy(a => a.CompanyName), "ID", "CompanyName", projectsInfo.AgentID);
                 }
                 return View(projectsInfo);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(projectsInfo);
             }
-            
+
         }
 
         // GET: ProjectsInfoes/Delete/5
@@ -429,6 +451,18 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                string fpath = "";
+                string wwwRootPath = "";
+                if(_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (_context.ProjectsInfo == null)
                 {
                     return Problem("Entity set 'ApplicationDbContext.ProjectsInfo'  is null.");
@@ -436,13 +470,29 @@ namespace USBDProperty.Controllers
                 var projectsInfo = await _context.ProjectsInfo.FindAsync(id);
                 if (projectsInfo != null)
                 {
+                    string path = projectsInfo.LocationMap.Replace("~", "");
+                    string vpath = projectsInfo.ProjectVideo.Replace("~", "");
                     _context.ProjectsInfo.Remove(projectsInfo);
+                    if(await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootPath = wwwRootPath + path;                      
+                        if(System.IO.File.Exists(rootPath))
+                        {
+                            System.IO.File.Delete(rootPath);
+                        }
+
+                        string vrootPath = wwwRootPath + vpath;
+                        if (System.IO.File.Exists(vrootPath))
+                        {
+                            System.IO.File.Delete(vrootPath);
+                        }
+                    }
                 }
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -450,7 +500,7 @@ namespace USBDProperty.Controllers
 
         private bool ProjectsInfoExists(int id)
         {
-          return (_context.ProjectsInfo?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.ProjectsInfo?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
