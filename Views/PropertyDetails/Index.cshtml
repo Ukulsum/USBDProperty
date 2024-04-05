@@ -41,9 +41,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.PropertyType)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Image)
                     </th>                   
@@ -66,9 +66,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
-                        <td>
+                       @* <td>
                             @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
-                        </td>
+                        </td>*@
                         <td>
                             @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
                             <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />

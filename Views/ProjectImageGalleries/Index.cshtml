@@ -22,7 +22,6 @@
                     <div class="form-group card-title">
                         <label class="control-label"> Agent </label>
                         <select class="form-control" asp-items="ViewBag.AgentId" name="AgentId" id="agent">
-                            @*<option value="0">Select Property</option>*@
                         </select>
                     </div>
                 </div>
@@ -30,23 +29,14 @@
                     <div class="form-group card-title">
                         <label class="control-label"> Projects </label>
                         <select class="form-control" id="projects">
-                            @*<option value="0">Select Property</option>*@
                         </select>
                     </div>
                 </div>
                 <div class="col-md-2 mt-5">
                     <div class="form-group card-title">
-                        @*<input type="submit" value="Search"/>*@
                         <button type="submit" class="search-bar">Search</button>
                     </div>
                 </div>
-
-                @*<div class="col-md-9">
-                    <h5 class="card-title">Multiple Project Images</h5>
-                    </div>
-                    <div class="col-md-3">
-                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
-                    </div>*@
             </form>
         </div>
         <table class="table table-borderless" id="datatable">
@@ -74,14 +64,6 @@
                         </td>
                         <td>
                             <img src="@Url.Content(item.ImagePath)" alt="@item.ProjectsInfo.Title" height="180" width="220" />
-                            @* @if(item.ImagePath != null)
-                                {
-
-                                @foreach(var image in item.ImagePath)
-                                {
-                                <img src="@Url.Content(item.ImagePath)" alt="@item.ProjectsInfo.Title" height="180" width="220"/>
-                                }
-                                }*@
                         </td>
                         <td>
 
@@ -166,7 +148,6 @@
         }
 
         function loadProject(id){
-            //console.log("dev id: "+id)
             $.get("/ProjectsInfoes/GetDrpProject?devid=" +id, function (data, status){
                 console.log(data.data)
                 $("#projects").empty();

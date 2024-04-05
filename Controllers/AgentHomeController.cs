@@ -43,8 +43,7 @@ namespace USBDProperty.Controllers
       
 
         [AllowAnonymous]
-        public IActionResult AgentProperties()
-        
+        public IActionResult AgentProperties() 
         {
             //var data = _context.DevelopersorAgent.Where(p => p.ID == id).OrderByDescending(p => p.ID).FirstOrDefault();
             return View();

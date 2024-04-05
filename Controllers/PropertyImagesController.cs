@@ -23,22 +23,22 @@ namespace USBDProperty.Controllers
         }
 
         // GET: PropertyImages
-        public async Task<IActionResult> Index(int propertyId=0)
+        public async Task<IActionResult> Index(int propertyId = 0)
         {
             try
             {
                 if (User.IsInRole("Agent"))
                 {
-                    var appDbData = _context.PropertyImages.Include(i=>i.PropertyDetails.ProjectsInfo.Developers).Where(d=>d.PropertyDetails.ProjectsInfo.Developers.Email.Equals(User.Identity.Name)).ToList();
-                    if(propertyId > 0)
+                    var appDbData = _context.PropertyImages.Include(i => i.PropertyDetails.ProjectsInfo.Developers).Where(d => d.PropertyDetails.ProjectsInfo.Developers.Email.Equals(User.Identity.Name)).ToList();
+                    if (propertyId > 0)
                     {
                         appDbData = appDbData.Where(d => d.propertyInfoId.Equals(propertyId)).ToList();
                     }
                     return View(appDbData);
                     //var appData = _context.PropertyImages.Include(i => i.PropertyDetails)                                          
-                                                         //.Where(d => d.PropertyDetails.ProjectsInfo.Developers.Email.Equals(User.Identity.Name) && d.propertyInfoId.Equals(propertyId)).ToList();
+                    //.Where(d => d.PropertyDetails.ProjectsInfo.Developers.Email.Equals(User.Identity.Name) && d.propertyInfoId.Equals(propertyId)).ToList();
                 }
-                else if(User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+                else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
                     var applicationDbContext = _context.PropertyImages.Include(i => i.PropertyDetails).ToList();
                     if (propertyId > 0)
@@ -56,7 +56,7 @@ namespace USBDProperty.Controllers
                 //return View( applicationDbContext);
                 return View();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -94,9 +94,9 @@ namespace USBDProperty.Controllers
             try
             {
                 var applicationDbContext = _context.PropertyImages
-                                              
+
                                                 .Where(p => p.propertyInfoId.Equals(Id)).ToList();
-                    
+
 
                 return Json(new { data = applicationDbContext });
             }
@@ -123,7 +123,7 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( PropertyImages propertyImages, List<IFormFile> MultiImagePath)
+        public async Task<IActionResult> Create(PropertyImages propertyImages, List<IFormFile> MultiImagePath)
         {
             if (ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace USBDProperty.Controllers
                     }
                     //string fileN = Path.GetFileNameWithoutExtension(propertyDetails.Image.FileName);
                     //foreach(var item in MultiImagePath)
-                    for(int i=0;i<MultiImagePath.Count(); i++)
+                    for (int i = 0; i < MultiImagePath.Count(); i++)
                     {
                         string extention = Path.GetExtension(MultiImagePath[i].FileName).ToLower();
                         if (extention == ".jpg" || extention == ".png" || extention == ".jpeg")
@@ -160,14 +160,14 @@ namespace USBDProperty.Controllers
                             await _context.SaveChangesAsync();
                         }
                     }
-                  
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
                     return View(propertyImages);
                 }
-                   
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Title", propertyImages.propertyInfoId);
@@ -192,7 +192,7 @@ namespace USBDProperty.Controllers
                 ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
                 return View(propertyImages);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -214,7 +214,7 @@ namespace USBDProperty.Controllers
                 var data = await _context.PropertyImages.FindAsync(id);
                 string fpath = "";
                 string wwwRootPath = "";
-                if(_environment != null)
+                if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
                     fpath = wwwRootPath + "/Content";
@@ -224,22 +224,33 @@ namespace USBDProperty.Controllers
                     wwwRootPath = Directory.GetCurrentDirectory();
                     fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
                 }
-                if(propertyImages.MultipleImage != null)
+                if (propertyImages.MultipleImage != null)
                 {
-                    string extension = Path.GetExtension(propertyImages.MultipleImage.FileName).ToLower();
-                    if(extension == ".jpg" || extension == ".png" || extension == ".jpeg")
+                    if (data != null)
                     {
-                        string fileName = propertyImages.Title + extension;
-                        string path = Path.Combine(fpath, "Images", fileName);
-                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        string npath = data.MultiImagePath.Replace("~/", "");
+                        string rootpath = wwwRootPath + npath;
+                        if (System.IO.File.Exists(rootpath))
                         {
-                            await propertyImages.MultipleImage.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(rootpath);
                         }
-                        propertyImages.MultiImagePath = "/Content/Images/" + fileName;
-                        if (System.IO.File.Exists(fpath))
+
+                        string extension = Path.GetExtension(propertyImages.MultipleImage.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                         {
-                            System.IO.File.Delete(fpath);
+                            string fileName = propertyImages.Title + extension;
+                            string path = Path.Combine(fpath, "Images", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await propertyImages.MultipleImage.CopyToAsync(fileStrem);
+                            }
+                            propertyImages.MultiImagePath = "/Content/Images/" + fileName;
+                            if (System.IO.File.Exists(fpath))
+                            {
+                                System.IO.File.Delete(fpath);
+                            }
                         }
+
                     }
                     else
                     {
@@ -257,22 +268,22 @@ namespace USBDProperty.Controllers
                 data.MultiImagePath = propertyImages.MultiImagePath;
 
                 _context.Update(data);
-                if(await _context.SaveChangesAsync() > 0)
+                if (await _context.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
                 return View(propertyImages);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(propertyImages);
             }
-            
+
             ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
             return View(propertyImages);
         }
-        
+
         public async Task<IActionResult> Delete(int? id)
         {
             try
@@ -292,7 +303,7 @@ namespace USBDProperty.Controllers
 
                 return View(propertyImages);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -305,6 +316,18 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                string fpath = "";
+                string wwwRootPath = "";
+                if(_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (_context.PropertyImages == null)
                 {
                     return Problem("Entity set 'ApplicationDbContext.PropertyImages'  is null.");
@@ -312,13 +335,22 @@ namespace USBDProperty.Controllers
                 var propertyImages = await _context.PropertyImages.FindAsync(id);
                 if (propertyImages != null)
                 {
+                    string path = propertyImages.MultiImagePath.Replace("~", "");
                     _context.PropertyImages.Remove(propertyImages);
+                    if(await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootPath = wwwRootPath + path;
+                        if (System.IO.File.Exists(rootPath))
+                        {
+                            System.IO.File.Delete(rootPath);
+                        }
+                    }
                 }
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -326,7 +358,7 @@ namespace USBDProperty.Controllers
 
         private bool PropertyImagesExists(int id)
         {
-          return (_context.PropertyImages?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.PropertyImages?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

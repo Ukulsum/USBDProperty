@@ -136,7 +136,7 @@ namespace USBDProperty.Controllers
 
         //[HttpGet]
         [AllowAnonymous]
-        public IActionResult MoreSearch(int? forid, int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, int? conStatus, string location = "")
+        public IActionResult MoreSearch(int? PropertyFor, int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, int? conStatus, string location = "", string SearchText = "")
         {
             try
             {
@@ -149,9 +149,13 @@ namespace USBDProperty.Controllers
                                                    .Include(p => p.MeasurementUnit)
                                                    //.Select(n => n.Location).Distinct()
                                                    .ToList();
-                if (forid != null || forid > 0)
+                //if (forid != null || forid > 0)
+                //{
+                //    data = data.Where(p => p.PropertyFor.Equals(forid)).ToList();
+                //}
+                if (PropertyFor > 0)
                 {
-                    data = data.Where(p => p.PropertyFor.Equals(forid)).ToList();
+                    data = data.Where(p => p.PropertyFor.Equals(PropertyFor)).ToList();
                 }
                 if (AreaId != null || AreaId > 0)
                 {
@@ -197,10 +201,14 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
                 }
-                //if (SearchText != " " || SearchText != null)
+                //if (!string.IsNullOrEmpty(SearchText))
                 //{
-                //    data = data.Where(p => p.PropertyName!.Contains(SearchText).ToList());
+                //    data = data.Where(p => p.Title.ToLower().Contains(SearchText.ToLower())).ToList();
                 //}
+                if (SearchText != " " || SearchText != null)
+                {
+                    data = data.Where(p => p.Title!.Contains(SearchText)).ToList();
+                }
 
                 return View(data);
             }
@@ -975,25 +983,35 @@ namespace USBDProperty.Controllers
                 }
                 if (propertyDetails.Image != null)
                 {
-                    string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
-                    if (extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
+                    if (data != null)
                     {
-                        string fileName = propertyDetails.Title + extention;
-                        string path = Path.Combine(fpath, "Images", fileName);
-                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        string npath = data.ImagePath.Replace("/", "");
+                        string rootpath = wwwRootPath + npath;
+                        if (System.IO.File.Exists(rootpath))
                         {
-                            await propertyDetails.Image.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(rootpath);
                         }
-                        propertyDetails.ImagePath = "/Content/Images/" + fileName;
-                        if (System.IO.File.Exists(fpath))
+
+                        string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
+                        if (extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
                         {
-                            System.IO.File.Delete(fpath);
+                            string fileName = propertyDetails.Title + extention;
+                            string path = Path.Combine(fpath, "Images", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await propertyDetails.Image.CopyToAsync(fileStrem);
+                            }
+                            propertyDetails.ImagePath = "/Content/Images/" + fileName;
+                            //if (System.IO.File.Exists(fpath))
+                            //{
+                            //    System.IO.File.Delete(fpath);
+                            //}
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
-                        return View(propertyDetails);
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide .jpg| .jpeg| .png");
+                            return View(propertyDetails);
+                        }
                     }
                 }
                 else
@@ -1106,6 +1124,18 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                string fpath = "";
+                string wwwRootPath = "";
+                if(_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (_context.PropertyDetails == null)
                 {
                     return Problem("Entity set 'ApplicationDbContext.PropertyDetails'  is null.");
@@ -1113,10 +1143,19 @@ namespace USBDProperty.Controllers
                 var propertyDetails = await _context.PropertyDetails.FindAsync(id);
                 if (propertyDetails != null)
                 {
+                    string path = propertyDetails.ImagePath.Replace("~", "");
                     _context.PropertyDetails.Remove(propertyDetails);
+                    if(await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootPath = wwwRootPath + path;
+                        if (System.IO.File.Exists(rootPath))
+                        {
+                            System.IO.File.Delete(rootPath);
+                        }
+                    }
                 }
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

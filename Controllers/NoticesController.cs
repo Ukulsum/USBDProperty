@@ -62,22 +62,6 @@ namespace USBDProperty.Controllers
             }
         }
 
-
-        //[AllowAnonymous]
-        //public async Task<IActionResult> NoticeDetails()
-        //{
-        //    try
-        //    {
-        //        var nData = _context.Notices.OrderByDescending(n => n.NoticeID).ToList();
-        //        return View(nData);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return View();
-        //    }
-        //}
-
         // GET: Notices
         public async Task<IActionResult> Index()
         {
@@ -153,12 +137,12 @@ namespace USBDProperty.Controllers
                     if(extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
                     {
                         string fileName = notice.Title + extension;
-                        string path = Path.Combine(fpath, "Images", fileName);
+                        string path = Path.Combine(fpath, "Notification", fileName);
                         using (var fileStrem = new FileStream(path, FileMode.Create))
                         {
                             await notice.Images.CopyToAsync(fileStrem);
                         }
-                        notice.ImagePath = "/Content/Images/" + fileName;
+                        notice.ImagePath = "/Content/Notification/" + fileName;
                     }
                     else
                     {
@@ -223,9 +207,7 @@ namespace USBDProperty.Controllers
                 }
                 var data = await _context.Notices.FindAsync(id);
                 string fpath = "";
-                string wwwRootPath = "";
-                //if (notice.Images != null)
-                //{
+                string wwwRootPath = "";         
                 if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
@@ -236,27 +218,42 @@ namespace USBDProperty.Controllers
                     wwwRootPath = Directory.GetCurrentDirectory();
                     fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
                 }
-                if(notice.Images != null)
+                if (notice.Images != null)
                 {
-                    string extension = Path.GetExtension(notice.Images.FileName).ToLower();
-                    if(extension==".jpg" || extension == ".png" || extension == ".jpeg" || extension == "..svg" || extension == ".gif")
+                    //var ndata = _context.Notices.FindAsync(id);
+                    if (data != null)
                     {
-                        string fileName = notice.Title + extension;
-                        string path = Path.Combine(fpath, "Images", fileName);
-                        using (var fileStrem = new FileStream(path, FileMode.Create))
+                        string npath = data.ImagePath.Replace("~/", "");
+                        string rootpath =  wwwRootPath+  npath;
+                        if (System.IO.File.Exists(rootpath))
                         {
-                            await notice.Images.CopyToAsync(fileStrem);
+                            System.IO.File.Delete(rootpath);
                         }
-                         notice.ImagePath = "/Content/Images/" + fileName;
-                        if (System.IO.File.Exists(fpath))
+                        //    }
+                        //}
+
+                        //return RedirectToAction("Index");
+
+                        string extension = Path.GetExtension(notice.Images.FileName).ToLower();
+                        if (extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == ".svg" || extension == ".gif")
                         {
-                            System.IO.File.Delete(fpath);
+                            string fileName = notice.Title + extension;
+                            string path = Path.Combine(fpath, "Notification", fileName);
+                            using (var fileStrem = new FileStream(path, FileMode.Create))
+                            {
+                                await notice.Images.CopyToAsync(fileStrem);
+                            }
+                            notice.ImagePath = "/Content/Notification/" + fileName;
+                            //if (System.IO.File.Exists(fpath))
+                            //{
+                            //    System.IO.File.Delete(fpath);
+                            //}
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please provide .jpg|.jpeg|.png");
-                        return View(notice);
+                        else
+                        {
+                            ModelState.AddModelError("", "Please provide .jpg|.jpeg|.png");
+                            return View(notice);
+                        }
                     }
                 }
                 else
@@ -322,6 +319,18 @@ namespace USBDProperty.Controllers
         {
             try
             {
+                string fpath = "";
+                string wwwRootPath = "";
+                if(_environment != null)
+                {
+                    wwwRootPath = _environment.WebRootPath;
+                    fpath = wwwRootPath + "/Content";
+                }
+                else
+                {
+                    wwwRootPath = Directory.GetCurrentDirectory();
+                    fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
+                }
                 if (_context.Notices == null)
                 {
                     return Problem("Entity set 'ApplicationDbContext.Notices'  is null.");
@@ -329,10 +338,19 @@ namespace USBDProperty.Controllers
                 var notice = await _context.Notices.FindAsync(id);
                 if (notice != null)
                 {
+                    string path = notice.ImagePath.Replace("~", "");                  
                     _context.Notices.Remove(notice);
+                    if (await _context.SaveChangesAsync() > 0)
+                    {
+                        string rootPath = wwwRootPath + path;
+                        if (System.IO.File.Exists(rootPath))
+                        {
+                            System.IO.File.Delete(rootPath);
+                        }
+                    }
                 }
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)

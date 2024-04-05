@@ -42,9 +42,7 @@
                 </div>
                 <div class="col-md-4">
                     <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
-                       <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview">
-                       @*<input type="text" class="form-control" name="ImagePath" id="ImagePath" asp-for="ImagePath" hidden />*@
-                       @*<input type="text" class="form-control" name="Images" id="photos" hidden />*@
+                       <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview">                
                         <input type="hidden" asp-for="ImagePath" />
                        
                     </div>
@@ -54,7 +52,7 @@
            <div class="row m-2">
                 <div class="form-group form-check col-md-6">
                     <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                        <input class="form-check-input" asp-for="IsActive" id="checkActive" /> @Html.DisplayNameFor(model => model.IsActive)
                     </label>
                </div>
                 <div class="form-group form-check col-md-6">
@@ -65,7 +63,7 @@
            </div>
            <div class="row">
                <div class="form-group col-md-6">
-                   <input type="submit" value="Update" class="btn btn-primary" />
+                   <input type="submit" value="Update" class="btn btn-primary" id="btnUpdate" />
                </div>
                <div class="form-group col-md-6">
                    <a asp-action="Index">Back to List</a>
@@ -80,6 +78,16 @@
     <script>
         var isChanged= false;
         $(document).ready(function (){
+             $("#checkActive").click(function() {
+            if($(this).is(':checked')){
+                $("#btnUpdate").removeAttr('disabled', 'disabled');
+                //$("#btnSave").attr('disabled', 'disabled');
+            }
+            else{
+                 $("#btnUpdate").attr('disabled', 'disabled');
+            }
+        });
+
              var isChanged = false;
              $("#btnChange").show();
              $("#imageInput").hide();

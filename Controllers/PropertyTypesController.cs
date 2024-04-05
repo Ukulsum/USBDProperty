@@ -26,7 +26,7 @@ namespace USBDProperty.Controllers
             {
                 if (pid.Value  != null || pid.Value>0)
                 {
-                    var result = _context.PropertyTypes.OrderBy(p => p.PropertyTypeName).Where(p => p.ParentPropertyTypeId.Equals(pid));
+                    var result = _context.PropertyTypes.OrderBy(p => p.PropertyTypeName).Where(p => p.ParentPropertyTypeId.Equals(pid)).ToList();
                     return Json(result);
                 }
                 else
