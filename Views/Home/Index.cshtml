@@ -495,7 +495,6 @@
         // }
 
         function PostClientData() {
-           // alert("Hello Client");
             var client = {
                 ClientContactId: 0,
                 ClientName: $("#ClientName").val(),
@@ -505,25 +504,18 @@
                 ContactDate: Date,
                     Interested:1
             }
-            console.log(client);
             $.ajax({
                 url: "/ClientContacts/Save",
                 type: "POST",
-                //data: JSON.stringify(data),
                 data: JSON.stringify(client),
                 dataType: "JSON",
                 contentType: "application/json",
                 success: function (res) {
-                    console.log(res);
-
                     $("#clientName").val(''),
                         $("#email").val(''),
                         $("#contactNo").val(''),
                         $("#message").val('')
                     $("#exampleModalCenter").modal('hide')
-                    //$("#btnSave").val('Save')
-
-
                 }
             })
         }
@@ -533,26 +525,16 @@
             url: "/Notices/HomeNotice",
             method: "Get",
             success: function(res){
-                console.log("Notification");
-                console.log(res.data);
                  var NoticeData = "";
-                 //var NoticeData = '<div><img src="' + res.data.path+ '" /><div>';
-                    //var NoticeData = "<div class='img'><img class='img-responsive' src='" + res.data[0].imagePath + "' alt='" + res.data[0].title + "'><div class='over-proper'></div><div>" + res.data[0].description + "</div> ";
                  $.each(res.data, function(index, value){
                      NoticeData +=  "<a href='/Notices/NoticeDetails/"+ value.noticeID +"'><div class='img'><img class='img-responsive' src='" + value.imagePath + "' alt='" + value.title + "'> </a>";
                       $("#exampleModalLabel").innerText=value.title
                  });
-                 /*
-                    <div class='over-proper'></div><p>" + value.description + "</p><p>"+ value.noticeID+"</p>
-                 */
-                  //  console.log(res.data[0].title);
-                  //$("#exampleModalLabel").innerText=res.data[0].title
-                  //$("#exampleModalLabel").innerText=value.title
-                  //$("#exampleModalLabel").modal('show')
-
                 $("#load_Notification").empty();
                 $("#load_Notification").html(NoticeData);
-                $("#NoticeModal").modal('show')
+                if(res.data.length > 0){
+                    $("#NoticeModal").modal('show')
+                }                
             }
         })
     }
@@ -560,7 +542,6 @@
 
     function loadLocation( aid) {
            $.get("/PropertyDetails/Getlocation?aid=" +aid, function (data, status) {
-               console.log(data)
                $("#propertyInfoId").empty();
                $("#propertyInfoId").append($('<option></option>').val("0").html("Select Location"));
                $.each(data, function (i, v) {
@@ -569,23 +550,15 @@
            })
      }
     function getFlatProperty(){
-        //alert("helo")
-        console.log("HomeProperty")
         $.ajax({
             url: "/PropertyDetails/HomeFlatProperty",
             method: "Get",
             success: function(res){
-                console.log(res.data)
                 var propertylist = "";
                 $.each(res.data, function(index, value){
-                    console.log(value )
-                    //console.log("island: "+value.isLand )
-                    console.log(value.numberOfBedrooms )
                     propertylist += '<ul class="row">';               
                     propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
-                console.log(propertylist);
-                //console.log(PropertySize);
                 propertylist += '</ul>';
                 $(".load_Property").empty();
                 $(".load_Property").html(propertylist);
@@ -596,58 +569,22 @@
 
 
     function getLandProperty(){
-        //alert("helo")
-        console.log("HomeProperty")
         $.ajax({
             url: "/PropertyDetails/HomeLandProperty",
             method: "Get",
             success: function(res){
-                console.log(res.data)
                 var landPropertylist = "";
                 landPropertylist += '<ul class="row">';
-                $.each(res.data, function(index, value){
-                    console.log(value )
-                    console.log("island: "+value.propertyTypeName )
-                    console.log("Land Area: " + value.measurementUnit.shortName)
-                    console.log("Land Properties")
-                    
+                $.each(res.data, function(index, value){                 
                    landPropertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.landArea + " " + value.measurementUnit.name + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + '/Plot</p> <span class="price font-montserrat">BDT.' + value.totalLandPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                    
                    
                 });
-                console.log(landPropertylist);
-                //console.log(PropertySize);
                 landPropertylist += '</ul>';
                 $(".load_LandProperty").empty();
                 $(".load_LandProperty").html(landPropertylist);
             }
         })
-    }
-
-
-    // function getBannerProperty(){
-    //    //alert("helo")
-    //    $.ajax({
-    //        url: "/PropertyDetails/BannerProperty",
-    //        method: "Get",
-    //        success: function(res){
-    //            console.log("Banner")
-    //            console.log(res.data)
-    //            var bannerProperty = "";
-    //            $.each(res.data, function(index, value){
-    //                console.log(value )
-    //                //console.log(value.numberOfBedrooms )
-
-    //                bannerProperty +='<div class="plots"> <div class="row">  <div class="col-xs-4">                       <a href="#."> <img class="img-responsive" src="images/propt-img-2.jpg" alt="" > </a> </div>        <div class="col-xs-8">         <div class="pri-info"> <span class="sale">For '+value.propertyFor+'</span> <a class="f-mont" href="#.">'+ value.price + ", " + value.numberOfBedrooms + " Bed Room At " + value.area.areaName +'</a><p><i class="fa fa-map-marker"></i> Down Street</p> <div class="auther"> <img src="images/auther-1.jpg" alt=""> <h6>Anderia jus</h6></div>    </div></div></div></div>';
-
-    //            });
-    //            console.log(bannerProperty);
-
-    //            $("#bannerslide").empty();
-    //            $("#bannerslide").html(bannerProperty);
-    //        }
-    //    })
-    //}
-               
+    }              
 </script>
 }

@@ -1,5 +1,6 @@
 ﻿@model USBDProperty.Models.PropertyDetails
 
+
 @{
     ViewData["Title"] = "Details";
     if (User.IsInRole("Agent"))
@@ -85,7 +86,17 @@
                 <h5 class="card-title text-center">Property Summary</h5>
                 <hr style="width:100%; " />
                 <div class="row">
+                    <div class="col-md-12">
+                        <dl class="row">
+                            <dt class="col-sm-5">
+                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Description)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.Raw(Model.Description)
 
+                            </dd>
+                        </dl>
+                    </div>
                     <div class="col-md-6">
                         <dl class="row">
                             <dt class="col-sm-5">
@@ -160,13 +171,13 @@
 
                     <div class="col-md-6">
                         <dl class="row">
-                            <dt class="col-sm-5">
+                            @* <dt class="col-sm-5">
                                 <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Description)
-                            </dt>
-                            <dd class="col-sm-7">
+                                </dt>
+                                <dd class="col-sm-7">
                                 @Html.Raw(Model.Description)
 
-                            </dd>
+                                </dd>*@
                             <dt class="col-sm-5">
                                 <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyType)
                             </dt>
