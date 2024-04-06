@@ -136,7 +136,7 @@ namespace USBDProperty.Controllers
 
         //[HttpGet]
         [AllowAnonymous]
-        public IActionResult MoreSearch(int? PropertyFor, int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, int? conStatus, string location = "", string SearchText = "")
+        public IActionResult MoreSearch(int? Propertyfor, int? AreaId, int? pSize, int? PropertyTypeId, int? minsize, int? maxsize, int? NumberOfBedrooms, int? minprice, int? maxprice, int? conStatus, string location = "", string SearchText = "")
         {
             try
             {
@@ -153,9 +153,11 @@ namespace USBDProperty.Controllers
                 //{
                 //    data = data.Where(p => p.PropertyFor.Equals(forid)).ToList();
                 //}
-                if (PropertyFor > 0)
+                if (Propertyfor > 0)
                 {
-                    data = data.Where(p => p.PropertyFor.Equals(PropertyFor)).ToList();
+
+                   
+                    data = data.Where(p => p.PropertyFor.Equals((PropertyFor)Propertyfor)).ToList();
                 }
                 if (AreaId != null || AreaId > 0)
                 {
@@ -201,13 +203,10 @@ namespace USBDProperty.Controllers
                 {
                     data = data.Where(p => p.Location.ToLower().Equals(location.ToLower())).ToList();
                 }
-                //if (!string.IsNullOrEmpty(SearchText))
-                //{
-                //    data = data.Where(p => p.Title.ToLower().Contains(SearchText.ToLower())).ToList();
-                //}
-                if (SearchText != " " || SearchText != null)
+               
+                if (!string.IsNullOrEmpty(SearchText))
                 {
-                    data = data.Where(p => p.Title!.Contains(SearchText)).ToList();
+                    data = data.Where(p => p.Title.ToLower().Contains(SearchText.ToLower())).ToList();
                 }
 
                 return View(data);
