@@ -210,18 +210,13 @@ namespace USBDProperty.Controllers
                     data = data.Where(p => p.Title!.Contains(SearchText)).ToList();
                 }
 
-
-
-
                 return View(data);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View();
-            }
-
-
+            }  
         }
 
         [AllowAnonymous]
