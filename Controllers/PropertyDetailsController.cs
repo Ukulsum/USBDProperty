@@ -725,6 +725,7 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.MeasurementUnit)
                                                 .Include(p => p.PropertyType)
+                                                .Include(p=>p.AvailableFlatSizes)
                                                 .Where(p => p.ProjectsInfo.Developers.Email.Equals(User.Identity.Name));
 
                     return View(await applicationDbContext.ToListAsync());
@@ -810,7 +811,8 @@ namespace USBDProperty.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PropertyDetails propertyDetails)
+        public async Task<IActionResult> Create(PropertyDetails propertyDetails,
+            string AvailableFlatSize)
         {
             try
             {
@@ -871,7 +873,18 @@ namespace USBDProperty.Controllers
 
                 if (await _context.SaveChangesAsync() > 0)
                 {
-                    return RedirectToAction(nameof(Index));
+                    var data = AvailableFlatSize;
+                    var arrData = AvailableFlatSize.Split(",");
+                    foreach (var item in arrData)
+                    {
+                        _context.AvailableFlatSizes.Add(new AvailableFlatSize { PropertyId=propertyDetails.PropertyInfoId, AvailableFSize=item,
+                         UnitID=1});
+
+                    }
+                    if (await _context.SaveChangesAsync() > 0)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
 
             }

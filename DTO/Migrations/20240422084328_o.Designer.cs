@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USBDProperty.Models;
 
@@ -11,9 +12,10 @@ using USBDProperty.Models;
 namespace USBDProperty.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240422084328_o")]
+    partial class o
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,6 +250,33 @@ namespace USBDProperty.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("Areas");
+                });
+
+            modelBuilder.Entity("USBDProperty.Models.AvailableFlatSize", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("AvailableFSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PropertyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UnitID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PropertyId");
+
+                    b.HasIndex("UnitID");
+
+                    b.ToTable("AvailableFlatSizes");
                 });
 
             modelBuilder.Entity("USBDProperty.Models.City", b =>
@@ -707,8 +736,8 @@ namespace USBDProperty.Migrations
                     b.Property<bool>("IsSold")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LandArea")
-                        .HasColumnType("int");
+                    b.Property<float>("LandArea")
+                        .HasColumnType("real");
 
                     b.Property<float?>("LandPrice")
                         .HasColumnType("real");
@@ -997,6 +1026,25 @@ namespace USBDProperty.Migrations
                     b.Navigation("City");
                 });
 
+            modelBuilder.Entity("USBDProperty.Models.AvailableFlatSize", b =>
+                {
+                    b.HasOne("USBDProperty.Models.PropertyDetails", "PropertyDetails")
+                        .WithMany("AvailableFlatSizes")
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("USBDProperty.Models.MeasurementUnit", "MeasurementUnits")
+                        .WithMany()
+                        .HasForeignKey("UnitID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MeasurementUnits");
+
+                    b.Navigation("PropertyDetails");
+                });
+
             modelBuilder.Entity("USBDProperty.Models.City", b =>
                 {
                     b.HasOne("USBDProperty.Models.Division", "Division")
@@ -1170,6 +1218,8 @@ namespace USBDProperty.Migrations
 
             modelBuilder.Entity("USBDProperty.Models.PropertyDetails", b =>
                 {
+                    b.Navigation("AvailableFlatSizes");
+
                     b.Navigation("PropertyWithFeatures");
                 });
 #pragma warning restore 612, 618

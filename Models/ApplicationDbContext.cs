@@ -33,5 +33,6 @@ namespace USBDProperty.Models
         public DbSet<ProjectsInfo> ProjectsInfo { get; set; }
         public DbSet<ProjectImageGallery> ProjectImageGallery { get; set; }
         public DbSet<USBDProperty.Models.MeasurementUnit>? MeasurementUnit { get; set; }
+        public DbSet<AvailableFlatSize> AvailableFlatSizes { get; set; }
     }
 }
