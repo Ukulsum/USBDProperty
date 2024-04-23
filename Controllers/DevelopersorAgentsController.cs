@@ -574,15 +574,17 @@ namespace USBDProperty.Controllers
                 if (developersorAgent != null)
                 {
                     string path = developersorAgent.Logo.Replace("~", "");
-                    if(await _context.SaveChangesAsync() > 0)
-                    {
-                        string rootLogo = wwwRootPath + path;
-                        if (System.IO.File.Exists(rootLogo))
-                        {
-                            System.IO.File.Delete(rootLogo);
-                        }
-                    }
+                    //_context.DevelopersorAgent.Remove(developersorAgent);
+                    //if(await _context.SaveChangesAsync() > 0)
+                    //{
+                    //    string rootLogo = wwwRootPath + path;
+                    //    if (System.IO.File.Exists(rootLogo))
+                    //    {
+                    //        System.IO.File.Delete(rootLogo);
+                    //    }
+                    //}
                     string bpath = developersorAgent.Banner.Replace("~", "");
+                    _context.DevelopersorAgent.Remove(developersorAgent);
                     if (await _context.SaveChangesAsync() > 0)
                     {
                         string rootBannar = wwwRootPath + path;
@@ -591,7 +593,7 @@ namespace USBDProperty.Controllers
                             System.IO.File.Delete(rootBannar);
                         }
                     }
-                    _context.DevelopersorAgent.Remove(developersorAgent);
+                    //_context.DevelopersorAgent.Remove(developersorAgent);
                 }
 
                 //await _context.SaveChangesAsync();

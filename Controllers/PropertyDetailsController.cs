@@ -282,10 +282,11 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.Area)
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
-
+                                                .Include(p=>p.AvailableFlatSizes)
                                                 .Where(p => p.ISFeatured && p.PropertyType.IsLand == false).Select(s => new
                                                 {
                                                     ContructionStatus = s.ConstructionStatus,
+                                               
                                                     PropertyFor = s.PropertyFor.ToString(),
                                                     ImagePath = s.ImagePath,
                                                     LandArea = s.LandArea,
@@ -296,7 +297,7 @@ namespace USBDProperty.Controllers
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalPrice = s.TotalPrice,
                                                     PropertyInfoId = s.PropertyInfoId,
-                                                    FlatSize = s.FlatSize,
+                                                    FlatSize = string.Join(",", s.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray()),
                                                     //IsLand= s.PropertyType.IsLand
                                                 }).ToList();
 
@@ -720,7 +721,7 @@ namespace USBDProperty.Controllers
                 if (User.IsInRole("Agent"))
                 {
                     var applicationDbContext = _context.PropertyDetails
-                                                .OrderByDescending(o => o.PropertyInfoId)
+                                                .OrderByDescending(o =>                                                     o.PropertyInfoId)
                                                 .Include(p => p.Area)
                                                 .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.MeasurementUnit)
@@ -737,8 +738,8 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.Area)
                                                 .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.MeasurementUnit)
-                                                .Include(p => p.PropertyType);
-
+                                                .Include(p => p.PropertyType)
+                                                .Include(p => p.AvailableFlatSizes);
                     return View(await applicationDbContext.ToListAsync());
                 }
                 //var applicationDbContext = _context.PropertyDetails

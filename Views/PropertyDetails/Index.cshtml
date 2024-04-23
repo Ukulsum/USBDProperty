@@ -47,10 +47,10 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Image)
                     </th>                   
-                    @*<th>
+                    <th>
                         @Html.DisplayNameFor(model => model.FlatSize)
                     </th>                 
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.FloorAvailableNo)
                     </th> *@                  
                     <th>
@@ -72,7 +72,14 @@
                         <td>
                             @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
                             <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />
-                        </td>                     
+                        </td>   
+                        <td>
+                                @{
+                                    var d = string.Join(",", item.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray());
+                                }
+                            @Html.DisplayFor(m=>d )
+                        </td>
+                        
                         @*<td>
                             @Html.DisplayFor(modelItem => item.FlatSize)
                         </td>                      
