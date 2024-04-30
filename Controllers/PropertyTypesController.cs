@@ -221,7 +221,7 @@ namespace USBDProperty.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        //dd
         private bool PropertyTypeExists(int id)
         {
           return (_context.PropertyTypes?.Any(e => e.PropertyTypeId == id)).GetValueOrDefault();
