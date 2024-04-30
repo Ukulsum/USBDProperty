@@ -21,9 +21,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Images)
             </th>
@@ -46,13 +43,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                @*<td>
-                    @Html.Raw(item.Description)
-                </td>*@
                 <td>
-                    
-                    @*@Html.DisplayFor(modelItem => item.Images)*@
-                   @* <img src=@Url.Content(item.ImagePath) alt=@item.Title width="250" height="200" class="img-responsive">*@
                     <img src="@Url.Content(item.ImagePath)" style="width:155px;height:155px;" alt="@item.Title"  >
                 </td>
                 <td>

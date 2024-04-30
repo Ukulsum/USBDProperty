@@ -4,7 +4,6 @@
 {
 <li>      
         @{
-            // var r = Model.Where(t=>t.ParentPropertyTypeId!=0).Select(p => p.ParentPropertyTypeId).ToList();
             var r = @ViewBag.ParentId;
             if (r.Contains(item.PropertyTypeId))
             {

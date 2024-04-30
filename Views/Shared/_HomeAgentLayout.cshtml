@@ -11,9 +11,6 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    @*<title> @ViewData["Title"] - USBD Property's - @Model.CompanyName </title>*@
-    @*<title>USBD Property's - <span class="load_title"></span> </title>*@
-    @* <title>USBD Property's -  </title> *@
     <div class="load_title"></div>
 
     <meta content="" name="description">
@@ -35,13 +32,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
 
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
-
-
-    @*  <link href="~/AgentAsserts/img/favicon.png" rel="icon">
-        <link href="~/AgentAsserts/img/apple-touch-icon.png" rel="apple-touch-icon">*@
-
-
-    @*<link href="~/Asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css">*@
     <link href="~/Asserts/css/main.css" rel="stylesheet" type="text/css">
     <link href="~/Asserts/css/style.css" rel="stylesheet" type="text/css">
     <link href="~/Asserts/css/animate.css" rel="stylesheet" type="text/css">
@@ -70,13 +60,10 @@
 </head>
 
 <body>
-    @* <img src="@Url.Content(@Model.Logo)"/>*@
+
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top" >
         <div class="container d-flex align-items-center justify-content-between">
-
-
-            @*<h1 class="logo"><a href="index.html">@Url.Content(@item.Logo)</a></h1>*@
             <h1 class="logo">
                 @*<div class="load_logo">
 
@@ -108,78 +95,10 @@
             <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
             <div class="load_banner">
-            </div>
-            @*<img src="@Url.Content(Model.Banner)" />*@
-
-
-            @*<div class="carousel-inner" role="listbox">
-
-                <!-- Slide 1 -->
-                <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
-                <div class="carousel-container">
-                <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Multi</span></h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
-                </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
-                <div class="carousel-container">
-                <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
-                </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
-                <div class="carousel-container">
-                <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
-                </div>
-                </div>
-
-                </div>
-
-                <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-                </a>
-
-                <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-                </a>*@
-
+            </div>          
         </div>
     </section><!-- End Hero -->
-    @*<main id="main">*@
-    @*  <section></section>
-
-        <section>
-        <div class="container">
-        <div class="load_video">
-
-        </div>
-
-        </div>
-        </section>
-    *@
-    @*   <section id="cta" class="cta">
-        <div class="container" data-aos="zoom-in">
-        <div class="load_video">
-
-        </div>
-
-        </div>
-        </section>*@
-
+  
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -191,8 +110,6 @@
             </div>
 
             <div class="row content">
-                @*<p>@Model.AboutUs </p>*@
-                @*<p>@Html.Raw(Model.AboutUs)</p>*@
                 <div class="load_about">
                 </div>
             </div>
@@ -258,13 +175,6 @@
 
                 </div>
 
-
-
-
-
-
-
-
                 <div class="col-lg-6">
                     <form class="php-email-form">
                         <p class="text-center">Send Message to Property Owner</p>
@@ -273,29 +183,19 @@
                             <div class="col-md-6 form-group">
 
                                 <input type="text" class="form-control" placeholder="Enter Your Name" id="clientName" />
-                                @*<input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>*@
                             </div>
                             <div class="col-md-6 form-group mt-3 mt-md-0">
                                 <input type="email" class="form-control" placeholder="Enter Your E-mail" id="email" />
-                                @*<input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>*@
                             </div>
                             <div class="form-group mt-3">
                                 <input type="text" class="form-control" placeholder="Enter Your Phone" id="contactNo" />
-                                @*<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>*@
                             </div>
 
                             <div class="form-group mt-3">
                                 <textarea type="text" class="form-control" rows="5" placeholder="Please Type Your Message" id="message"></textarea>
-                                @*<textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>*@
                             </div>
-                            @*<div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                                </div>*@
                             <div class="text-center">
-                                <input type="button" value="Send Message" class="btn btn-primary" id="btnSave" />
-                                @*<input type="button" value="Send Message" id="btnSave" />*@
+                                <input type="button" value="Send Message" class="btn btn-primary" id="btnSave" />                        
                             </div>
                         </div>
                     </form>
@@ -428,26 +328,18 @@
         });
 
         function HomeAgent(){
-            console.log("DevolopersAgentDisplay");
             var curloc = $(location).attr('href');
             var url = curloc.split('/');
-            console.log("HomeAgentDevDisplay");
-            console.log(url);
             var id = url[url.length - 1];
-            console.log("D :" + id)
             $.ajax({
                 url: "/DevelopersorAgents/HomeAgent/" + id,
                 method: "Get",
                 success: function(res){
-                    console.log(res.data);
-                    console.log("DevAgents");
                     var devAgentTitle = "";
                     var devAgentLogo = "";
                     var devAgentBanner = "";
                     var devAgentAbout = "";
                     $.each(res.data, function(index, value){
-                        console.log(value);
-                        //devAgentTitle += '<div><span>'+ value.companyName +'</span></div>'
                         devAgentTitle += '<title  >USBD Property"s - '+ value.companyName+' </title>'
                         devAgentLogo += '<img src="'+ value.logo+'">'
                         devAgentBanner += '<img src="'+ value.banner+'" style="width:100%">'
@@ -467,7 +359,6 @@
         }
 
         function PostClientData(){
-            alert("Hello Client");
             var client = {
                 ClientContactId:0,
                 ClientName: $("#clientName").val(),
@@ -476,186 +367,38 @@
                 Message: $("#message").val(),
                 ContactDate: Date
             }
-            console.log(client);
             $.ajax({
                 url: "/ClientContacts/Save",
                 type: "POST",
-                //data: JSON.stringify(data),
                 data: JSON.stringify(client),
                 dataType: "JSON",
                 contentType: "application/json",
                 success: function(res){
-                    console.log(res);
                      $("#clientName").val(''),
                      $("#email").val(''),
                      $("#contactNo").val(''),
                      $("#message").val('')
-
-                     //$("#btnSave").val('Save')
-
-
                 }
             })
         }
 
           function getFooterProperty(){
-              //alert("helo")
-               console.log("DevolopersAgentDisplay");
                var curloc = $(location).attr('href');
                var url = curloc.split('/');
-               console.log("HomeAgentDevDisplay");
-               console.log(url);
                var id = url[url.length - 1];
-               console.log("D :" + id)
               $.ajax({
                   url: "/PropertyDetails/AgentHomeFooterProperty/" + id,
                   method: "Get",
                   success: function(res){
-console.log("Footer")
-                      console.log(res.data)
                       var propertylist = "";
                       $.each(res.data, function(index, value){
-                          console.log(value )
-                          console.log(value.numberOfBedrooms )
-                          //propertylist += '<ul class="recent-come">';
                         propertylist += '<li><div class="img-post"> <img src="' + value.imagePath + '" height="59px" width="59px" alt=""> </div><div class="text-post"> <a href="#.">' + value.title + '</a> <span>BDT.' + value.totalPrice + ' TK</span> </div></li>'
                       });
-                      console.log("Image")
-                      console.log(propertylist);
-                      //console.log(PropertySize);
-                      //propertylist += '</ul>';
                       $(".load_FooterProperty").empty();
                       $(".load_FooterProperty").html(propertylist);
                   }
               })
         }
-
-         //type='video/mp4'
-        // function getVideo(){
-        //      //alert("helo")
-        //      $.ajax({
-        //          url: "/ProjectsInfoes/GetProjectsVideo",
-        //          method: "Get",
-        //          success: function(res){
-        //              console.log(res.data)
-        //              var ProjectVideolist = "";
-        //              $.each(res.data, function(index, value){
-        //                  console.log(value.projectVideo)
-        //                  console.log(value.locationMap)
-        //                  if(value.projectVideo != null){
-        //                       ProjectVideolist += "<li><video controls width='100%' height='256'><source src='"+value.projectVideo +"' ></video></li>"
-        //                  }
-        //                  else{
-        //                      ProjectVideolist = "<li><img src='"+value.locationMap +"' class='img-responsive' ></li>"
-        //                  }
-
-        //                  //if(res.data.projectVideo != null){
-        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].projectVideo +"' type='video/mp4'></video></li>"
-        //                  //}
-        //                  //else{
-        //                  //    ProjectVideolist = "<li><img src='"+res.data[0].locationMap +"' class='img-responsive' ></li>"
-        //                  //}
-        //                  //else{
-        //                  //    ProjectVideolist = "<li><video controls width='100%' height='236'><source src='"+res.data[0].locationMap +"' type='video/mp4'></video></li>"
-        //                  //}
-
-        //              });
-        //              console.log(ProjectVideolist);
-        //              $(".load_video").empty();
-        //              $(".load_video").html(ProjectVideolist);
-        //          }
-        //      })
-        //}
-
-        //function getFooterProperty(){
-        //      //alert("helo")
-        //      $.ajax({
-        //          url: "/PropertyDetails/HomeFooterProperty",
-        //          method: "Get",
-        //          success: function(res){
-        //              console.log(res.data)
-        //              var propertylist = "";
-        //              $.each(res.data, function(index, value){
-        //                  console.log(value )
-        //                  console.log(value.numberOfBedrooms )
-        //                  //propertylist += '<ul class="recent-come">';
-        //                  propertylist += '<li><div class="img-post"> <img src="'+ value.path +'" height="59px" width="59px" alt=""> </div><div class="text-post"> <a href="#.">'+ value.propertyName +'</a> <span>$'+ value.totalPrice +'</span> </div></li>'
-        //              });
-        //              console.log("Image")
-        //              console.log(propertylist);
-        //              //console.log(PropertySize);
-        //              //propertylist += '</ul>';
-        //              $(".load_FooterProperty").empty();
-        //              $(".load_FooterProperty").html(propertylist);
-        //          }
-        //      })
-        //}
-
-
-
-
-        //function GetHomeProjects(){
-
-        //   // alert("Home")
-        //    var curloc = $(location).attr('href');
-        //    var url = curloc.split('/');
-        //    console.log("HomeAgentProject");
-        //    console.log(url);
-        //    var id = url[url.length - 1];
-        //    console.log("D :" + id)
-
-        //    //alert("Projects")
-        //   $.ajax({
-        //        url: "/AgentHome/HomeAgentProject/" + id ,
-        //        method: "Get",
-        //        success: function(res){
-        //        console.log(res.data);
-        //        console.log("Projects");
-        //        var projectdata = "";
-        //         projectdata += ' <div class="row">'
-        //        $.each(res.data, function(index, value){
-        //                console.log(value.id)
-        //                $("#prjid").html("All properties under " + value.projectName)
-
-        //                projectdata += '<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" onclick="Getpropertiesbyproject('+ value.id+')" data-aos="zoom-in" data-aos-delay="300"><div class="icon-box"><div class="icon"><i class="bx bx-arch"></i></div><h4><a href="">' + value.projectName + '</a></h4><p>' + value.description + '</p></div></div>  '
-        //        });
-        //        projectdata += '</div>'
-        //        console.log(projectdata);
-        //        console.log("DataProjects");
-        //        $("#load_projects").empty();
-        //        $("#load_projects").html(projectdata);
-        //     }
-        //   })
-
-        //}
-
-        //function Getpropertiesbyproject(id){
-        //    alert(id)
-        //    $.ajax({
-        //        url: "/PropertyDetails/PropertybyProjects?prjId="+id,
-        //        method: "Get",
-        //        success: function (res) {
-        //            console.log(res.data)
-        //            var propertylist = "";
-        //            propertylist += '<ul class="row">';
-        //            $.each(res.data, function (index, value) {
-        //                console.log(value)
-        //                console.log(value.numberOfBedrooms)
-
-        //                propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><div class="img"><img class="img-responsive" src="' + value.path + '" height="165px" width="240px" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatsize + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyType.propertyTypeName + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></li>'
-        //            });
-        //            console.log(propertylist);
-        //            console.log("Hello");
-        //            //console.log(PropertySize);
-        //            propertylist += '</ul>';
-
-        //            $("#property").show();
-        //            $(".load_properties").empty();
-        //            $(".load_properties").html(propertylist);
-        //            $("#exampleModalXl").modal('show')
-        //        }
-        //    })
-        //}
     </script>
 </body>
 

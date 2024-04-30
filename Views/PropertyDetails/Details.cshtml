@@ -13,9 +13,7 @@
     }
 }
 
-
 <style>
-
     figure img {
         max-width: 100%;
         min-width: 100%;
@@ -76,8 +74,6 @@
             <hr style="width:100%;" />
             <div id="propertyInfo">
                 <div class="row">
-                    @*<h2>Property Features</h2>
-                        <hr />*@
                     <div class="col-md-12">
                         <img class="img-responsive mb-2" src="@Url.Content(@Model.ImagePath)" />
                     </div>
@@ -171,13 +167,6 @@
 
                     <div class="col-md-6">
                         <dl class="row">
-                            @* <dt class="col-sm-5">
-                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Description)
-                                </dt>
-                                <dd class="col-sm-7">
-                                @Html.Raw(Model.Description)
-
-                                </dd>*@
                             <dt class="col-sm-5">
                                 <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyType)
                             </dt>
@@ -253,10 +242,6 @@
                         </dl>
                     </div>
                 </div>
-                @* <div>
-                    <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
-                    <a asp-action="Index">Back to List</a>
-                    </div>*@
             </div>
 
             <div id="multiImage">
@@ -267,16 +252,10 @@
                 </div>
             </div>
 
-            @*<dl class="row">
-                <div id="load_HomePropertyFeatureById">
-
-                </div>
-                </dl>*@
 
             <ul class="row">
 
-                <div id="load_HomePropertyFeatureById">
-                </div>
+                <div id="load_HomePropertyFeatureById"> </div>
             </ul>
 
             <div class="card-footer">
@@ -316,15 +295,11 @@
            $("#proImage").click(function(){
                $("#propertyInfo").hide();
                $("#multiImage").show();
-               //DetailspropertyImages()
            })
            $("#featurePro").click(function(){
                $("#propertyInfo").hide();
                getHomeFeatureById()
            })
-           //DetailspropertyImages()
-
-
            $('#datatable').DataTable({
 
 
@@ -388,10 +363,7 @@
 
          var curloc = $(location).attr('href');
          var url = curloc.split('/');
-         console.log("Multiple Image " + url);
          var id = url[url.length - 1];
-
-         console.log(id)
          $.ajax({
              url: "/PropertyImages/HomeImagePropertybyID/" + id,
              method:"Get",
@@ -415,17 +387,11 @@
                  url: "/PropertyDetails/PropertyWithFeature/" + id,
                  method: "Get",
                  success: function (res){
-                     console.log("Feature List");
-                     console.log(res.data)
                      var featurelist = "";
                      featurelist = '<h2>Property Features</h2><hr />';
                      $.each(res.data, function(index, value){
-                         console.log(value);
-
                          featurelist += '<dt class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="bi bi-check2-circle"></i>' + value.propertyFeatures.propertyFeatureName + '</span></dt>'
                      })
-                     console.log("Feature")
-                     console.log(featurelist)
                      $("#load_HomePropertyFeatureById").empty();
                      $("#load_HomePropertyFeatureById").html(featurelist);
                  }

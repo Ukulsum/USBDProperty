@@ -6,9 +6,6 @@
 @foreach(var item in records)
 {
 <li>    
-  
-        @* @if (item.ParentPropertyTypeId > 0)
-        { *@
            
         @{
             var r = Model.Where(t=>t.ParentPropertyTypeId!=0).Select(p => p.ParentPropertyTypeId).ToList();

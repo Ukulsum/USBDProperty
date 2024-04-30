@@ -16,22 +16,9 @@ namespace USBDProperty.Controllers
             _context = context;
         }
 
-        //public JsonResult Getlocation(int aid)
-        //{
-        //    var record = _context.PropertyDetails.OrderBy(c => c.Location)
-        //                                    .Where(d => d.AreaId.Equals(aid)).ToList();
-        //    return Json(record);
-        //}
-
         public IActionResult Index()
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
-            //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location");
-            //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "location");
-            //ViewData["PropertyInfoId"] = new SelectList(_context.PropertyDetails.OrderBy(c => c.Location)
-            //               .Where(d => d.Area.AreaId.Equals(aid)).ToList(), "PropertyInfoId", "Location");
-            //var record = _context.
-
             return View();
         }
 

@@ -59,26 +59,18 @@
          function getHomePropertyDetailsById() {
              var curloc = $(location).attr('href');
              var url = curloc.split('/');
-             //console.log(url);
              var id = url[url.length - 1];
              $.ajax({
                  url: "/Notices/NoticeDetailsByID/" + id,
                  method: "Get",
                  success: function (res) {
-                     console.log(res.data);
                      var propertylist = "";
                      $.each(res.data, function (index, value) {     
-                         console.log(value)
                          propertylist = '<li class="col-xs-12 col-sm-6 col-md-12 col-lg-12"><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""></div><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"><i class="bi bi-calendar-date"></i> End Date: ' + (new Date (value.endDate).getDate() + "-" + (new Date ( value.endDate).toLocaleDateString ("default", {month : "short",}))) + "-" + (new Date (value.endDate).getFullYear()) + '</p><span class="locate">' + value.description + '</span></div></section></li>'
                      });
 
                      $(".load_HomePropertyDetailsById").empty();
                      $(".load_HomePropertyDetailsById").html(propertylist);
-
-                     /*
-                   <a href="/Notices/NoticeDetails/"></a>
-                  <p>'+ value.noticeID +'</p>
-                     */
                  }
              })
          }

@@ -259,7 +259,6 @@ namespace USBDProperty.Controllers
                     if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                     {
                         string fileName = $" {developersorAgent.CompanyName} _banner {extension}";
-                        //string path = Path.Combine(wwwRootPath + "/wwwroot/Developer/Banner", fileName);
                         string path = Path.Combine(rpath, "Banner", fileName);
                         using (var fileStrem = new FileStream(path, FileMode.Create))
                         {
@@ -362,7 +361,6 @@ namespace USBDProperty.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DevelopersorAgent developersorAgent)
-        //public async Task<IActionResult> Edit(int id, DevelopersorAgent developersorAgent, IFormFile logofile, IFormFile bannerFile)
         {
             using var transaction = _context.Database.BeginTransaction();
             try
@@ -405,10 +403,6 @@ namespace USBDProperty.Controllers
                                 await developersorAgent.logofile.CopyToAsync(fileStrem);
                             }
                             developersorAgent.Logo = "/Developer/Logo/" + fileName;
-                            //if (System.IO.File.Exists(rPath))
-                            //{
-                            //    System.IO.File.Delete(rPath);
-                            //}
 
                         }
 
@@ -447,10 +441,6 @@ namespace USBDProperty.Controllers
                                 await developersorAgent.bannerFile.CopyToAsync(fileStrem);
                             }
                             developersorAgent.Banner = "/Developer/Banner/" + fileName;
-                            //if (System.IO.File.Exists(rPath))
-                            //{
-                            //    System.IO.File.Delete(rPath);
-                            //}
                         }
                         else
                         {
@@ -574,15 +564,6 @@ namespace USBDProperty.Controllers
                 if (developersorAgent != null)
                 {
                     string path = developersorAgent.Logo.Replace("~", "");
-                    //_context.DevelopersorAgent.Remove(developersorAgent);
-                    //if(await _context.SaveChangesAsync() > 0)
-                    //{
-                    //    string rootLogo = wwwRootPath + path;
-                    //    if (System.IO.File.Exists(rootLogo))
-                    //    {
-                    //        System.IO.File.Delete(rootLogo);
-                    //    }
-                    //}
                     string bpath = developersorAgent.Banner.Replace("~", "");
                     _context.DevelopersorAgent.Remove(developersorAgent);
                     if (await _context.SaveChangesAsync() > 0)
@@ -593,10 +574,7 @@ namespace USBDProperty.Controllers
                             System.IO.File.Delete(rootBannar);
                         }
                     }
-                    //_context.DevelopersorAgent.Remove(developersorAgent);
                 }
-
-                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

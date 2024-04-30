@@ -35,8 +35,6 @@ namespace USBDProperty.Controllers
                         appDbData = appDbData.Where(d => d.propertyInfoId.Equals(propertyId)).ToList();
                     }
                     return View(appDbData);
-                    //var appData = _context.PropertyImages.Include(i => i.PropertyDetails)                                          
-                    //.Where(d => d.PropertyDetails.ProjectsInfo.Developers.Email.Equals(User.Identity.Name) && d.propertyInfoId.Equals(propertyId)).ToList();
                 }
                 else if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
                 {
@@ -47,13 +45,6 @@ namespace USBDProperty.Controllers
                     }
                     return View(applicationDbContext);
                 }
-
-                //var applicationDbContext = _context.PropertyImages.Include(i=>i.PropertyDetails).ToList();
-                //if(propertyId>0)
-                //{
-                //    applicationDbContext = applicationDbContext.Where(p => p.propertyInfoId.Equals(propertyId)).ToList();
-                //}
-                //return View( applicationDbContext);
                 return View();
             }
             catch (Exception ex)
@@ -141,8 +132,6 @@ namespace USBDProperty.Controllers
                         wwwRootPath = Directory.GetCurrentDirectory();
                         rpath = Path.Combine(wwwRootPath, "/wwwroot/Content/Images");
                     }
-                    //string fileN = Path.GetFileNameWithoutExtension(propertyDetails.Image.FileName);
-                    //foreach(var item in MultiImagePath)
                     for (int i = 0; i < MultiImagePath.Count(); i++)
                     {
                         string extention = Path.GetExtension(MultiImagePath[i].FileName).ToLower();

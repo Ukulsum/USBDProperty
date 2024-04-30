@@ -14,7 +14,6 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
                         <h2>Projects Information</h2>
-                        @*<hr />*@
                         <div class="form-group col-md-4">
                             <label asp-for="AgentID" class="control-label"></label>
                             <select asp-for="AgentID" class="form-control" asp-items="ViewBag.AgentID">
@@ -123,11 +122,9 @@
         });
         $("#videoFile").change(function(){
             const file = this.files[0];
-            console.log(file);
             if(file){
                 let reader = new FileReader();
                 reader.onload = function(event){
-                    console.log(event.target.result);
                     $("#videoPreview").attr('src', event.target.result);
                 }
                 reader.readAsDataURL(file);
@@ -135,11 +132,9 @@
         });
         $("#imgInput").change(function () {
             const file = this.files[0];
-            console.log(file);
             if (file) {
                 let reader = new FileReader();
                 reader.onload = function (event) {
-                    console.log(event.target.result);
                     $("#imgPreview").attr('src', event.target.result);
                 }
                 reader.readAsDataURL(file);
@@ -161,7 +156,6 @@
     });
     function loadCountry() {
         $.get("/Countries/GetCountry", function (data, status) {
-            console.log(data)
             $("#drpCountry").empty();
             $("#drpCountry").append($('<option></option>').val("0").html("Select country"));
             $.each(data, function (i, v) {
@@ -173,7 +167,6 @@
 
     function loadDivision(cid) {
         $.get("/Divisions/GetDivision?cid=" + cid, function (data, status) {
-            console.log(data)
             $("#drpDivision").empty();
             $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
             $.each(data, function (i, v) {
@@ -184,7 +177,6 @@
     }
     function loadCity(did) {
         $.get("/Cities/GetCities?did=" + did, function (data, status) {
-            console.log(data)
             $("#drpCity").empty();
             $("#drpCity").append($('<option></option>').val("0").html("Select City"));
             $.each(data, function (i, v) {
@@ -195,7 +187,6 @@
     }
     function loadArea(cid) {
         $.get("/Areas/GetArea?cid=" + cid, function (data, status) {
-            console.log(data)
             $("#drpArea").empty();
             $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
             $.each(data, function (i, v) {

@@ -180,13 +180,6 @@
                         </div>
                     </div>
                     <div class="row">
-                       @* <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="NumberOfBaths" class="control-label"></label>
-                                <input type="number" asp-for="NumberOfBaths" class="form-control" />
-                                <span asp-validation-for="NumberOfBaths" class="text-danger"></span>
-                            </div>
-                        </div>*@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="NumberOfBalconies" class="control-label"></label>
@@ -210,16 +203,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        @*<div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="TotalFloor" class="control-label"></label>
-                                <input type="number" asp-for="TotalFloor" class="form-control" id="totalFloor" />
-                                <span asp-validation-for="TotalFloor" class="text-danger"></span>
-                            </div>
-                        </div>*@
-                        @*@{
-                            if(Model.TotalFloor.Value >= Model.FloorAvailableNo.Value)
-                            {*@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="FloorAvailableNo" class="control-label"></label>
@@ -247,54 +230,8 @@
                                 </select>
                                 <span asp-validation-for="Facing" class="text-danger"></span>
                             </div>
-                        </div>
-                        @*   }
-                            }
-                        *@
-                        @* <div class="col-md-4">
-                            <div class="form-group">
-                            <label asp-for="Furnishing" class="control-label"></label>
-
-                            <select asp-for="Furnishing" class="form-control"
-                            asp-items="@Html.GetEnumSelectList<Furnished>()">
-                            <option>Select Property Decoration</option>
-                            </select>
-                            <span asp-validation-for="Furnishing" class="text-danger"></span>
-                            </div>
-                            </div>*@
-                    </div>
-                    @*}*@
-
-                    @*<div class="row">*@
-                       @* <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Furnishing" class="control-label"></label>
-
-                                <select asp-for="Furnishing" class="form-control"
-                                        asp-items="@Html.GetEnumSelectList<Furnished>()">
-                                    <option>Select Property Decoration</option>
-                                </select>
-                                <span asp-validation-for="Furnishing" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Facing" class="control-label"></label>
-                                <select asp-for="Facing" class="form-control"
-                                        asp-items="@Html.GetEnumSelectList<Facing>()">
-                                    <option>Select Property Face</option>
-                                </select>
-                                <span asp-validation-for="Facing" class="text-danger"></span>
-                            </div>
-                        </div>*@
-                        @*<div class="col-md-4">
-                            <div class="form-group">
-                            <label asp-for="LandArea" class="control-label"></label>
-                            <input type="text" asp-for="LandArea" class="form-control" />
-                            <span asp-validation-for="LandArea" class="text-danger"></span>
-                            </div>
-                            </div>*@
-                    @*</div>*@
+                        </div>                      
+                    </div>                
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -331,33 +268,7 @@
                     </div>
 
 
-                </div>
-                @*<div class="row">
-                    <div id="landDiv">
-                    <div class="col-md-6">
-                    <div class="form-group">
-                    <label asp-for="LandPrice" class="control-label"></label>
-                    <input type="text" asp-for="LandPrice" class="form-control" />
-                    <span asp-validation-for="LandPrice" class="text-danger"></span>
-                    </div>
-                    </div>
-                    </div>*@
-                @* <div class="col-md-6">
-                    <div class="form-group">
-                    <label asp-for="MeasurementID" class="control-label"></label>
-                    <select id="drpunit" asp-for="MeasurementID" class="form-control">
-                    </select>
-                    <span asp-validation-for="MeasurementID" class="text-danger"></span>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                    <label asp-for="HandOverDate" class="control-label"></label>
-                    <input asp-for="HandOverDate" class="form-control" />
-                    <span asp-validation-for="HandOverDate" class="text-danger"></span>
-                    </div>
-                    </div>*@
-                @*</div>*@
+                </div>            
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -376,34 +287,8 @@
                             <img src="#" style="width:155px;height:155px;" alt="Image Upload" id="imgPreview">
                         </div>
 
-                    </div>
-                    @*     <div class="col-md-4">
-                        <div class="form-group">
-                        <label asp-for="IconId" class="control-label"></label>
-                        <select asp-for="IconId" class="form-control" asp-items="ViewBag.IconId"></select>
-                        </div>
-                        </div> *@
-                    @*  <div class="col-md-4">
-                        <div class="form-group">
-                        <label asp-for="ProjectId" class="control-label"></label>
-                        <select asp-for="ProjectId" class="form-control" asp-items="ViewBag.OwnerId"></select>
-                        </div>
-                        </div> *@
-                </div>
-                @* <div class="row">
-                    <div class="col-md-8">
-                    <div class="form-group">
-                    <label asp-for="Image" class="control-label"></label>
-                    <input type="file" asp-for="Image" class="form-control" id="imageInput" />
-                    <span asp-validation-for="Image" class="text-danger"></span>
-                    </div>
-                    </div>
-                    <div class="col-md-4">
-                    <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
-                    <img src="#" style="width:155px;height:155px;" alt="Image Upload" id="imgPreview">
-                    </div>
-                    </div>
-                    </div>*@
+                    </div>          
+                </div>            
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
                     <textarea type="text" asp-for="Description" class="form-control"></textarea>
@@ -443,22 +328,10 @@
 
     $(document).ready(function (){
         let isLand=false;
-        $("#btnSave").attr('disabled', 'disabled');
-        //$("#btnSave").attr('disabled');
-        //$("#checkActive").is(':checked')){
-        //     $("#btnSave").removeAttr('disabled', 'disabled');
-        //}
-       //if( loadPrjbyDeveloper("#drpprj").val(0)){
-       //    $("#btnSave").attr('disabled', 'disabled');
-       //}
-       //else{
-       //    $("#btnSave").removeAttr('disabled', 'disabled');
-       //}
-       
+        $("#btnSave").attr('disabled', 'disabled');             
         $("#checkActive").click(function() {
             if($(this).is(':checked')){
                 $("#btnSave").removeAttr('disabled', 'disabled');
-                //$("#btnSave").attr('disabled', 'disabled');
             }
             else{
                  $("#btnSave").attr('disabled', 'disabled');
@@ -467,12 +340,6 @@
 
 
         $("#landDiv").hide();
-
-        //$("#btnSave").disabled();
-        //$("#isActive").checked(function() {
-        //    $("#btnSave").enabled();
-        //})
-
         loadCountry();
         loadDeveloper();
         loadParentType();
@@ -483,11 +350,9 @@
          });
           $("#imageInput").change(function () {
                 const file = this.files[0];
-                console.log(file);
                 if (file) {
                     let reader = new FileReader();
                     reader.onload = function (event) {
-                        console.log(event.target.result);
                         $("#imgPreview").attr('src', event.target.result);
                     }
                     reader.readAsDataURL(file);
@@ -499,7 +364,6 @@
 
                 console.log("pid "+ $(this).val())
                 $.get("/PropertyTypes/GetChildType?pid=" + $(this).val(), function (data, status) {
-                console.log(data)
                     $("#drptypes").empty();
                     $("#drptypes").append($('<option></option>').val("0").html("Select"));
                     $.each(data, function (i,v) {
@@ -512,22 +376,15 @@
 
           $("#drptypes").change(function () {
                 isLand=this.selectedOptions[0].getAttribute('data-island');
-                console.log(isLand)
                         if(isLand === 'true') {
                               console.log( "True part")
                               $("#flatdiv").hide();
                               $("#landDiv").show();
-                              console.log(isLand)
                         }
                        if(isLand === 'false') {
-                            console.log("false part")
-                            console.log(isLand)
-
                             $("#flatdiv").show();
                             $("#landDiv").hide();
                        }
-                  console.log( " Land= "+isLand)
-
           })
             $("#drpDeveloper").change(function () {
                 alert($(this).val())
@@ -546,7 +403,6 @@
     });
         function loadParentType() {
             $.get("/PropertyTypes/GetChildType" , function (data, status) {
-                console.log(data)
                 $("#parenTypes").empty();
                 $("#parenTypes").append($('<option></option>').val("0").html("Select type"));
                 $.each(data, function (i, v) {
@@ -557,7 +413,6 @@
         }
         function loadDeveloper() {
             $.get("/DevelopersorAgents/GetDeveloperProperty", function (data, status) {
-                console.log(data.data)
                 $("#drpDeveloper").empty();
                 $("#drpDeveloper").append($('<option></option>').val("0").html("Select Developer or agent"));
                 $.each(data.data, function (i, v) {
@@ -569,13 +424,9 @@
         function loadPrjbyDeveloper(devid) {
             console.log("dev id: "+devid)
             $.get("/ProjectsInfoes/GetProjects?id=" + devid, function (data, status) {
-                console.log(data.data)
                 $("#drpprj").empty();
                 $("#drpprj").append($('<option></option>').val("0").html("Select Project"));
                 $.each(data.data, function (i, v) {
-
-
-                    //$("#drpprj").append($(`<option value=${v.id}>${v.projectName}</option>').val(v.id).html(v.projectName))`;
                      $("#drpprj").append(`<option value=${v.id}>${v.projectName}</option>`) ;
                 })
 
@@ -583,7 +434,6 @@
         }
         function loadCountry(){
             $.get("/Countries/GetCountry" , function (data, status) {
-                console.log(data)
                 $("#drpCountry").empty();
                 $("#drpCountry").append($('<option></option>').val("0").html("Select country"));
                 $.each(data, function (i, v) {
@@ -595,7 +445,6 @@
 
         function loadDivision( cid) {
             $.get("/Divisions/GetDivision?cid="+cid, function (data, status) {
-                console.log(data)
                 $("#drpDivision").empty();
                 $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
                 $.each(data, function (i, v) {
@@ -606,7 +455,6 @@
         }
         function loadCity( did) {
             $.get("/Cities/GetCities?did="+did, function (data, status) {
-                console.log(data)
                 $("#drpCity").empty();
                 $("#drpCity").append($('<option></option>').val("0").html("Select City"));
                 $.each(data, function (i, v) {
@@ -617,7 +465,6 @@
         }
         function loadArea( cid) {
             $.get("/Areas/GetArea?cid=" +cid, function (data, status) {
-                console.log(data)
                 $("#drpArea").empty();
                 $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
                 $.each(data, function (i, v) {
@@ -628,7 +475,6 @@
         }
         function loadUNit() {
             $.get("/MeasurementUnits/GetMeasurmentUnit", function (data, status) {
-                console.log(data)
                 $("#drpunit").empty();
                 $("#drpunit").append($('<option></option>').val("0").html("Select Unit"));
                 $.each(data.data, function (i, v) {

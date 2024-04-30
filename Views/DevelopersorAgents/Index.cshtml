@@ -29,7 +29,6 @@
             </div>
         </div>
 
-        @*<table class="table datatable">*@
         <table class="table table-borderless" id="datatable">
             <thead>
                 <tr>
@@ -48,12 +47,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Email)
                     </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>*@
-                    @*  <th>
-                        @Html.DisplayNameFor(model => model.IsActive)
-                        </th> *@
                     <th>Action</th>
                 </tr>
             </thead>
@@ -76,12 +69,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Email)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>*@
-                      @*<td>
-                            @Html.DisplayFor(modelItem => item.IsActive)
-                        </td> *@
                         <td class="col-md-2">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success">Action</button>

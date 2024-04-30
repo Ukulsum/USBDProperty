@@ -17,7 +17,6 @@
                     <div class="form-group">
                         <label asp-for="propertyInfoId" class="control-label"> Property </label>
                         <select asp-for="propertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId">
-                            @*<option value="0">Select Property</option>*@
                         </select>
                     </div>
                 </div>
@@ -80,11 +79,9 @@
 
          $("#files").change(function () {
          const file = this.files[0];
-         console.log(file);
          if (file) {
              let reader = new FileReader();
              reader.onload = function (event) {
-                 console.log(event.target.result);
                  $("#imgPreview").attr('src', event.target.result);
              }
              reader.readAsDataURL(file);

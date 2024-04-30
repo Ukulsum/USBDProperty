@@ -15,7 +15,6 @@
                 @*<a href="/DevelopersorAgents/agent/@item.ID">*@
                                             *<a href="/AgentHome/AgentIndex/@item.ID">
                 <div class="team">
-                    @*  <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt=""> *@
                     @if (item.Banner != null)
                     {
                         <img src="@Url.Content(item.Banner)" alt="@item.CompanyName"   class="img-responsive" />
@@ -25,16 +24,6 @@
                     {
                         <img class="img-responsive" src="~/Asserts/images/agent-1.jpg" alt="">
                     }
-                  @*   <div class="team-over">
-                        <!--======= SOCIAL ICON =========-->
-                        <ul class="social_icons animated-6s fadeInUp">
-                            <li class="facebook"><a href="#."><i class="fa fa-facebook"></i></a></li>
-                            <li class="twitter"><a href="#."><i class="fa fa-twitter"></i></a></li>
-                            <li class="googleplus"><a href="#."><i class="fa fa-google-plus"></i></a></li>
-                            <li class="linkedin"><a href="#."><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div> *@
-
                     <!--======= TEAM DETAILS =========-->
                     <div class="team-detail">
                         <h6>@item.CompanyName</h6>

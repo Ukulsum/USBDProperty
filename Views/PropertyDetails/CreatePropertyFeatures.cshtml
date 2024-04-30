@@ -16,13 +16,7 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title text-center">Property Feature Listing</h5>
-        <hr style="width:100%;" />
-         @*<div class="form-group">
-            <label asp-for="PropertyInfoId" class="control-label"> Property </label>
-            <select asp-for="PropertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId">
-                @*<option value="0">Select Property</option>
-            </select>
-        </div>*@ 
+        <hr style="width:100%;" /> 
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
@@ -34,11 +28,6 @@
             </div>
            
         </div> 
-        @*<div class="form-group">
-            <label asp-for="PropertyFeatureName" class="control-label"></label>
-            <input asp-for="PropertyFeatureName" class="form-control" />
-            <span asp-validation-for="PropertyFeatureName" class="text-danger"></span>
-        </div>*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <table>
@@ -79,38 +68,4 @@
         
 </div>
     </div>
-
-
-
-
-@*
-<h1>CreatePropertyFeatures</h1>
-
-<h4>PropertyFeatures</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreatePropertyFeatures">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PropertyFeatureName" class="control-label"></label>
-                <input asp-for="PropertyFeatureName" class="form-control" />
-                <span asp-validation-for="PropertyFeatureName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FeatureDescription" class="control-label"></label>
-                <input asp-for="FeatureDescription" class="form-control" />
-                <span asp-validation-for="FeatureDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
-
 </form>

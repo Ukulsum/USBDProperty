@@ -81,8 +81,6 @@
                                             </section>
                                         </li>
                                     </ul>
-                                    @*<div id="load_HomePropertyFeatureById">
-                                    </div>*@
                                 </section>
                             </li>
                         </ul>
@@ -93,20 +91,15 @@
                             <div class="regi-sec">
                                 <p class="text-center">Property Owner Details</p>
                                 <hr style="width:100%" />
-
-                                @*<span class="regi-tag text-center">Send Message to Property Owner</span>*@
                                 <form asp-action="Create" asp-controller="ClientContacts" method="post">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <ul>
                                         <li>
                                             <p class="text-center">Send Message to Property Owner</p>
                                             <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
-                                            @*<input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />*@
                                             <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
                                             <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
                                             <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />
-                                            @*<input type="hidden" name="Interested" id="form_buy" value="@Interested.Buy" />
-                                                <span asp-validation-for="ClientName" class="text-danger"></span>*@
                                         </li>
                                         <li>
                                             <input type="email" asp-for="Email" class="form-control" placeholder="Enter Your E-mail" />
@@ -146,23 +139,17 @@
 
 
 
-
-
-
-
 @section Scripts{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 
          $(document).ready(function (){
-
              getHomePropertyDetailsById()
              multipleImageSliderById()
              getHomeFeatureById()
          })
      function imageslide(e) {
         var imageURL = $(e).attr('src');
-        console.log(imageURL)
         $('#mainImg').fadeOut(500, function () {
             $(this).attr('src', imageURL);
         }).fadeIn(500);
@@ -185,16 +172,12 @@
          function multipleImageSliderById(){
             var curloc = $(location).attr('href');
             var url = curloc.split('/');
-            console.log("Multiple Image " + url);
             var id = url[url.length - 1];
-
-            console.log(id)
             $.ajax({
                 url: "/PropertyImages/HomeImagePropertybyID/" + id,
                 method:"Get",
                 success: function(res){
                     var propertyImageSlide = "";
-
                     $.each(res.data, function(index, value){
                         $("#forid").val(value.propertyFor)
                         $("#typeID").val(value.propertyTypeId)
@@ -214,7 +197,6 @@
          function getHomePropertyDetailsById() {
              var curloc = $(location).attr('href');
              var url = curloc.split('/');
-             //console.log(url);
              var id = url[url.length - 1];
              $.ajax({
                  url: "/PropertyDetails/HomePropertybyID/" + id,
@@ -225,19 +207,13 @@
                          $("#forid").val(value.propertyFor)
                          $("#typeID").val(value.propertyTypeId)
                          $("#prid").val(value.propertyInfoId)
-                         //console.log("Propertyimage")
                          $("#forid").val(value.propertyFor)
                          $("#typeID").val(value.propertyTypeId)
                          $("#prid").val(value.propertyInfoId)
-                         //$("#propertytitle").html(value.flatsize + " " + value.propertytypename + " for " + value.propertyfor + " at " + value.location + " " + value.constructionstatus + " " + value.facing + " face ")
                           $("#propertytitle").html(value.title)
                          $("#mainImg").attr('src', value.imagePath);
                          propertylist = '<ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft" + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><a href="#." class="font-montserrat">BDT. ' + value.totalPrice + 'Tk</a><span> ' + value.propertyTypeName + " For Sale" + ' </span> <span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="price font-montserrat">' + "Share this ad" + '</span> <i class="fa fa-star-o"></i><a name="fb_share" type="button" href="http://www.facebook.com/sharer.php"> <i class="fa fa-share-alt"></i></a> </div></div>                                                                       <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Summary</h3><hr/><div>    <div class="row"><div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Name : </b>' + value.flatSize + " " + value.propertyTypeName + " for " + value.propertyFor + " at " + value.location + " " + value.constructionStatus + " " + value.facing + " face " + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property For : </b>' + " Sale" + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Address : </b>' + value.areaName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Construction Status : </b>' + value.constructionStatus + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Condition : </b>' + value.propertyCondition + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bedroom : </b>' + value.numberOfBedrooms + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Bathroom : </b>' + value.numberOfBaths + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Total Floor : </b>' + value.totalFloor + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Facing : </b>' + value.facing + '</span></li></ul></div>                                                                                                                        <div  class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><ul><li><span><i class="fa fa-chevron-right"></i><b>Property Type : </b>' + value.propertyTypeName + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Location : </b>' + value.location + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Available From : </b>' + (new Date(value.handOverDate).toLocaleDateString('default', {month : 'long'}) + ' , ' + (new Date (value.handOverDate)).getFullYear()) + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Property Size : </b>' + value.flatSize + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Floor Available No : </b>' + value.floorAvailableNo + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Balconies : </b>' + value.numberOfBalconies + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Garages : </b>' + value.numberOfGarages + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Furnishing : </b>' + value.furnishing + '</span></li><li><span><i class="fa fa-chevron-right"></i><b>Land Area : </b>' + value.landArea + " " + value.name + '</span></li></ul></div></div></div></section></li></ul>                                                                    <ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Description </h3><hr/><div><span>' + value.description + '</span></div></section></li></ul>      </div>'
-
-
                      });
-                     console.log(propertylist);
-                     console.log("Property List");
                      $(".load_HomePropertyDetailsById").empty();
                      $(".load_HomePropertyDetailsById").html(propertylist);
                  }
@@ -252,8 +228,6 @@
                  url: "/PropertyDetails/PropertyWithFeature/" + id,
                  method: "Get",
                  success: function (res){
-                     console.log("Feature List");
-                     console.log(res.data)
                      var featurelist = "";
                      $.each(res.data, function(index, value){
                          console.log(value);
@@ -266,8 +240,6 @@
                          //featurelist = '<ul><li><section style="padding: 13px 4px 13px 29px"><h3 class="m-2"> Property Feature </h3><hr/><div>    <ul><li><span><i class="fa fa-chevron-right"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li></ul></div></section></li></ul> '
                          featurelist += '<li class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="fa fa-check-circle-o"></i>' + value.propertyFeatures.propertyFeatureName + '</span></li>'
                      })
-                     console.log("Feature")
-                     console.log(featurelist)
                      $("#load_HomePropertyFeatureById").empty();
                      $("#load_HomePropertyFeatureById").html(featurelist);
                  }

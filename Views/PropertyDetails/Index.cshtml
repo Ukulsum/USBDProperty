@@ -1,10 +1,5 @@
 ﻿@model IEnumerable<USBDProperty.Models.PropertyDetails>
 <link href="~/AdminAsserts/vendor/simple-datatables/style.css rel="stylesheet" />
-
-@*@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}*@
 @{
     ViewData["Title"] = "All Properties";
     if(User.IsInRole("Agent"))
@@ -41,18 +36,12 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.PropertyType)
-                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Image)
                     </th>                   
                     <th>
                         @Html.DisplayNameFor(model => model.FlatSize)
-                    </th>                 
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.FloorAvailableNo)
-                    </th> *@                  
+                    </th>                                  
                     <th>
                         @Html.DisplayNameFor(model => model.Price)
                     </th>                   
@@ -66,11 +55,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
-                       @* <td>
-                            @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
-                        </td>*@
                         <td>
-                            @* <img src=@Url.Content(item.Path) alt=@item.Title width="250" height="200" class="img-responsive"> *@
                             <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />
                         </td>   
                         <td>
@@ -78,14 +63,7 @@
                                     var d = string.Join(",", item.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray());
                                 }
                             @Html.DisplayFor(m=>d )
-                        </td>
-                        
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.FlatSize)
-                        </td>                      
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FloorAvailableNo)
-                        </td>  *@                   
+                        </td>                                         
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>                      

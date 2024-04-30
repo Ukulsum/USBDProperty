@@ -31,8 +31,6 @@
 
     .remove {
         display: block;
-        /*background: #444;*/
-        /*border: 1px solid black;*/
         background: red;
         border-radius: 5%;
         padding: 2px;
@@ -60,7 +58,6 @@
                     <div class="form-group">
                         <label asp-for="propertyInfoId" class="control-label"> Property </label>
                         <select asp-for="propertyInfoId" class="form-control" asp-items="ViewBag.propertyInfoId">
-                            @*<option value="0">Select Property</option>*@
                         </select>
                         
                     </div>
@@ -94,32 +91,9 @@
     </div>
 </div>
 
-@*style=\"width:155px;height:155px;\" *@
-
 @section Scripts{
 <script>
     $(document).ready(function () {
-         //if(window.File && window.FileList && window.FileReader) {
-         //   $("#files").on("change",function(e) {
-         //       var files = e.target.files ,
-         //       filesLength = files.length ;
-         //       for (var i = 0; i < filesLength ; i++) {
-         //           var f = files[i]
-         //           var fileReader = new FileReader();
-         //           fileReader.onload = (function(e) {
-         //               var file = e.target;
-         //               $("<img></img>",{
-         //                   class : "imageThumb",
-         //                   src : e.target.result,
-         //                   title : file.name
-         //               }).insertAfter("#files");
-         //          });
-         //          fileReader.readAsDataURL(f);
-         //      }
-         // });
-         //}
-         //else
-         //{ alert("Your browser doesn't support to File API") }
          if (window.File && window.FileList && window.FileReader) {
             $("#files").on("change", function(e) {
               var files = e.target.files,
@@ -136,13 +110,6 @@
                   $(".remove").click(function(){
                     $(this).parent(".pip").remove();
                   });
-
-                  // Old code here
-                  /*$("<img></img>", {
-                    class: "imageThumb",
-                    src: e.target.result,
-                    title: file.name + " | Click to remove"
-                  }).insertAfter("#files").click(function(){$(this).remove();});*/
 
                 });
                 fileReader.readAsDataURL(f);

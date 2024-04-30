@@ -27,8 +27,6 @@ namespace USBDProperty.Controllers
         // GET: ClientContacts
         public async Task<IActionResult> Index(int id)
         {
-            //var applicationDbContext = _context.ClientContacts.Include(c => c.PropertyType);
-            //ViewData["Interested"] = interested;
             try
             {
                 var applicationDbContext = _context.ClientContacts.Where(c => ((int)c.Interested).Equals(id));
@@ -73,7 +71,6 @@ namespace USBDProperty.Controllers
         {
 
             ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
-            //ViewData["Interested"] = interested;
             return View();
         }
         public async Task<JsonResult> SaveContact([FromBody] ClientVM clientContact)
@@ -132,7 +129,6 @@ namespace USBDProperty.Controllers
 
 
                             _notyf.Success("As soon as possible we will contact with u");
-                            // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
 
                             return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
                         }
@@ -149,15 +145,12 @@ namespace USBDProperty.Controllers
 
 
                             _notyf.Success("As soon as possible we will contact with u");
-                            // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
 
                             return RedirectToAction("Index", "Home");
                         }
                     }
                 }
-                //ViewData["Interested"] = interested;
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
-                // return View(clientContact);
                 return RedirectToAction("HomePropertyDetails", "PropertyDetails", new { Id });
             }
 
@@ -184,8 +177,6 @@ namespace USBDProperty.Controllers
                     if (r > 0)
                     {
                         _notyf.Success("As soon as possible we will contact with u");
-                        // return RedirectToAction("/PropertyDetails/HomePropertyDetails/"+clientContact.PropertyID);
-                        //return RedirectToAction("Index", "Home");
                         return Json(new { Data = clientData, issuccess = true });
                     }
                 }
@@ -212,7 +203,6 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
-                //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", clientContact.PropertyTypeId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName");
                 return View(clientContact);
             }
@@ -276,7 +266,6 @@ namespace USBDProperty.Controllers
                 }
 
                 var clientContact = await _context.ClientContacts
-                    //.Include(c => c.PropertyType)
                     .FirstOrDefaultAsync(m => m.ClientContactId == id);
                 if (clientContact == null)
                 {

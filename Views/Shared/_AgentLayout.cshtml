@@ -1,9 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    @*<meta charset="utf-8" />*@
-    @*<meta name="viewport" content="width=device-width, initial-scale=1.0" />*@
-    @*<title>@ViewData["Title"] - UsBDPropertyRealEstateProject</title>*@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -385,11 +382,6 @@
                     <i class="bi bi-building"></i><span>Properties</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="property" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    @*<li>
-                        <a asp-action="Index" asp-controller="PropertyFeatures">
-                            <i class="bi bi-circle"></i><span>Property Features</span>
-                        </a>
-                    </li>*@
                       <li>
                         <a asp-action="Index" asp-controller="PropertyTypes">
                             <i class="bi bi-circle"></i><span>Property Types</span>
@@ -413,37 +405,11 @@
                     <i class="ri-settings-4-fill"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-
-                    @*<li>
-                        <a asp-action="Index" asp-controller="Notices">
-                            <i class="bi bi-circle"></i><span>Notifications</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-action="Index" asp-controller="PropertyFeatures">
-                            <i class="bi bi-circle"></i><span>Property Features</span>
-                        </a>
-                    </li>*@
                     <li>
                         <a asp-action="Index" asp-controller="MeasurementUnits">
                             <i class="bi bi-circle"></i><span>Measutement Unit</span>
                         </a>
-                    </li>
-                    @*<li>
-                        <a asp-action="Index" asp-controller="TermsConditions">
-                            <i class="bi bi-circle"></i><span>Terms & Conditions</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-action="Index" asp-controller="PrivacyPolicies">
-                            <i class="bi bi-circle"></i><span>Privacy Policy</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-action="Index" asp-controller="ClientContacts">
-                            <i class="bi bi-circle"></i><span>Client Contact</span>
-                        </a>
-                    </li>*@
+                    </li>               
                 </ul>
             </li><!-- End Settngs Nav -->
 

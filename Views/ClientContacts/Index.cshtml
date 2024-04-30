@@ -27,18 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            @*  <th>
-                @Html.DisplayNameFor(model => model.PropertyForId)
-                </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.ContactDate)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Message)
-                </th>*@
-            @*   <th>
-                @Html.DisplayNameFor(model => model.PropertyType)
-                </th> *@
             <th></th>
         </tr>
     </thead>
@@ -55,23 +46,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                @*    <td>
-                    @Html.DisplayFor(modelItem => item.PropertyForId)
-                    </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.ContactDate)
                 </td>
-                @* <td>
-                    @Html.DisplayFor(modelItem => item.Message)
-                    </td>*@
-                @* <td>
-                    @Html.DisplayFor(modelItem => item.PropertyType.PropertyTypeName)
-                    </td> *@
-                @*<td>
-                    <a asp-action="Edit" asp-route-id="@item.ClientContactId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ClientContactId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ClientContactId">Delete</a>
-                </td>*@
                 <td class="col-md-2">
                     <div class="btn-group">
                         <button type="button" class="btn btn-success">Action</button>

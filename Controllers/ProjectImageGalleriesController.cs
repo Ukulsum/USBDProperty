@@ -213,10 +213,6 @@ namespace USBDProperty.Controllers
                                 await projectImageGallery.ImageFile.CopyToAsync(fileStrem);
                             }
                             projectImageGallery.ImagePath = "/Content/Images/" + fileName;
-                            //if (System.IO.File.Exists(fpath))
-                            //{
-                            //    System.IO.File.Delete(fpath);
-                            //}
                         }
                         else
                         {

@@ -44,7 +44,6 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label asp-for="PropertyTypeId" class="control-label">Types</label>
-                        @*<select asp-for="PropertyTypeId" id="drptypes" class="form-control" ></select>*@
                         <select asp-items="ViewBag.PropertychildTypeId" id="drptypes" class="form-control" asp-for="PropertyTypeId"></select>
                     </div>
                 </div>
@@ -56,7 +55,6 @@
                     <div class="form-group">
                         <label class="control-label">Country</label>
                         <select id="drpCountry" class="form-control" asp-items="ViewBag.CountryId"></select>
-                        @*<select  id="drpCountry" class="form-control"  ></select>*@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Division</label>
@@ -72,7 +70,6 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Area</label>
-                        @*<select id="drpArea"  asp-for="AreaId"  class="form-control"  ></select>*@
                         <select id="drpArea" asp-items="ViewBag.AreaId" class="form-control" asp-for="AreaId"></select>
                     </div>
                 </div>
@@ -89,7 +86,6 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Developer</label>
-                        @*<select id="drpDeveloper" class="form-control"  >*@
                         <select id="drpDeveloper" class="form-control" asp-items="ViewBag.AgentID">
                         </select>
 
@@ -99,7 +95,6 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Projcts</label>
-                        @*<select asp-for="ProjectId" id="drpprj" class="form-control"></select>*@
                         <select asp-items="ViewBag.ProjectsId" id="drpprj" class="form-control" asp-for="ProjectId"></select>
                     </div>
                 </div>
@@ -108,43 +103,13 @@
             <div class="row">
                 <h2>Property's' Information</h2>
                 <hr />
-
-                @* <div class="row">*@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label asp-for="Title" class="control-label"></label>
                         <input type="text" asp-for="Title" class="form-control" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
-                </div>
-                @*<div class="col-md-6">
-                    <div class="form-group">
-                    <label asp-for="PropertyName" class="control-label"></label>
-                    <input type="text" asp-for="PropertyName" class="form-control" />
-                    <span asp-validation-for="PropertyName" class="text-danger"></span>
-                    </div>
-                    </div>*@
-                @* <div class="col-md-6">
-                    <div class="form-group">
-                    <label asp-for="PropertyName" class="control-label"></label>
-                    <input type="text" asp-for="PropertyName" class="form-control" />
-                    <span asp-validation-for="PropertyName" class="text-danger"></span>
-                    </div>
-                    </div>*@
-                @* <div class="col-md-4">
-                    <div class="form-group">
-                    <label asp-for="PropertyCondition" class="control-label"></label>
-
-
-                    <select asp-for="PropertyCondition" class="form-control"
-                    asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
-                    <option value="0">Select Property's condition</option>
-                    </select>
-
-                    <span asp-validation-for="PropertyCondition" class="text-danger"></span>
-                    </div>
-                    </div>*@
-                @*</div>*@
+                </div>               
                 @if (@Model.PropertyType.IsLand == false)
                 {
                     <div id="flatDiv">
@@ -177,22 +142,7 @@
                             </div>
 
                         </div>
-
-                        @*<div id="flatDiv">*@
-                        <div class="row">
-                            @* <div class="col-md-4">
-                                <div class="form-group">
-                                <label asp-for="ConstructionStatus" class="control-label"></label>
-
-
-                                <select asp-for="ConstructionStatus" class="form-control"
-                                asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
-                                <option value="0">Select Property's condition</option>
-                                </select>
-
-                                <span asp-validation-for="ConstructionStatus" class="text-danger"></span>
-                                </div>
-                                </div>*@
+                        <div class="row">                        
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label asp-for="FlatSize" class="control-label"></label>
@@ -244,13 +194,6 @@
 
                         </div>
                         <div class="row">
-                            @*  <div class="col-md-4">
-                                <div class="form-group">
-                                <label asp-for="NumberOfBalconies" class="control-label"></label>
-                                <input type="number" asp-for="NumberOfBalconies" class="form-control" />
-                                <span asp-validation-for="NumberOfBalconies" class="text-danger"></span>
-                                </div>
-                                </div>*@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label asp-for="NumberOfGarages" class="control-label"></label>
@@ -311,9 +254,6 @@
                         <div class="form-group">
                             <label asp-for="MeasurementID" class="control-label"></label>
                             <select id="drpunit" class="form-control" asp-items="ViewBag.MeasurementID" asp-for="MeasurementID"></select>
-                            @*<select id="drpunit" asp-items="ViewData.MeasurementID" class="form-control"   >
-
-                                </select>*@
                             <span asp-validation-for="MeasurementID" class="text-danger"></span>
                         </div>
                     </div>
@@ -388,7 +328,6 @@
                         </label>
                     </div>
                 </div>
-            @*</div>*@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
@@ -410,20 +349,12 @@
      $(document).ready(function(){
          let isLand = false;
          var isChanged = false;
-         console.log("hi")
-        console.log(  $('#drptypes :selected').val());
          isLand= $('#drptypes :selected').attr('data-island');
-           console.log(isLand);
             if(isLand === 'true') {
-               console.log( "True part")
                $("#flatDiv").hide();
                $("#landDiv").show();
-               console.log(isLand)
             }
             if(isLand === 'false') {
-               console.log("false part")
-               console.log(isLand)
-
                $("#flatDiv").show();
                $("#landDiv").hide();
             }
@@ -433,22 +364,14 @@
              $("#imageInput").show();
              $("#btnChange").hide();
          });
-         //if($("#checkActive").is(':checked'){
-         //    $("#btnUpdate").attr('disabled', 'disabled');
-         //})
-        //$("#btnUpdate").attr('disabled', 'disabled');
-        //$("#btnSave").attr('disabled');
         $("#checkActive").click(function() {
             if($(this).is(':checked')){
                 $("#btnUpdate").removeAttr('disabled', 'disabled');
-                //$("#btnSave").attr('disabled', 'disabled');
             }
             else{
                  $("#btnUpdate").attr('disabled', 'disabled');
             }
         });
-
-       //$("#flatDiv").hide();
 
 
       CKEDITOR.replace('Description', {
@@ -457,11 +380,9 @@
       });
        $("#imageInput").change(function () {
             const file = this.files[0];
-            console.log(file);
             if (file) {
                 let reader = new FileReader();
                 reader.onload = function (event) {
-                    console.log(event.target.result);
                     $("#imgPreview").attr('src', event.target.result);
                 }
                 reader.readAsDataURL(file);
@@ -469,15 +390,10 @@
         });
 
       $("#parenTypes").change(function () {
-
-          //alert("P type")
           loadChild($(this).val());
-          //$("#drptypes").Contains()
-
       })
 
      $("#drpDeveloper").change(function () {
-         // alert($(this).val())
           loadPrjbyDeveloper($(this).val())
       })
 
@@ -492,89 +408,34 @@
       $("#drpCity").change(function () {
              loadArea($(this).val())
       })
-
-
-     // $("#drptypes").append(function () {
-     //   isLand=this.selectedOptions[0].getAttribute('data-island');
-     //   console.log(isLand)
-     //           if(isLand === 'true') {
-     //                 console.log( "True part")
-     //                 $("#flatDiv").hide();
-     //                 $("#landDiv").show();
-     //                 console.log(isLand)
-     //           }
-     //          if(isLand === 'false') {
-     //               console.log("false part")
-     //               console.log(isLand)
-
-     //               $("#flatDiv").show();
-     //               $("#landDiv").hide();
-     //          }
-     //     console.log( " Land= "+isLand)
-
-     //})
-
-
-     })//document
+     })
 
      function loadChild(id){
-         //isLand=this.selectedOptions[0].getAttribute('data-island');
-         //console.log("IsLand data" + isLand);
           alert("Child id "+ id)
           $.get("/PropertyTypes/GetChildType?pid=" + id , function (data, status) {
-                console.log(data)
                 $("#drptypes").empty();
                 $("#drptypes").append($('<option></option>').val("0").html("Select type"));
                 $.each(data, function (i, v) {
                     $("#drptypes").append($('<option data-island='+v.isLand+'></option>').val(v.propertyTypeId).html(v.propertyTypeName));
-                    //$("#drptypes").append($('<option></option>').val(v.propertyTypeId).html(v.propertyTypeName));
                 })
-
           })
      }
 
        $("#drptypes").change(function(){
 
              isLand=this.selectedOptions[0].getAttribute('data-island');
-           console.log(isLand);
             if(isLand === 'true') {
-               console.log( "True part")
                $("#flatDiv").hide();
                $("#landDiv").show();
-               console.log(isLand)
             }
             if(isLand === 'false') {
-               console.log("false part")
-               console.log(isLand)
-
                $("#flatDiv").show();
                $("#landDiv").hide();
             }
        })
 
-     //$("#drptypes").append(function () {
-     //   isLand=this.selectedOptions[0].getAttribute('data-island');
-     //   console.log(isLand)
-     //           if(isLand === 'true') {
-     //                 console.log( "True part")
-     //                 $("#flatDiv").hide();
-     //                 $("#landDiv").show();
-     //                 console.log(isLand)
-     //           }
-     //          if(isLand === 'false') {
-     //               console.log("false part")
-     //               console.log(isLand)
-
-     //               $("#flatDiv").show();
-     //               $("#landDiv").hide();
-     //          }
-     //     console.log( " Land= "+isLand)
-
-     //})
      function loadPrjbyDeveloper(devid) {
-               console.log("dev id: "+devid)
                $.get("/ProjectsInfoes/GetProjects?id=" + devid, function (data, status) {
-                   console.log(data.data)
                    $("#drpprj").empty();
                    $("#drpprj").append($('<option></option>').val("0").html("Select Project"));
                    $.each(data.data, function (i, v) {
@@ -587,7 +448,6 @@
 
      function loadDivision( cid) {
          $.get("/Divisions/GetDivision?cid="+cid, function (data, status) {
-             console.log(data)
              $("#drpDivision").empty();
              $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
              $.each(data, function (i, v) {
@@ -599,7 +459,6 @@
 
      function loadCity( did) {
          $.get("/Cities/GetCities?did="+did, function (data, status) {
-             console.log(data)
              $("#drpCity").empty();
              $("#drpCity").append($('<option></option>').val("0").html("Select City"));
              $.each(data, function (i, v) {
@@ -611,7 +470,6 @@
 
      function loadArea( cid) {
         $.get("/Areas/GetArea?cid=" +cid, function (data, status) {
-             console.log(data)
              $("#drpArea").empty();
              $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
              $.each(data, function (i, v) {

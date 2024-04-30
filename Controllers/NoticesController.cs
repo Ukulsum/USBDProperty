@@ -26,8 +26,6 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                //var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
-                //                                 .Where(p => p.IsActive   && p.IsFeatured   && p.EndDate >= DateTime.Today).Take(1).ToList();
                 var noticeData = _context.Notices.OrderByDescending(p => p.NoticeID)
                                                  .Where(p => p.IsActive && p.IsFeatured && p.EndDate >= DateTime.Today).ToList();
 
@@ -220,7 +218,6 @@ namespace USBDProperty.Controllers
                 }
                 if (notice.Images != null)
                 {
-                    //var ndata = _context.Notices.FindAsync(id);
                     if (data != null)
                     {
                         string npath = data.ImagePath.Replace("~/", "");
@@ -229,11 +226,6 @@ namespace USBDProperty.Controllers
                         {
                             System.IO.File.Delete(rootpath);
                         }
-                        //    }
-                        //}
-
-                        //return RedirectToAction("Index");
-
                         string extension = Path.GetExtension(notice.Images.FileName).ToLower();
                         if (extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == ".svg" || extension == ".gif")
                         {
@@ -244,10 +236,6 @@ namespace USBDProperty.Controllers
                                 await notice.Images.CopyToAsync(fileStrem);
                             }
                             notice.ImagePath = "/Content/Notification/" + fileName;
-                            //if (System.IO.File.Exists(fpath))
-                            //{
-                            //    System.IO.File.Delete(fpath);
-                            //}
                         }
                         else
                         {
@@ -349,8 +337,6 @@ namespace USBDProperty.Controllers
                         }
                     }
                 }
-
-                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)

@@ -4,7 +4,7 @@
     ViewData["Title"] = "MoreSearch";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<div class="datatable"></div>*@
+
 <section class="properties">
     <div class="row ">
         <div class="col-md-12">
@@ -20,13 +20,8 @@
                                             <input type="text" class="form-control" name="SearchText" placeholder="Search Text" />
                                         </div>
                                         <div class="col-sm-12 col-md-12">
-                                            @*<label>Property Purposes</label>*@
                                             <input type="radio" asp-items="PropertyFor" name="Propertyfor" value=2 id="buy" />
                                             <label for="">Buy</label>
-
-                                           @* <input type="radio" asp-items="PropertyFor" name="PropertyFor" value=2 id="sale" />
-                                            <label for="">Sale</label>*@
-
                                             <input type="radio" asp-items="PropertyFor" name="PropertyFor" value=3 id="rent" />
                                             <label for="">Rent</label>
                                         </div>
@@ -35,10 +30,6 @@
                                             <select class="form-control" name="PropertyTypeId" id="PropertyTypeId">
                                                 <option>All Property Type</option>
                                             </select>
-                                            @*  <select class="form-control" asp-items="ViewBag.propertyTypeId" name="propertyTypeId">
-                                                <option>Property Type</option>
-                                                </select>*@
-                                            @* @Html.DropDownList("PropertyTypeName", ViewBag.propertyTypes as IEnumerable<SelectListItem>, "Select Property Type" )*@
                                         </div>
                                         <div class="col-sm-12 col-md-12">
                                             <label>size (sqft)</label>
@@ -83,18 +74,12 @@
                     </section>
                 </div>
                 <div class="col-sm-12 col-md-8">
-                    @* <section class="properties">*@
-                    @*<div class="container">*@
-                    @*@("~/image/"+item.ImageName)*@
-
-
                     <ul class="row">
                         @if (Model != null || Model.Count()>0)
                         {
                             @foreach (var pinfo in Model)
                             {
                                 <li class="col-md-12">
-                                    @*<span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>*@
                                     <section class="row flex-row">
                                         <div class="col-md-6">
                                             <span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>
@@ -104,7 +89,6 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="details-sec">
-                                                @*@Html.Raw(pinfo.PropertySize + " " + @pinfo.MeasurementUnit.ShortName) *@
                                                 <p class="font-montserrat">@(pinfo.FlatSize + " " + pinfo.MeasurementUnit.ShortName + ", " + pinfo.NumberOfBedrooms + " Beds " + pinfo.ConstructionStatus + " " + pinfo.PropertyType.PropertyTypeName + " for " + pinfo.PropertyFor + " at " + pinfo.Location)</p>
                                                 <p class="ptype">@pinfo.PropertyType.PropertyTypeName </p>
                                                 <span class="locate m-0"><i class="fa fa-map-marker"></i> @(pinfo.Location + " " + pinfo.Area.AreaName)</span>
@@ -124,9 +108,7 @@
                         {
                             <li>Sorry no record found!</li>
                         }
-
                     </ul>
-                    @*</section>*@
                 </div>
             </div>
         </div>
@@ -148,7 +130,6 @@
     function loadParentType() {
 
                $.get("/PropertyTypes/GetChildType" , function (data, status) {
-                console.log(data)
                 $("#PropertyTypeId").empty();
                 $("#PropertyTypeId").append($('<option></option>').val("0").html("Select type"));
                 $.each(data, function (i, v) {

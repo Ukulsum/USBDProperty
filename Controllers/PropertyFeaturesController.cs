@@ -39,7 +39,6 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                //var model = new List<PropertyFeatures>();
                 var data = await _context.PropertyFeatures.ToListAsync();
 
 

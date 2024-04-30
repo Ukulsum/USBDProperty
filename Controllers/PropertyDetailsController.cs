@@ -25,9 +25,6 @@ namespace USBDProperty.Controllers
             _environment = environment;
             _notyf = srv;
         }
-
-
-        //All Properties
         [AllowAnonymous]
         public IActionResult AllProperties()
         {
@@ -36,16 +33,6 @@ namespace USBDProperty.Controllers
                 var data = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
                                                 .Include("PropertyType")
                                                 .ToList();
-                //.Select(p => new
-                //{
-                //    FlatSize = p.PropertyType.IsLand ? p.LandArea : p.FlatSize,
-                //    NumberOfBedrooms = p.PropertyType.IsLand ? " " : p.NumberOfBedrooms.ToString(),
-                //    NumberOfBaths = p.PropertyType.IsLand ? " " : p.NumberOfBaths.ToString(),
-                //    TotalPrice = p.PropertyType.IsLand ? p.TotalLandPrice : p.TotalPrice,
-                //    PropertyFor = p.PropertyFor,
-                //    PropertyTypeName = p.PropertyType.PropertyTypeName,
-                //    Location = p.Location
-                //}).ToList();
                 return View(data);
             }
             catch (Exception ex)
@@ -60,9 +47,6 @@ namespace USBDProperty.Controllers
         {
             try
             {
-                //var property = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
-                //                                  .Where(d => d.ProjectId.Equals(pid)).ToList();
-                //return Json(new { Data = property });
                 if (User.IsInRole("Agent"))
                 {
                     var property = _context.PropertyDetails.OrderByDescending(p => p.PropertyInfoId)
@@ -103,11 +87,6 @@ namespace USBDProperty.Controllers
             }
         }
 
-        //public IActionResult GetPropertyByParent(int id)
-        //{
-        //    var data = _context.PropertyDetails.Where(p => p.PropertyTypeId.Equals(id));
-        //    return View(data);
-        //}
         [AllowAnonymous]
         [HttpGet]
         public IActionResult GetPropertyByParent(int id)
@@ -120,12 +99,7 @@ namespace USBDProperty.Controllers
                                                .Include(p => p.PropertyType)
                                                .Include(p => p.MeasurementUnit)
                                                .Where(p => p.PropertyTypeId.Equals(id));
-                return View(data);
-                //if (pforid != null || pforid > 0)
-                //{
-                //    //data = data.Where(p => p.PropertyFor.Equals(pforid)).ToList();
-                //    data = data.Where(p => p.PropertyFor.Equals(pforid)).ToList();
-                //}
+                return View(data);   
             }
             catch (Exception ex)
             {
@@ -143,16 +117,10 @@ namespace USBDProperty.Controllers
                 ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName");
                 
                 var data = _context.PropertyDetails.Where(p => p.IsActive)                                           
-                                                   .Include(p => p.Area)
-                                                   //.Include(p => p.ProjectsInfo)
+                                                   .Include(p => p.Area)        
                                                    .Include(p => p.PropertyType)
                                                    .Include(p => p.MeasurementUnit)
-                                                   //.Select(n => n.Location).Distinct()
                                                    .ToList();
-                //if (forid != null || forid > 0)
-                //{
-                //    data = data.Where(p => p.PropertyFor.Equals(forid)).ToList();
-                //}
                 if (Propertyfor > 0)
                 {
 
@@ -298,7 +266,6 @@ namespace USBDProperty.Controllers
                                                     TotalPrice = s.TotalPrice,
                                                     PropertyInfoId = s.PropertyInfoId,
                                                     FlatSize = string.Join(",", s.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray()),
-                                                    //IsLand= s.PropertyType.IsLand
                                                 }).ToList();
 
 
@@ -306,7 +273,6 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
                 return Json(new { data = "No record" });
             }
 
@@ -326,20 +292,15 @@ namespace USBDProperty.Controllers
 
                                                 .Where(p => p.ISFeatured && p.PropertyType.IsLand).Select(s => new
                                                 {
-                                                    //ContructionStatus = s.ConstructionStatus,
                                                     PropertyFor = s.PropertyFor.ToString(),
                                                     ImagePath = s.ImagePath,
                                                     LandArea = s.LandArea,
                                                     Location = s.Location,
-                                                    //NumberOfBaths = s.NumberOfBaths,
-                                                    //NumberOfBedrooms = s.NumberOfBedrooms,
                                                     Title = s.Title,
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalLandPrice = s.TotalLandPrice,
                                                     PropertyInfoId = s.PropertyInfoId,
                                                     MeasurementUnit = s.MeasurementUnit
-                                                    //FlatSize = s.FlatSize,
-
                                                 }).ToList();
 
 
@@ -347,7 +308,6 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
                 return Json(new { data = "No record" });
             }
 
@@ -378,7 +338,6 @@ namespace USBDProperty.Controllers
 
 
         [AllowAnonymous]
-        //[HttpGet("HomePropertyDetails")]
         public async Task<IActionResult> HomePropertyDetails(int? id)
         {
             return View();
@@ -425,12 +384,9 @@ namespace USBDProperty.Controllers
                                                  .Include(p => p.ProjectsInfo)
                                                 .Include(p => p.PropertyType)
                                                 .Include(p => p.MeasurementUnit)
-                                                //.Include(p => p.PropertyType.IsLand)
                                                 .Where(p => p.PropertyInfoId.Equals(Id))
                                                 .Select(s => new
                                                 {
-
-                                                    //NumberOfGarages = s.PropertyType.IsLand ? "N/A" : s.NumberOfGarages.ToString(),
                                                     Title = s.Title,
                                                     Description = s.Description,
                                                     ConstructionStatus = s.PropertyType.IsLand ? "N/A" : s.ConstructionStatus.ToString(),
@@ -442,8 +398,7 @@ namespace USBDProperty.Controllers
                                                     FloorAvailableNo = s.PropertyType.IsLand ? "N/A" : s.FloorAvailableNo.ToString(),
                                                     Furnishing = s.PropertyType.IsLand ? "N/A" : s.Furnishing.ToString(),
                                                     HandOverDate = s.HandOverDate,
-                                                    LandArea = s.LandArea,
-                                                    //LandPrice = s.PropertyType.IsLand != null : s.LandPrice,
+                                                    LandArea = s.LandArea,               
                                                     Location = s.Location,
                                                     name = s.MeasurementUnit.Name,
                                                     NumberOfBalconies = s.PropertyType.IsLand ? "N/A" : s.NumberOfBalconies.ToString(),
@@ -456,10 +411,6 @@ namespace USBDProperty.Controllers
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalFloor = s.PropertyType.IsLand ? "N/A" : s.TotalFloor.ToString(),
                                                     TotalPrice = s.PropertyType.IsLand ? s.TotalLandPrice : s.TotalPrice,
-
-                                                    //IsLand = s.PropertyType.IsLand,
-                                                    //TotalLandPrice = s.PropertyType.IsLand ? "N/A" : s.TotalLandPrice.ToString(),
-                                                    //IsLand = s.PropertyType.IsLand
                                                 }).ToList();
 
                 return Json(new { data = applicationDbContext, joinPropertyInfoDb, locallid });
@@ -549,57 +500,18 @@ namespace USBDProperty.Controllers
             try
             {
                 var propertyDetails = _context.PropertyDetails.Find(id);
-
-                //propertyDetails.PropertyWithFeatures = new List<PropertyFeatures>();
                 propertyDetails.PropertyWithFeatures = _context.PropertyWithFeatures.Where(r=>r.PropertyId.Equals(id)).ToList();
                 AssignedPropertyFeature(propertyDetails);
-                //var data = await _context.PropertyFeatures.ToListAsync();
                 ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(id)), "PropertyInfoId", "Title");
                 ViewData["pid"] = id;
-                //return View(data);
                 return View();
             }
             catch(Exception ex)
             {
-                //ModelState.AddModelError("", ex.Message);
                 ViewBag.Message = ex.Message;
             }
             return View();
         }
-
-        //POST: FeaturedProperty/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> CreatePropertyFeatures( PropertyWithFeatures propertyWithFeatures, string[] selectedFeatures)
-        //{
-        //    try
-        //    {
-        //        if (selectedFeatures != null)
-        //        {
-        //            //propertyDetails.propertyFeatures = new List<PropertyFeatures>();
-        //            //foreach (var feature in selectedFeatures)
-        //            //{
-        //            //    var featureToAdd = _context.PropertyFeatures.FindAsync(int.Parse(feature));
-        //            //    propertyDetails.propertyFeatures.Add(await featureToAdd);
-        //            //}
-        //        }
-        //        if (ModelState.IsValid)
-        //        {
-        //            _context.PropertyWithFeatures.Add(propertyWithFeatures);
-        //            _context.SaveChanges();
-        //            return RedirectToAction("AllFeatured");
-        //        }
-        //        AssignedPropertyFeature(propertyWithFeatures);
-        //        ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Where(p => p.PropertyInfoId.Equals(propertyWithFeatures.PropertyId)), "PropertyInfoId", "Title");
-        //        return View(propertyWithFeatures);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -616,16 +528,9 @@ namespace USBDProperty.Controllers
                                                     .ThenInclude(i => i.PropertyFeatures)
                                                     .FirstOrDefaultAsync(m => m.PropertyInfoId == id);
 
-                //if (await TryUpdateModelAsync<PropertyDetails>(propertyToUpdate,   ""))
-                //{
-
                 UpdatePropertyFeature(selectedFeatures, propertyToUpdate);
                 try
                 {
-                    //foreach(var i in propertyToUpdate.PropertyWithFeatures)
-                    //{
-                    //    _context.PropertyWithFeatures.Add(i);
-                    //}
                     if (await _context.SaveChangesAsync() > 0)
                     {
                         return RedirectToAction(nameof(Index));
@@ -633,7 +538,6 @@ namespace USBDProperty.Controllers
                 }
                 catch (DbUpdateException ex)
                 {
-                    //Log the error (uncomment ex variable name and write a log.)
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
@@ -647,9 +551,6 @@ namespace USBDProperty.Controllers
                 return View();
             }
 
-            //}
-            //UpdateInstructorCourses(selectedCourses, instructorToUpdate);
-            //PopulateAssignedCourseData(instructorToUpdate);
             return View();
         }
 
@@ -689,8 +590,6 @@ namespace USBDProperty.Controllers
                     }
 
                 }
-                //var propertyFeatures = new HashSet<int>
-                //    (propertyToUpdate.PropertyWithFeatures.Select(c => c.FeatureId));
 
                 else
                 {
@@ -742,14 +641,6 @@ namespace USBDProperty.Controllers
                                                 .Include(p => p.AvailableFlatSizes);
                     return View(await applicationDbContext.ToListAsync());
                 }
-                //var applicationDbContext = _context.PropertyDetails
-                //                                .OrderByDescending(o => o.PropertyInfoId)
-                //                                .Include(p => p.Area)
-                //                                .Include(p => p.ProjectsInfo)
-                //                                .Include(p => p.MeasurementUnit)
-                //                                .Include(p => p.PropertyType);
-
-                //return View(await applicationDbContext.ToListAsync());
                 return View();
             }
             catch (Exception ex)
@@ -903,8 +794,6 @@ namespace USBDProperty.Controllers
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "AreaId", "AreaName", propertyDetails.AreaId);
             ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
-            //ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
-            //ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
             ViewData["ParentPropertyTypeId"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
             ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes, "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
             ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "Id", "Name", propertyDetails.MeasurementID);
@@ -951,8 +840,7 @@ namespace USBDProperty.Controllers
                 ViewData["AreaId"] = new SelectList(_context.Areas.OrderBy(a => a.AreaName), "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allid.CityId);
                 ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allid.DivisionId);
-                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);
-                //ViewData["ProjectId"] = new SelectList(_context.ProjectsInfo, "ProjectId", "Banner", propertyDetails.ProjectId);
+                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);         
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == 0), "PropertyTypeId", "PropertyTypeName", pid.Value);
                 ViewData["PropertychildTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == pid.Value), "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "Id", "Name", propertyDetails.MeasurementID);
@@ -960,7 +848,6 @@ namespace USBDProperty.Controllers
             }
             catch (Exception ex)
             {
-                //return BadRequest(ex.Message);
                 ModelState.AddModelError("", ex.Message);
             }
             return View();
@@ -1015,10 +902,6 @@ namespace USBDProperty.Controllers
                                 await propertyDetails.Image.CopyToAsync(fileStrem);
                             }
                             propertyDetails.ImagePath = "/Content/Images/" + fileName;
-                            //if (System.IO.File.Exists(fpath))
-                            //{
-                            //    System.IO.File.Delete(fpath);
-                            //}
                         }
                         else
                         {
@@ -1167,8 +1050,6 @@ namespace USBDProperty.Controllers
                         }
                     }
                 }
-
-                //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

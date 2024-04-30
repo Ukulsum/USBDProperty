@@ -27,28 +27,18 @@
         <!--======= FIND PROPERTY =========-->
         <div class="finder">
             <div class="zoomBtn">
-                @*<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"> just contact us </button>*@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> Join For Zoom </button>
 
             </div>
             <div class="container">
-                @* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> just contact us </button>*@
                 <form asp-action="MoreSearch" asp-controller="PropertyDetails" method="get">
-                    @*<h1>Us-Bd Properties Ltd.</h1>*@
                     <!--======= FORM SECTION =========-->
                     <div class="find-sec">
                         <div class="search-type">
-                            <span class="search-type-tab active">
-                                @*<img src="/img/icon-Hotel.5d80c2e2.svg" alt="Hotel" width="25" height="18">*@
-                                Buy
-                            </span>
-                            <span class="search-type-tab">
-                                @*<img src="/img/icon-Tour.ca16ca10.svg" alt="Tour" width="25" height="18">*@
-                                Rent
-                            </span>
+                            <span class="search-type-tab active"> Buy </span>
+                            <span class="search-type-tab"> Rent </span>
                         </div>
                         <ul class="row">
-
                             <!--======= FORM =========-->
                             <li class="col-sm-6">
                                 <label>Choose The City</label>
@@ -61,9 +51,7 @@
                             <li class="col-sm-6">
                                 <label>Location</label>
                                 <select id="propertyInfoId" class="form-control"></select>
-
                             </li>
-
                         </ul>
                     </div>
                     <div class="search-btn-container">
@@ -72,9 +60,7 @@
                 </form>
             </div>
         </div>
-
     </div>
-
 </div>
 
 
@@ -88,7 +74,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-           @*  <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_zoom"> *@
             <form  id="form_zoom">
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -96,9 +81,6 @@
                         <li class="mb-2">
                             <p class="text-center">Join Zoom Abason Mela</p>
                             <input type="text"  id="ClientName" class="form-control" placeholder="Enter Your Name" />
-                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
-                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
-                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
                             <span asp-validation-for="ClientName" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
@@ -115,14 +97,9 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="modal-footer">
-                    
-                   
-                  @*   <button type="submit" class="btn btn-primary" asp-items="@ViewData["Interested"]" value="@Interested.ZoomInterested">Save</button> *@
                     <button type="button" class="btn btn-primary" onclick="PostClientData()">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
                 </div>
             </form>
         </div>
@@ -141,15 +118,11 @@
             </div>
             <form asp-action="Create" asp-controller="ClientContacts" method="post" id="form_Sale">
                 <div class="modal-body">
-
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <ul>
                         <li class="mb-2">
                             <p class="text-center">Send Message to Property Owner</p>
-                            <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
-                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
-                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
-                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
+                            <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />                         
                             <span asp-validation-for="ClientName" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
@@ -165,16 +138,13 @@
                             <span asp-validation-for="Message" class="text-danger"></span>
                         </li>
                         <li>
-                            @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
                         </li>
                     </ul>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
                     <button type="submit" value="@Interested.Sale" asp-items="@ViewData["Interested"]" class="btn btn-primary center mb-2">Save</button>
-                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
                 </div>
             </form>
         </div>
@@ -197,7 +167,6 @@
 <!--======= SERVICES =========-->
 <section class="services">
     <div class="container">
-        @*height="337px" width="271px" *@
         <!--======= TITTLE =========-->
         <div class="tittle">
             <img src="~/Asserts/images/head-top.png" alt="">
@@ -211,13 +180,10 @@
                 <section>
                     <!--======= SERVICE IMG =========-->
                     <img class="img-responsive" src="~/Asserts/Banner/service-img-1.jpg" alt="">
-                    @*<div class="icon"> <img src="~/Asserts/images/icon-services-1.png" alt=""> </div>*@
-
                     <!--======= SERVICE HOVER =========-->
                     <div class="ser-hover">
                         <p>
                             Are you ready to embark on the journey of a lifetime, securing your own piece of paradise? At USBDPROPERTY, we understand that buying a property is more than a transaction; it's an smart investment and you can call your own.
-                            @* <a href="#." class="read-more">Read more <i class="fa fa-angle-double-right"></i></a>*@
                         </p>
                     </div>
                     <a href="#." class="heading">Buy</a>
@@ -229,8 +195,6 @@
                 <section>
                     <!--======= SERVICE IMG =========-->
                     <img class="img-responsive" src="~/Asserts/Banner/service-img-2.jpg" alt="">
-                    @*<div class="icon"> <img src="~/Asserts/images/icon-services-2.png" alt=""> </div>*@
-
                     <!--======= SERVICE HOVER =========-->
                     <div class="ser-hover">
                         <p>
@@ -247,14 +211,11 @@
             <li class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <section>
                     <!--======= SERVICE IMG =========-->
-                    <img class="img-responsive" src="~/Asserts/Banner/service-img-3.jpg" alt="">
-                    @*<div class="icon"> <img src="~/Asserts/images/icon-services-3.png" alt=""> </div>*@
-
+                    <img class="img-responsive" src="~/Asserts/Banner/service-img-3.jpg" alt="">   
                     <!--======= SERVICE HOVER =========-->
                     <div class="ser-hover">
                         <p>
                             Seamless Living Starts Here: Rent with USBDPROPERTY"
-
                             Your dream rental is more than just a space; it's a place where your lifestyle unfolds. At [Your Company], we understand the importance of finding the perfect rental property tailored to your needs
                         </p>
                     </div>
@@ -267,8 +228,6 @@
                 <section>
                     <!--======= SERVICE IMG =========-->
                     <img class="img-responsive" src="~/Asserts/Banner/service-img-4.jpg" alt="">
-                    @*<div class="icon"> <img src="~/Asserts/images/icon-services-4.png" alt=""> </div>*@
-
                     <!--======= SERVICE HOVER =========-->
                     <div class="ser-hover">
                         <p>And when the odds are against him and their dangers work to do. You bet your life Speed Racer <a href="#." class="read-more">Read more <i class="fa fa-angle-double-right"></i></a> </p>
@@ -313,13 +272,11 @@
 <!--======= PROPERTY =========-->
 <section class="properties">
     <div class="container">
-
         <!--======= TITTLE =========-->
         <div class="tittle">
             <img src="~/Asserts/images/head-top.png" alt="">
             <h3>Featured Properties</h3>
         </div>
-
         <!--======= PROPERTIES ROW =========-->
         @*<ul class="row">*@
         <div class="   ">
@@ -388,7 +345,6 @@
                 </li>
                 <li class="col-sm-2 no-padding">
                     <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"> just contact us </button>
-                    @*<a href="#." class="btn">just contact us</a> *@
                 </li>
             </ul>
         </div>
@@ -416,9 +372,6 @@
                         <li class="mb-2">
                             <p class="text-center">Send Message to Property Owner</p>
                             <input type="text" asp-for="ClientName" class="form-control" placeholder="Enter Your Name" />
-                            @* <input type="hidden" name="PropertyID" asp-for="PropertyID" id="prid" />
-                                <input type="hidden" name="PropertyTypeId" id="typeID" asp-for="PropertyTypeId" />
-                                <input type="hidden" name="PropertyForId" id="forid" asp-for="PropertyForId" />*@
                             <span asp-validation-for="ClientName" class="text-danger"></span>
                         </li>
                         <li class="mb-2">
@@ -433,16 +386,12 @@
                             <textarea type="text" asp-for="Message" class="form-control" placeholder="Please Type Your Message"></textarea>
                             <span asp-validation-for="Message" class="text-danger"></span>
                         </li>
-                        <li>
-                            @*<input type="submit" value="Send Message" class="btn btn-primary center mb-2" />*@
-                        </li>
                     </ul>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <input type="submit" value="Send Message" class="btn btn-primary center mb-2" />
-                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
                 </div>
             </form>
         </div>
@@ -469,7 +418,6 @@
             $("#AreaId").change(function () {
                 loadLocation($(this).val())
             })
-            //$("#exampleModal").modal('Show');
             loadNotice();
             getFlatProperty()
             //getBannerProperty()
@@ -586,10 +534,7 @@
                     if(value.length > 0){
                          $("#landProperty").html('<div class="tittle"><img src="~/Asserts/images/head-top.png" alt=""><h3>Featured Land Properties</h3></div>');
                     }   
-
-                   landPropertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.landArea + " " + value.measurementUnit.name + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + '/Plot</p> <span class="price font-montserrat">BDT.' + value.totalLandPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
-                   
-                   
+                   landPropertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.landArea + " " + value.measurementUnit.name + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + '/Plot</p> <span class="price font-montserrat">BDT.' + value.totalLandPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'                                  
                 });
                 landPropertylist += '</ul>';
                 $(".load_LandProperty").empty();
