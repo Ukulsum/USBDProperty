@@ -360,9 +360,6 @@
             });
 
         $("#parenTypes").change(function () {
-
-
-                console.log("pid "+ $(this).val())
                 $.get("/PropertyTypes/GetChildType?pid=" + $(this).val(), function (data, status) {
                     $("#drptypes").empty();
                     $("#drptypes").append($('<option></option>').val("0").html("Select"));
@@ -422,7 +419,6 @@
             })
         }
         function loadPrjbyDeveloper(devid) {
-            console.log("dev id: "+devid)
             $.get("/ProjectsInfoes/GetProjects?id=" + devid, function (data, status) {
                 $("#drpprj").empty();
                 $("#drpprj").append($('<option></option>').val("0").html("Select Project"));

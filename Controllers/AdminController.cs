@@ -5,7 +5,7 @@ using USBDProperty.ViewModels;
 
 namespace USBDProperty.Controllers
 {
-    [Authorize(Roles = "Admin,Super Admin")        ]
+    //[Authorize(Roles = "Admin,Super Admin")]
     public class AdminController : Controller
     {
         public readonly ApplicationDbContext _context;
@@ -18,10 +18,15 @@ namespace USBDProperty.Controllers
             var propertyVM = new PropertyViewModel
             {
                 AgentID = _context.DevelopersorAgent.Count(),
-                ProjectId = _context.DevelopersorAgent.Count( ),
-                PropertyInfoId = _context.PropertyDetails.Count( )
+                ProjectId = _context.DevelopersorAgent.Count(),
+                PropertyInfoId = _context.PropertyDetails.Count()
             };
             return View(propertyVM);
+        }
+
+        public IActionResult sDashboard()
+        {
+            return View();
         }
     }
 }
