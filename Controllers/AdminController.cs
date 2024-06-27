@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.Logging;
+using System.Reflection;
 using USBDProperty.Models;
 using USBDProperty.ViewModels;
 
@@ -26,7 +29,13 @@ namespace USBDProperty.Controllers
 
         public IActionResult sDashboard()
         {
-            return View();
+            var propertyVM = new PropertyViewModel
+            {
+                AgentID = _context.DevelopersorAgent.Count(),
+                ProjectId = _context.DevelopersorAgent.Count(),
+                PropertyInfoId = _context.PropertyDetails.Count()
+            };
+            return View(propertyVM);
         }
     }
 }

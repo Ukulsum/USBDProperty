@@ -8,11 +8,95 @@
     }
     else
     {
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 }
 
-<main id="main">
+<div class="content-wrapper" style="min-height: 1345.31px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Locations</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Cities">Cities</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Cities</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="CityId" />
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CityName" class="control-label"></label>
+                                            <input asp-for="CityName" class="form-control" />
+                                            <span asp-validation-for="CityName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="DivisionId" class="control-label"></label>
+                                            <select asp-for="DivisionId" class="form-control" asp-items="ViewBag.CityId"></select>
+                                            <span asp-validation-for="DivisionId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    @* <button type="submit" class="btn btn-primary">Submit</button> *@
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Update" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+@* <main id="main">
     <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center">City</h5>
@@ -52,4 +136,4 @@
             </form>
         </div>
     </div>
-</main>
+</main> *@

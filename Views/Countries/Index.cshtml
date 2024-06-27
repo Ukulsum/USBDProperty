@@ -8,11 +8,119 @@
     }
     else
     {
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 }
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Area">Area</a></li>
+            <li class="breadcrumb-item active">Index</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
 
-<main id="main">
+
+<div class="content-wrapper" style="min-height: 1302.12px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Locations</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Countries">Countries</a></li>
+                        <li class="breadcrumb-item active">Index</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title">List of Countries</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CountryID)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CountryName)
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CountryID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CountryName)
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success">Action</button>
+                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.CountryID"><i class="bi bi-pencil-square"></i>Edit</a>
+                                                        <a class="dropdown-item" asp-action="Details" asp-route-id="@item.CountryID"><i class="bi bi-eye-fill"></i>Details</a>
+                                                        <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.CountryID"><i class="bi bi-trash"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        @* <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        </ul>
+                        </div> *@
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+@* <main id="main">
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -67,7 +175,7 @@
             </table>
         </div>
     </div>
-</main>
+</main> *@
 
 
 
