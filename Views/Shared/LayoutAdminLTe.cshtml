@@ -525,5 +525,8 @@
     <!------- Datatable ----------->
     @* <script src="~/AdminLTE/simple-datatables/simple-datatables.js"></script> *@
 
+
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

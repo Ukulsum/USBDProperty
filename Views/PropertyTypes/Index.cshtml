@@ -9,11 +9,23 @@
     else
     {
         // Layout = "~/Views/Shared/_AdminLayout.cshtml";
-        Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 }
 
-<div class="content-wrapper" style="min-height: 1345.31px;">
+
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Area">Area</a></li>
+            <li class="breadcrumb-item active">Index</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+
+<div class="content-wrapper" style="min-height: 1302.12px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -24,8 +36,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Properties</li>
-                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PropertyTypes">Property Types</a></li>
-                        <li class="breadcrumb-item active">Create</li>
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PropertyTypes">PropertyTypes</a></li>
+                        <li class="breadcrumb-item active">Index</li>
                     </ol>
                 </div>
             </div>
@@ -36,65 +48,85 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <!-- left column -->
                 <div class="col-md-12">
-                    <!-- general form elements -->
-                    <div class="card card-primary">
+                    <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Area</h3>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title">List of Property Types</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
-                        <!-- form start -->
-                        <form asp-action="Create">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label asp-for="AreaName" class="control-label"></label>
-                                            <input asp-for="AreaName" class="form-control" />
-                                            <span asp-validation-for="AreaName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label asp-for="CityId" class="control-label"></label>
-                                            <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
+                        <div class="card-body">
 
-                                <div class="card-footer">
-                                    @* <button type="submit" class="btn btn-primary">Submit</button> *@
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="form-group mt-2">
-                                                <input type="submit" value="Save" class="btn btn-primary" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <a asp-action="Index">Back to List</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </form>
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PropertyTypeName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ParentPropertyTypeId)
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PropertyTypeName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ParentPropertyTypeId)
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success">Action</button>
+                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.PropertyTypeId"><i class="bi bi-pencil-square"></i>Edit</a>
+                                                        <a class="dropdown-item" asp-action="Details" asp-route-id="@item.PropertyTypeId"><i class="bi bi-eye-fill"></i>Details</a>
+                                                        <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.PropertyTypeId"><i class="bi bi-trash"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        @* <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        </ul>
+                        </div> *@
                     </div>
                     <!-- /.card -->
-
-
                 </div>
             </div>
-            <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>
 
 
-@* <div class="card">
+
+
+
+@*  <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-9">
@@ -147,4 +179,4 @@
             </tbody>
         </table>
     </div>
-</div> *@
+</div>  *@
