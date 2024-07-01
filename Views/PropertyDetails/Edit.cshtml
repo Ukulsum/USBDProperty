@@ -8,11 +8,446 @@
     }
     else
     {
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 }
-@*<main id="main">*@
-<div class="card">
+
+
+<div class="content-wrapper" style="min-height: 1345.31px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Property Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PropertyDetails">Property Details</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Update Property</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        @* <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="AreaId" />
+                        <div class="card-body">
+                        <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                        <label asp-for="AreaName" class="control-label"></label>
+                        <input asp-for="AreaName" class="form-control" />
+                        <span asp-validation-for="AreaName" class="text-danger"></span>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group">
+                        <label asp-for="CityId" class="control-label"></label>
+                        <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                        <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                        </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <div class="row">
+                        <div class="col-md-9">
+                        <div class="form-group mt-2">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+                        </div>
+                        <div class="col-md-3 mt-2">
+                        <div class="form-group">
+                        <a asp-action="Index">Back to List</a>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </form> *@
+
+                        <form asp-action="Edit" method="post" enctype="multipart/form-data" asp-controller="PropertyDetails">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="PropertyInfoId" />
+                            <div class="card-body">
+                                <h2>Property Types</h2>
+                                <div class="row">
+                                    @*  <h2>Property Types</h2> *@
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Purposes</label>
+                                            <select asp-for="PropertyFor" class="form-control" asp-items="@Html.GetEnumSelectList<PropertyFor>()">
+                                                <option value="1">Select Type</option>
+                                            </select>
+                                            <span asp-validation-for="PropertyFor" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Property Types</label>
+                                            <select id="parenTypes" class="form-control" asp-items="ViewBag.PropertyTypeId">
+                                                <option value="0">Select Type</option>
+                                            </select>
+                                        </div>
+
+                                        <label id="lbl">@Model.PropertyType.IsLand</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="PropertyTypeId" class="control-label">Types</label>
+                                            <select asp-items="ViewBag.PropertychildTypeId" id="drptypes" class="form-control" asp-for="PropertyTypeId"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2>Location</h2>
+                                <div class="row">
+                                    @* <h2>Location</h2> *@
+                                    <hr />
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Country</label>
+                                            <select id="drpCountry" class="form-control" asp-items="ViewBag.CountryId"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Division</label>
+                                            <select id="drpDivision" class="form-control" asp-items="ViewBag.DivisionId"></select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="control-label">City</label>
+                                            <select id="drpCity" class="form-control" asp-items="ViewBag.CityId"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Area</label>
+                                            <select id="drpArea" asp-items="ViewBag.AreaId" class="form-control" asp-for="AreaId"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Address</label>
+                                            <input type="text" asp-for="Location" class="form-control" />
+                                            <span asp-validation-for="Location" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2>Developer's Information</h2>
+                                <div class="row">
+                                    @* <h2>Developer's Information</h2> *@
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Developer</label>
+                                            <select id="drpDeveloper" class="form-control" asp-items="ViewBag.AgentID">
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Projcts</label>
+                                            <select asp-items="ViewBag.ProjectsId" id="drpprj" class="form-control" asp-for="ProjectId"></select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <h2>Property's' Information</h2>
+                                <div class="row">
+                                    @* <h2>Property's' Information</h2> *@
+                                    <hr />
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Title" class="control-label"></label>
+                                            <input type="text" asp-for="Title" class="form-control" />
+                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    @if (@Model.PropertyType.IsLand == false)
+                                    {
+                                        <div id="flatDiv">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="PropertyCondition" class="control-label"></label>
+
+
+                                                        <select asp-for="PropertyCondition" class="form-control"
+                                                                asp-items="@Html.GetEnumSelectList<PropertyCondition>()">
+                                                            <option value="0">Select Property's condition</option>
+                                                        </select>
+
+                                                        <span asp-validation-for="PropertyCondition" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="ConstructionStatus" class="control-label"></label>
+
+
+                                                        <select asp-for="ConstructionStatus" class="form-control"
+                                                                asp-items="@Html.GetEnumSelectList<ConstructionStatus>()">
+                                                            <option value="0">Select Property's condition</option>
+                                                        </select>
+
+                                                        <span asp-validation-for="ConstructionStatus" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="FlatSize" class="control-label"></label>
+                                                        <input type="text" asp-for="FlatSize" class="form-control" />
+                                                        <span asp-validation-for="FlatSize" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="Price" class="control-label"></label>
+                                                        <input type="text" asp-for="Price" class="form-control" />
+                                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="TotalPrice" class="control-label"></label>
+                                                        <input type="text" asp-for="TotalPrice" class="form-control" />
+                                                        <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="NumberOfBedrooms" class="control-label"></label>
+                                                        <input type="number" asp-for="NumberOfBedrooms" class="form-control" />
+                                                        <span asp-validation-for="NumberOfBedrooms" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="NumberOfBaths" class="control-label"></label>
+                                                        <input type="number" asp-for="NumberOfBaths" class="form-control" />
+                                                        <span asp-validation-for="NumberOfBaths" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="NumberOfBalconies" class="control-label"></label>
+                                                        <input type="number" asp-for="NumberOfBalconies" class="form-control" />
+                                                        <span asp-validation-for="NumberOfBalconies" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="NumberOfGarages" class="control-label"></label>
+                                                        <input type="number" asp-for="NumberOfGarages" class="form-control" />
+                                                        <span asp-validation-for="NumberOfGarages" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="TotalFloor" class="control-label"></label>
+                                                        <input type="number" asp-for="TotalFloor" class="form-control" />
+                                                        <span asp-validation-for="TotalFloor" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label asp-for="FloorAvailableNo" class="control-label"></label>
+                                                        <input type="text" asp-for="FloorAvailableNo" class="form-control" />
+                                                        <span asp-validation-for="FloorAvailableNo" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Furnishing" class="control-label"></label>
+
+                                                        <select asp-for="Furnishing" class="form-control"
+                                                                asp-items="@Html.GetEnumSelectList<Furnished>()">
+                                                            <option>Select Property Decoration</option>
+                                                        </select>
+                                                        <span asp-validation-for="Furnishing" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="Facing" class="control-label"></label>
+                                                        <select asp-for="Facing" class="form-control"
+                                                                asp-items="@Html.GetEnumSelectList<Facing>()">
+                                                            <option>Select Property Face</option>
+                                                        </select>
+                                                        <span asp-validation-for="Facing" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="HandOverDate" class="control-label"></label>
+                                                <input asp-for="HandOverDate" class="form-control" />
+                                                <span asp-validation-for="HandOverDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="MeasurementID" class="control-label"></label>
+                                                <select id="drpunit" class="form-control" asp-items="ViewBag.MeasurementID" asp-for="MeasurementID"></select>
+                                                <span asp-validation-for="MeasurementID" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="LandArea" class="control-label"></label>
+                                                <input type="text" asp-for="LandArea" class="form-control" />
+                                                <span asp-validation-for="LandArea" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if (@Model.PropertyType.IsLand)
+                                    {
+                                        <div class="row">
+                                            <div id="landDiv">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="LandPrice" class="control-label"></label>
+                                                        <input type="text" asp-for="LandPrice" class="form-control" />
+                                                        <span asp-validation-for="LandPrice" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="TotalLandPrice" class="control-label"></label>
+                                                        <input type="text" asp-for="TotalLandPrice" class="form-control" />
+                                                        <span asp-validation-for="TotalLandPrice" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="row">
+                                        <div class="col-md-8 col-lg-8">
+                                            <div class="form-group">
+                                                <label asp-for="Comments" class="control-label"></label>
+                                                <textarea type="text" rows="10" asp-for="Comments" class="form-control"></textarea>
+                                                <span asp-validation-for="Comments" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label asp-for="Image" class="control-label"></label>
+                                                <input type="file" class="form-control" name="Image" id="imageInput" />
+                                                <span asp-validation-for="Image" class="text-danger"></span>
+                                            </div>
+
+                                            <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                                                <img src="@Url.Content(Model.ImagePath)" style="width:155px;height:155px;" alt="@Model.Title" id="imgPreview" />
+
+                                                <input type="text" asp-for="ImagePath" hidden />
+                                            </div>
+                                            <button type="button" id="btnChange" class="btn btn-primary mt-2">Change</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label asp-for="Description" class="control-label"></label>
+                                        <textarea type="text" asp-for="Description" class="form-control"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                    <div class="row m-2">
+                                        <div class="form-group form-check col-md-6">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" asp-for="IsActive" id="checkActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group form-check col-md-6">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" asp-for="ISFeatured" /> @Html.DisplayNameFor(model => model.ISFeatured)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*  <div class="row">
+                                <div class="col-md-8">
+                                <div class="form-group">
+                                <input type="submit" value="Update" class="btn btn-primary" id="btnUpdate" />
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                <div><a asp-action="Index">Back to List</a></div>
+                                </div>
+                                </div> *@
+
+
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Update" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </form>
+
+
+
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+@* <div class="card">
     <div class="card-body">
         <h5 class="card-title text-center">Property Update Listing</h5>
         <hr style="width:100%;" />
@@ -109,7 +544,7 @@
                         <input type="text" asp-for="Title" class="form-control" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
-                </div>               
+                </div>
                 @if (@Model.PropertyType.IsLand == false)
                 {
                     <div id="flatDiv">
@@ -142,7 +577,7 @@
                             </div>
 
                         </div>
-                        <div class="row">                        
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label asp-for="FlatSize" class="control-label"></label>
@@ -341,144 +776,144 @@
 
         </form>
     </div>
-</div>
-@*</main>*@
-
-@section Scripts{
-<script>
-     $(document).ready(function(){
-         let isLand = false;
-         var isChanged = false;
-         isLand= $('#drptypes :selected').attr('data-island');
-            if(isLand === 'true') {
-               $("#flatDiv").hide();
-               $("#landDiv").show();
-            }
-            if(isLand === 'false') {
-               $("#flatDiv").show();
-               $("#landDiv").hide();
-            }
-         $("#btnChange").show();
-         $("#imageInput").hide();
-         $("#btnChange").click(function() {
-             $("#imageInput").show();
-             $("#btnChange").hide();
-         });
-        $("#checkActive").click(function() {
-            if($(this).is(':checked')){
-                $("#btnUpdate").removeAttr('disabled', 'disabled');
-            }
-            else{
-                 $("#btnUpdate").attr('disabled', 'disabled');
-            }
-        });
+</div> *@
 
 
-      CKEDITOR.replace('Description', {
-         height: 300,
-         width: '100%',
-      });
-       $("#imageInput").change(function () {
-            const file = this.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function (event) {
-                    $("#imgPreview").attr('src', event.target.result);
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            let isLand = false;
+            var isChanged = false;
+            isLand = $('#drptypes :selected').attr('data-island');
+            if (isLand === 'true') {
+                $("#flatDiv").hide();
+                $("#landDiv").show();
+            }
+            if (isLand === 'false') {
+                $("#flatDiv").show();
+                $("#landDiv").hide();
+            }
+            $("#btnChange").show();
+            $("#imageInput").hide();
+            $("#btnChange").click(function () {
+                $("#imageInput").show();
+                $("#btnChange").hide();
+            });
+            $("#checkActive").click(function () {
+                if ($(this).is(':checked')) {
+                    $("#btnUpdate").removeAttr('disabled', 'disabled');
                 }
-                reader.readAsDataURL(file);
-            }
-        });
+                else {
+                    $("#btnUpdate").attr('disabled', 'disabled');
+                }
+            });
 
-      $("#parenTypes").change(function () {
-          loadChild($(this).val());
-      })
 
-     $("#drpDeveloper").change(function () {
-          loadPrjbyDeveloper($(this).val())
-      })
+            CKEDITOR.replace('Description', {
+                height: 300,
+                width: '100%',
+            });
+            $("#imageInput").change(function () {
+                const file = this.files[0];
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function (event) {
+                        $("#imgPreview").attr('src', event.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
 
-      $("#drpCountry").change(function(){
-             loadDivision($(this).val())
-      })
+            $("#parenTypes").change(function () {
+                loadChild($(this).val());
+            })
 
-      $("#drpDivision").change(function () {
-             loadCity($(this).val())
-      })
+            $("#drpDeveloper").change(function () {
+                loadPrjbyDeveloper($(this).val())
+            })
 
-      $("#drpCity").change(function () {
-             loadArea($(this).val())
-      })
-     })
+            $("#drpCountry").change(function () {
+                loadDivision($(this).val())
+            })
 
-     function loadChild(id){
-          alert("Child id "+ id)
-          $.get("/PropertyTypes/GetChildType?pid=" + id , function (data, status) {
+            $("#drpDivision").change(function () {
+                loadCity($(this).val())
+            })
+
+            $("#drpCity").change(function () {
+                loadArea($(this).val())
+            })
+        })
+
+        function loadChild(id) {
+            alert("Child id " + id)
+            $.get("/PropertyTypes/GetChildType?pid=" + id, function (data, status) {
                 $("#drptypes").empty();
                 $("#drptypes").append($('<option></option>').val("0").html("Select type"));
                 $.each(data, function (i, v) {
-                    $("#drptypes").append($('<option data-island='+v.isLand+'></option>').val(v.propertyTypeId).html(v.propertyTypeName));
+                    $("#drptypes").append($('<option data-island=' + v.isLand + '></option>').val(v.propertyTypeId).html(v.propertyTypeName));
                 })
-          })
-     }
+            })
+        }
 
-       $("#drptypes").change(function(){
+        $("#drptypes").change(function () {
 
-             isLand=this.selectedOptions[0].getAttribute('data-island');
-            if(isLand === 'true') {
-               $("#flatDiv").hide();
-               $("#landDiv").show();
+            isLand = this.selectedOptions[0].getAttribute('data-island');
+            if (isLand === 'true') {
+                $("#flatDiv").hide();
+                $("#landDiv").show();
             }
-            if(isLand === 'false') {
-               $("#flatDiv").show();
-               $("#landDiv").hide();
+            if (isLand === 'false') {
+                $("#flatDiv").show();
+                $("#landDiv").hide();
             }
-       })
-
-     function loadPrjbyDeveloper(devid) {
-               $.get("/ProjectsInfoes/GetProjects?id=" + devid, function (data, status) {
-                   $("#drpprj").empty();
-                   $("#drpprj").append($('<option></option>').val("0").html("Select Project"));
-                   $.each(data.data, function (i, v) {
-
-                       $("#drpprj").append($('<option></option>').val(v.id).html(v.projectName));
-                   })
-
-               })
-    }
-
-     function loadDivision( cid) {
-         $.get("/Divisions/GetDivision?cid="+cid, function (data, status) {
-             $("#drpDivision").empty();
-             $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
-             $.each(data, function (i, v) {
-                 $("#drpDivision").append($('<option></option>').val(v.divisionID).html(v.divisionName));
-             })
-
-         })
-     }
-
-     function loadCity( did) {
-         $.get("/Cities/GetCities?did="+did, function (data, status) {
-             $("#drpCity").empty();
-             $("#drpCity").append($('<option></option>').val("0").html("Select City"));
-             $.each(data, function (i, v) {
-                 $("#drpCity").append($('<option></option>').val(v.cityId).html(v.cityName));
-             })
-
-         })
-     }
-
-     function loadArea( cid) {
-        $.get("/Areas/GetArea?cid=" +cid, function (data, status) {
-             $("#drpArea").empty();
-             $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
-             $.each(data, function (i, v) {
-                 $("#drpArea").append($('<option></option>').val(v.areaId).html(v.areaName));
-             })
-
         })
-     }
+
+        function loadPrjbyDeveloper(devid) {
+            $.get("/ProjectsInfoes/GetProjects?id=" + devid, function (data, status) {
+                $("#drpprj").empty();
+                $("#drpprj").append($('<option></option>').val("0").html("Select Project"));
+                $.each(data.data, function (i, v) {
+
+                    $("#drpprj").append($('<option></option>').val(v.id).html(v.projectName));
+                })
+
+            })
+        }
+
+        function loadDivision(cid) {
+            $.get("/Divisions/GetDivision?cid=" + cid, function (data, status) {
+                $("#drpDivision").empty();
+                $("#drpDivision").append($('<option></option>').val("0").html("Select Division"));
+                $.each(data, function (i, v) {
+                    $("#drpDivision").append($('<option></option>').val(v.divisionID).html(v.divisionName));
+                })
+
+            })
+        }
+
+        function loadCity(did) {
+            $.get("/Cities/GetCities?did=" + did, function (data, status) {
+                $("#drpCity").empty();
+                $("#drpCity").append($('<option></option>').val("0").html("Select City"));
+                $.each(data, function (i, v) {
+                    $("#drpCity").append($('<option></option>').val(v.cityId).html(v.cityName));
+                })
+
+            })
+        }
+
+        function loadArea(cid) {
+            $.get("/Areas/GetArea?cid=" + cid, function (data, status) {
+                $("#drpArea").empty();
+                $("#drpArea").append($('<option></option>').val("0").html("Select Area"));
+                $.each(data, function (i, v) {
+                    $("#drpArea").append($('<option></option>').val(v.areaId).html(v.areaName));
+                })
+
+            })
+        }
 
 
-</script>
+    </script>
 }

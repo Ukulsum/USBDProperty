@@ -23,11 +23,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Developers or Agents</h1>
+                    <h1>Projects Information</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="DevelopersorAgents">Developers or Agents</a></li>
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="ProjectsInfoes">Projects Informations</a></li>
                         <li class="breadcrumb-item active">Create</li>
                     </ol>
                 </div>
@@ -44,7 +44,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Company graphics elements</h3>
+                            <h3 class="card-title">Projects Information</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -89,7 +89,7 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="card-body">
                             <div class="row">
-                                <h2>Projects Information</h2>
+                                @* <h2>Projects Information</h2> *@
                                 <div class="form-group col-md-4">
                                     <label asp-for="AgentID" class="control-label"></label>
                                     <select asp-for="AgentID" class="form-control" asp-items="ViewBag.AgentID">
@@ -124,10 +124,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <h2>Location</h2>
+                            <hr />
                             <div class="col-md-12 row">
-                                <h2>Location</h2>
-                                <hr />
+                                @* <h2>Location</h2>
+                                <hr /> *@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">Country</label>

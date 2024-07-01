@@ -1,10 +1,151 @@
 ﻿@model USBDProperty.Models.PropertyFeatures
 
-@{
+@* @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+} *@
+
+
+@{
+    ViewData["Title"] = "Edit";
+    if (User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+    }
 }
-<div class="card">
+
+
+
+<div class="content-wrapper" style="min-height: 1345.31px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Settings</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PropertyFeatures">Property Features</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Updating Property Features</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        @* <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="AreaId" />
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="AreaName" class="control-label"></label>
+                                            <input asp-for="AreaName" class="form-control" />
+                                            <span asp-validation-for="AreaName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CityId" class="control-label"></label>
+                                            <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                                            <span asp-validation-for="CityId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Update" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form> *@
+
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="PropertyFeatureId" />
+                            <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="PropertyFeatureName" class="control-label"></label>
+                                <input asp-for="PropertyFeatureName" class="form-control" />
+                                <span asp-validation-for="PropertyFeatureName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FeatureDescription" class="control-label"></label>
+                                <textarea asp-for="FeatureDescription" class="form-control"></textarea>
+                                <span asp-validation-for="FeatureDescription" class="text-danger"></span>
+                            </div>
+                            </div>
+                           @*  <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="submit" value="Update" class="btn btn-primary" id="btnUpdate" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div><a asp-action="Index">Back to List</a></div>
+                                </div>
+                            </div> *@
+
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group mt-2">
+                                            <input type="submit" value="Update" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mt-2">
+                                        <div class="form-group">
+                                            <a asp-action="Index">Back to List</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+@* <div class="card">
     <div class="card-body">
         <h5 class="card-title text-center">Property Features Update Listing</h5>
         <hr style="width:100%;" />
@@ -33,7 +174,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> *@
 
 @section Scripts{
     <script>

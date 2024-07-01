@@ -8,16 +8,179 @@
     }
     else
     {
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 
 }
-@User.IsInRole("Agent")
+
+ @User.IsInRole("Agent")
+@if (Model!=null || @Model.Count() > 0){
+
+<div class="content-wrapper" style="min-height: 1302.12px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Properties</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PropertyDetails">Property Details</a></li>
+                        <li class="breadcrumb-item active">Index</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title">List of Property</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            @* <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AreaId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AreaName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.City)
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AreaId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AreaName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.City.CityName)
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success">Action</button>
+                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.AreaId"><i class="bi bi-pencil-square"></i>Edit</a>
+                                                        <a class="dropdown-item" asp-action="Details" asp-route-id="@item.AreaId"><i class="bi bi-eye-fill"></i>Details</a>
+                                                        <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.AreaId"><i class="bi bi-trash"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table> *@
+
+
+                            <table class="table table-borderless" id="datatable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Title)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Image)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FlatSize)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Price)
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+                                            <td>
+                                                <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="250" height="200" class="img-responsive" />
+                                            </td>
+                                            <td>
+                                                @{
+                                                    var d = string.Join(",", item.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray());
+                                                }
+                                                @Html.DisplayFor(m => d)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Price)
+                                            </td>
+                                           
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success">Action</button>
+                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <a class="dropdown-item" asp-action="Create" asp-controller="PropertyImages" asp-route-id="@item.PropertyInfoId"><i class="bi bi-box-arrow-up"></i>Add More Pic</a>
+                                                        <a class="dropdown-item" asp-action="CreatePropertyFeatures" asp-controller="PropertyDetails" asp-route-id="@item.PropertyInfoId"><i class="bi bi-plus"></i>Add/Edit Featured</a>
+                                                        <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.PropertyInfoId"><i class="bi bi-pencil-square"></i>Edit</a>
+                                                        <a class="dropdown-item" asp-action="Details" asp-route-id="@item.PropertyInfoId"><i class="bi bi-eye-fill"></i>Details</a>
+                                                        <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.PropertyInfoId"><i class="bi bi-trash"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+
+
+                        </div>
+
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+}
+
+
+
+
+@* @User.IsInRole("Agent")
 @if (Model!=null || @Model.Count() > 0){
     
 
 
-@* <main id="main"> *@
 <div class="card">
     <div class="card-body">
         <div class="row">
@@ -94,7 +257,7 @@
     </div>
 </div>
 
-}
+} *@
 
 @section Scripts{
 <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css" rel="stylesheet" />
