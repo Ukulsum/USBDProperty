@@ -1,11 +1,191 @@
 ﻿@model USBDProperty.Models.Notice
 
-@{
+@* @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+} *@
+
+
+
+@{
+    ViewData["Title"] = "Create";
+    if (User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+    }
 }
 
-<div class="card">
+
+<div class="content-wrapper" style="min-height: 1345.31px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Notifications</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Notices">Notifications</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Notifications</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        @* <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="AreaName" class="control-label"></label>
+                                            <input asp-for="AreaName" class="form-control" />
+                                            <span asp-validation-for="AreaName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CityId" class="control-label"></label>
+                                            <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Save" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form> *@
+
+
+
+                        <form asp-action="Create" method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input type="text" asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea type="text" asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label asp-for="Images" class="control-label"></label>
+                                        <input type="file" asp-for="Images" class="form-control" id="imageInput" />
+                                        <span asp-validation-for="Images" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="StartDate" class="control-label"></label>
+                                        <input asp-for="StartDate" class="form-control" />
+                                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="EndDate" class="control-label"></label>
+                                        <input asp-for="EndDate" class="form-control" />
+                                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                                        <img src="#" style="width:155px;height:155px;" alt="Image Upload" id="imgPreview">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-2">
+                                <div class="form-group form-check col-md-6">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="IsActive" id="checkActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                                    </label>
+                                </div>
+                                <div class="form-group form-check col-md-6">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="IsFeatured" /> @Html.DisplayNameFor(model => model.IsFeatured)
+                                    </label>
+                                </div>
+                            </div>
+                            </div>
+                          @*   <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" id="btnSave" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div><a asp-action="Index">Back to List</a></div>
+                                </div>
+                            </div> *@
+
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group mt-2">
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mt-2">
+                                        <div class="form-group">
+                                            <a asp-action="Index">Back to List</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+
+@* <div class="card">
     <div class="card-body">
         <h5 class="card-title text-center">Notices Listing</h5>
         <hr style="width:100%; " />
@@ -69,7 +249,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> *@
 
 @section Scripts{
 <script>

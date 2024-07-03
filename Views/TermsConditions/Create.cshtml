@@ -2,9 +2,150 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    if (User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+    }
 }
-<main id="main">
+
+<div class="content-wrapper" style="min-height: 1345.31px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Terms & Conditions</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="TermsConditions">Home</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Terms & Conditions</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        @* <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="AreaName" class="control-label"></label>
+                                            <input asp-for="AreaName" class="form-control" />
+                                            <span asp-validation-for="AreaName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CityId" class="control-label"></label>
+                                            <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Save" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form> *@
+
+
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            </div>
+                            @* <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group mt-2">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <div class="form-group">
+                                        <a asp-action="Index">Back to List</a>
+                                    </div>
+                                </div>
+                            </div> *@
+
+
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group mt-2">
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mt-2">
+                                        <div class="form-group">
+                                            <a asp-action="Index">Back to List</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+@* @{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+} *@
+@* <main id="main">
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Terms & Conditions</h5>
@@ -37,7 +178,7 @@
             </form>
         </div>
     </div>
-</main>
+</main> *@
 
 @section Scripts{
     <script>

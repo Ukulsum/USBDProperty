@@ -1,11 +1,138 @@
 ﻿@model IEnumerable<USBDProperty.Models.Notice>
 
+@* @{
+    ViewData["Title"] = "Index";
+    // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+} *@
+
+
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    if (User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+    }
 }
 
-<div class="card">
+
+<div class="content-wrapper" style="min-height: 1302.12px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Notifications</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Notices">Notifications</a></li>
+                        <li class="breadcrumb-item active">Index</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title">List of Notices</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                         
+                            <table class="table table-borderless" id="datatable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Title)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Images)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.StartDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EndDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsActive)
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+                                            <td>
+                                                <img src="@Url.Content(item.ImagePath)" style="width:155px;height:155px;" alt="@item.Title">
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StartDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EndDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IsActive)
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success">Action</button>
+                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                        <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.NoticeID"><i class="bi bi-pencil-square"></i>Edit</a>
+                                                        <a class="dropdown-item" asp-action="Details" asp-route-id="@item.NoticeID"><i class="bi bi-eye-fill"></i>Details</a>
+                                                        <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.NoticeID"><i class="bi bi-trash"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+
+
+
+@* <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-9">
@@ -76,7 +203,7 @@
     </tbody>
 </table>
     </div>
-</div>
+</div> *@
 
 
 

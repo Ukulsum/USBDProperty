@@ -8,11 +8,75 @@
     }
     else
     {
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 }
 
-<main id="main">
+<div class="content-wrapper" style="min-height: 1302.12px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Locations</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Countries">Countries</a></li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title">Details of Country</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    @Html.DisplayNameFor(model => model.CountryID)
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.CountryID)
+                                </dd>
+                                <dt class="col-sm-3">
+                                    @Html.DisplayNameFor(model => model.CountryName)
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.CountryName)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <a asp-action="Edit" asp-route-id="@Model?.CountryID">Edit</a> |
+                                <a asp-action="Index">Back to List</a>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+@* <main id="main">
     <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center">Country Details</h5>
@@ -37,6 +101,6 @@
             </div>
         </div>
     </div>
-</main>
+</main> *@
 
 

@@ -1,10 +1,126 @@
 ﻿@model USBDProperty.ViewModels.UserVM
 @{
     ViewBag.Title = "Create User";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-
+    // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
 }
-<div class="row">
+
+<div class="content-wrapper" style="min-height: 1345.31px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Users</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Users">Users</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Create a new account.</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        @* <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="AreaName" class="control-label"></label>
+                                            <input asp-for="AreaName" class="form-control" />
+                                            <span asp-validation-for="AreaName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CityId" class="control-label"></label>
+                                            <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Save" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form> *@
+
+
+                        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            @* <h2>Create a new account.</h2>
+                            <hr /> *@
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+
+                            <div class="form-group">
+                                <select asp-for="Role" class="form-control" asp-items="ViewBag.roles">
+                                    <option>Select Role</option>
+                                </select>
+                                <label asp-for="Role"></label>
+                                <span asp-validation-for="Role" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Email" class="form-control" aria-required="true" />
+                                <label asp-for="Email"></label>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Password" class="form-control" aria-required="true" />
+                                <label asp-for="Password"></label>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                                <label asp-for="ConfirmPassword"></label>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+@* <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>
@@ -37,7 +153,7 @@
         </form>
     </div>
     
-</div>
+</div> *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

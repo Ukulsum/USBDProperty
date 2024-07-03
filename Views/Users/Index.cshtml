@@ -1,10 +1,102 @@
 ﻿
 @{
     ViewBag.Title = "AllUser";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
 
 }
-<style>
+
+<div class="content-wrapper" style="min-height: 1302.12px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>All Users</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Users">Users</a></li>
+                        <li class="breadcrumb-item active">Index</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title">List of All Users</h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="card-title"><a asp-action="Create">Create New</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+
+                            @using (Html.BeginForm())
+                            {
+
+                                <p class="col-md-4">
+                                    RoleName :   @Html.DropDownList("roleName", ViewBag.roles as IEnumerable<SelectListItem>, "Select role", new { @id = "cid" })
+                                </p>
+                                <p class="col-md-4">
+                                    <input type="text" name="email" title="search by email" placeholder="Search by email" />
+                                </p>
+                                <input type="submit" value="Search" class="col-md-4" />
+                            }
+
+                            <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+                                <thead>
+                                    <tr>
+                                        <td><b>Username</b></td>
+                                        <td><b>Email</b></td>
+                                        <td><b>Roles</b></td>
+                                        <td>........</td>
+                                    </tr>
+                                </thead>
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.Username</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.Role</td>
+                                        <td>
+                                            @Html.ActionLink("Edit or Add Role", "EditRoles", "UserInfos", new { @email = @user.Email }, null)
+
+                                        </td>
+                                    </tr>
+
+                                }
+                            </table>
+
+
+
+                        </div>
+
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+@* <style>
 .panel{
     margin-top:80px;
     }
@@ -18,6 +110,9 @@
         float:right;
         text-align:right;
     }</style>
+
+
+
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="box-title center">
@@ -70,4 +165,4 @@
     </div>
 
   
-</div>
+</div> *@

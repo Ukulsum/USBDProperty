@@ -1,6 +1,146 @@
 ﻿@model USBDProperty.Models.PrivacyPolicy
 
+
 @{
+    ViewData["Title"] = "Edit";
+    if (User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+    }
+}
+
+<div class="content-wrapper" style="min-height: 1345.31px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Privacy Policies</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PrivacyPolicies">Privacy Policies</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Privacy Policies</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        @* <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="AreaId" />
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="AreaName" class="control-label"></label>
+                                            <input asp-for="AreaName" class="form-control" />
+                                            <span asp-validation-for="AreaName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="CityId" class="control-label"></label>
+                                            <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                                            <span asp-validation-for="CityId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Update" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form> *@
+
+
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="PpId" />
+                            <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            </div>
+                           @*  <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group mt-2">
+                                        <input type="submit" value="Update" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <div class="form-group">
+                                        <a asp-action="Index">Back to List</a>
+                                    </div>
+                                </div>
+                            </div> *@
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group mt-2">
+                                                <input type="submit" value="Update" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <a asp-action="Index">Back to List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </form>
+
+                    </div>
+                    <!-- /.card -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+@* @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -39,7 +179,9 @@
             </form>
         </div>
     </div>
-</main>
+</main> *@
+
+
 @section Scripts{
 <script>
     $(document).ready(function (){
