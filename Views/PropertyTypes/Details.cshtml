@@ -8,11 +8,80 @@
     }   
     else
     {
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 }
 
-<div class="card">
+<div class="content-wrapper" style="min-height: 1302.12px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Property</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PropertyTypes">Property Types</a></li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title">Details of Property Types</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    @Html.DisplayNameFor(model => model.PropertyTypeId)
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.PropertyTypeId)
+                                </dd>
+                                <dt class="col-sm-3">
+                                    @Html.DisplayNameFor(model => model.PropertyTypeName)
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.PropertyTypeName)
+                                </dd>
+                                <dt class="col-sm-3">
+                                    @Html.DisplayNameFor(model => model.ParentPropertyTypeId)
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.ParentPropertyTypeId)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <a asp-action="Edit" asp-route-id="@Model?.PropertyTypeId">Edit</a> |
+                                <a asp-action="Index">Back to List</a>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+@* <div class="card">
     <div class="card-body">
         <h5 class="card-title text-center">Property Types Details</h5>
         <hr style="width:100%;" />
@@ -41,6 +110,6 @@
             <a asp-action="Index">Back to List</a>
         </div>
     </div>
-</div>
+</div> *@
 
 

@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
-    if(User.IsInRole("Agent"))
+    if (User.IsInRole("Agent"))
     {
         Layout = "~/Views/Shared/_AgentLayout.cshtml";
     }
@@ -93,7 +93,7 @@
                 </dt>
                  <dd class="col-sm-9">
                     @Html.DisplayFor(model => model.CountryName)
-                </dd>           
+                </dd>
             </dl>
             <div>
                 <a asp-action="Edit" asp-route-id="@Model?.CountryID">Edit</a> |

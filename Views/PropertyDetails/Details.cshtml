@@ -9,14 +9,15 @@
     }
     else
     {
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
     }
 }
 
 <style>
     figure img {
-        max-width: 100%;
-        min-width: 100%;
+        max-width: 80%;
+        min-width: 80%;
         display: block;
         height: 500px;
         width: 540px;
@@ -54,7 +55,258 @@
     }
 </style>
 
-<main id="main">
+
+<div class="content-wrapper" style="min-height: 1302.12px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Property Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="PropertyDetails"> Property Details</a></li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h3 class="card-title"> Property Details</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary" id="proInfo">Property Information</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary" id="proImage">Property Images</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary" id="featurePro">Property Features</button>
+                                </div>
+                            </div>
+                            <hr style="width:100%;" />
+                            <div id="propertyInfo">
+                                @* <div class="row">
+                                    <div class="col-md-8">
+                                        <img class="img-responsive mb-2" src="@Url.Content(@Model.ImagePath)" /> 
+                                    </div>
+                                </div> *@
+
+                                <h5 class="card-title text-center">Property Summary</h5>
+                               @*  <hr style="width:100%; " /> *@
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <dl class="row">
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Description)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.Raw(Model.Description)
+
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl class="row">
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Title)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.Title)
+                                            </dd>
+                                            <dt class="col-md-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyFor)
+                                            </dt>
+                                            <dd class="col-md-7">
+                                                @Html.DisplayFor(model => model.PropertyFor)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.Location)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.Location)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.NumberOfBedrooms)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.NumberOfBedrooms)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i> @Html.DisplayNameFor(model => model.NumberOfBaths)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.NumberOfBaths)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.TotalFloor)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.TotalFloor)
+                                            </dd>
+
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Price)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.Price)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Furnishing)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.Furnishing)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.HandOverDate)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.HandOverDate)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.CreatedBy)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.CreatedBy)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.UpdateBy)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.UpdateBy)
+                                            </dd>
+                                        </dl>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <dl class="row">
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyType)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.PropertyType.PropertyTypeName)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.ConstructionStatus)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.ConstructionStatus)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyCondition)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.PropertyCondition)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.FlatSize)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.FlatSize)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.NumberOfBalconies)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.NumberOfBalconies)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.NumberOfGarages)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.NumberOfGarages)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.FloorAvailableNo)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.FloorAvailableNo)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Facing)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.Facing)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.LandArea)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.LandArea)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Comments)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.Comments)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.CreatedDate)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.CreatedDate)
+                                            </dd>
+                                            <dt class="col-sm-5">
+                                                <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.UpdateDate)
+                                            </dt>
+                                            <dd class="col-sm-7">
+                                                @Html.DisplayFor(model => model.UpdateDate)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="multiImage">
+                                <div class="img">
+                                    <img src="@Url.Content(@Model.ImagePath)" id="mainImg" class="img-responsive" />
+                                    <div id="NavImg">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <ul class="row">
+
+                                <div id="load_HomePropertyFeatureById"> </div>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <a asp-action="Edit" asp-route-id="@Model?.PropertyInfoId">Edit</a> |
+                                <a asp-action="Index">Back to List</a>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+
+
+
+ @* <main id="main">
     <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center">Property Details</h5>
@@ -266,7 +518,7 @@
 
         </div>
     </div>
-</main>
+</main>  *@
 
 
 @section Scripts{
