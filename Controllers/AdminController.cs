@@ -8,7 +8,7 @@ using USBDProperty.ViewModels;
 
 namespace USBDProperty.Controllers
 {
-    //[Authorize(Roles = "Admin,Super Admin")]
+    [Authorize(Roles = "Admin,Super Admin")]
     public class AdminController : Controller
     {
         public readonly ApplicationDbContext _context;

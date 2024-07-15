@@ -1,9 +1,23 @@
 ﻿@model USBDProperty.Models.ProjectImageGallery
 
-@{
+@* @{
     ViewData["Title"] = "Edit";
     // Layout = "~/Views/Shared/_AdminLayout.cshtml";
      Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+} *@
+
+
+@{
+    ViewData["Title"] = "Edit";
+    if (User.IsInRole("Agent"))
+    {
+        Layout = "~/Views/Shared/_AgentLayout.cshtml";
+    }
+    else
+    {
+        // Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        Layout = "~/Views/Shared/LayoutAdminLTe.cshtml";
+    }
 }
 
 

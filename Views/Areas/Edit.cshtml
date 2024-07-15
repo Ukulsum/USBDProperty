@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
-    if(User.IsInRole("Agent"))
+    if (User.IsInRole("Agent"))
     {
         Layout = "~/Views/Shared/_AgentLayout.cshtml";
     }
@@ -64,22 +64,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card-body -->
 
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="form-group mt-2">
-                                                <input type="submit" value="Update" class="btn btn-primary" />
-                                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group mt-2">
+                                            <input type="submit" value="Update" class="btn btn-primary" />
                                         </div>
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <a asp-action="Index">Back to List</a>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-3 mt-2">
+                                        <div class="form-group">
+                                            <a asp-action="Index">Back to List</a>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </form>
                     </div>
                     <!-- /.card -->
@@ -94,7 +95,7 @@
 </div>
 
 
-@* 
+@*
 <main id="main">
     <div class="card">
         <div class="card-body">

@@ -141,7 +141,7 @@ namespace USBDProperty.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PropertyTypeId,PropertyTypeName,ParentPropertyTypeId")] PropertyType propertyType)
+        public async Task<IActionResult> Edit(int id, PropertyType propertyType)
         {
             if (id != propertyType.PropertyTypeId)
             {

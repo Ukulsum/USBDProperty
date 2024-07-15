@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
-    if(User.IsInRole("Agent"))
+    if (User.IsInRole("Agent"))
     {
         Layout = "~/Views/Shared/_AgentLayout.cshtml";
     }
@@ -139,7 +139,9 @@
                         <!-- /.card -->
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>
