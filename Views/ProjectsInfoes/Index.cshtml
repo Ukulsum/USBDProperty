@@ -62,18 +62,18 @@
                             <table class="table table-borderless" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        @* <th>
                                             @Html.DisplayNameFor(model => model.Title)
-                                        </th>
+                                        </th> *@
                                         <th>
                                             @Html.DisplayNameFor(model => model.ProjectName)
                                         </th>
                                         <th>
                                             @Html.DisplayNameFor(model => model.Location)
                                         </th>
-                                        <th>
+                                        @* <th>
                                             @Html.DisplayNameFor(model => model.LocationMap)
-                                        </th>
+                                        </th> *@
                                         <th>
                                             @Html.DisplayNameFor(model => model.ProjectVideo)
                                         </th>
@@ -84,15 +84,15 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>
+                                            @* <td>
                                                 @Html.DisplayFor(modelItem => item.Title)
-                                            </td>
+                                            </td> *@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.ProjectName)
                                             </td>
-                                            <td>
+                                            @* <td>
                                                 @Html.DisplayFor(modelItem => item.Location)
-                                            </td>
+                                            </td> *@
                                             <td>
                                                 @if (item.LocationMap != null)
                                                 {

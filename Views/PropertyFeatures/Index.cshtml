@@ -107,9 +107,9 @@
                             <table class="table table-borderless" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        @* <th>
                                             @Html.DisplayNameFor(model => model.PropertyFeatureId)
-                                        </th>
+                                        </th> *@
                                         <th>
                                             @Html.DisplayNameFor(model => model.PropertyFeatureName)
                                         </th>
@@ -123,9 +123,9 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>
+                                            @* <td>
                                                 @Html.DisplayFor(modelItem => item.PropertyFeatureId)
-                                            </td>
+                                            </td> *@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.PropertyFeatureName)
                                             </td>

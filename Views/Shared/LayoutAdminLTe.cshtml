@@ -3,12 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>US-BD Property</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -31,8 +34,24 @@
     <link href="~/AdminLTE/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="~/AdminLTE/boxicons/css/boxicons.min.css" rel="stylesheet">
 
+
+    @*Favicon*@
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon_io/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon_io/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon_io//apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon_io/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon_io/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon_io/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon_io/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon_io/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon_io/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+
     <!------ DataTable ------>
-    @* <link href="~/AdminLTE/simple-datatables/style.css" rel="stylesheet"> *@
+    @* <link href="~/AdminLTE/simple-datatables/style.css" rel="stylesheet">  *@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -181,7 +200,7 @@
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         @* <img src="~/Asserts/logo/Us--Bangla-logo-web-03.png" height="100px" width="200px" alt=""> *@
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
             @* <a href="index3.html" class="brand-link">
             <img src="dist/img/adminltelogo.png" alt="adminlte logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -192,10 +211,10 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex" id="user-panel">
                     <div class="image">
                         @* <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> *@
-                        <img src="~/Asserts/logo/Us--Bangla-logo-web-03.png" height="100px" width="200px" alt="">
+                        <img src="~/Asserts/logo/Us--Bangla-logo-web-03.png" alt="" style="width:12rem">
                     </div>
                     @* <div class="info">
                     <a href="#" class="d-block">Alexander Pierce</a>
@@ -263,7 +282,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
+                                @* <i class="nav-icon fas fa-chart-pie"></i> *@
+                                @* <i class="fa-sharp-duotone fa-solid fa-city"></i> *@
+                                <i class="fa fa-building"></i>
                                 <p>
                                     Developer or Agent or Individual
                                     <i class="right fas fa-angle-left"></i>
@@ -280,7 +301,9 @@
                         </li><!-- End Developer/Agent Nav -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
+                                @* <i class="nav-icon fas fa-tree"></i> *@
+                                @* <i class="fa-sharp-duotone fa-solid fa-building"></i> *@
+                                <i class="fa fa-building" ></i>
                                 <p>
                                     Projects Information
                                     <i class="fas fa-angle-left right"></i>
@@ -303,7 +326,8 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                @* <i class="nav-icon fas fa-edit"></i> *@
+                                <i class="fa fa-home" ></i>
                                 <p>
                                     Properties
                                     <i class="fas fa-angle-left right"></i>
@@ -332,7 +356,8 @@
                         </li><!-- End Property Nav -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
+                                @* <i class="nav-icon fas fa-table"></i> *@
+                                <i class="fa fa-wrench"></i>
                                 <p>
                                     Settings
                                     <i class="fas fa-angle-left right"></i>
@@ -379,7 +404,8 @@
                         </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-envelope"></i>
+                            @* <i class="nav-icon far fa-envelope"></i> *@
+                            <i class="fa fa-cog"></i>
                             <p>
                                 Authentication
                                 <i class="fas fa-angle-left right"></i>
@@ -427,7 +453,8 @@
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
+                                @* <i class="nav-icon fas fa-book"></i> *@
+                               <i class="fa fa-users"></i>
                                 <p>
                                 Client Information
                                     <i class="fas fa-angle-left right"></i>
@@ -526,7 +553,10 @@
     @* <script src="~/AdminLTE/simple-datatables/simple-datatables.js"></script> *@
 
 
+
     @await RenderSectionAsync("Scripts", required: false)
+
+
 
 </body>
 </html>

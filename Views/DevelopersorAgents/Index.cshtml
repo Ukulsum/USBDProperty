@@ -77,18 +77,18 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.Logo)
                                         </th>
-                                        <th>
+                                        @* <th>
                                             @Html.DisplayNameFor(model => model.Banner)
-                                        </th>
+                                        </th> *@
                                         <th>
                                             @Html.DisplayNameFor(model => model.CompanyName)
                                         </th>
-                                        <th>
+                                        @* <th>
                                             @Html.DisplayNameFor(model => model.ContactNo)
                                         </th>
                                         <th>
                                             @Html.DisplayNameFor(model => model.Email)
-                                        </th>
+                                        </th> *@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -99,18 +99,18 @@
                                             <td>
                                                 <img src="@Url.Content(item.Logo)" alt="@item.CompanyName" height="60" width="80" />
                                             </td>
-                                            <td>
+                                            @* <td>
                                                 <img src="@Url.Content(item.Banner)" alt="@item.CompanyName" height="120" width="160" />
-                                            </td>
+                                            </td> *@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.CompanyName)
                                             </td>
-                                            <td>
+                                            @* <td>
                                                 @Html.DisplayFor(modelItem => item.ContactNo)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Email)
-                                            </td>
+                                            </td> *@
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success">Action</button>

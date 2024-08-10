@@ -88,10 +88,10 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.ImagePath)
                                         </th>
-                                        <th>
+                                        @* <th>
                                             @Html.DisplayNameFor(model => model.ProjectsInfo)
-                                        </th>
-                                        <th></th>
+                                        </th> *@
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,10 +105,10 @@
                                             <td>
                                                 <img src="@Url.Content(item.ImagePath)" alt="@item.ProjectsInfo.Title" height="180" width="220" />
                                             </td>
-                                            <td>
+                                            @* <td>
 
                                                 @Html.DisplayFor(modelItem => item.ProjectsInfo.AgentID)
-                                            </td>
+                                            </td> *@
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success">Action</button>

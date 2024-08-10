@@ -65,9 +65,9 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        @* <th>
                                             @Html.DisplayNameFor(model => model.DivisionID)
-                                        </th>
+                                        </th> *@
                                         <th>
                                             @Html.DisplayNameFor(model => model.DivisionName)
                                         </th>
@@ -81,9 +81,9 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>
+                                           @*  <td>
                                                 @Html.DisplayFor(modelItem => item.DivisionID)
-                                            </td>
+                                            </td> *@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.DivisionName)
                                             </td>

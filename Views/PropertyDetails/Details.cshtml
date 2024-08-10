@@ -82,7 +82,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <h3 class="card-title"> Property Details</h3>
                                 </div>
                             </div>
@@ -108,15 +108,15 @@
                                     </div>
                                 </div> *@
 
-                                <h5 class="card-title text-center">Property Summary</h5>
+                                <h5 class="card-title text-center col-md-12">Property Summary</h5>
                                @*  <hr style="width:100%; " /> *@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <dl class="row">
-                                            <dt class="col-sm-5">
+                                            <dt class="col-sm-3">
                                                 <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Description)
                                             </dt>
-                                            <dd class="col-sm-7">
+                                            <dd class="col-sm-9">
                                                 @Html.Raw(Model.Description)
 
                                             </dd>
@@ -275,7 +275,7 @@
 
                             <div id="multiImage">
                                 <div class="img">
-                                    <img src="@Url.Content(@Model.ImagePath)" id="mainImg" class="img-responsive" />
+                                    <img src="@Url.Content(@Model.ImagePath)" id="mainImg" class="img-responsive" height="600px" width="600px"/>
                                     <div id="NavImg">
                                     </div>
                                 </div>
