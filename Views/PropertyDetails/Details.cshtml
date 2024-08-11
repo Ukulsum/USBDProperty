@@ -78,11 +78,11 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-sm-12">
                                     <h3 class="card-title"> Property Details</h3>
                                 </div>
                             </div>
@@ -90,13 +90,13 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-12">
                                     <button class="btn btn-primary" id="proInfo">Property Information</button>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-12">
                                     <button class="btn btn-primary" id="proImage">Property Images</button>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-12">
                                     <button class="btn btn-primary" id="featurePro">Property Features</button>
                                 </div>
                             </div>
@@ -108,10 +108,10 @@
                                     </div>
                                 </div> *@
 
-                                <h5 class="card-title text-center col-md-12">Property Summary</h5>
+                                <h5 class="card-title text-center col-md-12 col-sm-12">Property Summary</h5>
                                @*  <hr style="width:100%; " /> *@
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 col-sm-12">
                                         <dl class="row">
                                             <dt class="col-sm-3">
                                                 <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Description)
@@ -122,18 +122,18 @@
                                             </dd>
                                         </dl>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <dl class="row">
-                                            <dt class="col-sm-5">
+                                            <dt class="col-md-5 col-sm-6">
                                                 <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.Title)
                                             </dt>
-                                            <dd class="col-sm-7">
+                                            <dd class="col-md-7 col-sm-6">
                                                 @Html.DisplayFor(model => model.Title)
                                             </dd>
-                                            <dt class="col-md-5">
+                                            <dt class="col-md-5 col-sm-6">
                                                 <i class="bi bi-chevron-right"></i>@Html.DisplayNameFor(model => model.PropertyFor)
                                             </dt>
-                                            <dd class="col-md-7">
+                                            <dd class="col-md-7 col-sm-6">
                                                 @Html.DisplayFor(model => model.PropertyFor)
                                             </dd>
                                             <dt class="col-sm-5">
@@ -275,17 +275,20 @@
 
                             <div id="multiImage">
                                 <div class="img">
-                                    <img src="@Url.Content(@Model.ImagePath)" id="mainImg" class="img-responsive" height="600px" width="600px"/>
+                                    @* <img src="@Url.Content(@Model.ImagePath)" id="mainImg" class="img-responsive" height="600px" width="600px"/> *@
+                                    <img src="@Url.Content(@Model.ImagePath)" id="mainImg" class="img-responsive col-md-12 col-sm-6"/>
                                     <div id="NavImg">
                                     </div>
                                 </div>
                             </div>
 
 
-                            <ul class="row">
+                            <dl class="row">     
+                                <div class="col-md-12">
 
-                                <li id="load_HomePropertyFeatureById"> </li>
-                            </ul>
+                                <dd id="load_HomePropertyFeatureById"> </dd>
+                                </div>
+                            </dl>
                         </div>
                         <div class="card-footer">
                             <div>
@@ -538,19 +541,26 @@
 <script>
        $(document).ready(function (){
            DetailspropertyImages()
+           // getHomeFeatureById()
            $("#multiImage").hide();
            $("#propertyInfo").show();
            $("#proInfo").click(function(){
                $("#propertyInfo").show();
+               $("#multiImage").hide();
+              // $("#load_HomePropertyFeatureById").hide();
            })
 
            $("#proImage").click(function(){
-               $("#propertyInfo").hide();
+               $("#propertyInfo").hide(); 
+               // $("#load_HomePropertyFeatureById").hide();
+                //getHomeFeatureById.hide();
                $("#multiImage").show();
            })
            $("#featurePro").click(function(){
                $("#propertyInfo").hide();
-               getHomeFeatureById()
+               $("#multiImage").hide();
+               // $("#load_HomePropertyFeatureById").show();
+               getHomeFeatureById();
            })
            $('#datatable').DataTable({
 
@@ -642,7 +652,11 @@
                      var featurelist = "";
                      featurelist = '<h2>Property Features</h2><hr />';
                      $.each(res.data, function(index, value){
-                         featurelist += '<dt class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="bi bi-check2-circle"></i>' + value.propertyFeatures.propertyFeatureName + '</span></dt>'
+                         // featurelist += '<dt class="col-xs-3 col-lg-4 col-md-4 col-sm-12 "><span><i class="bi bi-check2-circle"></i>' + value.propertyFeatures.propertyFeatureName + '</span></dt>'
+
+                        featurelist += '<dt class="col-md-6"><span><i class="bi bi-check2-circle"></i>' + value.propertyFeatures.propertyFeatureName + '</span></dt>'
+
+
                      })
                      $("#load_HomePropertyFeatureById").empty();
                      $("#load_HomePropertyFeatureById").html(featurelist);

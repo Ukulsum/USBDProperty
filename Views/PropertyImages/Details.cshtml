@@ -47,22 +47,23 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <dl class="row">
-                                <dt class="col-sm-2">
+                                <dt class="col-sm-3">
                                     @Html.DisplayNameFor(model => model.Title)
                                 </dt>
-                                <dd class="col-sm-10">
+                                <dd class="col-sm-9">
                                     @Html.DisplayFor(model => model.Title)
                                 </dd>
-                                <dt class="col-sm-2">
+                                <dt class="col-sm-3">
                                     @Html.DisplayNameFor(model => model.MultiImagePath)
                                 </dt>
-                                <dd class="col-sm-10">
-                                    @Html.DisplayFor(model => model.MultiImagePath)
+                                <dd class="col-sm-9">
+                                    @* @Html.DisplayFor(model => model.MultiImagePath) *@
+                                    <img src="@Url.Content(Model.MultiImagePath)" alt="@Model.PropertyDetails.Title" height="180" width="220" />
                                 </dd>
-                                <dt class="col-sm-2">
+                                <dt class="col-sm-3">
                                     @Html.DisplayNameFor(model => model.PropertyDetails)
                                 </dt>
-                                <dd class="col-sm-10">
+                                <dd class="col-sm-9">
                                     @Html.DisplayFor(model => model.PropertyDetails.Location)
                                 </dd>
                             </dl>

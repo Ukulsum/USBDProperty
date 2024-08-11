@@ -59,7 +59,9 @@ namespace USBDProperty.Controllers
             try
             {
                 var project = _context.ProjectsInfo.OrderByDescending(p => p.Id)
-                                                   .Where(d => d.AgentID.Equals(devid)).ToList();
+                                                   .Where(d => d.AgentID.Equals(devid))
+                                                   .Select(l => new {l.ProjectName}).Distinct()
+                                                   .ToList();
                 return Json(new { Data = project });
                 //if (User.IsInRole("Agent"))
                 //{
