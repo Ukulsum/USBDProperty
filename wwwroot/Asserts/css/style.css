@@ -170,8 +170,8 @@ h6 {
 p {
 	color: #777777;
 	font-family: 'Lato';
-	font-size: 14px;
-	line-height: 24px;
+	font-size: 14px!important;
+	line-height: 24px!important;
 }
 a {
 	-webkit-transition: all 0.4s ease-in-out;
@@ -196,7 +196,8 @@ li {
 a {
 	font-family: 'Lato';
 	text-decoration: none;
-	color: #757575;
+	/*color: #757575;*/
+	color: white;
 }
 .font-montserrat {
 	font-family: 'Montserrat', sans-serif !important;
@@ -5189,8 +5190,12 @@ footer .loc-info p {
 	margin-bottom: 20px;
 	text-transform: uppercase;
 	font-size: 13px;
+	 
 }
-footer .loc-info p i {
+	footer .loc-info p a{
+		color:white!important;
+	}
+		footer .loc-info p i {
 	width: 28px;
 	float: left;
 	margin-top: 6px;
@@ -5257,7 +5262,7 @@ footer .tweet span {
 footer p {
 	color: #fff;
 	font-weight: normal;
-	font-size: 14px;
+	font-size:18px!important;
 	color: #eeeeee;
 }
 footer .links a {
