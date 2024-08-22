@@ -390,7 +390,7 @@ namespace USBDProperty.Controllers
                         string rootPath = wwwRootPath + npath;
                         if (System.IO.File.Exists(rootPath))
                         {
-                            System.IO.File.Delete(npath);
+                            System.IO.File.Delete(rootPath);
                         }
 
                         string extension = Path.GetExtension(developersorAgent.logofile.FileName).ToLower();

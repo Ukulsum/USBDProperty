@@ -47,7 +47,7 @@
                         <!-- form start -->
                         <form asp-action="Edit">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" asp-for="ParentPropertyTypeId" />
+                            <input type="hidden" asp-for="PropertyTypeId" />
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -60,7 +60,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label asp-for="ParentPropertyTypeId" class="control-label"></label>
-                                            <input asp-for="ParentPropertyTypeId" class="form-control" asp-items="@ViewBag.PropertyTypes" />
+                                            <input asp-for="ParentPropertyTypeId" class="form-control" asp-items="@ViewBag.propertyType" />
                                             <span asp-validation-for="ParentPropertyTypeId" class="text-danger"></span>
                                         </div>
                                     </div>
