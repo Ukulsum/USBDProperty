@@ -269,6 +269,7 @@ namespace USBDProperty.Controllers
                 return View(propertyImages);
             }
 
+            //ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails.Select(p => (new { p.Location })).Distinct(), "PropertyInfoId", "Location", propertyImages.propertyInfoId);
             ViewData["propertyInfoId"] = new SelectList(_context.PropertyDetails, "PropertyInfoId", "Location", propertyImages.propertyInfoId);
             return View(propertyImages);
         }

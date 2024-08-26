@@ -127,6 +127,7 @@ namespace USBDProperty.Controllers
                 {
                     return NotFound();
                 }
+                //ViewData["propertyType"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyType.ParentPropertyTypeId);
 
                 return View(propertyType);
             }
@@ -166,8 +167,9 @@ namespace USBDProperty.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
+            //ViewData["propertyType"] = new SelectList(_context.PropertyTypes, "ParentPropertyTypeId", "PropertyTypeName", propertyType.ParentPropertyTypeId);
             return View(propertyType);
         }
 

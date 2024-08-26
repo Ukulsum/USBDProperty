@@ -465,7 +465,12 @@ namespace USBDProperty.Controllers
                 if (projectsInfo != null)
                 {
                     string path = projectsInfo.LocationMap.Replace("~", "");
-                    string vpath = projectsInfo.ProjectVideo.Replace("~", "");
+                    string vpath = "";
+                    if (projectsInfo.ProjectVideo != null)
+                    {
+                       projectsInfo.ProjectVideo.Replace("~", "");
+                    }
+                    //projectsInfo.ProjectVideo.Replace("~", "");
                     _context.ProjectsInfo.Remove(projectsInfo);
                     if(await _context.SaveChangesAsync() > 0)
                     {
