@@ -84,6 +84,7 @@
                                         <div class="col-md-6">
                                             <span class="tag tagg font-montserrat sale">@pinfo.PropertyFor</span>
                                             <div class="img">
+                                                @* <a href="/PropertyDetails/HomePropertyDetails/@pinfo.PropertyInfoId"><img class="img-responsive" src="@Url.Content(@pinfo.ImagePath)" alt=""></a> *@
                                                 <a href="/PropertyDetails/HomePropertyDetails/@pinfo.PropertyInfoId"><img class="img-responsive" src="@Url.Content(@pinfo.ImagePath)" alt=""></a>
                                             </div>
                                         </div>
@@ -98,7 +99,9 @@
                                                     <li><span><i class="fa fa-bed"></i> @(pinfo.NumberOfBedrooms + " Beds")</span></li>
                                                     <li><span><i class="fa fa-tty"></i> @(pinfo.NumberOfBaths + " Baths")</span></li>
                                                 </ul>
+                                               
                                             </div>
+                                            <a href="/PropertyDetails/HomePropertyDetails/@pinfo.PropertyInfoId"><span class="btn-sm">More Details</span></a>
                                         </div>
                                     </section>
                                 </li>
