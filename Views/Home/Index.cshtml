@@ -279,7 +279,8 @@
         </div>
         <!--======= PROPERTIES ROW =========-->
         @*<ul class="row">*@
-        <div class="   ">
+        <div class="load_Property">
+
         </div>
         @*</ul>*@
     </div>
@@ -509,7 +510,9 @@
                 var propertylist = "";
                 $.each(res.data, function(index, value){
                     propertylist += '<ul class="row">';               
-                    propertylist += '<ul class="row"><li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                    // propertylist += '<ul class="row">  <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li></ul>'
+
+                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath + '" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
                 propertylist += '</ul>';
                 $(".load_Property").empty();
