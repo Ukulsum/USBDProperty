@@ -179,7 +179,7 @@ namespace USBDProperty.Models
 
 
         public ICollection<PropertyWithFeatures> PropertyWithFeatures { get; set; }
-        public ICollection<AvailableFlatSize> AvailableFlatSizes { get; set; }
+        public ICollection<AvailableFlatSize>? AvailableFlatSizes { get; set; }
 
         //[ValidateNever]
         //public virtual ICollection<PropertyFeatures> propertyFeatures

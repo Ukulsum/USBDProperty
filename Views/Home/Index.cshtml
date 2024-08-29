@@ -294,11 +294,11 @@
 
         <!--======= TITTLE =========-->
         <div id="landProperty">
-        @*<div class="tittle">
+        <div class="tittle">
             <img src="~/Asserts/images/head-top.png" alt="">
 
             <h3>Featured Land Properties</h3>
-        </div>*@
+        </div>
         </div>
 
         <!--======= PROPERTIES ROW =========-->
@@ -512,7 +512,7 @@
                     propertylist += '<ul class="row">';               
                     // propertylist += '<ul class="row">  <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms"+ '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms"+ '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li></ul>'
 
-                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath + '" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <span class="price font-montserrat">' + value.totalPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
+                        propertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath + '" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.flatSize + " sqft " + '</span></li><li><span><i class="fa fa-bed"></i>' + value.numberOfBedrooms + " Bedrooms" + '</span></li><li><span><i class="fa fa-tty"></i>' + value.numberOfBaths + " Bathrooms" + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + "/Flat" + '</p> <p class="price font-montserrat">BDT.' + value.price + ' Tk (sqft)</p><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
                 propertylist += '</ul>';
                 $(".load_Property").empty();
@@ -536,8 +536,8 @@
                     //}  
                     if(value.length > 0){
                          $("#landProperty").html('<div class="tittle"><img src="~/Asserts/images/head-top.png" alt=""><h3>Featured Land Properties</h3></div>');
-                    }   
-                   landPropertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/'+ value.propertyInfoId +'"><span class="tag font-montserrat sale">For ' + value.propertyFor  + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath +'" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.landArea + " " + value.measurementUnit.name + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + '/Plot</p> <span class="price font-montserrat">BDT.' + value.totalLandPrice + ' Tk</span><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'                                  
+                    }
+                        landPropertylist += '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><a href="/PropertyDetails/HomePropertyDetails/' + value.propertyInfoId + '"><span class="tag font-montserrat sale">For ' + value.propertyFor + '</span><section><div class="img"><img class="img-responsive" src="' + value.imagePath + '" alt=""><div class="over-proper"> <p class="btn font-montserrat">more details</p> </div></div><ul class="home-in"><li><span><i class="fa fa-home"></i>' + value.landArea + " " + value.measurementUnit.name + '</span></li></ul><div class="detail-sec"><h5 class="fw-bold">' + value.title + '</h5><p class="text-success"> ' + value.propertyTypeName + '/Plot</p> <p class="price font-montserrat">BDT.' + value.landPrice + ' Tk (' + value.measurementUnit.name + ')</p><span class="locate"><i class="fa fa-map-marker"></i>' + value.location + '</span><div class="share-p"> <span class="btn_more">' + " More Details" + '</span> </div></div></a></section></li>'
                 });
                 landPropertylist += '</ul>';
                 $(".load_LandProperty").empty();
