@@ -7,6 +7,7 @@ namespace USBDProperty.Models
     public class ProjectImageGallery
     {
         public int Id { get; set; }
+        [StringLength(40)]
         public string Name { get; set; }
         //[StringLength(100)]
         [ValidateNever]

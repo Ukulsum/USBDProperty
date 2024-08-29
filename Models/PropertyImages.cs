@@ -8,6 +8,7 @@ namespace USBDProperty.Models
     {
         [Key]
         public int ID { get; set; }
+        [StringLength(30)]
         public string Title { get; set; }
         [ValidateNever]
         public string MultiImagePath { get; set; }

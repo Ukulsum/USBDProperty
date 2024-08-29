@@ -9,7 +9,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int CountryID { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(20)]
         [DisplayName("Country")]
         public string CountryName { get; set; }
     }

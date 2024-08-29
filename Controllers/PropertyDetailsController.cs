@@ -800,7 +800,7 @@ namespace USBDProperty.Controllers
             return View(propertyDetails);
         }
 
-        // GET: PropertyDetails/Edit/5
+        //GET: PropertyDetails/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             try
@@ -840,7 +840,7 @@ namespace USBDProperty.Controllers
                 ViewData["AreaId"] = new SelectList(_context.Areas.OrderBy(a => a.AreaName), "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allid.CityId);
                 ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allid.DivisionId);
-                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);         
+                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == 0), "PropertyTypeId", "PropertyTypeName", pid.Value);
                 ViewData["PropertychildTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == pid.Value), "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "Id", "Name", propertyDetails.MeasurementID);
@@ -852,7 +852,6 @@ namespace USBDProperty.Controllers
             }
             return View();
         }
-
 
 
 
@@ -984,7 +983,9 @@ namespace USBDProperty.Controllers
                 return View(propertyDetails);
             }
         }
-        // GET: PropertyDetails/Delete/5
+
+
+        //GET: PropertyDetails/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             try

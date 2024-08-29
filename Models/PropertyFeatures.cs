@@ -13,7 +13,7 @@ namespace USBDProperty.Models
         [Required]
       
         [DisplayName("Feature")]
-        [StringLength(150)]
+        [StringLength(30)]
         public string PropertyFeatureName { get; set; }
         [DisplayName("Feature Description ")]
         public string  FeatureDescription{ get; set; }

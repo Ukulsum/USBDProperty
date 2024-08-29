@@ -7,7 +7,7 @@ namespace USBDProperty.Models
         [Key]
         public int ID { get; set; }
         [Required]
-        [StringLength(150)]
+        [StringLength(50)]
         public string Title { get; set; }
         [Required]
         [MaxLength]
