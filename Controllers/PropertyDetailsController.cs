@@ -264,6 +264,7 @@ namespace USBDProperty.Controllers
                                                     Title = s.Title,
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalPrice = s.TotalPrice,
+                                                    Price = s.Price,
                                                     PropertyInfoId = s.PropertyInfoId,
                                                     FlatSize = string.Join(",", s.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray()),
                                                 }).ToList();
@@ -299,6 +300,7 @@ namespace USBDProperty.Controllers
                                                     Title = s.Title,
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalLandPrice = s.TotalLandPrice,
+                                                    LandPrice = s.LandPrice,
                                                     PropertyInfoId = s.PropertyInfoId,
                                                     MeasurementUnit = s.MeasurementUnit
                                                 }).ToList();
@@ -719,10 +721,19 @@ namespace USBDProperty.Controllers
                 {
                     wwwRootPath = Directory.GetCurrentDirectory();
                     fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
-                }
+                }           
+
                 if (propertyDetails.Image != null)
                 {
-                    string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
+                //    using (var stream = file.OpenReadStream()) 
+                //    {
+
+                //        using (var image = propertyDetails.Image.FromStream(stream))
+                //        {
+
+                //        }
+                //    }
+                string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
                     if (extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
                     {
                         string fileName = propertyDetails.Title + extention;
@@ -731,6 +742,10 @@ namespace USBDProperty.Controllers
                         {
                             await propertyDetails.Image.CopyToAsync(fileStrem);
                         }
+                        //var image = propertyDetails.Image.FromFile(file.inputstream);
+                        //int width = image.width;
+                        //int height = image.height;
+
                         propertyDetails.ImagePath = "/Content/Images/" + fileName;
                     }
                     else

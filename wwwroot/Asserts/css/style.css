@@ -1380,11 +1380,14 @@ ul.dropdown li:hover {
 }
 .properties .detail-sec {
 	background: #fff;
-	padding: 25px;
+	/*padding: 25px;*/
+	padding: 15px;
 	border: 1px solid #ececec;
 	border-top: 2px solid #ff5722;
 	margin-top: -6px;
 }
+
+
 .properties .detail-sec a {
 	font-weight: 800;
 	font-size: 16px;
