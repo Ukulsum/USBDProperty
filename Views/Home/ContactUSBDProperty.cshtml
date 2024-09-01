@@ -2,8 +2,13 @@
     ViewBag.Title = "ContactUs-USBDProperty";
 }
 
-
-<div style="color:black; margin:2px auto" class="row">
+<style>
+    .contact a{
+        color: #b88d31!important;
+        font-size:34px;
+    }
+</style>
+<div style="color:black; margin:2px auto" class="row contact">
     <div class="center">
         <img src="~/Content/Fixed Img/contact-Powersoftit.png" width="100%" alt="PowersoftIt contact" class="center" />
     </div>
@@ -20,17 +25,15 @@
             <hr />
             <address style="        color: #b88d31
 ">
-               
                 <i class="fa fa-location-arrow" style="color: #b88d31"></i> 39 Headline, 
-               
                Road No#:Deer Park
-               
-               New York-11729
+                New York-11729
                 
                 @* @Html.Raw(Model.Address) *@
             </address>
             <div class="text-lg-center">
-                <a href="emailto:ashraf@usbdproperty.com">
+                <a href="emailto:ashraf@usbdproperty.com" style="color: #b88d31!important
+">
                 <i class="fa fa-envelope-square" style="        color: #b88d31
 "></i>  ashraf@usbdproperty.com
                 </a>
@@ -39,32 +42,29 @@
 "></i>  @Model.Email
 
                 <br /> *@
-                <a href="tel:+88 0188660077">
+                <a href="tel:+88 0188660077" style="color: #b88d31!important
+">
                 <i class="fa fa-phone" style="color: #b88d31
 "></i>   +88 0188660077
                 </a>
             </div>
         </div>
-
-     
-        <div class="col-md-5">
+        <div class="col-md-5" style="color: #b88d31
+">
             <h2>Bangladesh Office Address</h2>
             <hr />
-            <address style="        color: #b88d31
-">
-
+            <address style="color: #b88d31">
                 <i class="fa fa-location-arrow" style="color: #b88d31"></i> US-BD Property,
                567(2nd floor),East-Kazipara, Kazipara,Mirpur,Dhaka-1216
             </address>
             <div class="text-lg-center">
                 <a emailto:ashraf@usbdproperty.com>
-                <i class="fa fa-envelope-square" style="        color: #b88d31
+                <i class="fa fa-envelope-square" style="color: #b88d31
 "></i>  ashraf@usbdproperty.com
                 </a>
                 <br />
-                
-                <i class="fa fa-phone" style="        color: #b88d31
-"></i>    +88 0188660077
+                <i class="fa fa-phone" style="color: #b88d31"></i> 
+                +88 0188660077
 
             </div>
         </div>

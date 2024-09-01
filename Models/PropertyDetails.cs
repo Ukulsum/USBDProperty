@@ -164,6 +164,8 @@ namespace USBDProperty.Models
         //public int PropertyFeaturedId { get; set; }
         [NotMapped]
         public string PropertyForstr { get; set; }
+        [NotMapped]
+        public string AvailableFlatSize { get; set; }
 
         [ValidateNever]
         [DisplayName("Property Type")]

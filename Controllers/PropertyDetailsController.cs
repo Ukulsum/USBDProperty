@@ -765,13 +765,15 @@ namespace USBDProperty.Controllers
 
                 if (await _context.SaveChangesAsync() > 0)
                 {
-                    var data = AvailableFlatSize;
-                    var arrData = AvailableFlatSize.Split(",");
+                    //var data = AvailableFlatSize;
+                    //var arrData = AvailableFlatSize.Split(",");
+                    var arrData =propertyDetails.AvailableFlatSize.Split(",");
                     foreach (var item in arrData)
                     {
+
                         _context.AvailableFlatSizes.Add(new AvailableFlatSize { PropertyId=propertyDetails.PropertyInfoId, AvailableFSize=item,
                          UnitID=1});
-
+                        //UnitID=1(SQFT)
                     }
                     if (await _context.SaveChangesAsync() > 0)
                     {
@@ -812,10 +814,12 @@ namespace USBDProperty.Controllers
                 }
 
                 var propertyDetails = await _context.PropertyDetails.FindAsync(id);
+                //var propertyDetails = await  _context.PropertyDetails.Include("").Where(p=>p.PropertyInfoId==id).ToListAsync();
                 if (propertyDetails == null)
-                {
+                { 
                     return NotFound();
                 }
+                propertyDetails.AvailableFlatSize = string.Join(",", await  _context.AvailableFlatSizes.Where(s=>s.PropertyId.Equals(propertyDetails.PropertyInfoId)).ToListAsync());
                 propertyDetails.PropertyType = _context.PropertyTypes.Where(p => p.PropertyTypeId.Equals(propertyDetails.PropertyTypeId)).FirstOrDefault();
                 var allid = (from a in _context.Areas
                              join c in _context.Citys on a.CityId equals c.CityId
