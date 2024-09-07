@@ -170,8 +170,21 @@ h6 {
 p {
 	color: #777777;
 	font-family: 'Lato';
-	font-size: 20px!important;
+	font-size: 14px!important;
 	line-height: 24px!important;
+}
+.section-title h2 {
+	font-size: 22px !important;
+}
+.section-title p {
+	font-size: 22px !important;
+	margin: 9px 0 5px 0;
+}
+.load_about p{
+	font-size: 22px !important;
+}
+.devtitle p {
+	font-size: 20px !important;
 }
 a {
 	-webkit-transition: all 0.4s ease-in-out;
