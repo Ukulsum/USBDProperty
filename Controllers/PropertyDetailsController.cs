@@ -705,13 +705,14 @@ namespace USBDProperty.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PropertyDetails propertyDetails,
-            string AvailableFlatSize)
+        public async Task<IActionResult> Create(PropertyDetails propertyDetails,string AvailableFlatSize, IFormFile file)
         {
             try
             {
                 string wwwRootPath = "";
                 string fpath = "";
+                //int width;
+                //int height;
                 if (_environment != null)
                 {
                     wwwRootPath = _environment.WebRootPath;
@@ -745,6 +746,21 @@ namespace USBDProperty.Controllers
                         //var image = propertyDetails.Image.FromFile(file.inputstream);
                         //int width = image.width;
                         //int height = image.height;
+                        //var image = propertyDetails.Image.FromStream(file.InputStream);
+                        //int width = image.Width;
+                        //int height = image.Height;
+                        //if(Stream.Position)
+                        //using (var image = propertyDetails.Image.Load(file.OpenReadStream))
+                        //if(propertyDetails.Image != null && propertyDetails.Image.Length > 0)
+                        //{
+                        //    using (var memoryStrem = new MemoryStream())
+                        //    {
+                        //        propertyDetails.Image.CopyTo(memoryStrem);
+                        //        memoryStrem.Position = 0;
+
+                        //        using(var image = propertyDetails.Image.FromStream)
+                        //    }
+                        //}
 
                         propertyDetails.ImagePath = "/Content/Images/" + fileName;
                     }

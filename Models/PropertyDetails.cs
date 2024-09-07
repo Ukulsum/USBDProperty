@@ -72,7 +72,7 @@ namespace USBDProperty.Models
         //}
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string Location { get; set; }
 
         [DisplayName("Construction Status")]
