@@ -16,7 +16,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int ClientContactId { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(30)]
         [DisplayName("Name")]
         public string ClientName { get; set; }
         [Required]

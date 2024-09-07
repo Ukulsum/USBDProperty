@@ -6,9 +6,9 @@
     <title>@ViewData["Title"] - UsBDPropertyRealEstateProject</title>
 
     <!-- FONTS ONLINE -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    @* <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> *@
 
     <!--MAIN STYLE-->
     <link href="~/Asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -237,6 +237,7 @@
                   });
                   propertylist += '</ul>';
                   $(".load_FooterProperty").empty();
+                  console.log(propertylist);
                   $(".load_FooterProperty").html(propertylist);
               }
           })

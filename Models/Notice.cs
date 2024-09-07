@@ -12,7 +12,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int NoticeID { get; set; }
         [Required]
-        [StringLength(150)]
+        [StringLength(50)]
         public string Title { get; set; }
         [ValidateNever]
         public bool IsFeatured { get; set; }

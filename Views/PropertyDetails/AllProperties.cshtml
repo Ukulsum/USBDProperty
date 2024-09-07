@@ -46,8 +46,10 @@
                              <span class="price font-montserrat">@item.TotalPrice TK</span>
                              <span class="locate"><i class="fa fa-map-marker"></i>@item.Location </span>
                              <div class="share-p"> 
-                                 <span class="btn_more"> More Details</span> 
-                             </div>
+                                 @* asp-action="AllProperties" asp-controller="PropertyDetails" *@
+                                 @* <span class="btn_more"> More Details</span> *@
+                                @* <a asp-action="HomePropertyDetails" asp-controller="PropertyDetails"><div class="share-p"> <span class="btn_more"> More Details</span></div> </a>*@
+                                <a href="/PropertyDetails/HomePropertyDetails/@item.PropertyInfoId"><div class="share-p"> <span class="btn_more"> More Details</span></div> </a>
                          </div>
                     </section>
                 </li>

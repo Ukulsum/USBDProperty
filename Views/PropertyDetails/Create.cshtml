@@ -353,12 +353,28 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label asp-for="Image" class="control-label"></label>
+                                            @*  <ul>
+                                                <li>Upload image file only (jpg, jpeg, png)</li>
+                                                <li>height 526 and Width 526</li>
+                                            </ul> *@
                                             <input type="file" asp-for="Image" class="form-control" id="imageInput" />
                                             <span asp-validation-for="Image" class="text-danger"></span>
                                         </div>
-                                        <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
-                                            <img src="#" style="width:155px;height:155px;" alt="Image Upload" id="imgPreview">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div style="width:180px;height:180px; border:2px solid #012970; border-radius:10px; padding:10px;">
+                                                    <img src="#" style="width:155px;height:155px;" alt="Image Upload" id="imgPreview">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label asp-for="Image" class="control-label">Photo uploading instruction:</label>
+                                                <ul>
+                                                    <li>Upload image file only (jpg, jpeg, png)</li>
+                                                    <li>height 526 and Width 526</li>
+                                                </ul>
+                                            </div>
                                         </div>
+                                       
 
                                     </div>
                                 </div>

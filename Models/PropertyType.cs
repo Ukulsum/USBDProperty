@@ -10,7 +10,7 @@ namespace USBDProperty.Models
         [Key]
         public int PropertyTypeId { get; set; }
         [Required]
-        [StringLength(255)]
+        [StringLength(20)]
         [DisplayName("Property Type")]
         public string PropertyTypeName { get; set; }
         public int? ParentPropertyTypeId { get; set; } = 0;

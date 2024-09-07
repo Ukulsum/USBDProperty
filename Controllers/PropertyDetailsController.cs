@@ -264,6 +264,7 @@ namespace USBDProperty.Controllers
                                                     Title = s.Title,
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalPrice = s.TotalPrice,
+                                                    Price = s.Price,
                                                     PropertyInfoId = s.PropertyInfoId,
                                                     FlatSize = string.Join(",", s.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray()),
                                                 }).ToList();
@@ -299,6 +300,7 @@ namespace USBDProperty.Controllers
                                                     Title = s.Title,
                                                     PropertyTypeName = s.PropertyType.PropertyTypeName,
                                                     TotalLandPrice = s.TotalLandPrice,
+                                                    LandPrice = s.LandPrice,
                                                     PropertyInfoId = s.PropertyInfoId,
                                                     MeasurementUnit = s.MeasurementUnit
                                                 }).ToList();
@@ -719,10 +721,19 @@ namespace USBDProperty.Controllers
                 {
                     wwwRootPath = Directory.GetCurrentDirectory();
                     fpath = Path.Combine(wwwRootPath, "/wwwroot/Content");
-                }
+                }           
+
                 if (propertyDetails.Image != null)
                 {
-                    string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
+                //    using (var stream = file.OpenReadStream()) 
+                //    {
+
+                //        using (var image = propertyDetails.Image.FromStream(stream))
+                //        {
+
+                //        }
+                //    }
+                string extention = Path.GetExtension(propertyDetails.Image.FileName).ToLower();
                     if (extention == ".jpg" || extention == ".png" || extention == ".jpeg" || extention == "..svg" || extention == ".gif")
                     {
                         string fileName = propertyDetails.Title + extention;
@@ -731,6 +742,10 @@ namespace USBDProperty.Controllers
                         {
                             await propertyDetails.Image.CopyToAsync(fileStrem);
                         }
+                        //var image = propertyDetails.Image.FromFile(file.inputstream);
+                        //int width = image.width;
+                        //int height = image.height;
+
                         propertyDetails.ImagePath = "/Content/Images/" + fileName;
                     }
                     else
@@ -802,7 +817,7 @@ namespace USBDProperty.Controllers
             return View(propertyDetails);
         }
 
-        // GET: PropertyDetails/Edit/5
+        //GET: PropertyDetails/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             try
@@ -844,7 +859,7 @@ namespace USBDProperty.Controllers
                 ViewData["AreaId"] = new SelectList(_context.Areas.OrderBy(a => a.AreaName), "AreaId", "AreaName", propertyDetails.AreaId);
                 ViewData["CityId"] = new SelectList(_context.Citys, "CityId", "CityName", allid.CityId);
                 ViewData["DivisionId"] = new SelectList(_context.Divisions, "DivisionID", "DivisionName", allid.DivisionId);
-                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);         
+                ViewData["CountryId"] = new SelectList(_context.Countries, "CountryID", "CountryName", allid.CountryId);
                 ViewData["PropertyTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == 0), "PropertyTypeId", "PropertyTypeName", pid.Value);
                 ViewData["PropertychildTypeId"] = new SelectList(_context.PropertyTypes.Where(p => p.ParentPropertyTypeId == pid.Value), "PropertyTypeId", "PropertyTypeName", propertyDetails.PropertyTypeId);
                 ViewData["MeasurementID"] = new SelectList(_context.MeasurementUnit, "Id", "Name", propertyDetails.MeasurementID);
@@ -856,7 +871,6 @@ namespace USBDProperty.Controllers
             }
             return View();
         }
-
 
 
 
@@ -988,7 +1002,9 @@ namespace USBDProperty.Controllers
                 return View(propertyDetails);
             }
         }
-        // GET: PropertyDetails/Delete/5
+
+
+        //GET: PropertyDetails/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             try

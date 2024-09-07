@@ -9,7 +9,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int PpId { get; set; }
         [Required]
-        [StringLength(150)]
+        [StringLength(40)]
         public string Title { get; set; }
         [Required]
         [MaxLength]

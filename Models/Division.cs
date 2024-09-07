@@ -11,7 +11,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int DivisionID { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(20)]
         [DisplayName("Division")]
         public  string DivisionName { get; set; }
         [ForeignKey("Country")]

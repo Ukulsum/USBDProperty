@@ -9,7 +9,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int TransactionTypeId { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
         [DisplayName("Transaction Name")]
         public string TransactionTypeName { get; set; }
     }

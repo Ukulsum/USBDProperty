@@ -110,9 +110,9 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.Image)
                                         </th>
-                                        @* <th>
+                                        <th>
                                             @Html.DisplayNameFor(model => model.FlatSize)
-                                        </th> *@
+                                        </th>
                                         @* <th>
                                             @Html.DisplayNameFor(model => model.Price)
                                         </th> *@
@@ -129,12 +129,12 @@
                                             <td>
                                                 <img src="@Url.Content(item.ImagePath)" alt="@item.Title" width="100" height="70" class="img-responsive" />
                                             </td>
-                                            @* <td>
+                                            <td>
                                                 @{
                                                     var d = string.Join(",", item.AvailableFlatSizes.Select(x => x.AvailableFSize.ToString()).ToArray());
                                                 }
                                                 @Html.DisplayFor(m => d)
-                                            </td> *@
+                                            </td>
                                            @*  <td>
                                                 @Html.DisplayFor(modelItem => item.Price)
                                             </td> *@

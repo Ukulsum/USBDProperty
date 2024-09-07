@@ -11,16 +11,16 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int  Id { get; set; }
          
-        [StringLength(255)]
+        [StringLength(40)]
         public string Title { get; set; }
         [MaxLength]
         public string? Description { get; set; }
         [Required]
-        [StringLength(150)]
+        [StringLength(50)]
         [DisplayName("Project Name")]
         public string ProjectName { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
         public string Location { get; set; }
         [StringLength(100)]
         [ValidateNever]

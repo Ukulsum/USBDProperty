@@ -11,7 +11,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int AreaId { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(20)]
         [DisplayName("Area")]
         public string AreaName { get; set; }
         [ForeignKey("City")]

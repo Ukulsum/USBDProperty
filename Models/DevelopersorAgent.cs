@@ -33,18 +33,18 @@ namespace USBDProperty.Models
         public string Banner { get; set; }
         public Membership Membership { get; set; }
         [Required]
-        [StringLength(100)] 
+        [StringLength(30)] 
         [DisplayName("Company Name")]
         public string CompanyName { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(15)]
         [DisplayName("Contact Number")]
         public string ContactNo { get; set; }
-        [StringLength(150)]
+        [StringLength(40)]
         [DisplayName("E-mail")]
         public string Email { get; set; }
         [Required]
-        [StringLength(150)]
+        [StringLength(30)]
         [DisplayName("Contact Person")]
         public string Name { get; set; }//Owner Person Name / Contact Person Name
          

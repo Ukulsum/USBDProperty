@@ -33,7 +33,7 @@ namespace USBDProperty.Models
         public bool IsLand { get; set; }
         public bool IsSold { get; set; }
 
-        [StringLength(255)]
+        [StringLength(50)]
         public string Title { get; set; }
        
         [MaxLength]
@@ -72,7 +72,7 @@ namespace USBDProperty.Models
         //}
 
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
         public string Location { get; set; }
 
         [DisplayName("Construction Status")]
@@ -181,7 +181,7 @@ namespace USBDProperty.Models
 
 
         public ICollection<PropertyWithFeatures> PropertyWithFeatures { get; set; }
-        public ICollection<AvailableFlatSize> AvailableFlatSizes { get; set; }
+        public ICollection<AvailableFlatSize>? AvailableFlatSizes { get; set; }
 
         //[ValidateNever]
         //public virtual ICollection<PropertyFeatures> propertyFeatures

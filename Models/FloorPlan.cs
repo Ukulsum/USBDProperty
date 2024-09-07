@@ -10,7 +10,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int FloorPlanId { get; set; }
         [Required]
-        [StringLength(255)]
+        [StringLength(30)]
         [DisplayName("Floor Plan")]
         public string FloorPlanName { get; set; }
         public string ImagePath { get; set; }

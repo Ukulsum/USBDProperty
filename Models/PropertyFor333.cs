@@ -9,7 +9,7 @@ namespace USBDProperty.Models
         [DisplayName("ID")]
         public int PropertyForId { get; set; }
         [Required]
-        [StringLength(100)]
+        [StringLength(15)]
         [DisplayName("Property For")]
         public string PropeFor { get; set; }
     }
