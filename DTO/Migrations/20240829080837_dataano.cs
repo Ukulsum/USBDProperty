@@ -139,8 +139,8 @@ namespace USBDProperty.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "ShortName",
                 table: "MeasurementUnit",
-                type: "nvarchar(5)",
-                maxLength: 5,
+                type: "nvarchar(25)",
+                maxLength: 25,
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
